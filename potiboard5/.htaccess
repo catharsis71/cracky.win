@@ -9,3 +9,14 @@
 	order allow,deny
 	deny from all
 </files>
+DirectoryIndex index.html
+<If "%{THE_REQUEST} =~ m# .*php.* HTTP#">
+ Header onsuccess set X-Robots-Tag "nofollow,noindex"
+</If>
+<Else>
+ Header onsuccess set X-Robots-Tag "nofollow"
+</Else>
+
+<If "%{QUERY_STRING} =~ m#.*admin.*#">
+Require ip (redacted)
+</If>
