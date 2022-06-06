@@ -563,7 +563,7 @@ define('C_SECURITY_TIMER', '');
 // ペイント画面のパスワードの暗号鍵
 // あまり頻繁に変えないように
 // Encryption key for paint mode. (don't change it too often)
-define('CRYPT_PASS','yF2NQ3J9pnD78RT');
+define('CRYPT_PASS','(redacted)');
 
 // ↑ 暗号化と解読のためのパスワード。
 // phpの内部で処理するので覚えておく必要はありません。
