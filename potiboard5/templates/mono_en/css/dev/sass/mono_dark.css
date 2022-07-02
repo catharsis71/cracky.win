@@ -48,7 +48,7 @@ h2 a:active {
 
 h2 a:hover {
   color: #FEFEFE;
-  background-color: #252525;
+  background-color: #4b545f;
 }
 
 h2 a {
@@ -57,7 +57,7 @@ h2 a {
 }
 
 hr {
-  border: dashed 1px #4ba781;
+  border: dashed 1px #605f7c;
   margin: 1ex auto;
 }
 
@@ -74,7 +74,7 @@ header, main > section > .thread, main > div#catalog, footer > div, footer > div
   margin: 0px auto;
   display: block;
   max-width: 1350px;
-  border: solid 1px #4ba781;
+  border: solid 1px #605f7c;
 }
 
 footer > div form {
@@ -87,7 +87,7 @@ footer > div.copy {
 
 input, textarea, select, .se {
   border-style: solid;
-  border-color: #063 #50a57a #50a57a #063;
+  border-color: #003 #66F #66F #003;
   border-width: 1px;
   color: #000;
   background-color: #EEEEEE;
@@ -101,7 +101,7 @@ textarea {
 
 button, button.copy_button, .button {
   border-style: solid;
-  border-color: #50a57a #063 #063 #50a57a;
+  border-color: #66F #003 #003 #66F;
   border-width: 1px;
   color: #000;
   background-color: #EEEEEE;
@@ -129,7 +129,7 @@ input[name=pwd], textarea[name=pwd], select[name=pwd], .se[name=pwd], input[name
 }
 
 input[value=お絵かき], textarea[value=お絵かき], select[value=お絵かき], button.copy_button, .se[value=お絵かき], .button {
-  background-color: #4e9979;
+  background-color: #6f90d1;
   color: #FFF;
 }
 
@@ -164,7 +164,7 @@ em.thispage {
 
 .name {
   line-height: 1em;
-  border: solid 1px #4e9979;
+  border: solid 1px #6f90d1;
   border-radius: 5px;
   display: inline-block;
 }
@@ -184,8 +184,8 @@ h1 a {
 }
 
 h2 {
-  border-left: solid 1ex #4ba781;
-  background-color: #111111;
+  border-left: solid 1ex #605f7c;
+  background-color: #3b4856;
 }
 
 h3 {
@@ -249,7 +249,7 @@ ul.menu {
 }
 
 .resma {
-  color: #aab1ac;
+  color: #c5ced6;
 }
 
 .thfoot {
@@ -346,10 +346,10 @@ form.adminin {
   color: #646464;
 }
 .NEO .tool_color_button {
-  color: #369;
+  color: #669;
 }
 .NEO .tool_color_button2 {
-  color: #036;
+  color: #336;
 }
 .NEO .tool_color_text {
   color: #FFF;
@@ -414,7 +414,7 @@ form.adminin {
   border: 1px solid #111111;
 }
 .delfo tr:nth-child(odd) {
-  background-color: #111111;
+  background-color: #3b4856;
 }
 
 .page {
@@ -526,8 +526,8 @@ form.adminin {
 }
 #search .title {
   color: #FFF;
-  border-left: solid 1ex #4ba781;
-  background-color: #111111;
+  border-left: solid 1ex #605f7c;
+  background-color: #3b4856;
   padding: 6px 5px 2px;
   margin: 0 0 10px;
 }
@@ -590,18 +590,18 @@ form.adminin {
   width: 180px;
   border: 1px solid;
   color: #FFF;
-  border-color: #50a57a;
-  background-color: #243124;
+  border-color: #69C;
+  background-color: #333;
   vertical-align: middle;
 }
 #search input[type=text]:hover {
-  background-color: #010;
+  background-color: #222229;
 }
 #search input[type=submit] {
-  background-color: #4e9979;
+  background-color: #6f90d1;
   color: #FFF;
   border: 1px solid;
-  border-color: #50a57a;
+  border-color: #6f859a;
   vertical-align: middle;
 }
 #search .menu {
@@ -611,7 +611,7 @@ form.adminin {
   font-weight: 700;
   color: inherit;
   display: inline-block;
-  border: solid 1px #4e9979;
+  border: solid 1px #6f90d1;
   border-radius: 6px;
   line-height: 1em;
 }
@@ -619,7 +619,7 @@ form.adminin {
   background-color: #222;
 }
 #search .name a {
-  color: #FEFEFE;
+  color: #FFF;
   display: block;
   padding: 5px;
 }
@@ -656,7 +656,7 @@ form.adminin {
 }
 #search input[type=radio]:checked + label {
   color: #333;
-  background: #c5e4c5;
+  background: #DDF;
 }
 #search .label {
   color: #bbb;
@@ -664,12 +664,12 @@ form.adminin {
   padding: 0 10px;
   text-align: center;
   cursor: pointer;
-  border: 2px solid #4e9979;
+  border: 2px solid #6f90d1;
   border-radius: 15px;
 }
 #search .label:hover {
   color: #333;
-  background-color: #c5e4c5;
+  background-color: #DDF;
 }
 #search .radio {
   display: inline-block;
@@ -704,4 +704,4 @@ form.adminin {
     margin-right: 0;
   }
 }
-/*# sourceMappingURL=mono_deep.css.map */
+/*# sourceMappingURL=mono_dark.css.map */

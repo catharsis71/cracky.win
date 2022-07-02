@@ -28,7 +28,7 @@ This is a project to translate [POTI-board EVO](https://github.com/satopian/poti
 
 ## Required php version
 
-Required PHP version.PHP7.1 to PHP8.1
+Required PHP version.PHP7.4 to PHP8.1
 
 ### To change the color scheme of the Default theme MONO
 MONO's HTML and CSS have been significantly updated in v3.07.5.  
@@ -45,6 +45,13 @@ For example, the free [Visual Studio Code](https://azure.microsoft.com/en-us/pro
 
 ## Change log (timezone: Asia/Tokyo, UTC+09:00)
 
+## [2022/05/25] v5.19.1
+- Since it was confirmed that it does not work with PHP7.1, the required operating environment has been changed to PHP7.2 or higher.
+In the PHP7.1 environment, it will not start and will issue an error message telling you that the PHP version is low.
+- The form is not displayed when there is no unposted image.  
+
+[Release POTI-board EVO EN v5.19.1 released.](https://github.com/satopian/poti-kaini-EN/releases/latest)
+
 ## [2022/05/25] v5.18.25
 ### Bug fixes
 - Fixed the issue that the layout was broken when posts omitted .
@@ -53,7 +60,6 @@ For example, the free [Visual Studio Code](https://azure.microsoft.com/en-us/pro
 - ChickenPaint now launches in full screen.
 
 More information can be found in the release.    
-[Release POTI-board EVO EN v5.18.25 released.](https://github.com/satopian/poti-kaini-EN/releases/latest)
 
 ## [2022/05/25] v5.18.9
 ### Klecks update
@@ -204,9 +210,9 @@ Templates with the extension `HTML` have been replaced with templates with the e
 When you open the content, it's not much different from a traditional template. However, it may seem difficult because the extension is not HTML. 
 
 ### What has changed due to the change of the template engine
-#### PHP7.1
-- I was developing it to work in PHP5.6 environment, but I found that v4.2 of BladeOne only works in PHP7.1 or higher environment.
-POTI-board EVO v5.x requires PHP 7.1 or higher.
+#### PHP7.4
+- I was developing it to work in PHP5.6 environment, but I found that v4.2 of BladeOne only works in PHP7.4 or higher environment.
+POTI-board EVO v5.x requires PHP 7.4 or higher.
 
 #### Information for those who customize and use templates.
 The thread display process has changed significantly.
