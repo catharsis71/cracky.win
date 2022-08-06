@@ -50,7 +50,7 @@
 			document.cookie = key + "=" + encodeURIComponent(val) + ";max-age=31536000;";
 		}
 	</script>
-
+	<link rel="preload" as="script" href="lib/{{JQUERY}}">
 	<title>{{$title}}</title>
 	@if($notres)
 	{{-- I would be happy if you could change this area.
@@ -315,7 +315,7 @@
 							@endif
 							<img src="{{$res['imgsrc']}}" alt="{{$res['sub']}} by {{$res['name']}}"
 								title="{{$res['sub']}} by {{$res['name']}}" width="{{$res['w']}}"
-								height="{{$res['h']}}" loading="lazy">
+								height="{{$res['h']}}" @if($i>4)loading="lazy"@endif>
 							@if($res['thumb'])
 						</a>
 						@endif
@@ -416,7 +416,7 @@
 		{{-- <!-- 著作権表示 削除しないでください --> --}}
 		@include('parts.mono_copyright')
 	</footer>
-	<script src="{{$skindir}}jquery-3.5.1.min.js"></script>
+	<script src="lib/{{JQUERY}}"></script>
 	<script>
 		colorIdx = GetCookie('colorIdx');
 		document.getElementById("mystyle").selectedIndex = colorIdx;
