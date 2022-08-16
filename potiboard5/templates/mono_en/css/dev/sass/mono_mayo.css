@@ -10,8 +10,8 @@ label {
 }
 
 body {
-  background-color: #111111;
-  color: #FEFEFE;
+  background-color: rgb(209, 206, 158);
+  color: #222;
   font-family: sans-serif;
   word-wrap: break-word;
   overflow-wrap: break-word;
@@ -19,36 +19,36 @@ body {
 }
 
 a:link {
-  color: #CCC;
+  color: #666;
 }
 
 a:visited {
-  color: #CCC;
+  color: #666;
 }
 
 a:active {
-  color: #FEFEFE;
+  color: #716c6c;
 }
 
 a:hover {
-  color: #FEFEFE;
+  color: #716c6c;
 }
 
 h2 a:link {
-  color: #FEFEFE;
+  color: #222;
 }
 
 h2 a:visited {
-  color: #FEFEFE;
+  color: #222;
 }
 
 h2 a:active {
-  color: #FEFEFE;
+  color: #222;
 }
 
 h2 a:hover {
-  color: #FEFEFE;
-  background-color: #252525;
+  color: #222;
+  background-color: #ffa0a0;
 }
 
 h2 a {
@@ -57,7 +57,7 @@ h2 a {
 }
 
 hr {
-  border: dashed 1px #4ba781;
+  border: dashed 1px #333;
   margin: 1ex auto;
 }
 
@@ -66,7 +66,7 @@ hr.hr {
 }
 
 header, main > section > .thread, main > div#catalog, footer > div, footer > div.copy, main > section > .thread, footer > div {
-  background-color: #333333;
+  background-color: #FEFEFE;
   padding: 8px;
 }
 
@@ -74,7 +74,7 @@ header, main > section > .thread, main > div#catalog, footer > div, footer > div
   margin: 0px auto;
   display: block;
   max-width: 1350px;
-  border: solid 1px #4ba781;
+  border: solid 1px #333;
 }
 
 footer > div form {
@@ -87,9 +87,9 @@ footer > div.copy {
 
 input, textarea, select, .se {
   border-style: solid;
-  border-color: #063 #50a57a #50a57a #063;
+  border-color: #3d3431 #ffaa95 #ffaa95 #3d3431;
   border-width: 1px;
-  color: #000;
+  color: #222;
   background-color: #EEEEEE;
   padding: 3px;
 }
@@ -101,9 +101,9 @@ textarea {
 
 button, button.copy_button, .button {
   border-style: solid;
-  border-color: #50a57a #063 #063 #50a57a;
+  border-color: #ffaa95 #3d3431 #3d3431 #ffaa95;
   border-width: 1px;
-  color: #000;
+  color: #222;
   background-color: #EEEEEE;
 }
 
@@ -129,7 +129,7 @@ input[name=pwd], textarea[name=pwd], select[name=pwd], .se[name=pwd], input[name
 }
 
 input[value=お絵かき], textarea[value=お絵かき], select[value=お絵かき], button.copy_button, .se[value=お絵かき], .button {
-  background-color: #4e9979;
+  background-color: #f7a67e;
   color: #FFF;
 }
 
@@ -157,14 +157,14 @@ em.thispage {
 }
 
 .se {
-  color: #000;
+  color: #222;
   background-color: #EEEEEE;
   font-style: normal;
 }
 
 .name {
   line-height: 1em;
-  border: solid 1px #4e9979;
+  border: solid 1px #f7a67e;
   border-radius: 5px;
   display: inline-block;
 }
@@ -176,7 +176,7 @@ em.thispage {
 }
 
 .name:hover {
-  background-color: #222;
+  background-color: #ffe9e9;
 }
 
 h1 a {
@@ -184,8 +184,8 @@ h1 a {
 }
 
 h2 {
-  border-left: solid 1ex #4ba781;
-  background-color: #111111;
+  border-left: solid 1ex #333;
+  background-color: #ff8c8c;
 }
 
 h3 {
@@ -249,7 +249,7 @@ ul.menu {
 }
 
 .resma {
-  color: #aab1ac;
+  color: #675e5e;
 }
 
 .thfoot {
@@ -325,40 +325,40 @@ form.adminin {
 }
 
 .NEO .color_bk {
-  color: #333;
+  color: #de9b84;
 }
 .NEO .color_bk2 {
-  color: #222;
+  color: #a38a71;
 }
 .NEO .color_tool_icon {
-  color: #333;
+  color: #966;
 }
 .NEO .color_icon {
-  color: #333;
+  color: #966;
 }
 .NEO .color_iconselect {
-  color: #333;
+  color: #966;
 }
 .NEO .color_text {
   color: #FFF;
 }
 .NEO .color_bar {
-  color: #646464;
+  color: #a38a71;
 }
 .NEO .tool_color_button {
-  color: #369;
+  color: #966;
 }
 .NEO .tool_color_button2 {
-  color: #036;
+  color: #635142;
 }
 .NEO .tool_color_text {
   color: #FFF;
 }
 .NEO .tool_color_bar {
-  color: #444a53;
+  color: #C9AB8B;
 }
 .NEO .tool_color_frame {
-  color: #222;
+  color: #a38a71;
 }
 
 .palette {
@@ -411,10 +411,10 @@ form.adminin {
   font-size: smaller;
 }
 .delfo th, .delfo td {
-  border: 1px solid #111111;
+  border: 1px solid rgb(209, 206, 158);
 }
 .delfo tr:nth-child(odd) {
-  background-color: #111111;
+  background-color: #ff8c8c;
 }
 
 .page {
@@ -490,8 +490,8 @@ form.adminin {
   font-family: "Hiragino Sans", meiryo, ヒラギノ角ゴシック, メイリオ, sans-serif;
   font-size: 16px;
   line-height: 150%;
-  color: #FEFEFE;
-  background-color: #333333;
+  color: #222;
+  background-color: #FEFEFE;
   letter-spacing: 0.08em;
 }
 #search h1 {
@@ -508,11 +508,11 @@ form.adminin {
   padding-left: 5px;
 }
 #search h2 a {
-  color: #FEFEFE;
+  color: #222;
 }
 #search h2 a:hover {
-  color: #FEFEFE;
-  background-color: #333333;
+  color: #222;
+  background-color: #FEFEFE;
 }
 #search h3 {
   font-size: 16px;
@@ -520,14 +520,14 @@ form.adminin {
   margin: 0;
 }
 #search .title {
-  color: #FFF;
-  border-left: solid 1ex #4ba781;
-  background-color: #111111;
+  color: #222;
+  border-left: solid 1ex #333;
+  background-color: #ff8c8c;
   padding: 6px 5px 2px;
   margin: 0 0 10px;
 }
 #search a {
-  color: #CCC;
+  color: #555;
   text-decoration: underline;
 }
 #search a:hover {
@@ -584,19 +584,19 @@ form.adminin {
   height: 20px;
   width: 180px;
   border: 1px solid;
-  color: #FFF;
-  border-color: #50a57a;
-  background-color: #243124;
+  color: auto;
+  border-color: #003 #ff8c8c #ff8c8c #3d3431;
+  background-color: #FFF;
   vertical-align: middle;
 }
 #search input[type=text]:hover {
-  background-color: #010;
+  background-color: #ffbbbb;
 }
 #search input[type=submit] {
-  background-color: #4e9979;
+  background-color: #f7a67e;
   color: #FFF;
   border: 1px solid;
-  border-color: #50a57a;
+  border-color: #ff8c8c #3d3431 #3d3431 #ff8c8c;
   vertical-align: middle;
 }
 #search .menu {
@@ -606,15 +606,15 @@ form.adminin {
   font-weight: 700;
   color: inherit;
   display: inline-block;
-  border: solid 1px #4e9979;
+  border: solid 1px #f7a67e;
   border-radius: 6px;
   line-height: 1em;
 }
 #search .name:hover {
-  background-color: #222;
+  background-color: #ffe9e9;
 }
 #search .name a {
-  color: #FEFEFE;
+  color: #3d3431;
   display: block;
   padding: 5px;
 }
@@ -650,21 +650,21 @@ form.adminin {
   display: none;
 }
 #search input[type=radio]:checked + label {
-  color: #333;
-  background: #c5e4c5;
+  color: #222;
+  background: #ffbbbb;
 }
 #search .label {
-  color: #bbb;
+  color: #333;
   display: inline-block;
   padding: 0 10px;
   text-align: center;
   cursor: pointer;
-  border: 2px solid #4e9979;
+  border: 2px solid #f7a67e;
   border-radius: 15px;
 }
 #search .label:hover {
-  color: #333;
-  background-color: #c5e4c5;
+  color: #222;
+  background-color: #ffbbbb;
 }
 #search .radio {
   display: inline-block;
@@ -702,4 +702,4 @@ form.adminin {
     margin-right: 0;
   }
 }
-/*# sourceMappingURL=mono_deep.css.map */
+/*# sourceMappingURL=mono_mayo.css.map */
