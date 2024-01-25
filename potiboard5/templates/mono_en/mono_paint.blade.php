@@ -9,7 +9,7 @@
 				overflow-wrap: initial;
 				}
 				.input_disp_none{display: none;}
-			</style>
+		</style>
 		@if(!$chickenpaint)
 			@include('parts.style-switcher')
 			<link rel="preload" as="script" href="lib/{{$jquery}}">
@@ -30,8 +30,8 @@
 		</style>
 		@endif	
 		@if($useneo)
-		<link rel="stylesheet" href="neo.css?{{$parameter_day}}&{{$ver}}">
-		<script src="neo.js?{{$parameter_day}}&{{$ver}}"></script>
+			<link rel="stylesheet" href="neo.css?{{$parameter_day}}&{{$ver}}">
+			<script src="neo.js?{{$parameter_day}}&{{$ver}}"></script>
 		<script>
 			// https://qiita.com/tsmd/items/cfb5dcbec8433b87dc36
 			function isPinchZooming () {//ピンチズームを検知
@@ -64,7 +64,20 @@
 			});
 			window.addEventListener('DOMContentLoaded',neo_add_disable_touch_move,false);
 		</script>
-				@endif
+		@endif
+		@if($paint_mode) 
+			@if(!$chickenpaint)
+			<script>
+				//Firefoxのメニューバーが開閉するのため、Altキーのデフォルトの処理をキャンセル
+				document.addEventListener('keyup', function(e) {//しぃペインター NEO共通
+					// e.key を利用して特定のキーのアップイベントを検知する
+					if (e.key.toLowerCase() === 'alt') {
+						e.preventDefault(); // Alt キーのデフォルトの動作をキャンセル
+					}
+				});
+			</script>
+			@endif
+		@endif
 		@if($pch_mode)
 		@if($type_neo)
 		<link rel="stylesheet" href="neo.css?{{$parameter_day}}&{{$ver}}">
@@ -80,17 +93,15 @@
 			user-select: none;
 		}
 		</style>
-		
 		<script>
-		function fixchicken() {
-			document.addEventListener('dblclick', function(e){ e.preventDefault()}, { passive: false });
-			const chicken=document.querySelector('#chickenpaint-parent');
-			chicken.addEventListener('contextmenu', function (e){
-				e.preventDefault();
-				e.stopPropagation();
-			}, { passive: false });
-		}
-		window.addEventListener('DOMContentLoaded',fixchicken,false);
+			document.addEventListener('DOMContentLoaded',function(){
+				document.addEventListener('dblclick', function(e){ e.preventDefault()}, { passive: false });
+				const chicken=document.querySelector('#chickenpaint-parent');
+				chicken.addEventListener('contextmenu', function(e){
+					e.preventDefault();
+					e.stopPropagation();
+				}, { passive: false });
+			});
 		</script>
 		
 
@@ -99,9 +110,9 @@
 
 	@else 
 		@if(($paint_mode and !$useneo) or ($pch_mode and !$type_neo))
-		{{--  Javaが使えるかどうか判定 使えなければcheerpJをロード  --}}
-		<script>
-			function cheerpJLoad() {
+	<!-- Javaが使えるかどうか判定 -->
+	<script>
+		document.addEventListener("DOMContentLoaded", function() {
 			var jEnabled = navigator.javaEnabled();
 			if(!jEnabled){
 				var sN = document.createElement("script");
@@ -111,9 +122,8 @@
 				var s0 = document.getElementsByTagName("script")[0];
 				s0.parentNode.insertBefore(sN, s0);
 				sN.addEventListener("load", function(){ cheerpjInit(); }, false);
-				}
 			}
-			window.addEventListener("load", function() { cheerpJLoad(); }, false);
+		});
 	</script>
 		@endif
 	@endif
@@ -123,15 +133,6 @@
 
 		<title>{{$title}}</title>
 		<style id="for_mobile"></style>
-		<script>
-			function is_mobile() {
-				if (navigator.maxTouchPoints && (window.matchMedia && window.matchMedia('(max-width: 768px)').matches)){
-					return	document.getElementById("for_mobile").textContent = ".for_pc{display: none;}";
-				}
-				return false;
-			}
-			document.addEventListener('DOMContentLoaded',is_mobile,false);
-		</script>
 	
 	</head>
 	<body id="paintmode">
@@ -198,11 +199,11 @@
 				@if($palettes) 
 				{!!$palettes!!}
 				@endif
-				function setPalette(){d=document;d.paintbbs.setColors(Palettes[d.Palette.select.selectedIndex]);d.grad.view.checked&&GetPalette()}function PaletteSave(){Palettes[0]=String(document.paintbbs.getColors())}var cutomP=0;
-				function PaletteNew(){d=document;p=String(d.paintbbs.getColors());s=d.Palette.select;Palettes[s.length]=p;cutomP++;str=prompt("Palette name","Palette "+cutomP);null==str||""==str?cutomP--:(s.options[s.length]=new Option(str),30>s.length&&(s.size=s.length),PaletteListSetColor())}function PaletteRenew(){d=document;Palettes[d.Palette.select.selectedIndex]=String(d.paintbbs.getColors());PaletteListSetColor()}
+				function setPalette(){d=document;d.paintbbs.setColors(Palettes[d.Palette.select.selectedIndex]);d.grad.view.checked&&GetPalette()}{{$async}} function PaletteSave(){Palettes[0]=String({{$await}} document.paintbbs.getColors())}var cutomP=0;
+				{{$async}} function PaletteNew(){d=document;p=String({{$await}} d.paintbbs.getColors());s=d.Palette.select;Palettes[s.length]=p;cutomP++;str=prompt("Palette name","Palette "+cutomP);null==str||""==str?cutomP--:(s.options[s.length]=new Option(str),30>s.length&&(s.size=s.length),PaletteListSetColor())}{{$async}} function PaletteRenew(){d=document;Palettes[d.Palette.select.selectedIndex]=String({{$await}} d.paintbbs.getColors());PaletteListSetColor()}
 				function PaletteDel(){p=Palettes.length;s=document.Palette.select;i=s.selectedIndex;if(-1!=i&&(flag=confirm("Are you sure you want to delete ["+s.options[i].text + "] ?"))){for(s.options[i]=null;p>i;)Palettes[i]=Palettes[i+1],i++;30>s.length&&(s.size=s.length)}}
-				function P_Effect(a){a=parseInt(a);x=1;255==a&&(x=-1);d=document.paintbbs;p=String(d.getColors()).split("\n");l=p.length;var f="";for(n=0;l>n;n++)R=a+parseInt("0x"+p[n].substring(1,3))*x,G=a+parseInt("0x"+p[n].substring(3,5))*x,B=a+parseInt("0x"+p[n].substring(5,7))*x,255<R?R=255:0>R&&(R=0),255<G?G=255:0>G&&(G=0),255<B?B=255:0>B&&(B=0),f+="#"+Hex(R)+Hex(G)+Hex(B)+"\n";d.setColors(f);PaletteListSetColor()}
-				function PaletteMatrixGet(){d=document.Palette;p=Palettes.length;s=d.select;m=d.m_m.selectedIndex;t=d.setr;switch(m){default:t.value="";for(c=n=0;p>n;)null!=s.options[n]&&(t.value=t.value+"\n!"+s.options[n].text+"\n"+Palettes[n],c++),n++;alert("Number of pallets "+c+"\ngot the palette matrix.");break;case 1:t.value="!Palette\n"+String(document.paintbbs.getColors()),
+				{{$async}} function P_Effect(a){a=parseInt(a);x=1;255==a&&(x=-1);d=document.paintbbs;p=String({{$await}} d.getColors()).split("\n");l=p.length;var f="";for(n=0;l>n;n++)R=a+parseInt("0x"+p[n].substring(1,3))*x,G=a+parseInt("0x"+p[n].substring(3,5))*x,B=a+parseInt("0x"+p[n].substring(5,7))*x,255<R?R=255:0>R&&(R=0),255<G?G=255:0>G&&(G=0),255<B?B=255:0>B&&(B=0),f+="#"+Hex(R)+Hex(G)+Hex(B)+"\n";d.setColors(f);PaletteListSetColor()}
+				{{$async}} function PaletteMatrixGet(){d=document.Palette;p=Palettes.length;s=d.select;m=d.m_m.selectedIndex;t=d.setr;switch(m){default:t.value="";for(c=n=0;p>n;)null!=s.options[n]&&(t.value=t.value+"\n!"+s.options[n].text+"\n"+Palettes[n],c++),n++;alert("Number of pallets "+c+"\ngot the palette matrix.");break;case 1:t.value="!Palette\n"+String({{$await}} document.paintbbs.getColors()),
 				alert("got the palette information currently used.")}t.value=
 				t.value.trim()+"\n!Matrix"}
 				function PalleteMatrixSet(){m=document.Palette.m_m.selectedIndex;str="Set the palette matrix.";switch(m){default:flag=confirm(str+"\nAll current palette information will be lost, is that okay ?");break;case 1:flag=confirm(str+"\nAre you sure you want to replace it with the palette you are currently using?");break;
@@ -213,7 +214,7 @@
 				function GetBright(a){r=parseInt("0x"+a.substring(1,3));g=parseInt("0x"+a.substring(3,5));b=parseInt("0x"+a.substring(5,7));a=r>=g?r>=b?r:b:g>=b?g:b;return 128>a?"#FFFFFF":"#000000"}function Chenge_(){var a=document.grad.pst.value,f=document.grad.ped.value;isNaN(parseInt("0x"+a))||isNaN(parseInt("0x"+f))||GradView("#"+a,"#"+f)}
 				function ChengeGrad(){var a=document,f=a.grad.pst.value,h=a.grad.ped.value;Chenge_();var u=parseInt("0x"+f.substring(0,2)),v=parseInt("0x"+f.substring(2,4));f=parseInt("0x"+f.substring(4,6));var k=parseInt((u-parseInt("0x"+h.substring(0,2)))/15),q=parseInt((v-parseInt("0x"+h.substring(2,4)))/15);h=parseInt((f-parseInt("0x"+h.substring(4,6)))/15);isNaN(k)&&(k=1);isNaN(q)&&(q=1);isNaN(h)&&(h=1);var w=new String;cnt=0;m1=u;m2=v;for(m3=f;14>cnt;cnt++,m1-=k,m2-=q,m3-=h){if(255<m1||0>m1)k*=-1,m1-=k;if(255<m2||0>m2)q*=-1,
 				m2-=q;if(255<m3||0>m3)h*=-1,m2-=h;w+="#"+Hex(m1)+Hex(m2)+Hex(m3)+"\n"}a.paintbbs.setColors(w)}function Hex(a){a=parseInt(a);0>a&&(a*=-1);for(var f=new String,h;16<a;)h=a,16<a&&(a=parseInt(a/16),h-=16*a),h=Hex_(h),f=h+f;h=Hex_(a);for(f=h+f;2>f.length;)f="0"+f;return f}function Hex_(a){isNaN(a)?a="":10==a?a="A":11==a?a="B":12==a?a="C":13==a?a="D":14==a?a="E":15==a&&(a="F");return a}
-				function GetPalette(){d=document;p=String(d.paintbbs.getColors());"null"!=p&&""!=p&&(ps=p.split("\n"),st=d.grad.p_st.selectedIndex,ed=d.grad.p_ed.selectedIndex,d.grad.pst.value=ps[st].substring(1,7),d.grad.ped.value=ps[ed].substring(1,7),GradSelC(),GradView(ps[st],ps[ed]),PaletteListSetColor())}
+				{{$async}} function GetPalette(){d=document;p=String({{$await}} d.paintbbs.getColors());"null"!=p&&""!=p&&(ps=p.split("\n"),st=d.grad.p_st.selectedIndex,ed=d.grad.p_ed.selectedIndex,d.grad.pst.value=ps[st].substring(1,7),d.grad.ped.value=ps[ed].substring(1,7),GradSelC(),GradView(ps[st],ps[ed]),PaletteListSetColor())}
 				function GradSelC(){if(d.grad.view.checked){d=document.grad;l=ps.length;pe="";for(n=0;l>n;n++)R=255+-1*parseInt("0x"+ps[n].substring(1,3)),G=255+-1*parseInt("0x"+ps[n].substring(3,5)),B=255+-1*parseInt("0x"+ps[n].substring(5,7)),255<R?R=255:0>R&&(R=0),255<G?G=255:0>G&&(G=0),255<B?B=255:0>B&&(B=0),pe+="#"+Hex(R)+Hex(G)+Hex(B)+"\n";pe=pe.split("\n");for(n=0;l>n;n++)d.p_st.options[n].style.background=ps[n],d.p_st.options[n].style.color=pe[n],d.p_ed.options[n].style.background=ps[n],d.p_ed.options[n].style.color=pe[n]}}function GradView(a,f){d=document}function showHideLayer(){d=document;var a=d.layers?d.layers.psft:d.all("psft").style;d.grad.view.checked||(a.visibility="hidden");d.grad.view.checked&&(a.visibility="visible",GetPalette())};
 			</script>
 			<noscript>
@@ -221,7 +222,7 @@
 			</noscript>
 		
 						<div id="appstage">
-							<div class="app">
+							<div class="app" style="width:{{$w}}px; height:{{$h}}px">
 			
 
 					@if($paintbbs)
@@ -284,7 +285,7 @@
 						@if($imgfile)
 						<param name="image_canvas" value="{{$imgfile}}">
 						@endif
-						<param name="send_header" value="usercode={{$usercode}}">
+						<param name="send_header" value="usercode={{$usercode}}&amp;tool={{$tool}}">
 						<param name="poo" value="false">
 						<param name="send_advance" value="true">
 						<param name="thumbnail_width" value="100%">
@@ -418,7 +419,7 @@
 									}
 									document.watch.count.value = disp+s+"sec";
 									clearTimeout(timerID);
-									timerID = setTimeout(function() { SetTimeCount(); }, 250);
+									timerID = setTimeout(function(){ SetTimeCount(); }, 250);
 								};
 								document.addEventListener('DOMContentLoaded',SetTimeCount,false);
 							</script>
@@ -660,7 +661,7 @@
 				</div>
 			</div>
 			<script>
-			document.addEventListener('DOMContentLoaded',l,false);
+				document.addEventListener('DOMContentLoaded',l,false);
 			</script>
 			</section>
 			<script>
@@ -692,17 +693,17 @@
 				});
 			</script>
 
-<!-- (========== CONTINUE MODE(コンティニューモード) end ==========) -->
+			{{-- (========== CONTINUE MODE(コンティニューモード) end ==========) --}}
 			@endif
 		</main>
 		<footer>
-		{{-- <!-- 著作権表示 削除しないでください --> --}}
-							@include('parts.mono_copyright')
+		{{--  著作権表示 削除しないでください --}}
+		@include('parts.mono_copyright')
 
-		</footer>
-	@if(!$chickenpaint)
-		<script src="lib/{{$jquery}}"></script>
-		<script src="{{$skindir}}js/mono_common.js?{{$ver}}"></script>
-	@endif
+			</footer>
+		@if(!$chickenpaint)
+			<script src="lib/{{$jquery}}"></script>
+			<script src="{{$skindir}}js/mono_common.js?{{$ver}}"></script>
+		@endif
 	</body>
 </html>

@@ -3,8 +3,8 @@
 
 // POTI-board EVO
 // バージョン :
-const POTI_VER = 'v6.09.1';
-const POTI_LOT = 'lot.20231020';
+const POTI_VER = 'v6.20.5';
+const POTI_LOT = 'lot.20240125';
 
 /*
   (C) 2018-2023 POTI改 POTI-board redevelopment team
@@ -22,7 +22,7 @@ const POTI_LOT = 'lot.20231020';
   *   PCHViewer  (test by v1.12)
   *     (C)shi-chan >> http://hp.vector.co.jp/authors/VA016309/
   *
-  * PAINTBBS NEO
+  * PaintBBS NEO
   *     (C)funige >> https://github.com/funige/neo/
   *
   * USE FUNCTION :
@@ -61,17 +61,23 @@ if ($err = check_file(__DIR__.'/lib/luminous/luminous-basic.min.css')) {
 	die($err);
 }
 
-//CheerpJ
-const CHEERPJ_URL = 'https://cjrtnc.leaningtech.com/2.3/loader.js';
-const CHEERPJ_HASH = 'sha384-1s6C2I0gGJltmNWfLfzHgXW5Dj4JB4kQTpnS37fU6CaQR/FrYG219xbhcAFRcHKE';
-// $ cat FILENAME.js | openssl dgst -sha384 -binary | openssl base64 -A
-// https://developer.mozilla.org/docs/Web/Security/Subresource_Integrity
-
 //設定の読み込み
 if ($err = check_file(__DIR__.'/config.php')) {
 	die($err);
 }
 require(__DIR__.'/config.php');
+
+defined('USE_CHEERPJ_OLD_VERSION') or define('USE_CHEERPJ_OLD_VERSION',"1"); 
+
+if(USE_CHEERPJ_OLD_VERSION){//2.3
+	define('CHEERPJ_URL','https://cjrtnc.leaningtech.com/2.3/loader.js');
+	define('CHEERPJ_HASH','sha384-1s6C2I0gGJltmNWfLfzHgXW5Dj4JB4kQTpnS37fU6CaQR/FrYG219xbhcAFRcHKE');
+}else{//cj3
+	define('CHEERPJ_URL','https://cjrtnc.leaningtech.com/3_20231116_296/cj3loader.js');
+	define('CHEERPJ_HASH','sha384-3n3kvrYMpzHCXBmGKdDxBRXElXGWgc79N49R1ARvHPUTbfCVHpUbfyL5Fy20BL2Z');
+}
+// $ cat FILENAME.js | openssl dgst -sha384 -binary | openssl base64 -A
+// https://developer.mozilla.org/docs/Web/Security/Subresource_Integrity
 
 //BladeOne
 if ($err = check_file(__DIR__.'/BladeOne/lib/BladeOne.php')) {
@@ -109,7 +115,7 @@ if ($err = check_file(__DIR__.'/save.inc.php')) {
 }
 require(__DIR__.'/save.inc.php');
 
-if($save_inc_ver < 20230921){
+if($save_inc_ver < 20231227){
 die($en ? "Please update save.inc.php" : "save.inc.phpを更新してください。");
 }
 $path = __DIR__.'/'.IMG_DIR;
@@ -190,6 +196,12 @@ defined("SNS_WINDOW_WIDTH") or define("SNS_WINDOW_WIDTH","350");
 defined("SNS_WINDOW_HEIGHT") or define("SNS_WINDOW_HEIGHT","490");
 defined("USE_ADMIN_LINK") or define("USE_ADMIN_LINK","1");
 defined("CATALOG_PAGE_DEF") or define("CATALOG_PAGE_DEF",30);
+//お絵かきできる最小の幅と高さ
+defined("PMIN_W") or define("PMIN_W", "300"); //幅
+defined("PMIN_H") or define("PMIN_H", "300"); //高さ
+//アップロード時の幅と高さの最大サイズ これ以上は縮小
+defined("MAX_W_PX") or define("MAX_W_PX", "1024"); //高さ
+defined("MAX_H_PX") or define("MAX_H_PX", "1024"); //高さ
 
 $badurl= isset($badurl) ? $badurl : [];//拒絶するurl
 
@@ -245,10 +257,15 @@ $res = (string)filter_input(INPUT_GET, 'res',FILTER_VALIDATE_INT);
 
 $usercode = (string)filter_input(INPUT_COOKIE, 'usercode');//nullならuser-codeを発行
 
+
 //初期化
 init();	
 //テンポラリ
 deltemp();
+
+session_sta();
+$session_usercode = isset($_SESSION['usercode']) ? (string)$_SESSION['usercode'] : "";
+$usercode = $usercode ? $usercode : $session_usercode;
 
 //user-codeの発行
 if(!$usercode){//user-codeがなければ発行
@@ -258,6 +275,7 @@ if(!$usercode){//user-codeがなければ発行
 	$usercode = strtr($usercode,"!\"#$%&'()+,/:;<=>?@[\\]^`/{|}~\t","ABCDEFGHIJKLMNOabcdefghijklmno");
 }
 setcookie("usercode", $usercode, time()+(86400*365),"","",false,true);//1年間
+$_SESSION['usercode']=$usercode;
 
 switch($mode){
 	case 'regist':
@@ -417,10 +435,18 @@ function check_csrf_token(){
 	}
 }
 function check_same_origin($cookie_check=false){
+	global $usercode,$en;
+	session_sta();
+	$c_usercode = (string)filter_input(INPUT_COOKIE, 'usercode');//user-codeを取得
+	$session_usercode = isset($_SESSION['usercode']) ? (string)$_SESSION['usercode'] : "";
 
-	$usercode = (string)filter_input(INPUT_COOKIE, 'usercode');
-	if($cookie_check && !$usercode){
-		error(MSG050);
+	if($cookie_check){
+		if(!$c_usercode){
+			error(MSG050);
+		}
+		if(!$usercode || ($usercode!==$c_usercode)&&($usercode!==$session_usercode)){
+			error($en?"User code mismatch.":"ユーザーコードが一致しません。");
+		}
 	}
 	if(isset($_SERVER['HTTP_ORIGIN']) && isset($_SERVER['HTTP_HOST']) && (parse_url($_SERVER['HTTP_ORIGIN'], PHP_URL_HOST) !== $_SERVER['HTTP_HOST'])){
 		error(MSG049);
@@ -511,13 +537,17 @@ function form($resno="",$tmp=""){
 	$dat['use_tegaki'] = (USE_TEGAKI ? true : false);
 	$dat['pdefw'] = PDEF_W;
 	$dat['pdefh'] = PDEF_H;
+	$dat['maxw_px'] = MAX_W_PX;
+	$dat['maxh_px'] = MAX_H_PX;
 	$dat['pmaxw'] = PMAX_W;
 	$dat['pmaxh'] = PMAX_H;
+	$dat['pminw'] = PMIN_W;
+	$dat['pminh'] = PMIN_H;
 	$dat['anime'] = USE_ANIME ? true : false;
 	$dat['animechk'] = DEF_ANIME ? ' checked' : '';
 	$dat['resno'] = $resno ? $resno :'';
 	$dat['notres'] = $resno ? false : true;
-	$dat['paintform'] = USE_PAINT ? ($resno ? (RES_UPLOAD ? true :false) :true):false;
+	$dat['paintform'] = (USE_PAINT && !empty($count_arr_apps)) ? ($resno ? (RES_UPLOAD ? true :false) :true):false;
 	$dat['maxbyte'] = MAX_KB * 1024 * 2;//フォームのHTMLによるファイルサイズの制限 jpeG→png変換を考慮して2倍。
 	$dat['usename'] = USE_NAME ? ' *' : '';
 	$dat['usesub']  = USE_SUB ? ' *' : '';
@@ -529,7 +559,10 @@ function form($resno="",$tmp=""){
 	if(!USE_IMG_UPLOAD){//画像アップロード機能を使わない時
 		$dat['upfile'] = false;
 	} else{
-		if((!$resno && !$tmp) || (RES_UPLOAD && !$tmp)) $dat['upfile'] = true;
+		if((!$resno && !$tmp) || (RES_UPLOAD && !$tmp)){
+			$dat['upfile'] = true;
+		}
+			
 	}
 	$dat['maxkb']   = MAX_KB;//実際にアップロードできるファイルサイズ
 	$dat['maxw']    = $resno ? MAX_RESW : MAX_W;
@@ -666,12 +699,7 @@ function updatelog(){
 		$dat['logfilename']= $logfilename;
 
 		$buf = htmloutput(MAINFILE,$dat,true);
-		// return htmloutput(MAINFILE,$dat,false);
-
-		$fp = fopen($logfilename, "w");
-		flock($fp, LOCK_EX); //*
-		writeFile($fp, $buf);
-		closeFile($fp);
+		file_put_contents($logfilename,$buf,LOCK_EX);
 		if(PHP_EXT!='.php'){chmod($logfilename,PERMISSION_FOR_DEST);}
 	}
 
@@ -964,9 +992,12 @@ function regist(){
 	}
 	$dest='';
 	$is_file_dest=false;
+	$is_upload=false;
 	if($upfile && is_file($upfile)){//アップロード
-		$dest = $temppath.$time.'.tmp';
-		if($pictmp2){
+	//サポートしていないフォーマットならエラーが返る
+	getImgType($upfile);
+	$dest = $temppath.$time.'.tmp';
+	if($pictmp2){
 			copy($upfile, $dest);
 		} else{//フォームからのアップロード
 			if(!USE_IMG_UPLOAD && (!$admin||$admin!==$ADMIN_PASS)){//アップロード禁止で管理画面からの投稿ではない時
@@ -978,7 +1009,10 @@ function regist(){
 			if(!move_uploaded_file($upfile, $dest)){
 				error(MSG003,$upfile);
 			}
+			//Exifをチェックして画像が回転している時と位置情報が付いている時は上書き保存
+			check_jpeg_exif($dest);
 			$tool="Upload";
+			$is_upload=true;
 		}
 
 		$is_file_dest = is_file($dest);
@@ -1081,8 +1115,7 @@ function regist(){
 		}
 		if($pchk){
 		//KASIRAが入らない10桁のUNIX timeを取り出す
-		$ltime= $logver==="6" ? substr($ltime,0,-3) :
-		(strlen($ltime)>12 ? substr($ltime,-13,-3) : $ltime);
+		$ltime=microtime2time($ltime,$logver);
 		$interval=time()-(int)$ltime;
 		if(RENZOKU && ($interval>=0) && ($interval < RENZOKU)){error(MSG020,$dest);}
 		if(RENZOKU2 && ($interval>=0) && ($interval < RENZOKU2) && $dest){error(MSG021,$dest);}
@@ -1116,27 +1149,17 @@ function regist(){
 	$src='';
 	// アップロード処理
 	if($dest&&$is_file_dest){//画像が無い時は処理しない
-	//画像フォーマット
-		$fsize_dest=filesize($dest);
-		if($fsize_dest > IMAGE_SIZE * 1024 || $fsize_dest > MAX_KB * 1024){//指定サイズを超えていたら
-			if ($im_jpg = png2jpg($dest)) {
-				if(filesize($im_jpg)<$fsize_dest){//JPEGのほうが小さい時だけ
-					rename($im_jpg,$dest);//JPEGで保存
-					chmod($dest,PERMISSION_FOR_DEST);
-				} else{//PNGよりファイルサイズが大きくなる時は
-					unlink($im_jpg);//作成したJPEG画像を削除
-				}
-			}
-		}
+
+		thumb($temppath,$time,".tmp",MAX_W_PX,MAX_H_PX,['toolarge'=>1]);//実体データを縮小
+		//pngをjpegに変換してみてファイル容量が小さくなっていたら元のファイルを上書き
+		convert_andsave_if_smaller_png2jpg($dest,$is_upload);
+
 		clearstatcache();
 		if(filesize($dest) > MAX_KB * 1024){//ファイルサイズ再チェック
 		error(MSG034,$dest);
 		}
-		$img_type=mime_content_type($dest);//190603
-
-		if (!in_array($img_type, ['image/gif', 'image/jpeg', 'image/png','image/webp'])) {
-			error(MSG004,$dest);
-		}
+		//サポートしていないフォーマットならエラーが返る
+		getImgType($dest);
 
 		$chk = md5_file($dest);
 		check_badfile($chk, $dest); // 拒絶画像チェック
@@ -1174,8 +1197,9 @@ function regist(){
 		}
 
 		list($w, $h) = getimagesize($dest);
-		$ext = getImgType($img_type, $dest);
-
+		//サポートしていないフォーマットならエラーが返る
+		$ext = getImgType($dest);
+	
 		rename($dest,$path.$time.$ext);
 		chmod($path.$time.$ext,PERMISSION_FOR_DEST);
 		// 縮小表示
@@ -1659,8 +1683,8 @@ function paintform(){
 	$ctype = (string)newstring(filter_input(INPUT_POST, 'ctype'));
 	$quality = (int)filter_input(INPUT_POST, 'quality',FILTER_VALIDATE_INT);
 	$no = (int)filter_input(INPUT_POST, 'no',FILTER_VALIDATE_INT);
-	$is_mobile = (bool)filter_input(INPUT_POST, 'is_mobile',FILTER_VALIDATE_BOOLEAN);
 
+	
 	if(strlen($pwd) > 72) error(MSG015);
 
 	$dat['klecksusercode']=$usercode;//klecks
@@ -1759,9 +1783,7 @@ function paintform(){
 		list($picw,$pich)=getimagesize(IMG_DIR.$pch.$ext);//キャンバスサイズ
 	
 		$_pch_ext = check_pch_ext(__DIR__.'/'.PCH_DIR.$pch,['upfile'=>true]);
-		if($is_mobile && ($_pch_ext==='.spch')){
-			$ctype='img';
-		}
+
 		if($ctype=='pch'&& $_pch_ext){
 
 			if($_pch_ext==='.pch'){
@@ -1784,11 +1806,10 @@ function paintform(){
 		$dat['newpaint'] = true;
 	}
 
-	if($picw < 300) $picw = 300;
-	if($pich < 300) $pich = 300;
-	if($picw > PMAX_W) $picw = PMAX_W;
-	if($pich > PMAX_H) $pich = PMAX_H;
-
+	$picw = ($picw < PMIN_W) ? PMIN_W : $picw;//最低の幅チェック
+	$pich = ($pich < PMIN_H) ? PMIN_H : $pich;//最低の高さチェック
+	$picw = ($picw > PMAX_W) ? PMAX_W : $picw;//最大の幅チェック
+	$pich = ($pich > PMAX_H) ? PMAX_H : $pich;//最大の高さチェック
 
 	if($shi==1||$shi==2){
 	$w = $picw + 510;//しぃぺの時の幅
@@ -1797,7 +1818,9 @@ function paintform(){
 		$w = $picw + 150;//PaintBBSの時の幅
 		$h = $pich + 172;//PaintBBSの時の高さ
 	}
-	if($h < 560){$h = 560;}//共通の最低高
+
+	$w = ($w < 450) ? 450 : $w;//最低幅
+	$h = ($h < 560) ? 560 : $h;//最低高
 
 	$dat['compress_level'] = COMPRESS_LEVEL;
 	$dat['layer_count'] = LAYER_COUNT;
@@ -1870,6 +1893,10 @@ function paintform(){
 		$usercode.='&repcode='.$repcode;
 	}
 
+	$not_support_async_await=not_support_async_await()&&($shi==1||$shi==2);
+	$dat['await']=$not_support_async_await ? '' : 'await';//しぃペインターのダイナミックパレットの制御
+	$dat['async']=$not_support_async_await ? '' : 'async';//awaitをSupportしていない古いブラウザの時は空白に
+
 	//アプリ選択 
 	if($shi==1){ $dat['normal'] = true; }
 	elseif($shi==2){ $dat['pro'] = true; }
@@ -1891,6 +1918,15 @@ function paintform(){
 			return htmloutput(PAINT_KLECKS,$dat);
 		}
 		default:
+
+		if($dat['normal'] || $dat['pro']){
+			$dat['tool']="Shi-Painter";
+		}elseif($dat['paintbbs']){
+			$dat['tool']="PaintBBS";
+		}elseif($dat['chickenpaint']){
+			$dat['tool']="ChickenPaint";
+		}
+		
 		return htmloutput(PAINTFILE,$dat);
 	}
 }
@@ -2363,7 +2399,7 @@ global $ADMIN_PASS;
 			if(!$sub)  $sub  = $esub;
 			if(!$com)  $com  = $ecom;
 			if(!$fcolor) $fcolor = $efcolor;
-			is_paint_tool_name($tool);
+			$tool=is_paint_tool_name($tool);
 			$line[$i] = "$no,$date,$name,$email,$sub,$com,$url,$host,$epwd,$ext,$w,$h,$time,$chk,$ptime,$fcolor,$pchext,$thumbnail,$tool,$logver,";
 			$flag = TRUE;
 			break;
@@ -2490,33 +2526,24 @@ function replace(){
 
 			$upfile = $temppath.$file_name.$imgext;
 			$dest = $temppath.$time.'.tmp';
+			
+			//サポートしていないフォーマットならエラーが返る
+			getImgType($upfile);
 			copy($upfile, $dest);
 			
 			if(!is_file($dest)) error(MSG003);
 			chmod($dest,PERMISSION_FOR_DEST);
 
-			$fsize_dest=filesize($dest);
-			if($fsize_dest > IMAGE_SIZE * 1024 || $fsize_dest > MAX_KB * 1024){//指定サイズを超えていたら
-				if ($im_jpg = png2jpg($dest)) {
-					if(filesize($im_jpg)<$fsize_dest){//JPEGのほうが小さい時だけ
-						rename($im_jpg,$dest);//JPEGで保存
-						chmod($dest,PERMISSION_FOR_DEST);
-					} else{//PNGよりファイルサイズが大きくなる時は
-						unlink($im_jpg);//作成したJPEG画像を削除
-					}
-				}
-			}
+			//pngをjpegに変換してみてファイル容量が小さくなっていたら元のファイルを上書き
+			convert_andsave_if_smaller_png2jpg($dest);
 		
-			$img_type=mime_content_type($dest);
-			if (!in_array($img_type, ['image/gif', 'image/jpeg', 'image/png','image/webp'])) {
-				error(MSG004,$dest);
-			}
+			//サポートしていないフォーマットならエラーが返る
+			$imgext = getImgType($dest);
 
 			$chk = md5_file($dest);
 			check_badfile($chk, $dest); // 拒絶画像チェック
 
 			list($w, $h) = getimagesize($dest);
-			$imgext = getImgType($img_type, $dest);
 	
 			chmod($dest,PERMISSION_FOR_DEST);
 			rename($dest,$path.$time.$imgext);
@@ -2843,7 +2870,9 @@ function redirect ($url, $wait = 0, $message1 = '',$message2 = '') {
 	exit;
 }
 
-function getImgType ($img_type, $dest) {
+function getImgType ($dest) {
+
+	$img_type=mime_content_type($dest);
 
 	switch ($img_type) {
 		case "image/gif" : return ".gif";
@@ -2972,7 +3001,7 @@ function is_ngword ($ngwords, $strs) {
 function png2jpg ($src) {
 	global $temppath;
 	if(mime_content_type($src)!=="image/png" || !gd_check() ||!function_exists("ImageCreateFromPNG")){
-		return false;
+		return;
 	}
 	//pngならJPEGに変換
 	if($im_in=ImageCreateFromPNG($src)){
@@ -2995,7 +3024,89 @@ function png2jpg ($src) {
 			return $dst;
 		}
 	}
-	return false;
+	return;
+}
+
+//pngをjpegに変換してみてファイル容量が小さくなっていたら元のファイルを上書き
+function convert_andsave_if_smaller_png2jpg($dest,$is_upload=false){
+	clearstatcache();
+	$fsize_dest=filesize($dest);
+	if(($is_upload && ($fsize_dest > (IMAGE_SIZE * 1024))) || ($fsize_dest > (MAX_KB * 1024))){//指定サイズを超えていたら
+
+		if ($im_jpg = png2jpg($dest)) {
+			if(filesize($im_jpg)<$fsize_dest){//JPEGのほうが小さい時だけ
+				rename($im_jpg,$dest);//JPEGで保存
+				chmod($dest,PERMISSION_FOR_DEST);
+			} else{//PNGよりファイルサイズが大きくなる時は
+				unlink($im_jpg);//作成したJPEG画像を削除
+			}
+		}
+	}
+}
+//Exifをチェックして画像が回転している時と位置情報が付いている時は上書き保存
+function check_jpeg_exif($dest){
+
+	if((exif_imagetype($dest) !== IMAGETYPE_JPEG ) || !function_exists("imagecreatefromjpeg")){
+		return;
+	}
+	//画像回転の検出
+	$exif = exif_read_data($dest);
+	$orientation = isset($exif["Orientation"]) ? $exif["Orientation"] : 1;
+	//位置情報はあるか?
+	$gpsdata_exists =(isset($exif['GPSLatitude']) && isset($exif['GPSLongitude'])); 
+
+	if ($orientation === 1 && !$gpsdata_exists) {
+	//画像が回転していない、位置情報も存在しない時
+		return;
+	}
+
+	list($w,$h) = getimagesize($dest);
+
+	$im_in = imagecreatefromjpeg($dest);
+	if(!$im_in){
+		return;
+	}
+	switch ($orientation) {
+		case 3:
+			$im_in = imagerotate($im_in, 180, 0);
+			break;
+		case 6:
+			$im_in = imagerotate($im_in, -90, 0);
+			break;
+		case 8:
+			$im_in = imagerotate($im_in, 90, 0);
+			break;
+		default:
+			break;
+	}
+	if(!$im_in){
+		return;
+	}
+	if ($orientation === 6 || $orientation === 8) {
+		// 90度または270度回転の場合、幅と高さを入れ替える
+		list($w, $h) = [$h, $w];
+	}
+	$w_ratio = MAX_W_PX / $w;
+	$h_ratio = MAX_H_PX / $h;
+	$ratio = min($w_ratio, $h_ratio);
+	$out_w = ceil($w * $ratio);//端数の切り上げ
+	$out_h = ceil($h * $ratio);
+	$im_out = $im_in;//縮小しない時
+	//JPEG形式で何度も保存しなおすのを回避するため、
+	//指定範囲内にリサイズしておく。
+	if(function_exists("ImageCreateTrueColor") && function_exists("ImageCopyResampled")){
+		$im_out = ImageCreateTrueColor($out_w, $out_h);
+		ImageCopyResampled($im_out, $im_in, 0, 0, 0, 0, $out_w, $out_h, $w, $h);
+	}
+	// 画像を保存
+	imagejpeg($im_out, $dest,98);
+	// 画像のメモリを解放
+	imagedestroy($im_in);
+	imagedestroy($im_out);
+
+	if(!is_file($dest)){
+		error(MSG003,$dest);
+	}
 }
 
 function check_badhost () {
@@ -3224,13 +3335,19 @@ function getId ($userip) {
 }
 
 // 古いスレッドへの投稿を許可するかどうか
-function check_elapsed_days ($time,$logver=false) {
+function check_elapsed_days ($microtime,$logver=false) {
 
-	$time = ($logver==="6") ? (int)substr($time,0,-3) : (int)substr($time, -13, -3);
+	$time = microtime2time($microtime,$logver);
 
 	return ELAPSED_DAYS //古いスレッドのフォームを閉じる日数が設定されていたら
 		? ((time() - $time)) <= ((int)ELAPSED_DAYS * 86400) // 指定日数以内なら許可
 		: true; // フォームを閉じる日数が未設定なら許可
+}
+//マイクロ秒を秒に戻す
+function microtime2time($microtime,$logver){
+
+	return $logver==="6" ? (int)substr($microtime,0,-3) :
+	(int)(strlen($microtime)>12 ? substr($microtime,-13,-3) : (int)$microtime);
 }
 
 //逆変換テーブル作成
@@ -3268,6 +3385,9 @@ function app_to_use(){
 	$arr_apps=[];
 		if(USE_PAINTBBS_NEO){
 			$arr_apps[]='neo';
+		}
+		if(USE_TEGAKI){
+			$arr_apps[]='tegaki';
 		}
 		if(USE_SHI_PAINTER){
 			$arr_apps[]='1';
@@ -3406,6 +3526,21 @@ function isIE() {
 	$userAgent = isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : "";
     return (bool) strpos($userAgent, 'MSIE') || (bool) strpos($userAgent, 'Trident/');
 }
+function not_support_async_await(){
+
+	if(isIE()){
+		return true;
+	}
+	$userAgent = $_SERVER['HTTP_USER_AGENT'];
+	if (strpos($userAgent, 'Firefox/') !== false) {
+		$matches = [];
+		preg_match('/Firefox\/(\d+)/', $userAgent, $matches);
+		if (isset($matches[1]) && (int)$matches[1] < 89 ) {
+			return true;
+		}
+	}
+	return false;
+}
 
 // 優先言語のリストをチェックして対応する言語があればその翻訳されたレイヤー名を返す
 function getTranslatedLayerName() {
@@ -3425,6 +3560,9 @@ function getTranslatedLayerName() {
 		}
 		if (strpos($language, 'zh-cn') === 0) {
 			return "图层";
+		}
+		if (strpos($language, 'ko') === 0) {
+			return "레이어";
 		}
 		if (strpos($language, 'fr') === 0) {
 			return "Calque";

@@ -1,0 +1,25 @@
+# Automatically generated
+# duptype id depth size device inode priority name
+DUPTYPE_FIRST_OCCURRENCE 11 1 41 2 23925373020764699 1 ./.git/ORIG_HEAD
+DUPTYPE_WITHIN_SAME_TREE -11 3 41 2 50384020831229097 1 ./.git/refs/heads/temp
+DUPTYPE_FIRST_OCCURRENCE 353 5 996 2 396598242185338971 1 ./potiboard5/chickenpaint/fonts/fontawesome/demo-files/demo.js
+DUPTYPE_WITHIN_SAME_TREE -353 5 996 2 17732923533130384 1 ./potiboard5/templates/mono_en/icomoon/demo-files/demo.js
+DUPTYPE_FIRST_OCCURRENCE 352 5 1996 2 16044073672532058 1 ./potiboard5/chickenpaint/fonts/fontawesome/demo-files/demo.css
+DUPTYPE_WITHIN_SAME_TREE -352 5 1996 2 18295873486551697 1 ./potiboard5/templates/mono_en/icomoon/demo-files/demo.css
+DUPTYPE_FIRST_OCCURRENCE 329 4 9063 2 50384020831232175 1 ./potiboard5/templates/mono_en/css/mono_dark.min.css
+DUPTYPE_WITHIN_SAME_TREE -329 6 9063 2 657244070619406478 1 ./potiboard5/templates/mono_en/css/dev/sass/mono_dark.min.css
+DUPTYPE_FIRST_OCCURRENCE 331 4 9087 2 123286039799292081 1 ./potiboard5/templates/mono_en/css/mono_deep.min.css
+DUPTYPE_WITHIN_SAME_TREE -331 6 9087 2 1015561715972071573 1 ./potiboard5/templates/mono_en/css/dev/sass/mono_deep.min.css
+DUPTYPE_FIRST_OCCURRENCE 333 4 9099 2 209135907696042163 1 ./potiboard5/templates/mono_en/css/mono_main.min.css
+DUPTYPE_WITHIN_SAME_TREE -333 6 9099 2 281756451687391390 1 ./potiboard5/templates/mono_en/css/dev/sass/mono_main.min.css
+DUPTYPE_FIRST_OCCURRENCE 335 4 9105 2 219550481834336437 1 ./potiboard5/templates/mono_en/css/mono_mayo.min.css
+DUPTYPE_WITHIN_SAME_TREE -335 6 9105 2 21955048183455914 1 ./potiboard5/templates/mono_en/css/dev/sass/mono_mayo.min.css
+DUPTYPE_FIRST_OCCURRENCE 328 4 11552 2 172262685746946221 1 ./potiboard5/templates/mono_en/css/mono_dark.css
+DUPTYPE_WITHIN_SAME_TREE -328 6 11552 2 906067950031626378 1 ./potiboard5/templates/mono_en/css/dev/sass/mono_dark.css
+DUPTYPE_FIRST_OCCURRENCE 332 4 11573 2 9851624184897714 1 ./potiboard5/templates/mono_en/css/mono_main.css
+DUPTYPE_WITHIN_SAME_TREE -332 6 11573 2 162974011515494556 1 ./potiboard5/templates/mono_en/css/dev/sass/mono_main.css
+DUPTYPE_FIRST_OCCURRENCE 330 4 11585 2 58828270132551856 1 ./potiboard5/templates/mono_en/css/mono_deep.css
+DUPTYPE_WITHIN_SAME_TREE -330 6 11585 2 447545212969967763 1 ./potiboard5/templates/mono_en/css/dev/sass/mono_deep.css
+DUPTYPE_FIRST_OCCURRENCE 334 4 11607 2 44754521297019060 1 ./potiboard5/templates/mono_en/css/mono_mayo.css
+DUPTYPE_WITHIN_SAME_TREE -334 6 11607 2 74309393851637921 1 ./potiboard5/templates/mono_en/css/dev/sass/mono_mayo.css
+# end of file

@@ -239,15 +239,19 @@ define("DSP_RES", "7");
 define("USE_FONTCOLOR", "0");
 
 
-// 投稿容量制限 KB phpの設定により2M(2048)まで
+// 投稿容量制限 KB
 // Maximum size allowed for the images in the posts (in KB).
-// By php limit, it is allowed up to 2048.
-define("MAX_KB", "1000");
+define("MAX_KB", "2048");
 
 //表示する最大サイズ（これ以上はサムネイルまたは縮小表示
 // Maximum size to display (thumbnails or reduced view.
 define("MAX_W", "600");	//幅(width)
 define("MAX_H", "600");	//高さ(height)
+
+//アップロード時の幅と高さの最大サイズ これ以上は縮小
+// The maximum size for width and height during upload, any larger will be resized.
+define("MAX_W_PX", "1024"); //幅(width)
+define("MAX_H_PX", "1024"); //高さ(height)
 
 // レスで画像貼りを許可する する:1 しない:0
 // ※お絵かきも連動
@@ -313,10 +317,11 @@ define("USE_ADMIN_LINK", "1");
 // Use the oekaki function  (1: Enabled, 0: Disabled)
 define("USE_PAINT", "1"); 
 
-// お絵描き最大サイズ（これ以上は強制でこの値
-// 最小値は幅、高さともに 300 固定です
-// The maximum drawing size value larger than this will be the maximum value set here.
-// The minimum value is fixed at 300 for both width and height.
+// If a drawing size smaller than this is input, it will be the minimum value set here.
+define("PMIN_W", "300");	//幅 (width)
+define("PMIN_H", "300");	//高さ (height)
+
+// If a drawing size larger than this is input, the maximum value set here will be used.
 define("PMAX_W", "800");	//幅 (width)
 define("PMAX_H", "800");	//高さ (height)
 
@@ -590,6 +595,10 @@ define("CRYPT_PASS","(redacted)");
 // 適当な英数字を入れてください。
 // This is the internal encryption password.
 // This is not the administrator password.
+
+//Use an older version of CheerpJ Yes:1 No:0
+//If there is a problem with the latest version, do this:1
+// define("USE_CHEERPJ_OLD_VERSION","0");
 
 /* ------------- トラブルシューティング(trouble shooting) ------------- */
 
