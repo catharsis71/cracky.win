@@ -47,15 +47,6 @@
 	@endif
 	@endif
 	<style id="for_mobile"></style>
-	<script>
-		function is_mobile() {
-			if (navigator.maxTouchPoints && (window.matchMedia && window.matchMedia('(max-width: 768px)').matches)){
-				return	document.getElementById("for_mobile").textContent = ".for_pc{display: none;}";
-			}
-			return false;
-		}
-		document.addEventListener('DOMContentLoaded',is_mobile,false);
-	</script>
 </head>
 
 <body>
@@ -108,8 +99,8 @@
 	@endif
 	@endif
 	@if($paintform)
-	@if($paint and ($resno or !$diary))
-		@if($resno)
+	@if($resno or !$diary)
+	@if($resno)
 			<p class="resm">Reply with oekaki</p>
 			<hr>
 		@endif
@@ -120,18 +111,18 @@
 
 	@endif
 
-		@if ($notres and (!$diary or $addinfo))
 		<div class="epost">
+		@if ($notres and (!$diary or $addinfo))
 			<ul>
 			@if ($paint2 and !$diary)
-			<li>Canvas size is width 300px to {{$pmaxw}}px, height 300px to {{$pmaxh}}px.</li>
-			<li>Images larger than width {{$maxw}}px height {{$maxh}}px will be displayed in reduced size.</li>
+			<li>Canvas size is width {{$pminw}}px to {{$pmaxw}}px, height {{$pminh}}px to {{$pmaxh}}px.</li>
+			<li>Images larger than width {{$maxw}}px height {{$maxh}}px will be thumbnailed.</li>
 			@endif
 			{!!$addinfo!!}
 		</ul>
-		</div>
 		@endif	
-	@endif
+		</div>
+		@endif
 		@if($form)
 			<div>
 			<form action="{{$self}}" method="post" enctype="multipart/form-data" id="comment_form">
@@ -187,9 +178,12 @@
 				<ul>
 					@if($upfile)
 					<li>Attachable files type: GIF, JPG, PNG and WEBP. </li>
-					<li>Images larger than width {{$maxw}}px height {{$maxh}}px will be displayed in reduced size.</li>
+					<li>Attached image larger than width {{$maxw_px}}px height {{$maxh_px}}px will be reduced size.</li>
 					@endif
+					@if($paintform or $upfile)
+					<li>Images larger than width {{$maxw}}px height {{$maxh}}px will be  will be thumbnailed.</li>
 					<li>The maximum amount of posted data is {{$maxkb}}KB. With sage function.</li>
+					@endif
 					{!!$addinfo!!}
 				</ul>
 			</form>
@@ -252,7 +246,7 @@
 					{{-- 親子共通 --}}
 					@if($res['src'])
 					<div class="img_info_wrap">
-						<a href="{{$res['src']}}" title="{{$res['sub']}}" target="_blank" class="luminous">{{$res['srcname']}}</a>
+						<a href="{{$res['src']}}" title="{{$res['sub']}}" target="_blank" class="luminous_Filename">{{$res['srcname']}}</a>
 						({{$res['size_kb']}} KB)
 						@if($res['thumb']) - Showing thumbnail - @endif @if($res['painttime']) PaintTime :
 						{{$res['painttime']}}@endif
@@ -378,6 +372,9 @@
 	<script>
 	document.addEventListener('DOMContentLoaded',l,false);
 	</script>
+	@if($resno)	{{-- レス返信画面の画像はギャラリーモードで開く --}}
+	<script>const luminous_gallery = true;</script>
+	@endif
 	<script src="lib/{{$jquery}}"></script>
 	<script src="lib/luminous/luminous.min.js"></script>
 	<script src="{{$skindir}}js/mono_common.js?{{$ver}}"></script>

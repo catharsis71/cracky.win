@@ -80,6 +80,9 @@
   footer > div.copy {
 		  text-align: right;
   }
+  footer > div.copy a {
+    display: inline-block;
+}
   input, textarea, select, .se {
 	  border-style: solid;
 	border-color: val.$b_border_u val.$b_border val.$b_border val.$b_border_u;
@@ -389,7 +392,7 @@
 	  vertical-align: top;
   }
   .view_other_works img{
-	  width: 100%;
+	  max-width: 100%;
 	  height:auto;
   }
   .view_other_works div:nth-of-type(6n) {

@@ -27,15 +27,6 @@
 </style>
 	<title>{{$title}}</title>
 	<style id="for_mobile"></style>
-	<script>
-		function is_mobile() {
-			if (navigator.maxTouchPoints && (window.matchMedia && window.matchMedia('(max-width: 768px)').matches)){
-				return	document.getElementById("for_mobile").textContent = ".for_pc{display: none;}";
-			}
-			return false;
-		}
-		document.addEventListener('DOMContentLoaded',is_mobile,false);
-	</script>
 </head>
 
 <body>
@@ -207,7 +198,8 @@
 					<ul>
 						@if($upfile)
 						<li>Attachable files type: GIF, JPG, PNG and WEBP.</li>
-						<li>Images larger than width {{$maxw}}px height {{$maxh}}px will be displayed in reduced size.</li>
+						<li>Attached image larger than width {{$maxw_px}}px height {{$maxh_px}}px will be reduced size.</li>
+						<li>Images larger than width {{$maxw}}px height {{$maxh}}px will be thumbnailed.</li>
 						<li>The maximum amount of posted data is {{$maxkb}}KB. With sage function.</li>
 						@endif
 						@if($rewrite)

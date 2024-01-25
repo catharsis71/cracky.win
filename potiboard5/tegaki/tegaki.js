@@ -1,6 +1,8 @@
+/*! tegaki.js, MIT License */
+'use strict';
 var browserLanguage = window.navigator.language.toLowerCase();
 var isJa = browserLanguage.startsWith('ja');
-/*! tegaki.js, MIT License */'use strict';var TegakiStrings = {
+var TegakiStrings = {
   // Messages
   badDimensions: 'Invalid dimensions.',
   promptWidth: 'Canvas width in pixels',
@@ -1750,7 +1752,7 @@ var TegakiCursor = {
 	
 	render: function(x, y) {
 	  var i, size, srcImg, srcData, destImg, destData, activeLayer;
-	  
+
 	  if (!this.cached) {
 		this.buildCache();
 	  }
@@ -1840,7 +1842,7 @@ var TegakiCursor = {
 	
 	generate: function(size) {
 	  var e, x, y, c, r, rr, points;
-	  
+
 	  r = 0 | ((size) / 2);
 	  
 	  rr = 0 | ((size + 1) % 2);
@@ -2314,6 +2316,21 @@ var TegakiKeybinds = {
       e.stopPropagation();
       fn[0][fn[1]]();
     }
+	document.addEventListener('keyup', function(e) {
+		// e.key を利用して特定のキーのアップイベントを検知する
+		if (e.key.toLowerCase() === 'alt') {
+			e.preventDefault(); // Alt キーのデフォルトの動作をキャンセル
+		}
+	});
+	//ブラウザデフォルトのキー操作をキャンセル
+	document.addEventListener("keydown",(e)=>{
+	const keys = ["+", ";", "=","-","s","h","r"];
+	if (keys.includes(e.key.toLowerCase())) {
+		// console.log("e.key",e.key);
+		e.preventDefault();
+	}
+});
+
   },
 };
 var TegakiLayers = {
@@ -3983,9 +4000,14 @@ var Tegaki = {
 	},
 	
 	updateCursorStatus: function() {
-	  if (!Tegaki.tool.noCursor && Tegaki.tool.size > 1) {
+	  if (!Tegaki.tool.noCursor && Tegaki.tool.size > 0
+	  && (!navigator.maxTouchPoints || navigator.maxTouchPoints < 2)) {
+
 		Tegaki.cursor = true;
-		TegakiCursor.generate(Tegaki.tool.size);
+		// ブラシサイズが1pxの時は2px相当の円カーソルを表示
+		const size=Tegaki.tool.size
+		const CursorSize= (size===1) ? 2 : size;
+		TegakiCursor.generate(CursorSize);
 	  }
 	  else {
 		Tegaki.cursor = false;

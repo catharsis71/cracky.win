@@ -1,3 +1,40 @@
+/*
+    ChickenPaint Be
+    https://github.com/satopian/ChickenPaint_Be
+    by satopian
+    Customized from ChickenPaint by Nicholas Sherlock.
+    GNU GENERAL PUBLIC LICENSE
+    Version 3, 29 June 2007
+    <http://www.gnu.org/licenses/>
+*/
+/*
+    ChickenPaint
+
+    ChickenPaint is a translation of ChibiPaint from Java to JavaScript
+    by Nicholas Sherlock / Chicken Smoothie.
+
+    ChibiPaint is Copyright (c) 2006-2008 Marc Schefer
+
+    ChickenPaint is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    ChickenPaint is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with ChickenPaint. If not, see <http://www.gnu.org/licenses/>.
+*/
+/*!
+  * Bootstrap v5.3.0 (https://getbootstrap.com/)
+  * Copyright 2011-2023 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
+  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+*/
+!function(t,e){"object"==typeof exports&&"undefined"!=typeof module?module.exports=e():"function"==typeof define&&define.amd?define(e):(t="undefined"!=typeof globalThis?globalThis:t||self).bootstrap=e()}(this,(function(){"use strict";const t=new Map,e={set(e,i,n){t.has(e)||t.set(e,new Map);const s=t.get(e);s.has(i)||0===s.size?s.set(i,n):console.error(`Bootstrap doesn't allow more than one instance per element. Bound instance: ${Array.from(s.keys())[0]}.`)},get:(e,i)=>t.has(e)&&t.get(e).get(i)||null,remove(e,i){if(!t.has(e))return;const n=t.get(e);n.delete(i),0===n.size&&t.delete(e)}},i="transitionend",n=t=>(t&&window.CSS&&window.CSS.escape&&(t=t.replace(/#([^\s"#']+)/g,((t,e)=>`#${CSS.escape(e)}`))),t),s=t=>{t.dispatchEvent(new Event(i))},o=t=>!(!t||"object"!=typeof t)&&(void 0!==t.jquery&&(t=t[0]),void 0!==t.nodeType),r=t=>o(t)?t.jquery?t[0]:t:"string"==typeof t&&t.length>0?document.querySelector(n(t)):null,a=t=>{if(!o(t)||0===t.getClientRects().length)return!1;const e="visible"===getComputedStyle(t).getPropertyValue("visibility"),i=t.closest("details:not([open])");if(!i)return e;if(i!==t){const e=t.closest("summary");if(e&&e.parentNode!==i)return!1;if(null===e)return!1}return e},l=t=>!t||t.nodeType!==Node.ELEMENT_NODE||!!t.classList.contains("disabled")||(void 0!==t.disabled?t.disabled:t.hasAttribute("disabled")&&"false"!==t.getAttribute("disabled")),c=t=>{if(!document.documentElement.attachShadow)return null;if("function"==typeof t.getRootNode){const e=t.getRootNode();return e instanceof ShadowRoot?e:null}return t instanceof ShadowRoot?t:t.parentNode?c(t.parentNode):null},h=()=>{},d=t=>{t.offsetHeight},u=()=>window.jQuery&&!document.body.hasAttribute("data-bs-no-jquery")?window.jQuery:null,f=[],p=()=>"rtl"===document.documentElement.dir,m=t=>{var e;e=()=>{const e=u();if(e){const i=t.NAME,n=e.fn[i];e.fn[i]=t.jQueryInterface,e.fn[i].Constructor=t,e.fn[i].noConflict=()=>(e.fn[i]=n,t.jQueryInterface)}},"loading"===document.readyState?(f.length||document.addEventListener("DOMContentLoaded",(()=>{for(const t of f)t()})),f.push(e)):e()},g=(t,e=[],i=t)=>"function"==typeof t?t(...e):i,_=(t,e,n=!0)=>{if(!n)return void g(t);const o=(t=>{if(!t)return 0;let{transitionDuration:e,transitionDelay:i}=window.getComputedStyle(t);const n=Number.parseFloat(e),s=Number.parseFloat(i);return n||s?(e=e.split(",")[0],i=i.split(",")[0],1e3*(Number.parseFloat(e)+Number.parseFloat(i))):0})(e)+5;let r=!1;const a=({target:n})=>{n===e&&(r=!0,e.removeEventListener(i,a),g(t))};e.addEventListener(i,a),setTimeout((()=>{r||s(e)}),o)},b=(t,e,i,n)=>{const s=t.length;let o=t.indexOf(e);return-1===o?!i&&n?t[s-1]:t[0]:(o+=i?1:-1,n&&(o=(o+s)%s),t[Math.max(0,Math.min(o,s-1))])},v=/[^.]*(?=\..*)\.|.*/,y=/\..*/,w=/::\d+$/,A={};let E=1;const T={mouseenter:"mouseover",mouseleave:"mouseout"},C=new Set(["click","dblclick","mouseup","mousedown","contextmenu","mousewheel","DOMMouseScroll","mouseover","mouseout","mousemove","selectstart","selectend","keydown","keypress","keyup","orientationchange","touchstart","touchmove","touchend","touchcancel","pointerdown","pointermove","pointerup","pointerleave","pointercancel","gesturestart","gesturechange","gestureend","focus","blur","change","reset","select","submit","focusin","focusout","load","unload","beforeunload","resize","move","DOMContentLoaded","readystatechange","error","abort","scroll"]);function O(t,e){return e&&`${e}::${E++}`||t.uidEvent||E++}function x(t){const e=O(t);return t.uidEvent=e,A[e]=A[e]||{},A[e]}function k(t,e,i=null){return Object.values(t).find((t=>t.callable===e&&t.delegationSelector===i))}function L(t,e,i){const n="string"==typeof e,s=n?i:e||i;let o=N(t);return C.has(o)||(o=t),[n,s,o]}function S(t,e,i,n,s){if("string"!=typeof e||!t)return;let[o,r,a]=L(e,i,n);if(e in T){const t=t=>function(e){if(!e.relatedTarget||e.relatedTarget!==e.delegateTarget&&!e.delegateTarget.contains(e.relatedTarget))return t.call(this,e)};r=t(r)}const l=x(t),c=l[a]||(l[a]={}),h=k(c,r,o?i:null);if(h)return void(h.oneOff=h.oneOff&&s);const d=O(r,e.replace(v,"")),u=o?function(t,e,i){return function n(s){const o=t.querySelectorAll(e);for(let{target:r}=s;r&&r!==this;r=r.parentNode)for(const a of o)if(a===r)return M(s,{delegateTarget:r}),n.oneOff&&P.off(t,s.type,e,i),i.apply(r,[s])}}(t,i,r):function(t,e){return function i(n){return M(n,{delegateTarget:t}),i.oneOff&&P.off(t,n.type,e),e.apply(t,[n])}}(t,r);u.delegationSelector=o?i:null,u.callable=r,u.oneOff=s,u.uidEvent=d,c[d]=u,t.addEventListener(a,u,o)}function D(t,e,i,n,s){const o=k(e[i],n,s);o&&(t.removeEventListener(i,o,Boolean(s)),delete e[i][o.uidEvent])}function I(t,e,i,n){const s=e[i]||{};for(const[o,r]of Object.entries(s))o.includes(n)&&D(t,e,i,r.callable,r.delegationSelector)}function N(t){return t=t.replace(y,""),T[t]||t}const P={on(t,e,i,n){S(t,e,i,n,!1)},one(t,e,i,n){S(t,e,i,n,!0)},off(t,e,i,n){if("string"!=typeof e||!t)return;const[s,o,r]=L(e,i,n),a=r!==e,l=x(t),c=l[r]||{},h=e.startsWith(".");if(void 0===o){if(h)for(const i of Object.keys(l))I(t,l,i,e.slice(1));for(const[i,n]of Object.entries(c)){const s=i.replace(w,"");a&&!e.includes(s)||D(t,l,r,n.callable,n.delegationSelector)}}else{if(!Object.keys(c).length)return;D(t,l,r,o,s?i:null)}},trigger(t,e,i){if("string"!=typeof e||!t)return null;const n=u();let s=null,o=!0,r=!0,a=!1;e!==N(e)&&n&&(s=n.Event(e,i),n(t).trigger(s),o=!s.isPropagationStopped(),r=!s.isImmediatePropagationStopped(),a=s.isDefaultPrevented());const l=M(new Event(e,{bubbles:o,cancelable:!0}),i);return a&&l.preventDefault(),r&&t.dispatchEvent(l),l.defaultPrevented&&s&&s.preventDefault(),l}};function M(t,e={}){for(const[i,n]of Object.entries(e))try{t[i]=n}catch(e){Object.defineProperty(t,i,{configurable:!0,get:()=>n})}return t}function j(t){if("true"===t)return!0;if("false"===t)return!1;if(t===Number(t).toString())return Number(t);if(""===t||"null"===t)return null;if("string"!=typeof t)return t;try{return JSON.parse(decodeURIComponent(t))}catch(e){return t}}function F(t){return t.replace(/[A-Z]/g,(t=>`-${t.toLowerCase()}`))}const H={setDataAttribute(t,e,i){t.setAttribute(`data-bs-${F(e)}`,i)},removeDataAttribute(t,e){t.removeAttribute(`data-bs-${F(e)}`)},getDataAttributes(t){if(!t)return{};const e={},i=Object.keys(t.dataset).filter((t=>t.startsWith("bs")&&!t.startsWith("bsConfig")));for(const n of i){let i=n.replace(/^bs/,"");i=i.charAt(0).toLowerCase()+i.slice(1,i.length),e[i]=j(t.dataset[n])}return e},getDataAttribute:(t,e)=>j(t.getAttribute(`data-bs-${F(e)}`))};class ${static get Default(){return{}}static get DefaultType(){return{}}static get NAME(){throw new Error('You have to implement the static method "NAME", for each component!')}_getConfig(t){return t=this._mergeConfigObj(t),t=this._configAfterMerge(t),this._typeCheckConfig(t),t}_configAfterMerge(t){return t}_mergeConfigObj(t,e){const i=o(e)?H.getDataAttribute(e,"config"):{};return{...this.constructor.Default,..."object"==typeof i?i:{},...o(e)?H.getDataAttributes(e):{},..."object"==typeof t?t:{}}}_typeCheckConfig(t,e=this.constructor.DefaultType){for(const[n,s]of Object.entries(e)){const e=t[n],r=o(e)?"element":null==(i=e)?`${i}`:Object.prototype.toString.call(i).match(/\s([a-z]+)/i)[1].toLowerCase();if(!new RegExp(s).test(r))throw new TypeError(`${this.constructor.NAME.toUpperCase()}: Option "${n}" provided type "${r}" but expected type "${s}".`)}var i}}class W extends ${constructor(t,i){super(),(t=r(t))&&(this._element=t,this._config=this._getConfig(i),e.set(this._element,this.constructor.DATA_KEY,this))}dispose(){e.remove(this._element,this.constructor.DATA_KEY),P.off(this._element,this.constructor.EVENT_KEY);for(const t of Object.getOwnPropertyNames(this))this[t]=null}_queueCallback(t,e,i=!0){_(t,e,i)}_getConfig(t){return t=this._mergeConfigObj(t,this._element),t=this._configAfterMerge(t),this._typeCheckConfig(t),t}static getInstance(t){return e.get(r(t),this.DATA_KEY)}static getOrCreateInstance(t,e={}){return this.getInstance(t)||new this(t,"object"==typeof e?e:null)}static get VERSION(){return"5.3.0"}static get DATA_KEY(){return`bs.${this.NAME}`}static get EVENT_KEY(){return`.${this.DATA_KEY}`}static eventName(t){return`${t}${this.EVENT_KEY}`}}const B=t=>{let e=t.getAttribute("data-bs-target");if(!e||"#"===e){let i=t.getAttribute("href");if(!i||!i.includes("#")&&!i.startsWith("."))return null;i.includes("#")&&!i.startsWith("#")&&(i=`#${i.split("#")[1]}`),e=i&&"#"!==i?i.trim():null}return n(e)},z={find:(t,e=document.documentElement)=>[].concat(...Element.prototype.querySelectorAll.call(e,t)),findOne:(t,e=document.documentElement)=>Element.prototype.querySelector.call(e,t),children:(t,e)=>[].concat(...t.children).filter((t=>t.matches(e))),parents(t,e){const i=[];let n=t.parentNode.closest(e);for(;n;)i.push(n),n=n.parentNode.closest(e);return i},prev(t,e){let i=t.previousElementSibling;for(;i;){if(i.matches(e))return[i];i=i.previousElementSibling}return[]},next(t,e){let i=t.nextElementSibling;for(;i;){if(i.matches(e))return[i];i=i.nextElementSibling}return[]},focusableChildren(t){const e=["a","button","input","textarea","select","details","[tabindex]",'[contenteditable="true"]'].map((t=>`${t}:not([tabindex^="-"])`)).join(",");return this.find(e,t).filter((t=>!l(t)&&a(t)))},getSelectorFromElement(t){const e=B(t);return e&&z.findOne(e)?e:null},getElementFromSelector(t){const e=B(t);return e?z.findOne(e):null},getMultipleElementsFromSelector(t){const e=B(t);return e?z.find(e):[]}},R=(t,e="hide")=>{const i=`click.dismiss${t.EVENT_KEY}`,n=t.NAME;P.on(document,i,`[data-bs-dismiss="${n}"]`,(function(i){if(["A","AREA"].includes(this.tagName)&&i.preventDefault(),l(this))return;const s=z.getElementFromSelector(this)||this.closest(`.${n}`);t.getOrCreateInstance(s)[e]()}))};class q extends W{static get NAME(){return"alert"}close(){if(P.trigger(this._element,"close.bs.alert").defaultPrevented)return;this._element.classList.remove("show");const t=this._element.classList.contains("fade");this._queueCallback((()=>this._destroyElement()),this._element,t)}_destroyElement(){this._element.remove(),P.trigger(this._element,"closed.bs.alert"),this.dispose()}static jQueryInterface(t){return this.each((function(){const e=q.getOrCreateInstance(this);if("string"==typeof t){if(void 0===e[t]||t.startsWith("_")||"constructor"===t)throw new TypeError(`No method named "${t}"`);e[t](this)}}))}}R(q,"close"),m(q);const V='[data-bs-toggle="button"]';class K extends W{static get NAME(){return"button"}toggle(){this._element.setAttribute("aria-pressed",this._element.classList.toggle("active"))}static jQueryInterface(t){return this.each((function(){const e=K.getOrCreateInstance(this);"toggle"===t&&e[t]()}))}}P.on(document,"click.bs.button.data-api",V,(t=>{t.preventDefault();const e=t.target.closest(V);K.getOrCreateInstance(e).toggle()})),m(K);const Q={endCallback:null,leftCallback:null,rightCallback:null},X={endCallback:"(function|null)",leftCallback:"(function|null)",rightCallback:"(function|null)"};class Y extends ${constructor(t,e){super(),this._element=t,t&&Y.isSupported()&&(this._config=this._getConfig(e),this._deltaX=0,this._supportPointerEvents=Boolean(window.PointerEvent),this._initEvents())}static get Default(){return Q}static get DefaultType(){return X}static get NAME(){return"swipe"}dispose(){P.off(this._element,".bs.swipe")}_start(t){this._supportPointerEvents?this._eventIsPointerPenTouch(t)&&(this._deltaX=t.clientX):this._deltaX=t.touches[0].clientX}_end(t){this._eventIsPointerPenTouch(t)&&(this._deltaX=t.clientX-this._deltaX),this._handleSwipe(),g(this._config.endCallback)}_move(t){this._deltaX=t.touches&&t.touches.length>1?0:t.touches[0].clientX-this._deltaX}_handleSwipe(){const t=Math.abs(this._deltaX);if(t<=40)return;const e=t/this._deltaX;this._deltaX=0,e&&g(e>0?this._config.rightCallback:this._config.leftCallback)}_initEvents(){this._supportPointerEvents?(P.on(this._element,"pointerdown.bs.swipe",(t=>this._start(t))),P.on(this._element,"pointerup.bs.swipe",(t=>this._end(t))),this._element.classList.add("pointer-event")):(P.on(this._element,"touchstart.bs.swipe",(t=>this._start(t))),P.on(this._element,"touchmove.bs.swipe",(t=>this._move(t))),P.on(this._element,"touchend.bs.swipe",(t=>this._end(t))))}_eventIsPointerPenTouch(t){return this._supportPointerEvents&&("pen"===t.pointerType||"touch"===t.pointerType)}static isSupported(){return"ontouchstart"in document.documentElement||navigator.maxTouchPoints>0}}const U="next",G="prev",J="left",Z="right",tt="slid.bs.carousel",et="carousel",it="active",nt={ArrowLeft:Z,ArrowRight:J},st={interval:5e3,keyboard:!0,pause:"hover",ride:!1,touch:!0,wrap:!0},ot={interval:"(number|boolean)",keyboard:"boolean",pause:"(string|boolean)",ride:"(boolean|string)",touch:"boolean",wrap:"boolean"};class rt extends W{constructor(t,e){super(t,e),this._interval=null,this._activeElement=null,this._isSliding=!1,this.touchTimeout=null,this._swipeHelper=null,this._indicatorsElement=z.findOne(".carousel-indicators",this._element),this._addEventListeners(),this._config.ride===et&&this.cycle()}static get Default(){return st}static get DefaultType(){return ot}static get NAME(){return"carousel"}next(){this._slide(U)}nextWhenVisible(){!document.hidden&&a(this._element)&&this.next()}prev(){this._slide(G)}pause(){this._isSliding&&s(this._element),this._clearInterval()}cycle(){this._clearInterval(),this._updateInterval(),this._interval=setInterval((()=>this.nextWhenVisible()),this._config.interval)}_maybeEnableCycle(){this._config.ride&&(this._isSliding?P.one(this._element,tt,(()=>this.cycle())):this.cycle())}to(t){const e=this._getItems();if(t>e.length-1||t<0)return;if(this._isSliding)return void P.one(this._element,tt,(()=>this.to(t)));const i=this._getItemIndex(this._getActive());if(i===t)return;const n=t>i?U:G;this._slide(n,e[t])}dispose(){this._swipeHelper&&this._swipeHelper.dispose(),super.dispose()}_configAfterMerge(t){return t.defaultInterval=t.interval,t}_addEventListeners(){this._config.keyboard&&P.on(this._element,"keydown.bs.carousel",(t=>this._keydown(t))),"hover"===this._config.pause&&(P.on(this._element,"mouseenter.bs.carousel",(()=>this.pause())),P.on(this._element,"mouseleave.bs.carousel",(()=>this._maybeEnableCycle()))),this._config.touch&&Y.isSupported()&&this._addTouchEventListeners()}_addTouchEventListeners(){for(const t of z.find(".carousel-item img",this._element))P.on(t,"dragstart.bs.carousel",(t=>t.preventDefault()));const t={leftCallback:()=>this._slide(this._directionToOrder(J)),rightCallback:()=>this._slide(this._directionToOrder(Z)),endCallback:()=>{"hover"===this._config.pause&&(this.pause(),this.touchTimeout&&clearTimeout(this.touchTimeout),this.touchTimeout=setTimeout((()=>this._maybeEnableCycle()),500+this._config.interval))}};this._swipeHelper=new Y(this._element,t)}_keydown(t){if(/input|textarea/i.test(t.target.tagName))return;const e=nt[t.key];e&&(t.preventDefault(),this._slide(this._directionToOrder(e)))}_getItemIndex(t){return this._getItems().indexOf(t)}_setActiveIndicatorElement(t){if(!this._indicatorsElement)return;const e=z.findOne(".active",this._indicatorsElement);e.classList.remove(it),e.removeAttribute("aria-current");const i=z.findOne(`[data-bs-slide-to="${t}"]`,this._indicatorsElement);i&&(i.classList.add(it),i.setAttribute("aria-current","true"))}_updateInterval(){const t=this._activeElement||this._getActive();if(!t)return;const e=Number.parseInt(t.getAttribute("data-bs-interval"),10);this._config.interval=e||this._config.defaultInterval}_slide(t,e=null){if(this._isSliding)return;const i=this._getActive(),n=t===U,s=e||b(this._getItems(),i,n,this._config.wrap);if(s===i)return;const o=this._getItemIndex(s),r=e=>P.trigger(this._element,e,{relatedTarget:s,direction:this._orderToDirection(t),from:this._getItemIndex(i),to:o});if(r("slide.bs.carousel").defaultPrevented)return;if(!i||!s)return;const a=Boolean(this._interval);this.pause(),this._isSliding=!0,this._setActiveIndicatorElement(o),this._activeElement=s;const l=n?"carousel-item-start":"carousel-item-end",c=n?"carousel-item-next":"carousel-item-prev";s.classList.add(c),d(s),i.classList.add(l),s.classList.add(l),this._queueCallback((()=>{s.classList.remove(l,c),s.classList.add(it),i.classList.remove(it,c,l),this._isSliding=!1,r(tt)}),i,this._isAnimated()),a&&this.cycle()}_isAnimated(){return this._element.classList.contains("slide")}_getActive(){return z.findOne(".active.carousel-item",this._element)}_getItems(){return z.find(".carousel-item",this._element)}_clearInterval(){this._interval&&(clearInterval(this._interval),this._interval=null)}_directionToOrder(t){return p()?t===J?G:U:t===J?U:G}_orderToDirection(t){return p()?t===G?J:Z:t===G?Z:J}static jQueryInterface(t){return this.each((function(){const e=rt.getOrCreateInstance(this,t);if("number"!=typeof t){if("string"==typeof t){if(void 0===e[t]||t.startsWith("_")||"constructor"===t)throw new TypeError(`No method named "${t}"`);e[t]()}}else e.to(t)}))}}P.on(document,"click.bs.carousel.data-api","[data-bs-slide], [data-bs-slide-to]",(function(t){const e=z.getElementFromSelector(this);if(!e||!e.classList.contains(et))return;t.preventDefault();const i=rt.getOrCreateInstance(e),n=this.getAttribute("data-bs-slide-to");return n?(i.to(n),void i._maybeEnableCycle()):"next"===H.getDataAttribute(this,"slide")?(i.next(),void i._maybeEnableCycle()):(i.prev(),void i._maybeEnableCycle())})),P.on(window,"load.bs.carousel.data-api",(()=>{const t=z.find('[data-bs-ride="carousel"]');for(const e of t)rt.getOrCreateInstance(e)})),m(rt);const at="show",lt="collapse",ct="collapsing",ht='[data-bs-toggle="collapse"]',dt={parent:null,toggle:!0},ut={parent:"(null|element)",toggle:"boolean"};class ft extends W{constructor(t,e){super(t,e),this._isTransitioning=!1,this._triggerArray=[];const i=z.find(ht);for(const t of i){const e=z.getSelectorFromElement(t),i=z.find(e).filter((t=>t===this._element));null!==e&&i.length&&this._triggerArray.push(t)}this._initializeChildren(),this._config.parent||this._addAriaAndCollapsedClass(this._triggerArray,this._isShown()),this._config.toggle&&this.toggle()}static get Default(){return dt}static get DefaultType(){return ut}static get NAME(){return"collapse"}toggle(){this._isShown()?this.hide():this.show()}show(){if(this._isTransitioning||this._isShown())return;let t=[];if(this._config.parent&&(t=this._getFirstLevelChildren(".collapse.show, .collapse.collapsing").filter((t=>t!==this._element)).map((t=>ft.getOrCreateInstance(t,{toggle:!1})))),t.length&&t[0]._isTransitioning)return;if(P.trigger(this._element,"show.bs.collapse").defaultPrevented)return;for(const e of t)e.hide();const e=this._getDimension();this._element.classList.remove(lt),this._element.classList.add(ct),this._element.style[e]=0,this._addAriaAndCollapsedClass(this._triggerArray,!0),this._isTransitioning=!0;const i=`scroll${e[0].toUpperCase()+e.slice(1)}`;this._queueCallback((()=>{this._isTransitioning=!1,this._element.classList.remove(ct),this._element.classList.add(lt,at),this._element.style[e]="",P.trigger(this._element,"shown.bs.collapse")}),this._element,!0),this._element.style[e]=`${this._element[i]}px`}hide(){if(this._isTransitioning||!this._isShown())return;if(P.trigger(this._element,"hide.bs.collapse").defaultPrevented)return;const t=this._getDimension();this._element.style[t]=`${this._element.getBoundingClientRect()[t]}px`,d(this._element),this._element.classList.add(ct),this._element.classList.remove(lt,at);for(const t of this._triggerArray){const e=z.getElementFromSelector(t);e&&!this._isShown(e)&&this._addAriaAndCollapsedClass([t],!1)}this._isTransitioning=!0,this._element.style[t]="",this._queueCallback((()=>{this._isTransitioning=!1,this._element.classList.remove(ct),this._element.classList.add(lt),P.trigger(this._element,"hidden.bs.collapse")}),this._element,!0)}_isShown(t=this._element){return t.classList.contains(at)}_configAfterMerge(t){return t.toggle=Boolean(t.toggle),t.parent=r(t.parent),t}_getDimension(){return this._element.classList.contains("collapse-horizontal")?"width":"height"}_initializeChildren(){if(!this._config.parent)return;const t=this._getFirstLevelChildren(ht);for(const e of t){const t=z.getElementFromSelector(e);t&&this._addAriaAndCollapsedClass([e],this._isShown(t))}}_getFirstLevelChildren(t){const e=z.find(":scope .collapse .collapse",this._config.parent);return z.find(t,this._config.parent).filter((t=>!e.includes(t)))}_addAriaAndCollapsedClass(t,e){if(t.length)for(const i of t)i.classList.toggle("collapsed",!e),i.setAttribute("aria-expanded",e)}static jQueryInterface(t){const e={};return"string"==typeof t&&/show|hide/.test(t)&&(e.toggle=!1),this.each((function(){const i=ft.getOrCreateInstance(this,e);if("string"==typeof t){if(void 0===i[t])throw new TypeError(`No method named "${t}"`);i[t]()}}))}}P.on(document,"click.bs.collapse.data-api",ht,(function(t){("A"===t.target.tagName||t.delegateTarget&&"A"===t.delegateTarget.tagName)&&t.preventDefault();for(const t of z.getMultipleElementsFromSelector(this))ft.getOrCreateInstance(t,{toggle:!1}).toggle()})),m(ft);var pt="top",mt="bottom",gt="right",_t="left",bt="auto",vt=[pt,mt,gt,_t],yt="start",wt="end",At="clippingParents",Et="viewport",Tt="popper",Ct="reference",Ot=vt.reduce((function(t,e){return t.concat([e+"-"+yt,e+"-"+wt])}),[]),xt=[].concat(vt,[bt]).reduce((function(t,e){return t.concat([e,e+"-"+yt,e+"-"+wt])}),[]),kt="beforeRead",Lt="read",St="afterRead",Dt="beforeMain",It="main",Nt="afterMain",Pt="beforeWrite",Mt="write",jt="afterWrite",Ft=[kt,Lt,St,Dt,It,Nt,Pt,Mt,jt];function Ht(t){return t?(t.nodeName||"").toLowerCase():null}function $t(t){if(null==t)return window;if("[object Window]"!==t.toString()){var e=t.ownerDocument;return e&&e.defaultView||window}return t}function Wt(t){return t instanceof $t(t).Element||t instanceof Element}function Bt(t){return t instanceof $t(t).HTMLElement||t instanceof HTMLElement}function zt(t){return"undefined"!=typeof ShadowRoot&&(t instanceof $t(t).ShadowRoot||t instanceof ShadowRoot)}const Rt={name:"applyStyles",enabled:!0,phase:"write",fn:function(t){var e=t.state;Object.keys(e.elements).forEach((function(t){var i=e.styles[t]||{},n=e.attributes[t]||{},s=e.elements[t];Bt(s)&&Ht(s)&&(Object.assign(s.style,i),Object.keys(n).forEach((function(t){var e=n[t];!1===e?s.removeAttribute(t):s.setAttribute(t,!0===e?"":e)})))}))},effect:function(t){var e=t.state,i={popper:{position:e.options.strategy,left:"0",top:"0",margin:"0"},arrow:{position:"absolute"},reference:{}};return Object.assign(e.elements.popper.style,i.popper),e.styles=i,e.elements.arrow&&Object.assign(e.elements.arrow.style,i.arrow),function(){Object.keys(e.elements).forEach((function(t){var n=e.elements[t],s=e.attributes[t]||{},o=Object.keys(e.styles.hasOwnProperty(t)?e.styles[t]:i[t]).reduce((function(t,e){return t[e]="",t}),{});Bt(n)&&Ht(n)&&(Object.assign(n.style,o),Object.keys(s).forEach((function(t){n.removeAttribute(t)})))}))}},requires:["computeStyles"]};function qt(t){return t.split("-")[0]}var Vt=Math.max,Kt=Math.min,Qt=Math.round;function Xt(){var t=navigator.userAgentData;return null!=t&&t.brands&&Array.isArray(t.brands)?t.brands.map((function(t){return t.brand+"/"+t.version})).join(" "):navigator.userAgent}function Yt(){return!/^((?!chrome|android).)*safari/i.test(Xt())}function Ut(t,e,i){void 0===e&&(e=!1),void 0===i&&(i=!1);var n=t.getBoundingClientRect(),s=1,o=1;e&&Bt(t)&&(s=t.offsetWidth>0&&Qt(n.width)/t.offsetWidth||1,o=t.offsetHeight>0&&Qt(n.height)/t.offsetHeight||1);var r=(Wt(t)?$t(t):window).visualViewport,a=!Yt()&&i,l=(n.left+(a&&r?r.offsetLeft:0))/s,c=(n.top+(a&&r?r.offsetTop:0))/o,h=n.width/s,d=n.height/o;return{width:h,height:d,top:c,right:l+h,bottom:c+d,left:l,x:l,y:c}}function Gt(t){var e=Ut(t),i=t.offsetWidth,n=t.offsetHeight;return Math.abs(e.width-i)<=1&&(i=e.width),Math.abs(e.height-n)<=1&&(n=e.height),{x:t.offsetLeft,y:t.offsetTop,width:i,height:n}}function Jt(t,e){var i=e.getRootNode&&e.getRootNode();if(t.contains(e))return!0;if(i&&zt(i)){var n=e;do{if(n&&t.isSameNode(n))return!0;n=n.parentNode||n.host}while(n)}return!1}function Zt(t){return $t(t).getComputedStyle(t)}function te(t){return["table","td","th"].indexOf(Ht(t))>=0}function ee(t){return((Wt(t)?t.ownerDocument:t.document)||window.document).documentElement}function ie(t){return"html"===Ht(t)?t:t.assignedSlot||t.parentNode||(zt(t)?t.host:null)||ee(t)}function ne(t){return Bt(t)&&"fixed"!==Zt(t).position?t.offsetParent:null}function se(t){for(var e=$t(t),i=ne(t);i&&te(i)&&"static"===Zt(i).position;)i=ne(i);return i&&("html"===Ht(i)||"body"===Ht(i)&&"static"===Zt(i).position)?e:i||function(t){var e=/firefox/i.test(Xt());if(/Trident/i.test(Xt())&&Bt(t)&&"fixed"===Zt(t).position)return null;var i=ie(t);for(zt(i)&&(i=i.host);Bt(i)&&["html","body"].indexOf(Ht(i))<0;){var n=Zt(i);if("none"!==n.transform||"none"!==n.perspective||"paint"===n.contain||-1!==["transform","perspective"].indexOf(n.willChange)||e&&"filter"===n.willChange||e&&n.filter&&"none"!==n.filter)return i;i=i.parentNode}return null}(t)||e}function oe(t){return["top","bottom"].indexOf(t)>=0?"x":"y"}function re(t,e,i){return Vt(t,Kt(e,i))}function ae(t){return Object.assign({},{top:0,right:0,bottom:0,left:0},t)}function le(t,e){return e.reduce((function(e,i){return e[i]=t,e}),{})}const ce={name:"arrow",enabled:!0,phase:"main",fn:function(t){var e,i=t.state,n=t.name,s=t.options,o=i.elements.arrow,r=i.modifiersData.popperOffsets,a=qt(i.placement),l=oe(a),c=[_t,gt].indexOf(a)>=0?"height":"width";if(o&&r){var h=function(t,e){return ae("number"!=typeof(t="function"==typeof t?t(Object.assign({},e.rects,{placement:e.placement})):t)?t:le(t,vt))}(s.padding,i),d=Gt(o),u="y"===l?pt:_t,f="y"===l?mt:gt,p=i.rects.reference[c]+i.rects.reference[l]-r[l]-i.rects.popper[c],m=r[l]-i.rects.reference[l],g=se(o),_=g?"y"===l?g.clientHeight||0:g.clientWidth||0:0,b=p/2-m/2,v=h[u],y=_-d[c]-h[f],w=_/2-d[c]/2+b,A=re(v,w,y),E=l;i.modifiersData[n]=((e={})[E]=A,e.centerOffset=A-w,e)}},effect:function(t){var e=t.state,i=t.options.element,n=void 0===i?"[data-popper-arrow]":i;null!=n&&("string"!=typeof n||(n=e.elements.popper.querySelector(n)))&&Jt(e.elements.popper,n)&&(e.elements.arrow=n)},requires:["popperOffsets"],requiresIfExists:["preventOverflow"]};function he(t){return t.split("-")[1]}var de={top:"auto",right:"auto",bottom:"auto",left:"auto"};function ue(t){var e,i=t.popper,n=t.popperRect,s=t.placement,o=t.variation,r=t.offsets,a=t.position,l=t.gpuAcceleration,c=t.adaptive,h=t.roundOffsets,d=t.isFixed,u=r.x,f=void 0===u?0:u,p=r.y,m=void 0===p?0:p,g="function"==typeof h?h({x:f,y:m}):{x:f,y:m};f=g.x,m=g.y;var _=r.hasOwnProperty("x"),b=r.hasOwnProperty("y"),v=_t,y=pt,w=window;if(c){var A=se(i),E="clientHeight",T="clientWidth";A===$t(i)&&"static"!==Zt(A=ee(i)).position&&"absolute"===a&&(E="scrollHeight",T="scrollWidth"),(s===pt||(s===_t||s===gt)&&o===wt)&&(y=mt,m-=(d&&A===w&&w.visualViewport?w.visualViewport.height:A[E])-n.height,m*=l?1:-1),s!==_t&&(s!==pt&&s!==mt||o!==wt)||(v=gt,f-=(d&&A===w&&w.visualViewport?w.visualViewport.width:A[T])-n.width,f*=l?1:-1)}var C,O=Object.assign({position:a},c&&de),x=!0===h?function(t,e){var i=t.x,n=t.y,s=e.devicePixelRatio||1;return{x:Qt(i*s)/s||0,y:Qt(n*s)/s||0}}({x:f,y:m},$t(i)):{x:f,y:m};return f=x.x,m=x.y,l?Object.assign({},O,((C={})[y]=b?"0":"",C[v]=_?"0":"",C.transform=(w.devicePixelRatio||1)<=1?"translate("+f+"px, "+m+"px)":"translate3d("+f+"px, "+m+"px, 0)",C)):Object.assign({},O,((e={})[y]=b?m+"px":"",e[v]=_?f+"px":"",e.transform="",e))}const fe={name:"computeStyles",enabled:!0,phase:"beforeWrite",fn:function(t){var e=t.state,i=t.options,n=i.gpuAcceleration,s=void 0===n||n,o=i.adaptive,r=void 0===o||o,a=i.roundOffsets,l=void 0===a||a,c={placement:qt(e.placement),variation:he(e.placement),popper:e.elements.popper,popperRect:e.rects.popper,gpuAcceleration:s,isFixed:"fixed"===e.options.strategy};null!=e.modifiersData.popperOffsets&&(e.styles.popper=Object.assign({},e.styles.popper,ue(Object.assign({},c,{offsets:e.modifiersData.popperOffsets,position:e.options.strategy,adaptive:r,roundOffsets:l})))),null!=e.modifiersData.arrow&&(e.styles.arrow=Object.assign({},e.styles.arrow,ue(Object.assign({},c,{offsets:e.modifiersData.arrow,position:"absolute",adaptive:!1,roundOffsets:l})))),e.attributes.popper=Object.assign({},e.attributes.popper,{"data-popper-placement":e.placement})},data:{}};var pe={passive:!0};const me={name:"eventListeners",enabled:!0,phase:"write",fn:function(){},effect:function(t){var e=t.state,i=t.instance,n=t.options,s=n.scroll,o=void 0===s||s,r=n.resize,a=void 0===r||r,l=$t(e.elements.popper),c=[].concat(e.scrollParents.reference,e.scrollParents.popper);return o&&c.forEach((function(t){t.addEventListener("scroll",i.update,pe)})),a&&l.addEventListener("resize",i.update,pe),function(){o&&c.forEach((function(t){t.removeEventListener("scroll",i.update,pe)})),a&&l.removeEventListener("resize",i.update,pe)}},data:{}};var ge={left:"right",right:"left",bottom:"top",top:"bottom"};function _e(t){return t.replace(/left|right|bottom|top/g,(function(t){return ge[t]}))}var be={start:"end",end:"start"};function ve(t){return t.replace(/start|end/g,(function(t){return be[t]}))}function ye(t){var e=$t(t);return{scrollLeft:e.pageXOffset,scrollTop:e.pageYOffset}}function we(t){return Ut(ee(t)).left+ye(t).scrollLeft}function Ae(t){var e=Zt(t),i=e.overflow,n=e.overflowX,s=e.overflowY;return/auto|scroll|overlay|hidden/.test(i+s+n)}function Ee(t){return["html","body","#document"].indexOf(Ht(t))>=0?t.ownerDocument.body:Bt(t)&&Ae(t)?t:Ee(ie(t))}function Te(t,e){var i;void 0===e&&(e=[]);var n=Ee(t),s=n===(null==(i=t.ownerDocument)?void 0:i.body),o=$t(n),r=s?[o].concat(o.visualViewport||[],Ae(n)?n:[]):n,a=e.concat(r);return s?a:a.concat(Te(ie(r)))}function Ce(t){return Object.assign({},t,{left:t.x,top:t.y,right:t.x+t.width,bottom:t.y+t.height})}function Oe(t,e,i){return e===Et?Ce(function(t,e){var i=$t(t),n=ee(t),s=i.visualViewport,o=n.clientWidth,r=n.clientHeight,a=0,l=0;if(s){o=s.width,r=s.height;var c=Yt();(c||!c&&"fixed"===e)&&(a=s.offsetLeft,l=s.offsetTop)}return{width:o,height:r,x:a+we(t),y:l}}(t,i)):Wt(e)?function(t,e){var i=Ut(t,!1,"fixed"===e);return i.top=i.top+t.clientTop,i.left=i.left+t.clientLeft,i.bottom=i.top+t.clientHeight,i.right=i.left+t.clientWidth,i.width=t.clientWidth,i.height=t.clientHeight,i.x=i.left,i.y=i.top,i}(e,i):Ce(function(t){var e,i=ee(t),n=ye(t),s=null==(e=t.ownerDocument)?void 0:e.body,o=Vt(i.scrollWidth,i.clientWidth,s?s.scrollWidth:0,s?s.clientWidth:0),r=Vt(i.scrollHeight,i.clientHeight,s?s.scrollHeight:0,s?s.clientHeight:0),a=-n.scrollLeft+we(t),l=-n.scrollTop;return"rtl"===Zt(s||i).direction&&(a+=Vt(i.clientWidth,s?s.clientWidth:0)-o),{width:o,height:r,x:a,y:l}}(ee(t)))}function xe(t){var e,i=t.reference,n=t.element,s=t.placement,o=s?qt(s):null,r=s?he(s):null,a=i.x+i.width/2-n.width/2,l=i.y+i.height/2-n.height/2;switch(o){case pt:e={x:a,y:i.y-n.height};break;case mt:e={x:a,y:i.y+i.height};break;case gt:e={x:i.x+i.width,y:l};break;case _t:e={x:i.x-n.width,y:l};break;default:e={x:i.x,y:i.y}}var c=o?oe(o):null;if(null!=c){var h="y"===c?"height":"width";switch(r){case yt:e[c]=e[c]-(i[h]/2-n[h]/2);break;case wt:e[c]=e[c]+(i[h]/2-n[h]/2)}}return e}function ke(t,e){void 0===e&&(e={});var i=e,n=i.placement,s=void 0===n?t.placement:n,o=i.strategy,r=void 0===o?t.strategy:o,a=i.boundary,l=void 0===a?At:a,c=i.rootBoundary,h=void 0===c?Et:c,d=i.elementContext,u=void 0===d?Tt:d,f=i.altBoundary,p=void 0!==f&&f,m=i.padding,g=void 0===m?0:m,_=ae("number"!=typeof g?g:le(g,vt)),b=u===Tt?Ct:Tt,v=t.rects.popper,y=t.elements[p?b:u],w=function(t,e,i,n){var s="clippingParents"===e?function(t){var e=Te(ie(t)),i=["absolute","fixed"].indexOf(Zt(t).position)>=0&&Bt(t)?se(t):t;return Wt(i)?e.filter((function(t){return Wt(t)&&Jt(t,i)&&"body"!==Ht(t)})):[]}(t):[].concat(e),o=[].concat(s,[i]),r=o[0],a=o.reduce((function(e,i){var s=Oe(t,i,n);return e.top=Vt(s.top,e.top),e.right=Kt(s.right,e.right),e.bottom=Kt(s.bottom,e.bottom),e.left=Vt(s.left,e.left),e}),Oe(t,r,n));return a.width=a.right-a.left,a.height=a.bottom-a.top,a.x=a.left,a.y=a.top,a}(Wt(y)?y:y.contextElement||ee(t.elements.popper),l,h,r),A=Ut(t.elements.reference),E=xe({reference:A,element:v,strategy:"absolute",placement:s}),T=Ce(Object.assign({},v,E)),C=u===Tt?T:A,O={top:w.top-C.top+_.top,bottom:C.bottom-w.bottom+_.bottom,left:w.left-C.left+_.left,right:C.right-w.right+_.right},x=t.modifiersData.offset;if(u===Tt&&x){var k=x[s];Object.keys(O).forEach((function(t){var e=[gt,mt].indexOf(t)>=0?1:-1,i=[pt,mt].indexOf(t)>=0?"y":"x";O[t]+=k[i]*e}))}return O}function Le(t,e){void 0===e&&(e={});var i=e,n=i.placement,s=i.boundary,o=i.rootBoundary,r=i.padding,a=i.flipVariations,l=i.allowedAutoPlacements,c=void 0===l?xt:l,h=he(n),d=h?a?Ot:Ot.filter((function(t){return he(t)===h})):vt,u=d.filter((function(t){return c.indexOf(t)>=0}));0===u.length&&(u=d);var f=u.reduce((function(e,i){return e[i]=ke(t,{placement:i,boundary:s,rootBoundary:o,padding:r})[qt(i)],e}),{});return Object.keys(f).sort((function(t,e){return f[t]-f[e]}))}const Se={name:"flip",enabled:!0,phase:"main",fn:function(t){var e=t.state,i=t.options,n=t.name;if(!e.modifiersData[n]._skip){for(var s=i.mainAxis,o=void 0===s||s,r=i.altAxis,a=void 0===r||r,l=i.fallbackPlacements,c=i.padding,h=i.boundary,d=i.rootBoundary,u=i.altBoundary,f=i.flipVariations,p=void 0===f||f,m=i.allowedAutoPlacements,g=e.options.placement,_=qt(g),b=l||(_!==g&&p?function(t){if(qt(t)===bt)return[];var e=_e(t);return[ve(t),e,ve(e)]}(g):[_e(g)]),v=[g].concat(b).reduce((function(t,i){return t.concat(qt(i)===bt?Le(e,{placement:i,boundary:h,rootBoundary:d,padding:c,flipVariations:p,allowedAutoPlacements:m}):i)}),[]),y=e.rects.reference,w=e.rects.popper,A=new Map,E=!0,T=v[0],C=0;C<v.length;C++){var O=v[C],x=qt(O),k=he(O)===yt,L=[pt,mt].indexOf(x)>=0,S=L?"width":"height",D=ke(e,{placement:O,boundary:h,rootBoundary:d,altBoundary:u,padding:c}),I=L?k?gt:_t:k?mt:pt;y[S]>w[S]&&(I=_e(I));var N=_e(I),P=[];if(o&&P.push(D[x]<=0),a&&P.push(D[I]<=0,D[N]<=0),P.every((function(t){return t}))){T=O,E=!1;break}A.set(O,P)}if(E)for(var M=function(t){var e=v.find((function(e){var i=A.get(e);if(i)return i.slice(0,t).every((function(t){return t}))}));if(e)return T=e,"break"},j=p?3:1;j>0&&"break"!==M(j);j--);e.placement!==T&&(e.modifiersData[n]._skip=!0,e.placement=T,e.reset=!0)}},requiresIfExists:["offset"],data:{_skip:!1}};function De(t,e,i){return void 0===i&&(i={x:0,y:0}),{top:t.top-e.height-i.y,right:t.right-e.width+i.x,bottom:t.bottom-e.height+i.y,left:t.left-e.width-i.x}}function Ie(t){return[pt,gt,mt,_t].some((function(e){return t[e]>=0}))}const Ne={name:"hide",enabled:!0,phase:"main",requiresIfExists:["preventOverflow"],fn:function(t){var e=t.state,i=t.name,n=e.rects.reference,s=e.rects.popper,o=e.modifiersData.preventOverflow,r=ke(e,{elementContext:"reference"}),a=ke(e,{altBoundary:!0}),l=De(r,n),c=De(a,s,o),h=Ie(l),d=Ie(c);e.modifiersData[i]={referenceClippingOffsets:l,popperEscapeOffsets:c,isReferenceHidden:h,hasPopperEscaped:d},e.attributes.popper=Object.assign({},e.attributes.popper,{"data-popper-reference-hidden":h,"data-popper-escaped":d})}},Pe={name:"offset",enabled:!0,phase:"main",requires:["popperOffsets"],fn:function(t){var e=t.state,i=t.options,n=t.name,s=i.offset,o=void 0===s?[0,0]:s,r=xt.reduce((function(t,i){return t[i]=function(t,e,i){var n=qt(t),s=[_t,pt].indexOf(n)>=0?-1:1,o="function"==typeof i?i(Object.assign({},e,{placement:t})):i,r=o[0],a=o[1];return r=r||0,a=(a||0)*s,[_t,gt].indexOf(n)>=0?{x:a,y:r}:{x:r,y:a}}(i,e.rects,o),t}),{}),a=r[e.placement],l=a.x,c=a.y;null!=e.modifiersData.popperOffsets&&(e.modifiersData.popperOffsets.x+=l,e.modifiersData.popperOffsets.y+=c),e.modifiersData[n]=r}},Me={name:"popperOffsets",enabled:!0,phase:"read",fn:function(t){var e=t.state,i=t.name;e.modifiersData[i]=xe({reference:e.rects.reference,element:e.rects.popper,strategy:"absolute",placement:e.placement})},data:{}},je={name:"preventOverflow",enabled:!0,phase:"main",fn:function(t){var e=t.state,i=t.options,n=t.name,s=i.mainAxis,o=void 0===s||s,r=i.altAxis,a=void 0!==r&&r,l=i.boundary,c=i.rootBoundary,h=i.altBoundary,d=i.padding,u=i.tether,f=void 0===u||u,p=i.tetherOffset,m=void 0===p?0:p,g=ke(e,{boundary:l,rootBoundary:c,padding:d,altBoundary:h}),_=qt(e.placement),b=he(e.placement),v=!b,y=oe(_),w="x"===y?"y":"x",A=e.modifiersData.popperOffsets,E=e.rects.reference,T=e.rects.popper,C="function"==typeof m?m(Object.assign({},e.rects,{placement:e.placement})):m,O="number"==typeof C?{mainAxis:C,altAxis:C}:Object.assign({mainAxis:0,altAxis:0},C),x=e.modifiersData.offset?e.modifiersData.offset[e.placement]:null,k={x:0,y:0};if(A){if(o){var L,S="y"===y?pt:_t,D="y"===y?mt:gt,I="y"===y?"height":"width",N=A[y],P=N+g[S],M=N-g[D],j=f?-T[I]/2:0,F=b===yt?E[I]:T[I],H=b===yt?-T[I]:-E[I],$=e.elements.arrow,W=f&&$?Gt($):{width:0,height:0},B=e.modifiersData["arrow#persistent"]?e.modifiersData["arrow#persistent"].padding:{top:0,right:0,bottom:0,left:0},z=B[S],R=B[D],q=re(0,E[I],W[I]),V=v?E[I]/2-j-q-z-O.mainAxis:F-q-z-O.mainAxis,K=v?-E[I]/2+j+q+R+O.mainAxis:H+q+R+O.mainAxis,Q=e.elements.arrow&&se(e.elements.arrow),X=Q?"y"===y?Q.clientTop||0:Q.clientLeft||0:0,Y=null!=(L=null==x?void 0:x[y])?L:0,U=N+K-Y,G=re(f?Kt(P,N+V-Y-X):P,N,f?Vt(M,U):M);A[y]=G,k[y]=G-N}if(a){var J,Z="x"===y?pt:_t,tt="x"===y?mt:gt,et=A[w],it="y"===w?"height":"width",nt=et+g[Z],st=et-g[tt],ot=-1!==[pt,_t].indexOf(_),rt=null!=(J=null==x?void 0:x[w])?J:0,at=ot?nt:et-E[it]-T[it]-rt+O.altAxis,lt=ot?et+E[it]+T[it]-rt-O.altAxis:st,ct=f&&ot?function(t,e,i){var n=re(t,e,i);return n>i?i:n}(at,et,lt):re(f?at:nt,et,f?lt:st);A[w]=ct,k[w]=ct-et}e.modifiersData[n]=k}},requiresIfExists:["offset"]};function Fe(t,e,i){void 0===i&&(i=!1);var n,s,o=Bt(e),r=Bt(e)&&function(t){var e=t.getBoundingClientRect(),i=Qt(e.width)/t.offsetWidth||1,n=Qt(e.height)/t.offsetHeight||1;return 1!==i||1!==n}(e),a=ee(e),l=Ut(t,r,i),c={scrollLeft:0,scrollTop:0},h={x:0,y:0};return(o||!o&&!i)&&(("body"!==Ht(e)||Ae(a))&&(c=(n=e)!==$t(n)&&Bt(n)?{scrollLeft:(s=n).scrollLeft,scrollTop:s.scrollTop}:ye(n)),Bt(e)?((h=Ut(e,!0)).x+=e.clientLeft,h.y+=e.clientTop):a&&(h.x=we(a))),{x:l.left+c.scrollLeft-h.x,y:l.top+c.scrollTop-h.y,width:l.width,height:l.height}}function He(t){var e=new Map,i=new Set,n=[];function s(t){i.add(t.name),[].concat(t.requires||[],t.requiresIfExists||[]).forEach((function(t){if(!i.has(t)){var n=e.get(t);n&&s(n)}})),n.push(t)}return t.forEach((function(t){e.set(t.name,t)})),t.forEach((function(t){i.has(t.name)||s(t)})),n}var $e={placement:"bottom",modifiers:[],strategy:"absolute"};function We(){for(var t=arguments.length,e=new Array(t),i=0;i<t;i++)e[i]=arguments[i];return!e.some((function(t){return!(t&&"function"==typeof t.getBoundingClientRect)}))}function Be(t){void 0===t&&(t={});var e=t,i=e.defaultModifiers,n=void 0===i?[]:i,s=e.defaultOptions,o=void 0===s?$e:s;return function(t,e,i){void 0===i&&(i=o);var s,r,a={placement:"bottom",orderedModifiers:[],options:Object.assign({},$e,o),modifiersData:{},elements:{reference:t,popper:e},attributes:{},styles:{}},l=[],c=!1,h={state:a,setOptions:function(i){var s="function"==typeof i?i(a.options):i;d(),a.options=Object.assign({},o,a.options,s),a.scrollParents={reference:Wt(t)?Te(t):t.contextElement?Te(t.contextElement):[],popper:Te(e)};var r,c,u=function(t){var e=He(t);return Ft.reduce((function(t,i){return t.concat(e.filter((function(t){return t.phase===i})))}),[])}((r=[].concat(n,a.options.modifiers),c=r.reduce((function(t,e){var i=t[e.name];return t[e.name]=i?Object.assign({},i,e,{options:Object.assign({},i.options,e.options),data:Object.assign({},i.data,e.data)}):e,t}),{}),Object.keys(c).map((function(t){return c[t]}))));return a.orderedModifiers=u.filter((function(t){return t.enabled})),a.orderedModifiers.forEach((function(t){var e=t.name,i=t.options,n=void 0===i?{}:i,s=t.effect;if("function"==typeof s){var o=s({state:a,name:e,instance:h,options:n});l.push(o||function(){})}})),h.update()},forceUpdate:function(){if(!c){var t=a.elements,e=t.reference,i=t.popper;if(We(e,i)){a.rects={reference:Fe(e,se(i),"fixed"===a.options.strategy),popper:Gt(i)},a.reset=!1,a.placement=a.options.placement,a.orderedModifiers.forEach((function(t){return a.modifiersData[t.name]=Object.assign({},t.data)}));for(var n=0;n<a.orderedModifiers.length;n++)if(!0!==a.reset){var s=a.orderedModifiers[n],o=s.fn,r=s.options,l=void 0===r?{}:r,d=s.name;"function"==typeof o&&(a=o({state:a,options:l,name:d,instance:h})||a)}else a.reset=!1,n=-1}}},update:(s=function(){return new Promise((function(t){h.forceUpdate(),t(a)}))},function(){return r||(r=new Promise((function(t){Promise.resolve().then((function(){r=void 0,t(s())}))}))),r}),destroy:function(){d(),c=!0}};if(!We(t,e))return h;function d(){l.forEach((function(t){return t()})),l=[]}return h.setOptions(i).then((function(t){!c&&i.onFirstUpdate&&i.onFirstUpdate(t)})),h}}var ze=Be(),Re=Be({defaultModifiers:[me,Me,fe,Rt]}),qe=Be({defaultModifiers:[me,Me,fe,Rt,Pe,Se,je,ce,Ne]});const Ve=Object.freeze(Object.defineProperty({__proto__:null,afterMain:Nt,afterRead:St,afterWrite:jt,applyStyles:Rt,arrow:ce,auto:bt,basePlacements:vt,beforeMain:Dt,beforeRead:kt,beforeWrite:Pt,bottom:mt,clippingParents:At,computeStyles:fe,createPopper:qe,createPopperBase:ze,createPopperLite:Re,detectOverflow:ke,end:wt,eventListeners:me,flip:Se,hide:Ne,left:_t,main:It,modifierPhases:Ft,offset:Pe,placements:xt,popper:Tt,popperGenerator:Be,popperOffsets:Me,preventOverflow:je,read:Lt,reference:Ct,right:gt,start:yt,top:pt,variationPlacements:Ot,viewport:Et,write:Mt},Symbol.toStringTag,{value:"Module"})),Ke="dropdown",Qe="ArrowUp",Xe="ArrowDown",Ye="click.bs.dropdown.data-api",Ue="keydown.bs.dropdown.data-api",Ge="show",Je='[data-bs-toggle="dropdown"]:not(.disabled):not(:disabled)',Ze=`${Je}.show`,ti=".dropdown-menu",ei=p()?"top-end":"top-start",ii=p()?"top-start":"top-end",ni=p()?"bottom-end":"bottom-start",si=p()?"bottom-start":"bottom-end",oi=p()?"left-start":"right-start",ri=p()?"right-start":"left-start",ai={autoClose:!0,boundary:"clippingParents",display:"dynamic",offset:[0,2],popperConfig:null,reference:"toggle"},li={autoClose:"(boolean|string)",boundary:"(string|element)",display:"string",offset:"(array|string|function)",popperConfig:"(null|object|function)",reference:"(string|element|object)"};class ci extends W{constructor(t,e){super(t,e),this._popper=null,this._parent=this._element.parentNode,this._menu=z.next(this._element,ti)[0]||z.prev(this._element,ti)[0]||z.findOne(ti,this._parent),this._inNavbar=this._detectNavbar()}static get Default(){return ai}static get DefaultType(){return li}static get NAME(){return Ke}toggle(){return this._isShown()?this.hide():this.show()}show(){if(l(this._element)||this._isShown())return;const t={relatedTarget:this._element};if(!P.trigger(this._element,"show.bs.dropdown",t).defaultPrevented){if(this._createPopper(),"ontouchstart"in document.documentElement&&!this._parent.closest(".navbar-nav"))for(const t of[].concat(...document.body.children))P.on(t,"mouseover",h);this._element.focus(),this._element.setAttribute("aria-expanded",!0),this._menu.classList.add(Ge),this._element.classList.add(Ge),P.trigger(this._element,"shown.bs.dropdown",t)}}hide(){if(l(this._element)||!this._isShown())return;const t={relatedTarget:this._element};this._completeHide(t)}dispose(){this._popper&&this._popper.destroy(),super.dispose()}update(){this._inNavbar=this._detectNavbar(),this._popper&&this._popper.update()}_completeHide(t){if(!P.trigger(this._element,"hide.bs.dropdown",t).defaultPrevented){if("ontouchstart"in document.documentElement)for(const t of[].concat(...document.body.children))P.off(t,"mouseover",h);this._popper&&this._popper.destroy(),this._menu.classList.remove(Ge),this._element.classList.remove(Ge),this._element.setAttribute("aria-expanded","false"),H.removeDataAttribute(this._menu,"popper"),P.trigger(this._element,"hidden.bs.dropdown",t)}}_getConfig(t){if("object"==typeof(t=super._getConfig(t)).reference&&!o(t.reference)&&"function"!=typeof t.reference.getBoundingClientRect)throw new TypeError(`${Ke.toUpperCase()}: Option "reference" provided type "object" without a required "getBoundingClientRect" method.`);return t}_createPopper(){if(void 0===Ve)throw new TypeError("Bootstrap's dropdowns require Popper (https://popper.js.org)");let t=this._element;"parent"===this._config.reference?t=this._parent:o(this._config.reference)?t=r(this._config.reference):"object"==typeof this._config.reference&&(t=this._config.reference);const e=this._getPopperConfig();this._popper=qe(t,this._menu,e)}_isShown(){return this._menu.classList.contains(Ge)}_getPlacement(){const t=this._parent;if(t.classList.contains("dropend"))return oi;if(t.classList.contains("dropstart"))return ri;if(t.classList.contains("dropup-center"))return"top";if(t.classList.contains("dropdown-center"))return"bottom";const e="end"===getComputedStyle(this._menu).getPropertyValue("--bs-position").trim();return t.classList.contains("dropup")?e?ii:ei:e?si:ni}_detectNavbar(){return null!==this._element.closest(".navbar")}_getOffset(){const{offset:t}=this._config;return"string"==typeof t?t.split(",").map((t=>Number.parseInt(t,10))):"function"==typeof t?e=>t(e,this._element):t}_getPopperConfig(){const t={placement:this._getPlacement(),modifiers:[{name:"preventOverflow",options:{boundary:this._config.boundary}},{name:"offset",options:{offset:this._getOffset()}}]};return(this._inNavbar||"static"===this._config.display)&&(H.setDataAttribute(this._menu,"popper","static"),t.modifiers=[{name:"applyStyles",enabled:!1}]),{...t,...g(this._config.popperConfig,[t])}}_selectMenuItem({key:t,target:e}){const i=z.find(".dropdown-menu .dropdown-item:not(.disabled):not(:disabled)",this._menu).filter((t=>a(t)));i.length&&b(i,e,t===Xe,!i.includes(e)).focus()}static jQueryInterface(t){return this.each((function(){const e=ci.getOrCreateInstance(this,t);if("string"==typeof t){if(void 0===e[t])throw new TypeError(`No method named "${t}"`);e[t]()}}))}static clearMenus(t){if(2===t.button||"keyup"===t.type&&"Tab"!==t.key)return;const e=z.find(Ze);for(const i of e){const e=ci.getInstance(i);if(!e||!1===e._config.autoClose)continue;const n=t.composedPath(),s=n.includes(e._menu);if(n.includes(e._element)||"inside"===e._config.autoClose&&!s||"outside"===e._config.autoClose&&s)continue;if(e._menu.contains(t.target)&&("keyup"===t.type&&"Tab"===t.key||/input|select|option|textarea|form/i.test(t.target.tagName)))continue;const o={relatedTarget:e._element};"click"===t.type&&(o.clickEvent=t),e._completeHide(o)}}static dataApiKeydownHandler(t){const e=/input|textarea/i.test(t.target.tagName),i="Escape"===t.key,n=[Qe,Xe].includes(t.key);if(!n&&!i)return;if(e&&!i)return;t.preventDefault();const s=this.matches(Je)?this:z.prev(this,Je)[0]||z.next(this,Je)[0]||z.findOne(Je,t.delegateTarget.parentNode),o=ci.getOrCreateInstance(s);if(n)return t.stopPropagation(),o.show(),void o._selectMenuItem(t);o._isShown()&&(t.stopPropagation(),o.hide(),s.focus())}}P.on(document,Ue,Je,ci.dataApiKeydownHandler),P.on(document,Ue,ti,ci.dataApiKeydownHandler),P.on(document,Ye,ci.clearMenus),P.on(document,"keyup.bs.dropdown.data-api",ci.clearMenus),P.on(document,Ye,Je,(function(t){t.preventDefault(),ci.getOrCreateInstance(this).toggle()})),m(ci);const hi="show",di="mousedown.bs.backdrop",ui={className:"modal-backdrop",clickCallback:null,isAnimated:!1,isVisible:!0,rootElement:"body"},fi={className:"string",clickCallback:"(function|null)",isAnimated:"boolean",isVisible:"boolean",rootElement:"(element|string)"};class pi extends ${constructor(t){super(),this._config=this._getConfig(t),this._isAppended=!1,this._element=null}static get Default(){return ui}static get DefaultType(){return fi}static get NAME(){return"backdrop"}show(t){if(!this._config.isVisible)return void g(t);this._append();const e=this._getElement();this._config.isAnimated&&d(e),e.classList.add(hi),this._emulateAnimation((()=>{g(t)}))}hide(t){this._config.isVisible?(this._getElement().classList.remove(hi),this._emulateAnimation((()=>{this.dispose(),g(t)}))):g(t)}dispose(){this._isAppended&&(P.off(this._element,di),this._element.remove(),this._isAppended=!1)}_getElement(){if(!this._element){const t=document.createElement("div");t.className=this._config.className,this._config.isAnimated&&t.classList.add("fade"),this._element=t}return this._element}_configAfterMerge(t){return t.rootElement=r(t.rootElement),t}_append(){if(this._isAppended)return;const t=this._getElement();this._config.rootElement.append(t),P.on(t,di,(()=>{g(this._config.clickCallback)})),this._isAppended=!0}_emulateAnimation(t){_(t,this._getElement(),this._config.isAnimated)}}const mi=".bs.focustrap",gi="backward",_i={autofocus:!0,trapElement:null},bi={autofocus:"boolean",trapElement:"element"};class vi extends ${constructor(t){super(),this._config=this._getConfig(t),this._isActive=!1,this._lastTabNavDirection=null}static get Default(){return _i}static get DefaultType(){return bi}static get NAME(){return"focustrap"}activate(){this._isActive||(this._config.autofocus&&this._config.trapElement.focus(),P.off(document,mi),P.on(document,"focusin.bs.focustrap",(t=>this._handleFocusin(t))),P.on(document,"keydown.tab.bs.focustrap",(t=>this._handleKeydown(t))),this._isActive=!0)}deactivate(){this._isActive&&(this._isActive=!1,P.off(document,mi))}_handleFocusin(t){const{trapElement:e}=this._config;if(t.target===document||t.target===e||e.contains(t.target))return;const i=z.focusableChildren(e);0===i.length?e.focus():this._lastTabNavDirection===gi?i[i.length-1].focus():i[0].focus()}_handleKeydown(t){"Tab"===t.key&&(this._lastTabNavDirection=t.shiftKey?gi:"forward")}}const yi=".fixed-top, .fixed-bottom, .is-fixed, .sticky-top",wi=".sticky-top",Ai="padding-right",Ei="margin-right";class Ti{constructor(){this._element=document.body}getWidth(){const t=document.documentElement.clientWidth;return Math.abs(window.innerWidth-t)}hide(){const t=this.getWidth();this._disableOverFlow(),this._setElementAttributes(this._element,Ai,(e=>e+t)),this._setElementAttributes(yi,Ai,(e=>e+t)),this._setElementAttributes(wi,Ei,(e=>e-t))}reset(){this._resetElementAttributes(this._element,"overflow"),this._resetElementAttributes(this._element,Ai),this._resetElementAttributes(yi,Ai),this._resetElementAttributes(wi,Ei)}isOverflowing(){return this.getWidth()>0}_disableOverFlow(){this._saveInitialAttribute(this._element,"overflow"),this._element.style.overflow="hidden"}_setElementAttributes(t,e,i){const n=this.getWidth();this._applyManipulationCallback(t,(t=>{if(t!==this._element&&window.innerWidth>t.clientWidth+n)return;this._saveInitialAttribute(t,e);const s=window.getComputedStyle(t).getPropertyValue(e);t.style.setProperty(e,`${i(Number.parseFloat(s))}px`)}))}_saveInitialAttribute(t,e){const i=t.style.getPropertyValue(e);i&&H.setDataAttribute(t,e,i)}_resetElementAttributes(t,e){this._applyManipulationCallback(t,(t=>{const i=H.getDataAttribute(t,e);null!==i?(H.removeDataAttribute(t,e),t.style.setProperty(e,i)):t.style.removeProperty(e)}))}_applyManipulationCallback(t,e){if(o(t))e(t);else for(const i of z.find(t,this._element))e(i)}}const Ci=".bs.modal",Oi="hidden.bs.modal",xi="show.bs.modal",ki="modal-open",Li="show",Si="modal-static",Di={backdrop:!0,focus:!0,keyboard:!0},Ii={backdrop:"(boolean|string)",focus:"boolean",keyboard:"boolean"};class Ni extends W{constructor(t,e){super(t,e),this._dialog=z.findOne(".modal-dialog",this._element),this._backdrop=this._initializeBackDrop(),this._focustrap=this._initializeFocusTrap(),this._isShown=!1,this._isTransitioning=!1,this._scrollBar=new Ti,this._addEventListeners()}static get Default(){return Di}static get DefaultType(){return Ii}static get NAME(){return"modal"}toggle(t){return this._isShown?this.hide():this.show(t)}show(t){this._isShown||this._isTransitioning||P.trigger(this._element,xi,{relatedTarget:t}).defaultPrevented||(this._isShown=!0,this._isTransitioning=!0,this._scrollBar.hide(),document.body.classList.add(ki),this._adjustDialog(),this._backdrop.show((()=>this._showElement(t))))}hide(){this._isShown&&!this._isTransitioning&&(P.trigger(this._element,"hide.bs.modal").defaultPrevented||(this._isShown=!1,this._isTransitioning=!0,this._focustrap.deactivate(),this._element.classList.remove(Li),this._queueCallback((()=>this._hideModal()),this._element,this._isAnimated())))}dispose(){P.off(window,Ci),P.off(this._dialog,Ci),this._backdrop.dispose(),this._focustrap.deactivate(),super.dispose()}handleUpdate(){this._adjustDialog()}_initializeBackDrop(){return new pi({isVisible:Boolean(this._config.backdrop),isAnimated:this._isAnimated()})}_initializeFocusTrap(){return new vi({trapElement:this._element})}_showElement(t){document.body.contains(this._element)||document.body.append(this._element),this._element.style.display="block",this._element.removeAttribute("aria-hidden"),this._element.setAttribute("aria-modal",!0),this._element.setAttribute("role","dialog"),this._element.scrollTop=0;const e=z.findOne(".modal-body",this._dialog);e&&(e.scrollTop=0),d(this._element),this._element.classList.add(Li),this._queueCallback((()=>{this._config.focus&&this._focustrap.activate(),this._isTransitioning=!1,P.trigger(this._element,"shown.bs.modal",{relatedTarget:t})}),this._dialog,this._isAnimated())}_addEventListeners(){P.on(this._element,"keydown.dismiss.bs.modal",(t=>{"Escape"===t.key&&(this._config.keyboard?this.hide():this._triggerBackdropTransition())})),P.on(window,"resize.bs.modal",(()=>{this._isShown&&!this._isTransitioning&&this._adjustDialog()})),P.on(this._element,"mousedown.dismiss.bs.modal",(t=>{P.one(this._element,"click.dismiss.bs.modal",(e=>{this._element===t.target&&this._element===e.target&&("static"!==this._config.backdrop?this._config.backdrop&&this.hide():this._triggerBackdropTransition())}))}))}_hideModal(){this._element.style.display="none",this._element.setAttribute("aria-hidden",!0),this._element.removeAttribute("aria-modal"),this._element.removeAttribute("role"),this._isTransitioning=!1,this._backdrop.hide((()=>{document.body.classList.remove(ki),this._resetAdjustments(),this._scrollBar.reset(),P.trigger(this._element,Oi)}))}_isAnimated(){return this._element.classList.contains("fade")}_triggerBackdropTransition(){if(P.trigger(this._element,"hidePrevented.bs.modal").defaultPrevented)return;const t=this._element.scrollHeight>document.documentElement.clientHeight,e=this._element.style.overflowY;"hidden"===e||this._element.classList.contains(Si)||(t||(this._element.style.overflowY="hidden"),this._element.classList.add(Si),this._queueCallback((()=>{this._element.classList.remove(Si),this._queueCallback((()=>{this._element.style.overflowY=e}),this._dialog)}),this._dialog),this._element.focus())}_adjustDialog(){const t=this._element.scrollHeight>document.documentElement.clientHeight,e=this._scrollBar.getWidth(),i=e>0;if(i&&!t){const t=p()?"paddingLeft":"paddingRight";this._element.style[t]=`${e}px`}if(!i&&t){const t=p()?"paddingRight":"paddingLeft";this._element.style[t]=`${e}px`}}_resetAdjustments(){this._element.style.paddingLeft="",this._element.style.paddingRight=""}static jQueryInterface(t,e){return this.each((function(){const i=Ni.getOrCreateInstance(this,t);if("string"==typeof t){if(void 0===i[t])throw new TypeError(`No method named "${t}"`);i[t](e)}}))}}P.on(document,"click.bs.modal.data-api",'[data-bs-toggle="modal"]',(function(t){const e=z.getElementFromSelector(this);["A","AREA"].includes(this.tagName)&&t.preventDefault(),P.one(e,xi,(t=>{t.defaultPrevented||P.one(e,Oi,(()=>{a(this)&&this.focus()}))}));const i=z.findOne(".modal.show");i&&Ni.getInstance(i).hide(),Ni.getOrCreateInstance(e).toggle(this)})),R(Ni),m(Ni);const Pi="show",Mi="showing",ji="hiding",Fi=".offcanvas.show",Hi="hidePrevented.bs.offcanvas",$i="hidden.bs.offcanvas",Wi={backdrop:!0,keyboard:!0,scroll:!1},Bi={backdrop:"(boolean|string)",keyboard:"boolean",scroll:"boolean"};class zi extends W{constructor(t,e){super(t,e),this._isShown=!1,this._backdrop=this._initializeBackDrop(),this._focustrap=this._initializeFocusTrap(),this._addEventListeners()}static get Default(){return Wi}static get DefaultType(){return Bi}static get NAME(){return"offcanvas"}toggle(t){return this._isShown?this.hide():this.show(t)}show(t){this._isShown||P.trigger(this._element,"show.bs.offcanvas",{relatedTarget:t}).defaultPrevented||(this._isShown=!0,this._backdrop.show(),this._config.scroll||(new Ti).hide(),this._element.setAttribute("aria-modal",!0),this._element.setAttribute("role","dialog"),this._element.classList.add(Mi),this._queueCallback((()=>{this._config.scroll&&!this._config.backdrop||this._focustrap.activate(),this._element.classList.add(Pi),this._element.classList.remove(Mi),P.trigger(this._element,"shown.bs.offcanvas",{relatedTarget:t})}),this._element,!0))}hide(){this._isShown&&(P.trigger(this._element,"hide.bs.offcanvas").defaultPrevented||(this._focustrap.deactivate(),this._element.blur(),this._isShown=!1,this._element.classList.add(ji),this._backdrop.hide(),this._queueCallback((()=>{this._element.classList.remove(Pi,ji),this._element.removeAttribute("aria-modal"),this._element.removeAttribute("role"),this._config.scroll||(new Ti).reset(),P.trigger(this._element,$i)}),this._element,!0)))}dispose(){this._backdrop.dispose(),this._focustrap.deactivate(),super.dispose()}_initializeBackDrop(){const t=Boolean(this._config.backdrop);return new pi({className:"offcanvas-backdrop",isVisible:t,isAnimated:!0,rootElement:this._element.parentNode,clickCallback:t?()=>{"static"!==this._config.backdrop?this.hide():P.trigger(this._element,Hi)}:null})}_initializeFocusTrap(){return new vi({trapElement:this._element})}_addEventListeners(){P.on(this._element,"keydown.dismiss.bs.offcanvas",(t=>{"Escape"===t.key&&(this._config.keyboard?this.hide():P.trigger(this._element,Hi))}))}static jQueryInterface(t){return this.each((function(){const e=zi.getOrCreateInstance(this,t);if("string"==typeof t){if(void 0===e[t]||t.startsWith("_")||"constructor"===t)throw new TypeError(`No method named "${t}"`);e[t](this)}}))}}P.on(document,"click.bs.offcanvas.data-api",'[data-bs-toggle="offcanvas"]',(function(t){const e=z.getElementFromSelector(this);if(["A","AREA"].includes(this.tagName)&&t.preventDefault(),l(this))return;P.one(e,$i,(()=>{a(this)&&this.focus()}));const i=z.findOne(Fi);i&&i!==e&&zi.getInstance(i).hide(),zi.getOrCreateInstance(e).toggle(this)})),P.on(window,"load.bs.offcanvas.data-api",(()=>{for(const t of z.find(Fi))zi.getOrCreateInstance(t).show()})),P.on(window,"resize.bs.offcanvas",(()=>{for(const t of z.find("[aria-modal][class*=show][class*=offcanvas-]"))"fixed"!==getComputedStyle(t).position&&zi.getOrCreateInstance(t).hide()})),R(zi),m(zi);const Ri={"*":["class","dir","id","lang","role",/^aria-[\w-]*$/i],a:["target","href","title","rel"],area:[],b:[],br:[],col:[],code:[],div:[],em:[],hr:[],h1:[],h2:[],h3:[],h4:[],h5:[],h6:[],i:[],img:["src","srcset","alt","title","width","height"],li:[],ol:[],p:[],pre:[],s:[],small:[],span:[],sub:[],sup:[],strong:[],u:[],ul:[]},qi=new Set(["background","cite","href","itemtype","longdesc","poster","src","xlink:href"]),Vi=/^(?!javascript:)(?:[a-z0-9+.-]+:|[^&:/?#]*(?:[/?#]|$))/i,Ki=(t,e)=>{const i=t.nodeName.toLowerCase();return e.includes(i)?!qi.has(i)||Boolean(Vi.test(t.nodeValue)):e.filter((t=>t instanceof RegExp)).some((t=>t.test(i)))},Qi={allowList:Ri,content:{},extraClass:"",html:!1,sanitize:!0,sanitizeFn:null,template:"<div></div>"},Xi={allowList:"object",content:"object",extraClass:"(string|function)",html:"boolean",sanitize:"boolean",sanitizeFn:"(null|function)",template:"string"},Yi={entry:"(string|element|function|null)",selector:"(string|element)"};class Ui extends ${constructor(t){super(),this._config=this._getConfig(t)}static get Default(){return Qi}static get DefaultType(){return Xi}static get NAME(){return"TemplateFactory"}getContent(){return Object.values(this._config.content).map((t=>this._resolvePossibleFunction(t))).filter(Boolean)}hasContent(){return this.getContent().length>0}changeContent(t){return this._checkContent(t),this._config.content={...this._config.content,...t},this}toHtml(){const t=document.createElement("div");t.innerHTML=this._maybeSanitize(this._config.template);for(const[e,i]of Object.entries(this._config.content))this._setContent(t,i,e);const e=t.children[0],i=this._resolvePossibleFunction(this._config.extraClass);return i&&e.classList.add(...i.split(" ")),e}_typeCheckConfig(t){super._typeCheckConfig(t),this._checkContent(t.content)}_checkContent(t){for(const[e,i]of Object.entries(t))super._typeCheckConfig({selector:e,entry:i},Yi)}_setContent(t,e,i){const n=z.findOne(i,t);n&&((e=this._resolvePossibleFunction(e))?o(e)?this._putElementInTemplate(r(e),n):this._config.html?n.innerHTML=this._maybeSanitize(e):n.textContent=e:n.remove())}_maybeSanitize(t){return this._config.sanitize?function(t,e,i){if(!t.length)return t;if(i&&"function"==typeof i)return i(t);const n=(new window.DOMParser).parseFromString(t,"text/html"),s=[].concat(...n.body.querySelectorAll("*"));for(const t of s){const i=t.nodeName.toLowerCase();if(!Object.keys(e).includes(i)){t.remove();continue}const n=[].concat(...t.attributes),s=[].concat(e["*"]||[],e[i]||[]);for(const e of n)Ki(e,s)||t.removeAttribute(e.nodeName)}return n.body.innerHTML}(t,this._config.allowList,this._config.sanitizeFn):t}_resolvePossibleFunction(t){return g(t,[this])}_putElementInTemplate(t,e){if(this._config.html)return e.innerHTML="",void e.append(t);e.textContent=t.textContent}}const Gi=new Set(["sanitize","allowList","sanitizeFn"]),Ji="fade",Zi="show",tn=".modal",en="hide.bs.modal",nn="hover",sn="focus",on={AUTO:"auto",TOP:"top",RIGHT:p()?"left":"right",BOTTOM:"bottom",LEFT:p()?"right":"left"},rn={allowList:Ri,animation:!0,boundary:"clippingParents",container:!1,customClass:"",delay:0,fallbackPlacements:["top","right","bottom","left"],html:!1,offset:[0,6],placement:"top",popperConfig:null,sanitize:!0,sanitizeFn:null,selector:!1,template:'<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>',title:"",trigger:"hover focus"},an={allowList:"object",animation:"boolean",boundary:"(string|element)",container:"(string|element|boolean)",customClass:"(string|function)",delay:"(number|object)",fallbackPlacements:"array",html:"boolean",offset:"(array|string|function)",placement:"(string|function)",popperConfig:"(null|object|function)",sanitize:"boolean",sanitizeFn:"(null|function)",selector:"(string|boolean)",template:"string",title:"(string|element|function)",trigger:"string"};class ln extends W{constructor(t,e){if(void 0===Ve)throw new TypeError("Bootstrap's tooltips require Popper (https://popper.js.org)");super(t,e),this._isEnabled=!0,this._timeout=0,this._isHovered=null,this._activeTrigger={},this._popper=null,this._templateFactory=null,this._newContent=null,this.tip=null,this._setListeners(),this._config.selector||this._fixTitle()}static get Default(){return rn}static get DefaultType(){return an}static get NAME(){return"tooltip"}enable(){this._isEnabled=!0}disable(){this._isEnabled=!1}toggleEnabled(){this._isEnabled=!this._isEnabled}toggle(){this._isEnabled&&(this._activeTrigger.click=!this._activeTrigger.click,this._isShown()?this._leave():this._enter())}dispose(){clearTimeout(this._timeout),P.off(this._element.closest(tn),en,this._hideModalHandler),this._element.getAttribute("data-bs-original-title")&&this._element.setAttribute("title",this._element.getAttribute("data-bs-original-title")),this._disposePopper(),super.dispose()}show(){if("none"===this._element.style.display)throw new Error("Please use show on visible elements");if(!this._isWithContent()||!this._isEnabled)return;const t=P.trigger(this._element,this.constructor.eventName("show")),e=(c(this._element)||this._element.ownerDocument.documentElement).contains(this._element);if(t.defaultPrevented||!e)return;this._disposePopper();const i=this._getTipElement();this._element.setAttribute("aria-describedby",i.getAttribute("id"));const{container:n}=this._config;if(this._element.ownerDocument.documentElement.contains(this.tip)||(n.append(i),P.trigger(this._element,this.constructor.eventName("inserted"))),this._popper=this._createPopper(i),i.classList.add(Zi),"ontouchstart"in document.documentElement)for(const t of[].concat(...document.body.children))P.on(t,"mouseover",h);this._queueCallback((()=>{P.trigger(this._element,this.constructor.eventName("shown")),!1===this._isHovered&&this._leave(),this._isHovered=!1}),this.tip,this._isAnimated())}hide(){if(this._isShown()&&!P.trigger(this._element,this.constructor.eventName("hide")).defaultPrevented){if(this._getTipElement().classList.remove(Zi),"ontouchstart"in document.documentElement)for(const t of[].concat(...document.body.children))P.off(t,"mouseover",h);this._activeTrigger.click=!1,this._activeTrigger.focus=!1,this._activeTrigger.hover=!1,this._isHovered=null,this._queueCallback((()=>{this._isWithActiveTrigger()||(this._isHovered||this._disposePopper(),this._element.removeAttribute("aria-describedby"),P.trigger(this._element,this.constructor.eventName("hidden")))}),this.tip,this._isAnimated())}}update(){this._popper&&this._popper.update()}_isWithContent(){return Boolean(this._getTitle())}_getTipElement(){return this.tip||(this.tip=this._createTipElement(this._newContent||this._getContentForTemplate())),this.tip}_createTipElement(t){const e=this._getTemplateFactory(t).toHtml();if(!e)return null;e.classList.remove(Ji,Zi),e.classList.add(`bs-${this.constructor.NAME}-auto`);const i=(t=>{do{t+=Math.floor(1e6*Math.random())}while(document.getElementById(t));return t})(this.constructor.NAME).toString();return e.setAttribute("id",i),this._isAnimated()&&e.classList.add(Ji),e}setContent(t){this._newContent=t,this._isShown()&&(this._disposePopper(),this.show())}_getTemplateFactory(t){return this._templateFactory?this._templateFactory.changeContent(t):this._templateFactory=new Ui({...this._config,content:t,extraClass:this._resolvePossibleFunction(this._config.customClass)}),this._templateFactory}_getContentForTemplate(){return{".tooltip-inner":this._getTitle()}}_getTitle(){return this._resolvePossibleFunction(this._config.title)||this._element.getAttribute("data-bs-original-title")}_initializeOnDelegatedTarget(t){return this.constructor.getOrCreateInstance(t.delegateTarget,this._getDelegateConfig())}_isAnimated(){return this._config.animation||this.tip&&this.tip.classList.contains(Ji)}_isShown(){return this.tip&&this.tip.classList.contains(Zi)}_createPopper(t){const e=g(this._config.placement,[this,t,this._element]),i=on[e.toUpperCase()];return qe(this._element,t,this._getPopperConfig(i))}_getOffset(){const{offset:t}=this._config;return"string"==typeof t?t.split(",").map((t=>Number.parseInt(t,10))):"function"==typeof t?e=>t(e,this._element):t}_resolvePossibleFunction(t){return g(t,[this._element])}_getPopperConfig(t){const e={placement:t,modifiers:[{name:"flip",options:{fallbackPlacements:this._config.fallbackPlacements}},{name:"offset",options:{offset:this._getOffset()}},{name:"preventOverflow",options:{boundary:this._config.boundary}},{name:"arrow",options:{element:`.${this.constructor.NAME}-arrow`}},{name:"preSetPlacement",enabled:!0,phase:"beforeMain",fn:t=>{this._getTipElement().setAttribute("data-popper-placement",t.state.placement)}}]};return{...e,...g(this._config.popperConfig,[e])}}_setListeners(){const t=this._config.trigger.split(" ");for(const e of t)if("click"===e)P.on(this._element,this.constructor.eventName("click"),this._config.selector,(t=>{this._initializeOnDelegatedTarget(t).toggle()}));else if("manual"!==e){const t=e===nn?this.constructor.eventName("mouseenter"):this.constructor.eventName("focusin"),i=e===nn?this.constructor.eventName("mouseleave"):this.constructor.eventName("focusout");P.on(this._element,t,this._config.selector,(t=>{const e=this._initializeOnDelegatedTarget(t);e._activeTrigger["focusin"===t.type?sn:nn]=!0,e._enter()})),P.on(this._element,i,this._config.selector,(t=>{const e=this._initializeOnDelegatedTarget(t);e._activeTrigger["focusout"===t.type?sn:nn]=e._element.contains(t.relatedTarget),e._leave()}))}this._hideModalHandler=()=>{this._element&&this.hide()},P.on(this._element.closest(tn),en,this._hideModalHandler)}_fixTitle(){const t=this._element.getAttribute("title");t&&(this._element.getAttribute("aria-label")||this._element.textContent.trim()||this._element.setAttribute("aria-label",t),this._element.setAttribute("data-bs-original-title",t),this._element.removeAttribute("title"))}_enter(){this._isShown()||this._isHovered?this._isHovered=!0:(this._isHovered=!0,this._setTimeout((()=>{this._isHovered&&this.show()}),this._config.delay.show))}_leave(){this._isWithActiveTrigger()||(this._isHovered=!1,this._setTimeout((()=>{this._isHovered||this.hide()}),this._config.delay.hide))}_setTimeout(t,e){clearTimeout(this._timeout),this._timeout=setTimeout(t,e)}_isWithActiveTrigger(){return Object.values(this._activeTrigger).includes(!0)}_getConfig(t){const e=H.getDataAttributes(this._element);for(const t of Object.keys(e))Gi.has(t)&&delete e[t];return t={...e,..."object"==typeof t&&t?t:{}},t=this._mergeConfigObj(t),t=this._configAfterMerge(t),this._typeCheckConfig(t),t}_configAfterMerge(t){return t.container=!1===t.container?document.body:r(t.container),"number"==typeof t.delay&&(t.delay={show:t.delay,hide:t.delay}),"number"==typeof t.title&&(t.title=t.title.toString()),"number"==typeof t.content&&(t.content=t.content.toString()),t}_getDelegateConfig(){const t={};for(const[e,i]of Object.entries(this._config))this.constructor.Default[e]!==i&&(t[e]=i);return t.selector=!1,t.trigger="manual",t}_disposePopper(){this._popper&&(this._popper.destroy(),this._popper=null),this.tip&&(this.tip.remove(),this.tip=null)}static jQueryInterface(t){return this.each((function(){const e=ln.getOrCreateInstance(this,t);if("string"==typeof t){if(void 0===e[t])throw new TypeError(`No method named "${t}"`);e[t]()}}))}}m(ln);const cn={...ln.Default,content:"",offset:[0,8],placement:"right",template:'<div class="popover" role="tooltip"><div class="popover-arrow"></div><h3 class="popover-header"></h3><div class="popover-body"></div></div>',trigger:"click"},hn={...ln.DefaultType,content:"(null|string|element|function)"};class dn extends ln{static get Default(){return cn}static get DefaultType(){return hn}static get NAME(){return"popover"}_isWithContent(){return this._getTitle()||this._getContent()}_getContentForTemplate(){return{".popover-header":this._getTitle(),".popover-body":this._getContent()}}_getContent(){return this._resolvePossibleFunction(this._config.content)}static jQueryInterface(t){return this.each((function(){const e=dn.getOrCreateInstance(this,t);if("string"==typeof t){if(void 0===e[t])throw new TypeError(`No method named "${t}"`);e[t]()}}))}}m(dn);const un="click.bs.scrollspy",fn="active",pn="[href]",mn={offset:null,rootMargin:"0px 0px -25%",smoothScroll:!1,target:null,threshold:[.1,.5,1]},gn={offset:"(number|null)",rootMargin:"string",smoothScroll:"boolean",target:"element",threshold:"array"};class _n extends W{constructor(t,e){super(t,e),this._targetLinks=new Map,this._observableSections=new Map,this._rootElement="visible"===getComputedStyle(this._element).overflowY?null:this._element,this._activeTarget=null,this._observer=null,this._previousScrollData={visibleEntryTop:0,parentScrollTop:0},this.refresh()}static get Default(){return mn}static get DefaultType(){return gn}static get NAME(){return"scrollspy"}refresh(){this._initializeTargetsAndObservables(),this._maybeEnableSmoothScroll(),this._observer?this._observer.disconnect():this._observer=this._getNewObserver();for(const t of this._observableSections.values())this._observer.observe(t)}dispose(){this._observer.disconnect(),super.dispose()}_configAfterMerge(t){return t.target=r(t.target)||document.body,t.rootMargin=t.offset?`${t.offset}px 0px -30%`:t.rootMargin,"string"==typeof t.threshold&&(t.threshold=t.threshold.split(",").map((t=>Number.parseFloat(t)))),t}_maybeEnableSmoothScroll(){this._config.smoothScroll&&(P.off(this._config.target,un),P.on(this._config.target,un,pn,(t=>{const e=this._observableSections.get(t.target.hash);if(e){t.preventDefault();const i=this._rootElement||window,n=e.offsetTop-this._element.offsetTop;if(i.scrollTo)return void i.scrollTo({top:n,behavior:"smooth"});i.scrollTop=n}})))}_getNewObserver(){const t={root:this._rootElement,threshold:this._config.threshold,rootMargin:this._config.rootMargin};return new IntersectionObserver((t=>this._observerCallback(t)),t)}_observerCallback(t){const e=t=>this._targetLinks.get(`#${t.target.id}`),i=t=>{this._previousScrollData.visibleEntryTop=t.target.offsetTop,this._process(e(t))},n=(this._rootElement||document.documentElement).scrollTop,s=n>=this._previousScrollData.parentScrollTop;this._previousScrollData.parentScrollTop=n;for(const o of t){if(!o.isIntersecting){this._activeTarget=null,this._clearActiveClass(e(o));continue}const t=o.target.offsetTop>=this._previousScrollData.visibleEntryTop;if(s&&t){if(i(o),!n)return}else s||t||i(o)}}_initializeTargetsAndObservables(){this._targetLinks=new Map,this._observableSections=new Map;const t=z.find(pn,this._config.target);for(const e of t){if(!e.hash||l(e))continue;const t=z.findOne(decodeURI(e.hash),this._element);a(t)&&(this._targetLinks.set(decodeURI(e.hash),e),this._observableSections.set(e.hash,t))}}_process(t){this._activeTarget!==t&&(this._clearActiveClass(this._config.target),this._activeTarget=t,t.classList.add(fn),this._activateParents(t),P.trigger(this._element,"activate.bs.scrollspy",{relatedTarget:t}))}_activateParents(t){if(t.classList.contains("dropdown-item"))z.findOne(".dropdown-toggle",t.closest(".dropdown")).classList.add(fn);else for(const e of z.parents(t,".nav, .list-group"))for(const t of z.prev(e,".nav-link, .nav-item > .nav-link, .list-group-item"))t.classList.add(fn)}_clearActiveClass(t){t.classList.remove(fn);const e=z.find("[href].active",t);for(const t of e)t.classList.remove(fn)}static jQueryInterface(t){return this.each((function(){const e=_n.getOrCreateInstance(this,t);if("string"==typeof t){if(void 0===e[t]||t.startsWith("_")||"constructor"===t)throw new TypeError(`No method named "${t}"`);e[t]()}}))}}P.on(window,"load.bs.scrollspy.data-api",(()=>{for(const t of z.find('[data-bs-spy="scroll"]'))_n.getOrCreateInstance(t)})),m(_n);const bn="ArrowLeft",vn="ArrowRight",yn="ArrowUp",wn="ArrowDown",An="active",En="fade",Tn="show",Cn='[data-bs-toggle="tab"], [data-bs-toggle="pill"], [data-bs-toggle="list"]',On=`.nav-link:not(.dropdown-toggle), .list-group-item:not(.dropdown-toggle), [role="tab"]:not(.dropdown-toggle), ${Cn}`;class xn extends W{constructor(t){super(t),this._parent=this._element.closest('.list-group, .nav, [role="tablist"]'),this._parent&&(this._setInitialAttributes(this._parent,this._getChildren()),P.on(this._element,"keydown.bs.tab",(t=>this._keydown(t))))}static get NAME(){return"tab"}show(){const t=this._element;if(this._elemIsActive(t))return;const e=this._getActiveElem(),i=e?P.trigger(e,"hide.bs.tab",{relatedTarget:t}):null;P.trigger(t,"show.bs.tab",{relatedTarget:e}).defaultPrevented||i&&i.defaultPrevented||(this._deactivate(e,t),this._activate(t,e))}_activate(t,e){t&&(t.classList.add(An),this._activate(z.getElementFromSelector(t)),this._queueCallback((()=>{"tab"===t.getAttribute("role")?(t.removeAttribute("tabindex"),t.setAttribute("aria-selected",!0),this._toggleDropDown(t,!0),P.trigger(t,"shown.bs.tab",{relatedTarget:e})):t.classList.add(Tn)}),t,t.classList.contains(En)))}_deactivate(t,e){t&&(t.classList.remove(An),t.blur(),this._deactivate(z.getElementFromSelector(t)),this._queueCallback((()=>{"tab"===t.getAttribute("role")?(t.setAttribute("aria-selected",!1),t.setAttribute("tabindex","-1"),this._toggleDropDown(t,!1),P.trigger(t,"hidden.bs.tab",{relatedTarget:e})):t.classList.remove(Tn)}),t,t.classList.contains(En)))}_keydown(t){if(![bn,vn,yn,wn].includes(t.key))return;t.stopPropagation(),t.preventDefault();const e=[vn,wn].includes(t.key),i=b(this._getChildren().filter((t=>!l(t))),t.target,e,!0);i&&(i.focus({preventScroll:!0}),xn.getOrCreateInstance(i).show())}_getChildren(){return z.find(On,this._parent)}_getActiveElem(){return this._getChildren().find((t=>this._elemIsActive(t)))||null}_setInitialAttributes(t,e){this._setAttributeIfNotExists(t,"role","tablist");for(const t of e)this._setInitialAttributesOnChild(t)}_setInitialAttributesOnChild(t){t=this._getInnerElement(t);const e=this._elemIsActive(t),i=this._getOuterElement(t);t.setAttribute("aria-selected",e),i!==t&&this._setAttributeIfNotExists(i,"role","presentation"),e||t.setAttribute("tabindex","-1"),this._setAttributeIfNotExists(t,"role","tab"),this._setInitialAttributesOnTargetPanel(t)}_setInitialAttributesOnTargetPanel(t){const e=z.getElementFromSelector(t);e&&(this._setAttributeIfNotExists(e,"role","tabpanel"),t.id&&this._setAttributeIfNotExists(e,"aria-labelledby",`${t.id}`))}_toggleDropDown(t,e){const i=this._getOuterElement(t);if(!i.classList.contains("dropdown"))return;const n=(t,n)=>{const s=z.findOne(t,i);s&&s.classList.toggle(n,e)};n(".dropdown-toggle",An),n(".dropdown-menu",Tn),i.setAttribute("aria-expanded",e)}_setAttributeIfNotExists(t,e,i){t.hasAttribute(e)||t.setAttribute(e,i)}_elemIsActive(t){return t.classList.contains(An)}_getInnerElement(t){return t.matches(On)?t:z.findOne(On,t)}_getOuterElement(t){return t.closest(".nav-item, .list-group-item")||t}static jQueryInterface(t){return this.each((function(){const e=xn.getOrCreateInstance(this);if("string"==typeof t){if(void 0===e[t]||t.startsWith("_")||"constructor"===t)throw new TypeError(`No method named "${t}"`);e[t]()}}))}}P.on(document,"click.bs.tab",Cn,(function(t){["A","AREA"].includes(this.tagName)&&t.preventDefault(),l(this)||xn.getOrCreateInstance(this).show()})),P.on(window,"load.bs.tab",(()=>{for(const t of z.find('.active[data-bs-toggle="tab"], .active[data-bs-toggle="pill"], .active[data-bs-toggle="list"]'))xn.getOrCreateInstance(t)})),m(xn);const kn="hide",Ln="show",Sn="showing",Dn={animation:"boolean",autohide:"boolean",delay:"number"},In={animation:!0,autohide:!0,delay:5e3};class Nn extends W{constructor(t,e){super(t,e),this._timeout=null,this._hasMouseInteraction=!1,this._hasKeyboardInteraction=!1,this._setListeners()}static get Default(){return In}static get DefaultType(){return Dn}static get NAME(){return"toast"}show(){P.trigger(this._element,"show.bs.toast").defaultPrevented||(this._clearTimeout(),this._config.animation&&this._element.classList.add("fade"),this._element.classList.remove(kn),d(this._element),this._element.classList.add(Ln,Sn),this._queueCallback((()=>{this._element.classList.remove(Sn),P.trigger(this._element,"shown.bs.toast"),this._maybeScheduleHide()}),this._element,this._config.animation))}hide(){this.isShown()&&(P.trigger(this._element,"hide.bs.toast").defaultPrevented||(this._element.classList.add(Sn),this._queueCallback((()=>{this._element.classList.add(kn),this._element.classList.remove(Sn,Ln),P.trigger(this._element,"hidden.bs.toast")}),this._element,this._config.animation)))}dispose(){this._clearTimeout(),this.isShown()&&this._element.classList.remove(Ln),super.dispose()}isShown(){return this._element.classList.contains(Ln)}_maybeScheduleHide(){this._config.autohide&&(this._hasMouseInteraction||this._hasKeyboardInteraction||(this._timeout=setTimeout((()=>{this.hide()}),this._config.delay)))}_onInteraction(t,e){switch(t.type){case"mouseover":case"mouseout":this._hasMouseInteraction=e;break;case"focusin":case"focusout":this._hasKeyboardInteraction=e}if(e)return void this._clearTimeout();const i=t.relatedTarget;this._element===i||this._element.contains(i)||this._maybeScheduleHide()}_setListeners(){P.on(this._element,"mouseover.bs.toast",(t=>this._onInteraction(t,!0))),P.on(this._element,"mouseout.bs.toast",(t=>this._onInteraction(t,!1))),P.on(this._element,"focusin.bs.toast",(t=>this._onInteraction(t,!0))),P.on(this._element,"focusout.bs.toast",(t=>this._onInteraction(t,!1)))}_clearTimeout(){clearTimeout(this._timeout),this._timeout=null}static jQueryInterface(t){return this.each((function(){const e=Nn.getOrCreateInstance(this,t);if("string"==typeof t){if(void 0===e[t])throw new TypeError(`No method named "${t}"`);e[t](this)}}))}}return R(Nn),m(Nn),{Alert:q,Button:K,Carousel:rt,Collapse:ft,Dropdown:ci,Modal:Ni,Offcanvas:zi,Popover:dn,ScrollSpy:_n,Tab:xn,Toast:Nn,Tooltip:ln}}));
+//# sourceMappingURL=bootstrap.bundle.min.js.map
 (function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.ChickenPaint = f()}})(function(){var define,module,exports;return (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
 "use strict";
 
@@ -15,7 +52,6 @@ require("core-js/stable/array/iterator.js");
 require("core-js/stable/array/fill.js");
 require("core-js/stable/string/ends-with.js");
 var _jquery = _interopRequireDefault(require("jquery"));
-require("bootstrap");
 require("../lib/raf.js");
 var _CPBrushInfo = _interopRequireDefault(require("./engine/CPBrushInfo.js"));
 var _CPArtwork = _interopRequireDefault(require("./engine/CPArtwork.js"));
@@ -38,33 +74,49 @@ var _wolfy87Eventemitter = _interopRequireDefault(require("wolfy87-eventemitter"
 var _lang = require("./languages/lang.js");
 var _CPUserPreferences = _interopRequireDefault(require("./gui/CPUserPreferences.js"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); } /*
-                                                                                                                                                                                                                                                                                                                                                     ChickenPaint
-                                                                                                                                                                                                                                                                                                                                                 
-                                                                                                                                                                                                                                                                                                                                                     ChickenPaint is a translation of ChibiPaint from Java to JavaScript
-                                                                                                                                                                                                                                                                                                                                                     by Nicholas Sherlock / Chicken Smoothie.
-                                                                                                                                                                                                                                                                                                                                                 
-                                                                                                                                                                                                                                                                                                                                                     ChibiPaint is Copyright (c) 2006-2008 Marc Schefer
-                                                                                                                                                                                                                                                                                                                                                 
-                                                                                                                                                                                                                                                                                                                                                     ChickenPaint is free software: you can redistribute it and/or modify
-                                                                                                                                                                                                                                                                                                                                                     it under the terms of the GNU General Public License as published by
-                                                                                                                                                                                                                                                                                                                                                     the Free Software Foundation, either version 3 of the License, or
-                                                                                                                                                                                                                                                                                                                                                     (at your option) any later version.
-                                                                                                                                                                                                                                                                                                                                                 
-                                                                                                                                                                                                                                                                                                                                                     ChickenPaint is distributed in the hope that it will be useful,
-                                                                                                                                                                                                                                                                                                                                                     but WITHOUT ANY WARRANTY; without even the implied warranty of
-                                                                                                                                                                                                                                                                                                                                                     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-                                                                                                                                                                                                                                                                                                                                                     GNU General Public License for more details.
-                                                                                                                                                                                                                                                                                                                                                 
-                                                                                                                                                                                                                                                                                                                                                     You should have received a copy of the GNU General Public License
-                                                                                                                                                                                                                                                                                                                                                     along with ChickenPaint. If not, see <http://www.gnu.org/licenses/>.
-                                                                                                                                                                                                                                                                                                                                                 */ // core-js Polyfills for the features we use
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); } /*
+                                                                                                                                                                                                                                                                                                                                   ChickenPaint Be
+                                                                                                                                                                                                                                                                                                                                   https://github.com/satopian/ChickenPaint_Be
+                                                                                                                                                                                                                                                                                                                                   by satopian
+                                                                                                                                                                                                                                                                                                                                   Customized from ChickenPaint by Nicholas Sherlock.
+                                                                                                                                                                                                                                                                                                                                   GNU GENERAL PUBLIC LICENSE
+                                                                                                                                                                                                                                                                                                                                   Version 3, 29 June 2007
+                                                                                                                                                                                                                                                                                                                                   <http://www.gnu.org/licenses/>
+                                                                                                                                                                                                                                                                                                                               */ /*
+                                                                                                                                                                                                                                                                                                                                      ChickenPaint
+                                                                                                                                                                                                                                                                                                                                  
+                                                                                                                                                                                                                                                                                                                                      ChickenPaint is a translation of ChibiPaint from Java to JavaScript
+                                                                                                                                                                                                                                                                                                                                      by Nicholas Sherlock / Chicken Smoothie.
+                                                                                                                                                                                                                                                                                                                                  
+                                                                                                                                                                                                                                                                                                                                      ChibiPaint is Copyright (c) 2006-2008 Marc Schefer
+                                                                                                                                                                                                                                                                                                                                  
+                                                                                                                                                                                                                                                                                                                                      ChickenPaint is free software: you can redistribute it and/or modify
+                                                                                                                                                                                                                                                                                                                                      it under the terms of the GNU General Public License as published by
+                                                                                                                                                                                                                                                                                                                                      the Free Software Foundation, either version 3 of the License, or
+                                                                                                                                                                                                                                                                                                                                      (at your option) any later version.
+                                                                                                                                                                                                                                                                                                                                  
+                                                                                                                                                                                                                                                                                                                                      ChickenPaint is distributed in the hope that it will be useful,
+                                                                                                                                                                                                                                                                                                                                      but WITHOUT ANY WARRANTY; without even the implied warranty of
+                                                                                                                                                                                                                                                                                                                                      MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+                                                                                                                                                                                                                                                                                                                                      GNU General Public License for more details.
+                                                                                                                                                                                                                                                                                                                                  
+                                                                                                                                                                                                                                                                                                                                      You should have received a copy of the GNU General Public License
+                                                                                                                                                                                                                                                                                                                                      along with ChickenPaint. If not, see <http://www.gnu.org/licenses/>.
+                                                                                                                                                                                                                                                                                                                                  */ // core-js Polyfills for the features we use
+// import "bootstrap";
 /* Check for native pointer event support before PEP adds its polyfill */
 if (window.PointerEvent) {
   window.hasNativePointerEvents = true;
 }
+//ブラウザデフォルトのキー操作をキャンセル
+document.addEventListener("keydown", function (e) {
+  var keys = ["+", ";", "=", "-", "s", "h", "r"];
+  if ((e.ctrlKey || e.metaKey) && keys.includes(e.key.toLowerCase()) || e.key === "Enter") {
+    // console.log("e.key",e.key);
+    e.preventDefault();
+  }
+});
 require("pepjs"); // Needs to use require() instead of import so we can run code before it
-
 function checkBrowserSupport() {
   var supportsAPIs = (0, _CPPolyfill.isCanvasSupported)() && "Uint8Array" in window;
   if (!supportsAPIs) {
@@ -435,12 +487,8 @@ function ChickenPaint(options) {
       CPTransform: {
         action: function action() {
           var layer = that.artwork.getActiveLayer();
-          if (!layer.visible) {
-            that.showLayerNotification(layer, "Whoops! This layer is currently hidden", "layer");
-          } else if (layer.alpha == 0) {
-            that.showLayerNotification(layer, "Whoops! This layer's opacity is currently 0%", "opacity");
-          } else if (that.artwork.transformAffineBegin() == null) {
-            that.showLayerNotification(layer, "Whoops! All of the selected pixels are transparent!", "layer");
+          if (that.artwork.transformAffineBegin() == null) {
+            that.showLayerNotification(layer, (0, _lang._)("Whoops! All of the selected pixels are transparent!"), "layer");
           } else {
             setMode(ChickenPaint.M_TRANSFORM);
           }
@@ -449,7 +497,17 @@ function ChickenPaint(options) {
           mode: true
         },
         allowed: function allowed() {
-          return that.artwork.getActiveLayer().getEffectiveAlpha() != 0;
+          var layer = that.artwork.getActiveLayer();
+          if (!layer.visible) {
+            //非表示レイヤーを変形しようとした時にエラーメッセージを出す
+            that.showLayerNotification(layer, (0, _lang._)("Whoops! This layer is currently hidden"), "layer");
+          } else if (layer.alpha == 0) {
+            that.showLayerNotification(layer, (0, _lang._)("Whoops! This layer's opacity is currently 0%"), "opacity");
+          } else if (that.artwork.transformAffineBegin() == null) {
+            that.showLayerNotification(layer, (0, _lang._)("Whoops! All of the selected pixels are transparent!"), "layer");
+          } else {
+            return layer.getEffectiveAlpha() != 0;
+          }
         }
       },
       CPTransformAccept: {
@@ -782,7 +840,7 @@ function ChickenPaint(options) {
       CPRemoveLayer: {
         action: function action() {
           if (!that.artwork.removeLayer()) {
-            alert("Sorry, you can't remove the last remaining layer in the drawing.");
+            alert((0, _lang._)("Sorry, you can't remove the last remaining layer in the drawing."));
           }
         },
         modifies: {
@@ -1445,7 +1503,7 @@ ChickenPaint.COLOR_MODE_RGB = 0;
 ChickenPaint.COLOR_MODE_GREYSCALE = 1;
 module.exports = exports.default;
 
-},{"../lib/raf.js":69,"./engine/CPArtwork.js":3,"./engine/CPBrushInfo.js":8,"./engine/CPResourceLoader.js":20,"./engine/CPResourceSaver.js":21,"./gui/CPAboutDialog.js":23,"./gui/CPBoxBlurDialog.js":24,"./gui/CPConfirmTransformDialog.js":32,"./gui/CPGridDialog.js":34,"./gui/CPMainGUI.js":36,"./gui/CPSendDialog.js":42,"./gui/CPShortcutsDialog.js":43,"./gui/CPSplashScreen.js":45,"./gui/CPTabletDialog.js":48,"./gui/CPUserPreferences.js":51,"./languages/lang.js":54,"./util/CPColor.js":58,"./util/CPPolyfill.js":60,"./util/CPRect.js":63,"./util/CPWacomTablet.js":66,"bootstrap":70,"core-js/stable/array/fill.js":255,"core-js/stable/array/iterator.js":256,"core-js/stable/map/index.js":257,"core-js/stable/promise/index.js":258,"core-js/stable/set/index.js":259,"core-js/stable/string/ends-with.js":260,"core-js/stable/symbol/index.js":261,"core-js/stable/typed-array/fill.js":262,"core-js/stable/typed-array/slice.js":263,"jquery":265,"pepjs":282,"wolfy87-eventemitter":284}],2:[function(require,module,exports){
+},{"../lib/raf.js":69,"./engine/CPArtwork.js":3,"./engine/CPBrushInfo.js":8,"./engine/CPResourceLoader.js":20,"./engine/CPResourceSaver.js":21,"./gui/CPAboutDialog.js":23,"./gui/CPBoxBlurDialog.js":24,"./gui/CPConfirmTransformDialog.js":32,"./gui/CPGridDialog.js":34,"./gui/CPMainGUI.js":36,"./gui/CPSendDialog.js":42,"./gui/CPShortcutsDialog.js":43,"./gui/CPSplashScreen.js":45,"./gui/CPTabletDialog.js":48,"./gui/CPUserPreferences.js":51,"./languages/lang.js":54,"./util/CPColor.js":58,"./util/CPPolyfill.js":60,"./util/CPRect.js":63,"./util/CPWacomTablet.js":66,"core-js/stable/array/fill.js":286,"core-js/stable/array/iterator.js":287,"core-js/stable/map/index.js":288,"core-js/stable/promise/index.js":289,"core-js/stable/set/index.js":290,"core-js/stable/string/ends-with.js":291,"core-js/stable/symbol/index.js":292,"core-js/stable/typed-array/fill.js":293,"core-js/stable/typed-array/slice.js":294,"jquery":296,"pepjs":313,"wolfy87-eventemitter":314}],2:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -1491,7 +1549,7 @@ function createImageData(width, height) {
 },{}],3:[function(require,module,exports){
 "use strict";
 
-function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -1517,41 +1575,43 @@ var _Canvas = require("../util/Canvas.js");
 var _wolfy87Eventemitter = _interopRequireDefault(require("wolfy87-eventemitter"));
 var _CPBrushTool = require("./CPBrushTool.js");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-function _get() { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(arguments.length < 3 ? target : receiver); } return desc.value; }; } return _get.apply(this, arguments); }
+function _get() { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get.bind(); } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(arguments.length < 3 ? target : receiver); } return desc.value; }; } return _get.apply(this, arguments); }
 function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor); } }
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); Object.defineProperty(subClass, "prototype", { writable: false }); if (superClass) _setPrototypeOf(subClass, superClass); }
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } else if (call !== void 0) { throw new TypeError("Derived constructors may only return object or undefined"); } return _assertThisInitialized(self); }
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; } /*
-                                                                                                                                                                                            ChickenPaint
-                                                                                                                                                                                            
-                                                                                                                                                                                            ChickenPaint is a translation of ChibiPaint from Java to JavaScript
-                                                                                                                                                                                            by Nicholas Sherlock / Chicken Smoothie.
-                                                                                                                                                                                            
-                                                                                                                                                                                            ChibiPaint is Copyright (c) 2006-2008 Marc Schefer
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; } /*
+                                                                                                                                                                                        ChickenPaint
                                                                                                                                                                                         
-                                                                                                                                                                                            ChickenPaint is free software: you can redistribute it and/or modify
-                                                                                                                                                                                            it under the terms of the GNU General Public License as published by
-                                                                                                                                                                                            the Free Software Foundation, either version 3 of the License, or
-                                                                                                                                                                                            (at your option) any later version.
+                                                                                                                                                                                        ChickenPaint is a translation of ChibiPaint from Java to JavaScript
+                                                                                                                                                                                        by Nicholas Sherlock / Chicken Smoothie.
                                                                                                                                                                                         
-                                                                                                                                                                                            ChickenPaint is distributed in the hope that it will be useful,
-                                                                                                                                                                                            but WITHOUT ANY WARRANTY; without even the implied warranty of
-                                                                                                                                                                                            MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-                                                                                                                                                                                            GNU General Public License for more details.
-                                                                                                                                                                                        
-                                                                                                                                                                                            You should have received a copy of the GNU General Public License
-                                                                                                                                                                                            along with ChickenPaint. If not, see <http://www.gnu.org/licenses/>.
-                                                                                                                                                                                        */
+                                                                                                                                                                                        ChibiPaint is Copyright (c) 2006-2008 Marc Schefer
+                                                                                                                                                                                    
+                                                                                                                                                                                        ChickenPaint is free software: you can redistribute it and/or modify
+                                                                                                                                                                                        it under the terms of the GNU General Public License as published by
+                                                                                                                                                                                        the Free Software Foundation, either version 3 of the License, or
+                                                                                                                                                                                        (at your option) any later version.
+                                                                                                                                                                                    
+                                                                                                                                                                                        ChickenPaint is distributed in the hope that it will be useful,
+                                                                                                                                                                                        but WITHOUT ANY WARRANTY; without even the implied warranty of
+                                                                                                                                                                                        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+                                                                                                                                                                                        GNU General Public License for more details.
+                                                                                                                                                                                    
+                                                                                                                                                                                        You should have received a copy of the GNU General Public License
+                                                                                                                                                                                        along with ChickenPaint. If not, see <http://www.gnu.org/licenses/>.
+                                                                                                                                                                                    */
 /**
  * Capitalize the first letter of the string.
  *
@@ -3951,7 +4011,11 @@ function CPArtwork(_width, _height) {
             }
           });
           this.composeCanvas = (0, _Canvas.createCanvas)(that.width, that.height);
-          this.composeCanvasContext = this.composeCanvas.getContext("2d");
+
+          // willReadFrequently オプションを使用して Canvas コンテキストを取得
+          this.composeCanvasContext = this.composeCanvas.getContext("2d", {
+            willReadFrequently: true
+          });
           (0, _CPPolyfill.setCanvasInterpolation)(this.composeCanvasContext, this.interpolation == "smooth");
 
           /* Calling getImageData on the canvas forces Chrome to disable hardware acceleration for it, see
@@ -4402,7 +4466,7 @@ CPArtwork.EDITING_MODE_IMAGE = 0;
 CPArtwork.EDITING_MODE_MASK = 1;
 module.exports = exports.default;
 
-},{"../util/CPColor.js":58,"../util/CPPolyfill.js":60,"../util/CPRandom.js":62,"../util/CPRect.js":63,"../util/CPTransform.js":64,"../util/Canvas.js":2,"./CPBlend.js":5,"./CPBlendAdditional.js":6,"./CPBlendTree.js":7,"./CPBrushInfo.js":8,"./CPBrushManager.js":9,"./CPBrushTool.js":10,"./CPClip.js":12,"./CPColorBmp.js":13,"./CPGreyBmp.js":14,"./CPImageLayer.js":15,"./CPLayerGroup.js":17,"./CPMaskView.js":19,"./CPUndo.js":22,"wolfy87-eventemitter":284}],4:[function(require,module,exports){
+},{"../util/CPColor.js":58,"../util/CPPolyfill.js":60,"../util/CPRandom.js":62,"../util/CPRect.js":63,"../util/CPTransform.js":64,"../util/Canvas.js":2,"./CPBlend.js":5,"./CPBlendAdditional.js":6,"./CPBlendTree.js":7,"./CPBrushInfo.js":8,"./CPBrushManager.js":9,"./CPBrushTool.js":10,"./CPClip.js":12,"./CPColorBmp.js":13,"./CPGreyBmp.js":14,"./CPImageLayer.js":15,"./CPLayerGroup.js":17,"./CPMaskView.js":19,"./CPUndo.js":22,"wolfy87-eventemitter":314}],4:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -11069,27 +11133,27 @@ var _CPRect = _interopRequireDefault(require("../util/CPRect.js"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; } /*
-                                                                                                                                                                                        	ChickenPaint
-                                                                                                                                                                                        
-                                                                                                                                                                                        	ChickenPaint is a translation of ChibiPaint from Java to JavaScript
-                                                                                                                                                                                        	by Nicholas Sherlock / Chicken Smoothie.
-                                                                                                                                                                                        
-                                                                                                                                                                                        	ChibiPaint is Copyright (c) 2006-2008 Marc Schefer
-                                                                                                                                                                                        
-                                                                                                                                                                                        	ChickenPaint is free software: you can redistribute it and/or modify
-                                                                                                                                                                                        	it under the terms of the GNU General Public License as published by
-                                                                                                                                                                                        	the Free Software Foundation, either version 3 of the License, or
-                                                                                                                                                                                        	(at your option) any later version.
-                                                                                                                                                                                        
-                                                                                                                                                                                        	ChickenPaint is distributed in the hope that it will be useful,
-                                                                                                                                                                                        	but WITHOUT ANY WARRANTY; without even the implied warranty of
-                                                                                                                                                                                        	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-                                                                                                                                                                                        	GNU General Public License for more details.
-                                                                                                                                                                                        
-                                                                                                                                                                                        	You should have received a copy of the GNU General Public License
-                                                                                                                                                                                        	along with ChickenPaint. If not, see <http://www.gnu.org/licenses/>.
-                                                                                                                                                                                        */
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; } /*
+                                                                                                                                                                                    	ChickenPaint
+                                                                                                                                                                                    
+                                                                                                                                                                                    	ChickenPaint is a translation of ChibiPaint from Java to JavaScript
+                                                                                                                                                                                    	by Nicholas Sherlock / Chicken Smoothie.
+                                                                                                                                                                                    
+                                                                                                                                                                                    	ChibiPaint is Copyright (c) 2006-2008 Marc Schefer
+                                                                                                                                                                                    
+                                                                                                                                                                                    	ChickenPaint is free software: you can redistribute it and/or modify
+                                                                                                                                                                                    	it under the terms of the GNU General Public License as published by
+                                                                                                                                                                                    	the Free Software Foundation, either version 3 of the License, or
+                                                                                                                                                                                    	(at your option) any later version.
+                                                                                                                                                                                    
+                                                                                                                                                                                    	ChickenPaint is distributed in the hope that it will be useful,
+                                                                                                                                                                                    	but WITHOUT ANY WARRANTY; without even the implied warranty of
+                                                                                                                                                                                    	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+                                                                                                                                                                                    	GNU General Public License for more details.
+                                                                                                                                                                                    
+                                                                                                                                                                                    	You should have received a copy of the GNU General Public License
+                                                                                                                                                                                    	along with ChickenPaint. If not, see <http://www.gnu.org/licenses/>.
+                                                                                                                                                                                    */
 /**
  *
  * @param {int} width
@@ -12159,7 +12223,6 @@ module.exports = exports.default;
 },{"./CPBrushInfo.js":8}],10:[function(require,module,exports){
 "use strict";
 
-function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -12169,36 +12232,39 @@ var _CPGreyBmp = _interopRequireDefault(require("./CPGreyBmp.js"));
 var _CPBrushInfo = _interopRequireDefault(require("./CPBrushInfo.js"));
 var _CPColorFloat = _interopRequireDefault(require("../util/CPColorFloat.js"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); Object.defineProperty(subClass, "prototype", { writable: false }); if (superClass) _setPrototypeOf(subClass, superClass); }
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } else if (call !== void 0) { throw new TypeError("Derived constructors may only return object or undefined"); } return _assertThisInitialized(self); }
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; } /*
-                                                                                                                                                                                                                                                                                                  ChickenPaint
-                                                                                                                                                                                                                                                                                              
-                                                                                                                                                                                                                                                                                                  ChickenPaint is a translation of ChibiPaint from Java to JavaScript
-                                                                                                                                                                                                                                                                                                  by Nicholas Sherlock / Chicken Smoothie.
-                                                                                                                                                                                                                                                                                              
-                                                                                                                                                                                                                                                                                                  ChibiPaint is Copyright (c) 2006-2008 Marc Schefer
-                                                                                                                                                                                                                                                                                              
-                                                                                                                                                                                                                                                                                                  ChickenPaint is free software: you can redistribute it and/or modify
-                                                                                                                                                                                                                                                                                                  it under the terms of the GNU General Public License as published by
-                                                                                                                                                                                                                                                                                                  the Free Software Foundation, either version 3 of the License, or
-                                                                                                                                                                                                                                                                                                  (at your option) any later version.
-                                                                                                                                                                                                                                                                                              
-                                                                                                                                                                                                                                                                                                  ChickenPaint is distributed in the hope that it will be useful,
-                                                                                                                                                                                                                                                                                                  but WITHOUT ANY WARRANTY; without even the implied warranty of
-                                                                                                                                                                                                                                                                                                  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-                                                                                                                                                                                                                                                                                                  GNU General Public License for more details.
-                                                                                                                                                                                                                                                                                              
-                                                                                                                                                                                                                                                                                                  You should have received a copy of the GNU General Public License
-                                                                                                                                                                                                                                                                                                  along with ChickenPaint. If not, see <http://www.gnu.org/licenses/>.
-                                                                                                                                                                                                                                                                                              */
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor); } }
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); } /*
+                                                                                                                                                                                                                                                                                                                                                                                                  ChickenPaint
+                                                                                                                                                                                                                                                                                                                                                                                              
+                                                                                                                                                                                                                                                                                                                                                                                                  ChickenPaint is a translation of ChibiPaint from Java to JavaScript
+                                                                                                                                                                                                                                                                                                                                                                                                  by Nicholas Sherlock / Chicken Smoothie.
+                                                                                                                                                                                                                                                                                                                                                                                              
+                                                                                                                                                                                                                                                                                                                                                                                                  ChibiPaint is Copyright (c) 2006-2008 Marc Schefer
+                                                                                                                                                                                                                                                                                                                                                                                              
+                                                                                                                                                                                                                                                                                                                                                                                                  ChickenPaint is free software: you can redistribute it and/or modify
+                                                                                                                                                                                                                                                                                                                                                                                                  it under the terms of the GNU General Public License as published by
+                                                                                                                                                                                                                                                                                                                                                                                                  the Free Software Foundation, either version 3 of the License, or
+                                                                                                                                                                                                                                                                                                                                                                                                  (at your option) any later version.
+                                                                                                                                                                                                                                                                                                                                                                                              
+                                                                                                                                                                                                                                                                                                                                                                                                  ChickenPaint is distributed in the hope that it will be useful,
+                                                                                                                                                                                                                                                                                                                                                                                                  but WITHOUT ANY WARRANTY; without even the implied warranty of
+                                                                                                                                                                                                                                                                                                                                                                                                  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+                                                                                                                                                                                                                                                                                                                                                                                                  GNU General Public License for more details.
+                                                                                                                                                                                                                                                                                                                                                                                              
+                                                                                                                                                                                                                                                                                                                                                                                                  You should have received a copy of the GNU General Public License
+                                                                                                                                                                                                                                                                                                                                                                                                  along with ChickenPaint. If not, see <http://www.gnu.org/licenses/>.
+                                                                                                                                                                                                                                                                                                                                                                                              */
 /**
  * @param {number[]} array
  * @returns {number}
@@ -12231,7 +12297,7 @@ function averageColorFloat(array) {
 function lerp(from, to, prop) {
   return from * (1 - prop) + to * prop;
 }
-var CPBrushTool = /*#__PURE__*/function () {
+var CPBrushTool = exports.CPBrushTool = /*#__PURE__*/function () {
   /**
    * @param {CPGreyBmp} strokeBuffer - A 32-bit image we can use for buffering paint operations to be merged later.
    * @param {CPRect} strokedRegion - The area of the strokeBuffer we've painted on.
@@ -12427,8 +12493,7 @@ var CPBrushTool = /*#__PURE__*/function () {
   }]);
   return CPBrushTool;
 }();
-exports.CPBrushTool = CPBrushTool;
-var CPBrushToolEraser = /*#__PURE__*/function (_CPBrushTool) {
+var CPBrushToolEraser = exports.CPBrushToolEraser = /*#__PURE__*/function (_CPBrushTool) {
   _inherits(CPBrushToolEraser, _CPBrushTool);
   var _super = _createSuper(CPBrushToolEraser);
   function CPBrushToolEraser() {
@@ -12461,8 +12526,7 @@ var CPBrushToolEraser = /*#__PURE__*/function (_CPBrushTool) {
   }]);
   return CPBrushToolEraser;
 }(CPBrushTool);
-exports.CPBrushToolEraser = CPBrushToolEraser;
-var CPBrushToolDodge = /*#__PURE__*/function (_CPBrushTool2) {
+var CPBrushToolDodge = exports.CPBrushToolDodge = /*#__PURE__*/function (_CPBrushTool2) {
   _inherits(CPBrushToolDodge, _CPBrushTool2);
   var _super2 = _createSuper(CPBrushToolDodge);
   function CPBrushToolDodge() {
@@ -12530,9 +12594,8 @@ var CPBrushToolDodge = /*#__PURE__*/function (_CPBrushTool2) {
   }]);
   return CPBrushToolDodge;
 }(CPBrushTool);
-exports.CPBrushToolDodge = CPBrushToolDodge;
 var BURN_CONSTANT = 260;
-var CPBrushToolBurn = /*#__PURE__*/function (_CPBrushTool3) {
+var CPBrushToolBurn = exports.CPBrushToolBurn = /*#__PURE__*/function (_CPBrushTool3) {
   _inherits(CPBrushToolBurn, _CPBrushTool3);
   var _super3 = _createSuper(CPBrushToolBurn);
   function CPBrushToolBurn() {
@@ -12598,7 +12661,6 @@ var CPBrushToolBurn = /*#__PURE__*/function (_CPBrushTool3) {
   }]);
   return CPBrushToolBurn;
 }(CPBrushTool);
-exports.CPBrushToolBurn = CPBrushToolBurn;
 var BLUR_MIN = 64,
   BLUR_MAX = 1;
 
@@ -12607,7 +12669,7 @@ var BLUR_MIN = 64,
  * how much weight the central pixel should have in the sum (higher opacities cause the central pixel to have lower weight,
  * increasing the contribution of those on the edges)
  */
-var CPBrushToolBlur = /*#__PURE__*/function (_CPBrushTool4) {
+var CPBrushToolBlur = exports.CPBrushToolBlur = /*#__PURE__*/function (_CPBrushTool4) {
   _inherits(CPBrushToolBlur, _CPBrushTool4);
   var _super4 = _createSuper(CPBrushToolBlur);
   function CPBrushToolBlur() {
@@ -12728,7 +12790,6 @@ var CPBrushToolBlur = /*#__PURE__*/function (_CPBrushTool4) {
  * The undoBuffer (pre-stroke image data) is restored to the layer, then the pixels from strokeBuffer are blended
  * on top of that.
  */
-exports.CPBrushToolBlur = CPBrushToolBlur;
 var CPBrushToolDirectBrush = /*#__PURE__*/function (_CPBrushTool5) {
   _inherits(CPBrushToolDirectBrush, _CPBrushTool5);
   var _super5 = _createSuper(CPBrushToolDirectBrush);
@@ -12804,7 +12865,7 @@ var CPBrushToolDirectBrush = /*#__PURE__*/function (_CPBrushTool5) {
 var WATERCOLOR_NUM_SAMPLES = 50,
   WATERCOLOR_SAMPLE_RADIUS = 64,
   WATERCOLOR_SPREAD_FACTOR = 2 / 6;
-var CPBrushToolWatercolor = /*#__PURE__*/function (_CPBrushToolDirectBru) {
+var CPBrushToolWatercolor = exports.CPBrushToolWatercolor = /*#__PURE__*/function (_CPBrushToolDirectBru) {
   _inherits(CPBrushToolWatercolor, _CPBrushToolDirectBru);
   var _super6 = _createSuper(CPBrushToolWatercolor);
   function CPBrushToolWatercolor(strokeBuffer, strokedRegion) {
@@ -13060,8 +13121,7 @@ var CPBrushToolWatercolor = /*#__PURE__*/function (_CPBrushToolDirectBru) {
   }]);
   return CPBrushToolWatercolor;
 }(CPBrushToolDirectBrush);
-exports.CPBrushToolWatercolor = CPBrushToolWatercolor;
-var CPBrushToolOil = /*#__PURE__*/function (_CPBrushToolDirectBru2) {
+var CPBrushToolOil = exports.CPBrushToolOil = /*#__PURE__*/function (_CPBrushToolDirectBru2) {
   _inherits(CPBrushToolOil, _CPBrushToolDirectBru2);
   var _super7 = _createSuper(CPBrushToolOil);
   function CPBrushToolOil(strokeBuffer, strokedRegion) {
@@ -13318,7 +13378,6 @@ var CPBrushToolOil = /*#__PURE__*/function (_CPBrushToolDirectBru2) {
  * @param {CPGreyBmp} image
  * @param {CPRect} rect
  */
-exports.CPBrushToolOil = CPBrushToolOil;
 function stretchRectToFillBuffer(image, rect) {
   var imageData = image.data;
 
@@ -13360,7 +13419,7 @@ function stretchRectToFillBuffer(image, rect) {
     }
   }
 }
-var CPBrushToolSmudge = /*#__PURE__*/function (_CPBrushToolDirectBru3) {
+var CPBrushToolSmudge = exports.CPBrushToolSmudge = /*#__PURE__*/function (_CPBrushToolDirectBru3) {
   _inherits(CPBrushToolSmudge, _CPBrushToolDirectBru3);
   var _super8 = _createSuper(CPBrushToolSmudge);
   function CPBrushToolSmudge(strokeBuffer, strokedRegion) {
@@ -13615,12 +13674,10 @@ var CPBrushToolSmudge = /*#__PURE__*/function (_CPBrushToolDirectBru3) {
   }]);
   return CPBrushToolSmudge;
 }(CPBrushToolDirectBrush);
-exports.CPBrushToolSmudge = CPBrushToolSmudge;
 
 },{"../util/CPColorFloat.js":59,"./CPBrushInfo.js":8,"./CPColorBmp.js":13,"./CPGreyBmp.js":14}],11:[function(require,module,exports){
 "use strict";
 
-function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -13637,39 +13694,42 @@ var _pako = _interopRequireDefault(require("pako"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-function _get() { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(arguments.length < 3 ? target : receiver); } return desc.value; }; } return _get.apply(this, arguments); }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
+function _get() { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get.bind(); } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(arguments.length < 3 ? target : receiver); } return desc.value; }; } return _get.apply(this, arguments); }
 function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); Object.defineProperty(subClass, "prototype", { writable: false }); if (superClass) _setPrototypeOf(subClass, superClass); }
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } else if (call !== void 0) { throw new TypeError("Derived constructors may only return object or undefined"); } return _assertThisInitialized(self); }
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; } /*
-                                                                                                                                                                                                                                                                                                  ChickenPaint
-                                                                                                                                                                                                                                                                                              
-                                                                                                                                                                                                                                                                                                  ChickenPaint is a translation of ChibiPaint from Java to JavaScript
-                                                                                                                                                                                                                                                                                                  by Nicholas Sherlock / Chicken Smoothie.
-                                                                                                                                                                                                                                                                                              
-                                                                                                                                                                                                                                                                                                  ChibiPaint is Copyright (c) 2006-2008 Marc Schefer
-                                                                                                                                                                                                                                                                                              
-                                                                                                                                                                                                                                                                                                  ChickenPaint is free software: you can redistribute it and/or modify
-                                                                                                                                                                                                                                                                                                  it under the terms of the GNU General Public License as published by
-                                                                                                                                                                                                                                                                                                  the Free Software Foundation, either version 3 of the License, or
-                                                                                                                                                                                                                                                                                                  (at your option) any later version.
-                                                                                                                                                                                                                                                                                              
-                                                                                                                                                                                                                                                                                                  ChickenPaint is distributed in the hope that it will be useful,
-                                                                                                                                                                                                                                                                                                  but WITHOUT ANY WARRANTY; without even the implied warranty of
-                                                                                                                                                                                                                                                                                                  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-                                                                                                                                                                                                                                                                                                  GNU General Public License for more details.
-                                                                                                                                                                                                                                                                                              
-                                                                                                                                                                                                                                                                                                  You should have received a copy of the GNU General Public License
-                                                                                                                                                                                                                                                                                                  along with ChickenPaint. If not, see <http://www.gnu.org/licenses/>.
-                                                                                                                                                                                                                                                                                              */
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor); } }
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); } /*
+                                                                                                                                                                                                                                                                                                                                                                                                  ChickenPaint
+                                                                                                                                                                                                                                                                                                                                                                                              
+                                                                                                                                                                                                                                                                                                                                                                                                  ChickenPaint is a translation of ChibiPaint from Java to JavaScript
+                                                                                                                                                                                                                                                                                                                                                                                                  by Nicholas Sherlock / Chicken Smoothie.
+                                                                                                                                                                                                                                                                                                                                                                                              
+                                                                                                                                                                                                                                                                                                                                                                                                  ChibiPaint is Copyright (c) 2006-2008 Marc Schefer
+                                                                                                                                                                                                                                                                                                                                                                                              
+                                                                                                                                                                                                                                                                                                                                                                                                  ChickenPaint is free software: you can redistribute it and/or modify
+                                                                                                                                                                                                                                                                                                                                                                                                  it under the terms of the GNU General Public License as published by
+                                                                                                                                                                                                                                                                                                                                                                                                  the Free Software Foundation, either version 3 of the License, or
+                                                                                                                                                                                                                                                                                                                                                                                                  (at your option) any later version.
+                                                                                                                                                                                                                                                                                                                                                                                              
+                                                                                                                                                                                                                                                                                                                                                                                                  ChickenPaint is distributed in the hope that it will be useful,
+                                                                                                                                                                                                                                                                                                                                                                                                  but WITHOUT ANY WARRANTY; without even the implied warranty of
+                                                                                                                                                                                                                                                                                                                                                                                                  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+                                                                                                                                                                                                                                                                                                                                                                                                  GNU General Public License for more details.
+                                                                                                                                                                                                                                                                                                                                                                                              
+                                                                                                                                                                                                                                                                                                                                                                                                  You should have received a copy of the GNU General Public License
+                                                                                                                                                                                                                                                                                                                                                                                                  along with ChickenPaint. If not, see <http://www.gnu.org/licenses/>.
+                                                                                                                                                                                                                                                                                                                                                                                              */
 /**
  * Concat two Uint8Arrays to make a new one and return it.
  *
@@ -14594,7 +14654,7 @@ function load(source, options) {
   });
 }
 
-},{"../util/ArrayDataStream.js":56,"./CPArtwork.js":3,"./CPBlend.js":5,"./CPColorBmp.js":13,"./CPGreyBmp.js":14,"./CPImageLayer.js":15,"./CPLayerGroup.js":17,"pako":266}],12:[function(require,module,exports){
+},{"../util/ArrayDataStream.js":56,"./CPArtwork.js":3,"./CPBlend.js":5,"./CPColorBmp.js":13,"./CPGreyBmp.js":14,"./CPImageLayer.js":15,"./CPLayerGroup.js":17,"pako":297}],12:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -17432,27 +17492,27 @@ var _CPRect = _interopRequireDefault(require("../util/CPRect.js"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; } /*
-                                                                                                                                                                                        	ChickenPaint
-                                                                                                                                                                                        
-                                                                                                                                                                                        	ChickenPaint is a translation of ChibiPaint from Java to JavaScript
-                                                                                                                                                                                        	by Nicholas Sherlock / Chicken Smoothie.
-                                                                                                                                                                                        
-                                                                                                                                                                                        	ChibiPaint is Copyright (c) 2006-2008 Marc Schefer
-                                                                                                                                                                                        
-                                                                                                                                                                                        	ChickenPaint is free software: you can redistribute it and/or modify
-                                                                                                                                                                                        	it under the terms of the GNU General Public License as published by
-                                                                                                                                                                                        	the Free Software Foundation, either version 3 of the License, or
-                                                                                                                                                                                        	(at your option) any later version.
-                                                                                                                                                                                        
-                                                                                                                                                                                        	ChickenPaint is distributed in the hope that it will be useful,
-                                                                                                                                                                                        	but WITHOUT ANY WARRANTY; without even the implied warranty of
-                                                                                                                                                                                        	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-                                                                                                                                                                                        	GNU General Public License for more details.
-                                                                                                                                                                                        
-                                                                                                                                                                                        	You should have received a copy of the GNU General Public License
-                                                                                                                                                                                        	along with ChickenPaint. If not, see <http://www.gnu.org/licenses/>.
-                                                                                                                                                                                        */
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; } /*
+                                                                                                                                                                                    	ChickenPaint
+                                                                                                                                                                                    
+                                                                                                                                                                                    	ChickenPaint is a translation of ChibiPaint from Java to JavaScript
+                                                                                                                                                                                    	by Nicholas Sherlock / Chicken Smoothie.
+                                                                                                                                                                                    
+                                                                                                                                                                                    	ChibiPaint is Copyright (c) 2006-2008 Marc Schefer
+                                                                                                                                                                                    
+                                                                                                                                                                                    	ChickenPaint is free software: you can redistribute it and/or modify
+                                                                                                                                                                                    	it under the terms of the GNU General Public License as published by
+                                                                                                                                                                                    	the Free Software Foundation, either version 3 of the License, or
+                                                                                                                                                                                    	(at your option) any later version.
+                                                                                                                                                                                    
+                                                                                                                                                                                    	ChickenPaint is distributed in the hope that it will be useful,
+                                                                                                                                                                                    	but WITHOUT ANY WARRANTY; without even the implied warranty of
+                                                                                                                                                                                    	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+                                                                                                                                                                                    	GNU General Public License for more details.
+                                                                                                                                                                                    
+                                                                                                                                                                                    	You should have received a copy of the GNU General Public License
+                                                                                                                                                                                    	along with ChickenPaint. If not, see <http://www.gnu.org/licenses/>.
+                                                                                                                                                                                    */
 /**
  *
  * @param {string} name
@@ -17644,7 +17704,7 @@ module.exports = exports.default;
 },{}],19:[function(require,module,exports){
 "use strict";
 
-function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -17655,35 +17715,37 @@ var _CPGreyBmp = _interopRequireDefault(require("./CPGreyBmp.js"));
 var _wolfy87Eventemitter = _interopRequireDefault(require("wolfy87-eventemitter"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor); } }
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); Object.defineProperty(subClass, "prototype", { writable: false }); if (superClass) _setPrototypeOf(subClass, superClass); }
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } else if (call !== void 0) { throw new TypeError("Derived constructors may only return object or undefined"); } return _assertThisInitialized(self); }
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); } /*
-                                                                                                                                                                                                                  ChickenPaint
-                                                                                                                                                                                                              
-                                                                                                                                                                                                                  ChickenPaint is a translation of ChibiPaint from Java to JavaScript
-                                                                                                                                                                                                                  by Nicholas Sherlock / Chicken Smoothie.
-                                                                                                                                                                                                              
-                                                                                                                                                                                                                  ChibiPaint is Copyright (c) 2006-2008 Marc Schefer
-                                                                                                                                                                                                              
-                                                                                                                                                                                                                  ChickenPaint is free software: you can redistribute it and/or modify
-                                                                                                                                                                                                                  it under the terms of the GNU General Public License as published by
-                                                                                                                                                                                                                  the Free Software Foundation, either version 3 of the License, or
-                                                                                                                                                                                                                  (at your option) any later version.
-                                                                                                                                                                                                              
-                                                                                                                                                                                                                  ChickenPaint is distributed in the hope that it will be useful,
-                                                                                                                                                                                                                  but WITHOUT ANY WARRANTY; without even the implied warranty of
-                                                                                                                                                                                                                  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-                                                                                                                                                                                                                  GNU General Public License for more details.
-                                                                                                                                                                                                              
-                                                                                                                                                                                                                  You should have received a copy of the GNU General Public License
-                                                                                                                                                                                                                  along with ChickenPaint. If not, see <http://www.gnu.org/licenses/>.
-                                                                                                                                                                                                              */
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); } /*
+                                                                                                                                                                                                                         ChickenPaint
+                                                                                                                                                                                                                     
+                                                                                                                                                                                                                         ChickenPaint is a translation of ChibiPaint from Java to JavaScript
+                                                                                                                                                                                                                         by Nicholas Sherlock / Chicken Smoothie.
+                                                                                                                                                                                                                     
+                                                                                                                                                                                                                         ChibiPaint is Copyright (c) 2006-2008 Marc Schefer
+                                                                                                                                                                                                                     
+                                                                                                                                                                                                                         ChickenPaint is free software: you can redistribute it and/or modify
+                                                                                                                                                                                                                         it under the terms of the GNU General Public License as published by
+                                                                                                                                                                                                                         the Free Software Foundation, either version 3 of the License, or
+                                                                                                                                                                                                                         (at your option) any later version.
+                                                                                                                                                                                                                     
+                                                                                                                                                                                                                         ChickenPaint is distributed in the hope that it will be useful,
+                                                                                                                                                                                                                         but WITHOUT ANY WARRANTY; without even the implied warranty of
+                                                                                                                                                                                                                         MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+                                                                                                                                                                                                                         GNU General Public License for more details.
+                                                                                                                                                                                                                     
+                                                                                                                                                                                                                         You should have received a copy of the GNU General Public License
+                                                                                                                                                                                                                         along with ChickenPaint. If not, see <http://www.gnu.org/licenses/>.
+                                                                                                                                                                                                                     */
 /**
  * Copy the rectangle from the single-channel `greyscale` to the RGBA `imageData` as greyscale pixels with full alpha.
  * Both images must be the same size.
@@ -17715,7 +17777,7 @@ function copyGreyscaleRectToImageData(imageData, greyscale, rect) {
  *
  * Emits a "changeLayer" event if the mask view attaches to a different target layer.
  */
-var CPMaskView = /*#__PURE__*/function (_EventEmitter) {
+var CPMaskView = exports.default = /*#__PURE__*/function (_EventEmitter) {
   _inherits(CPMaskView, _EventEmitter);
   var _super = _createSuper(CPMaskView);
   /**
@@ -17787,10 +17849,9 @@ var CPMaskView = /*#__PURE__*/function (_EventEmitter) {
   }]);
   return CPMaskView;
 }(_wolfy87Eventemitter.default);
-exports.default = CPMaskView;
 module.exports = exports.default;
 
-},{"../util/CPRect.js":63,"./CPColorBmp.js":13,"./CPGreyBmp.js":14,"wolfy87-eventemitter":284}],20:[function(require,module,exports){
+},{"../util/CPRect.js":63,"./CPColorBmp.js":13,"./CPGreyBmp.js":14,"wolfy87-eventemitter":314}],20:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -17948,7 +18009,7 @@ CPResourceLoader.prototype = Object.create(_wolfy87Eventemitter.default.prototyp
 CPResourceLoader.prototype.constructor = CPResourceLoader;
 module.exports = exports.default;
 
-},{"../../js/engine/CPChibiFile.js":11,"../util/AdobeColorTable.js":55,"./CPArtwork.js":3,"./CPColorBmp.js":13,"./CPImageLayer.js":15,"wolfy87-eventemitter":284}],21:[function(require,module,exports){
+},{"../../js/engine/CPChibiFile.js":11,"../util/AdobeColorTable.js":55,"./CPArtwork.js":3,"./CPColorBmp.js":13,"./CPImageLayer.js":15,"wolfy87-eventemitter":314}],21:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -18130,12 +18191,13 @@ function CPResourceSaver(options) {
         formData.append("endMarker", marker);
         postDrawing(formData);
       } else {
-        _fileSaver.default.saveAs(flatBlob, "oekaki.png");
+        var saveFilename = 'oekaki_' + new Date().toISOString().split('.')[0].replace(/[^0-9]/g, '_');
+        _fileSaver.default.saveAs(flatBlob, saveFilename + ".png");
         if (chibiResult) {
-          _fileSaver.default.saveAs(chibiResult.bytes, "oekaki.chi");
+          _fileSaver.default.saveAs(chibiResult.bytes, saveFilename + ".chi");
         }
         if (swatchesBlob) {
-          _fileSaver.default.saveAs(swatchesBlob, "oekaki.aco");
+          _fileSaver.default.saveAs(swatchesBlob, saveFilename + ".aco");
         }
       }
     }).catch(function (e) {
@@ -18149,16 +18211,19 @@ function CPResourceSaver(options) {
 CPResourceSaver.prototype = Object.create(_wolfy87Eventemitter.default.prototype);
 CPResourceSaver.prototype.constructor = CPResourceSaver;
 
-},{"../../js/engine/CPChibiFile.js":11,"../languages/lang.js":54,"../util/AdobeColorTable.js":55,"file-saver":264,"wolfy87-eventemitter":284}],22:[function(require,module,exports){
+},{"../../js/engine/CPChibiFile.js":11,"../languages/lang.js":54,"../util/AdobeColorTable.js":55,"file-saver":295,"wolfy87-eventemitter":314}],22:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor); } }
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
 /*
     ChickenPaint
     
@@ -18180,7 +18245,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     You should have received a copy of the GNU General Public License
     along with ChickenPaint. If not, see <http://www.gnu.org/licenses/>.
 */
-var CPUndo = /*#__PURE__*/function () {
+var CPUndo = exports.default = /*#__PURE__*/function () {
   function CPUndo() {
     _classCallCheck(this, CPUndo);
   }
@@ -18230,7 +18295,6 @@ var CPUndo = /*#__PURE__*/function () {
   }]);
   return CPUndo;
 }();
-exports.default = CPUndo;
 module.exports = exports.default;
 
 },{}],23:[function(require,module,exports){
@@ -18265,26 +18329,22 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 */
 
 function CPAboutDialog(parent) {
-  var dialog = (0, _jquery.default)("<div class=\"modal fade chickenpaint-about-dialog\" tabindex=\"-1\" role=\"dialog\">\n                <div class=\"modal-dialog\">\n                    <div class=\"modal-content\">\n                        <div class=\"modal-header\">\n                            <h5 class=\"modal-title\">About ChickenPaint v2</h5>\n                            <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\n                                <span aria-hidden=\"true\">&times;</span>\n                            </button>\n                        </div>\n                        <div class=\"modal-body\">\n                            <a class=\"chickenpaint-on-github\" target=\"_blank\" href=\"https://github.com/thenickdude/chickenpaint\"><span class=\"fab fa-github\"></span> ChickenPaint on GitHub</a>\n                            \n                            <p>\n                                ChickenPaint is a translation of <a href=\"https://github.com/thenickdude/chibipaint\" target=\"_blank\">ChibiPaint</a>\n                                from Java to JavaScript by Nicholas Sherlock / Chicken Smoothie\n                            </p>\n                            <p>\n                                ChibiPaint is Copyright (c) 2006-2008 Marc Schefer. All Rights Reserved\n                            </p>\n                            <p>\n                                ChickenPaint is free software: you can redistribute it and/or modify\n                                it under the terms of the GNU General Public License as published by\n                                the Free Software Foundation, either version 3 of the License, or\n                                (at your option) any later version.\n                            </p>\n        \n                            <p>\n                                ChickenPaint is distributed in the hope that it will be useful,\n                                but WITHOUT ANY WARRANTY; without even the implied warranty of\n                                MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n                                <a target=\"_blank\" href=\"https://www.gnu.org/licenses/\">GNU General Public License</a> for more details.\n                            </p>\n        \n                            <pre class=\"pre-scrollable chickenpaint-third-party-licenses\">Toolbar icons designed by <a target=\"_blank\" href=\"https://github.com/Anteira\">Miglena Lapavicheva (Anteira)</a>\n    These icons are dual-licensed under <a target=\"_blank\" href=\"https://spdx.org/licenses/GPL-3.0-or-later.html\">GPL-3.0-or-later</a> and <a target=\"_blank\" href=\"https://creativecommons.org/licenses/by/3.0/\">CC-BY-3.0</a>\n\nIncludes icons from the <a target=\"_blank\" href=\"https://extensions.libreoffice.org/en/extensions/show/tango-icon-theme-for-libreoffice\">Tango Icon Theme for LibreOffice</a>:\n    All artwork is licensed under the Creative Commons Attribution-Share Alike 3.0\n    United States License. To view a copy of this licence, visit\n    https://creativecommons.org/licenses/by-sa/3.0/ or send a letter to Creative\n    Commons, 171 Second Street, Suite 300, San Francisco, California 94105, USA.\n    \n    Credit for icons imported from git://git.gnome.org/gnome-icon-theme or derivatives\n    of these goes to the GNOME project (https://www.gnome.org)\n    Derivatives and new icons were created by Alexander Wilms &lt;f.alexander.wilms@gmail.com> \n    and Miroslav Mazel &lt;mazelm@gmail.com>\n    \nIncludes these MIT-licensed libraries:\n\n    Includes the <a target=\"_blank\" href=\"https://github.com/eligrey/FileSaver.js\">FileSaver.js library</a>\n    FileSaver.js Copyright \xA9 2015 <a target=\"_blank\" href=\"https://eligrey.com/\">Eli Grey</a>\n\n    Includes the <a target=\"_blank\" href=\"https://github.com/nodeca/pako\">Pako zlib compression library</a>\n    Copyright (C) 2014-2015 by Vitaly Puzrin\n    \n    Includes the <a target=\"_blank\" href=\"https://github.com/madrobby/keymaster\">keymaster.js</a> keyboard library\n    Copyright (c) 2011-2013 Thomas Fuchs\n\n    Includes the <a target=\"_blank\" href=\"https://github.com/stefanpenner/es6-promise\">es6-promise</a> library\n    Copyright (c) 2014 Yehuda Katz, Tom Dale, Stefan Penner and contributors\n\n    Includes the <a target=\"_blank\" href=\"https://benalman.com/projects/jquery-throttle-debounce-plugin/\">jQuery throttle-debounce</a> library\n    Copyright (c) 2010 \"Cowboy\" Ben Alman\n\n    Permission is hereby granted, free of charge, to any person\n    obtaining a copy of this software and associated documentation\n    files (the \"Software\"), to deal in the Software without\n    restriction, including without limitation the rights to use,\n    copy, modify, merge, publish, distribute, sublicense, and/or\n    sell copies of the Software, and to permit persons to whom the\n    Software is furnished to do so, subject to the following\n    conditions:\n\n    The above copyright notice and this permission notice shall be\n    included in all copies or substantial portions of the Software.\n\n    THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,\n    EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES\n    OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND\n    NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT \n    HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,\n    WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING\n    FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR\n    OTHER DEALINGS IN THE SOFTWARE.\n\nIncludes the <a href=\"https://www.jquery.com/\" target=\"_blank\">jQuery library</a> \nCopyright <a href=\"https://jquery.org/\" target=\"_blank\">jQuery Foundation and other contributors</a>\n    \n    This software consists of voluntary contributions made by many\n    individuals. For exact contribution history, see the revision \n    history available at https://github.com/jquery/jquery\n    \n    The following license applies to all parts of this software \n    except as documented below:\n    \n    Permission is hereby granted, free of charge, to any person \n    obtaining a copy of this software and associated documentation\n    files (the \"Software\"), to deal in the Software without\n    restriction, including without limitation the rights to use, \n    copy, modify, merge, publish, distribute, sublicense, and/or\n    sell copies of the Software, and to permit persons to whom the\n    Software is furnished to do so, subject to the following\n    conditions:\n    \n    The above copyright notice and this permission notice shall be\n    included in all copies or substantial portions of the Software.\n    \n    THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,\n    EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES\n    OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND\n    NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT\n    HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,\n    WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING\n    FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR\n    OTHER DEALINGS IN THE SOFTWARE.\n\nIncludes the <a href=\"https://github.com/jquery/PEP/\" target=\"_blank\">jQuery PEP library</a>\nCopyright jQuery Foundation and other contributors, https://jquery.org/\n    \n    This software consists of voluntary contributions made by many\n    individuals. For exact contribution history, see the revision \n    history available at https://github.com/jquery/PEP\n    \n    The following license applies to all parts of this software \n    except as documented below:\n    \n    Permission is hereby granted, free of charge, to any person \n    obtaining a copy of this software and associated documentation \n    files (the \"Software\"), to deal in the Software without \n    restriction, including without limitation the rights to use, \n    copy, modify, merge, publish, distribute, sublicense, and/or \n    sell copies of the Software, and to permit persons to whom the\n    Software is furnished to do so, subject to the following \n    conditions:\n\n    The above copyright notice and this permission notice shall be\n    included in all copies or substantial portions of the Software.\n    \n    THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,\n    EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES\n    OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND \n    NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT \n    HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, \n    WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING \n    FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR \n    OTHER DEALINGS IN THE SOFTWARE.\n\nIncludes Font Awesome by Dave Gandy - <a href=\"https://fontawesome.io\" target=\"_blank\">https://fontawesome.io</a>\n                    </pre>\n                </div>\n            </div>\n        </div>\n    ");
+  var dialog = (0, _jquery.default)("<div class=\"modal fade chickenpaint-about-dialog\" tabindex=\"-1\" role=\"dialog\">\n                <div class=\"modal-dialog\">\n                    <div class=\"modal-content\">\n                        <div class=\"modal-header\">\n                            <h5 class=\"modal-title\">About ChickenPaint Be</h5>\n                            <button type=\"button\" class=\"btn btn-close\" data-bs-dismiss=\"modal\" aria-label=\"btn btn-close\">\n                            </button>\n                        </div>\n                        <div class=\"modal-body\">\n\t\t\t\t\t\t<a class=\"chickenpaint-on-github\" target=\"_blank\" href=\"https://github.com/satopian/ChickenPaint_Be\" rel=\"noopener\"><span class=\"icon-github\"></span> ChickenPaint Be on GitHub</a>\n\t\t\t\t\t\t<p>\n\t\t\t\t\t\tCustomized from <a href=\"https://github.com/thenickdude/chickenpaint\" target=\"_blank\" rel=\"noopener\">ChickenPaint</a>.<br>\n\t\t\t\t\t\tby satopian.<br>\n\t\t\t\t\t\t<a href=\"https://www.gnu.org/licenses/\" target=\"_blank\" rel=\"noopener\">GNU General Public License</a></br>\n\t\t\t\t\t\t</p>\n\t\t\t\t\t\t\n\t\t\t\t\t\t<a class=\"chickenpaint-on-github\" target=\"_blank\" href=\"https://github.com/thenickdude/chickenpaint\" rel=\"noopener\"><span class=\"icon-github\"></span> ChickenPaint on GitHub</a>\n                            \n                            <p>\n                                ChickenPaint is a translation of <a href=\"https://github.com/thenickdude/chibipaint\" target=\"_blank\" rel=\"noopener\">ChibiPaint</a>\n                                from Java to JavaScript by Nicholas Sherlock / Chicken Smoothie\n                            </p>\n                            <p>\n                                ChibiPaint is Copyright (c) 2006-2008 Marc Schefer. All Rights Reserved\n                            </p>\n                            <p>\n                                ChickenPaint is free software: you can redistribute it and/or modify\n                                it under the terms of the GNU General Public License as published by\n                                the Free Software Foundation, either version 3 of the License, or\n                                (at your option) any later version.\n                            </p>\n        \n                            <p>\n                                ChickenPaint is distributed in the hope that it will be useful,\n                                but WITHOUT ANY WARRANTY; without even the implied warranty of\n                                MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n                                <a target=\"_blank\" href=\"https://www.gnu.org/licenses/\" rel=\"noopener\">GNU General Public License</a> for more details.\n                            </p>\n        \n                            <pre class=\"pre-scrollable chickenpaint-third-party-licenses\">Toolbar icons designed by <a target=\"_blank\" href=\"https://github.com/Anteira\" rel=\"noopener\">Miglena Lapavicheva (Anteira)</a>\n    These icons are dual-licensed under <a target=\"_blank\" href=\"https://spdx.org/licenses/GPL-3.0-or-later.html\" rel=\"noopener\">GPL-3.0-or-later</a> and <a target=\"_blank\" href=\"https://creativecommons.org/licenses/by/3.0/\" rel=\"noopener\">CC-BY-3.0</a>\n\nIncludes icons from the <a target=\"_blank\" href=\"https://extensions.libreoffice.org/en/extensions/show/tango-icon-theme-for-libreoffice\" rel=\"noopener\">Tango Icon Theme for LibreOffice</a>:\n    All artwork is licensed under the Creative Commons Attribution-Share Alike 3.0\n    United States License. To view a copy of this licence, visit\n    https://creativecommons.org/licenses/by-sa/3.0/ or send a letter to Creative\n    Commons, 171 Second Street, Suite 300, San Francisco, California 94105, USA.\n    \n    Credit for icons imported from git://git.gnome.org/gnome-icon-theme or derivatives\n    of these goes to the GNOME project (https://www.gnome.org)\n    Derivatives and new icons were created by Alexander Wilms &lt;f.alexander.wilms@gmail.com> \n    and Miroslav Mazel &lt;mazelm@gmail.com>\n    \nIncludes these MIT-licensed libraries:\n\n    Includes the <a target=\"_blank\" href=\"https://github.com/eligrey/FileSaver.js\" rel=\"noopener\">FileSaver.js library</a>\n    FileSaver.js Copyright \xA9 2015 <a target=\"_blank\" href=\"https://eligrey.com/\" rel=\"noopener\">Eli Grey</a>\n\n    Includes the <a target=\"_blank\" href=\"https://github.com/nodeca/pako\" rel=\"noopener\">Pako zlib compression library</a>\n    Copyright (C) 2014-2015 by Vitaly Puzrin\n    \n    Includes the <a target=\"_blank\" href=\"https://github.com/madrobby/keymaster\" rel=\"noopener\">keymaster.js</a> keyboard library\n    Copyright (c) 2011-2013 Thomas Fuchs\n\n    Includes the <a target=\"_blank\" href=\"https://github.com/stefanpenner/es6-promise\" rel=\"noopener\">es6-promise</a> library\n    Copyright (c) 2014 Yehuda Katz, Tom Dale, Stefan Penner and contributors\n\n    Includes the <a target=\"_blank\" href=\"https://benalman.com/projects/jquery-throttle-debounce-plugin/\" rel=\"noopener\">jQuery throttle-debounce</a> library\n    Copyright (c) 2010 \"Cowboy\" Ben Alman\n\n    Permission is hereby granted, free of charge, to any person\n    obtaining a copy of this software and associated documentation\n    files (the \"Software\"), to deal in the Software without\n    restriction, including without limitation the rights to use,\n    copy, modify, merge, publish, distribute, sublicense, and/or\n    sell copies of the Software, and to permit persons to whom the\n    Software is furnished to do so, subject to the following\n    conditions:\n\n    The above copyright notice and this permission notice shall be\n    included in all copies or substantial portions of the Software.\n\n    THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,\n    EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES\n    OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND\n    NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT \n    HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,\n    WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING\n    FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR\n    OTHER DEALINGS IN THE SOFTWARE.\n\nIncludes the <a href=\"https://www.jquery.com/\" target=\"_blank\" rel=\"noopener\">jQuery library</a> \nCopyright <a href=\"https://jquery.org/\" target=\"_blank\" rel=\"noopener\">jQuery Foundation and other contributors</a>\n    \n    This software consists of voluntary contributions made by many\n    individuals. For exact contribution history, see the revision \n    history available at https://github.com/jquery/jquery\n    \n    The following license applies to all parts of this software \n    except as documented below:\n    \n    Permission is hereby granted, free of charge, to any person \n    obtaining a copy of this software and associated documentation\n    files (the \"Software\"), to deal in the Software without\n    restriction, including without limitation the rights to use, \n    copy, modify, merge, publish, distribute, sublicense, and/or\n    sell copies of the Software, and to permit persons to whom the\n    Software is furnished to do so, subject to the following\n    conditions:\n    \n    The above copyright notice and this permission notice shall be\n    included in all copies or substantial portions of the Software.\n    \n    THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,\n    EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES\n    OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND\n    NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT\n    HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,\n    WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING\n    FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR\n    OTHER DEALINGS IN THE SOFTWARE.\n\nIncludes the <a href=\"https://github.com/jquery/PEP/\" target=\"_blank\" rel=\"noopener\">jQuery PEP library</a>\nCopyright jQuery Foundation and other contributors, https://jquery.org/\n    \n    This software consists of voluntary contributions made by many\n    individuals. For exact contribution history, see the revision \n    history available at https://github.com/jquery/PEP\n    \n    The following license applies to all parts of this software \n    except as documented below:\n    \n    Permission is hereby granted, free of charge, to any person \n    obtaining a copy of this software and associated documentation \n    files (the \"Software\"), to deal in the Software without \n    restriction, including without limitation the rights to use, \n    copy, modify, merge, publish, distribute, sublicense, and/or \n    sell copies of the Software, and to permit persons to whom the\n    Software is furnished to do so, subject to the following \n    conditions:\n\n    The above copyright notice and this permission notice shall be\n    included in all copies or substantial portions of the Software.\n    \n    THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,\n    EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES\n    OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND \n    NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT \n    HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, \n    WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING \n    FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR \n    OTHER DEALINGS IN THE SOFTWARE.\n\nIncludes Font Awesome by Dave Gandy - <a href=\"https://fontawesome.io\" target=\"_blank\" rel=\"noopener\">https://fontawesome.io</a>\n                    </pre>\n                </div>\n            </div>\n        </div>\n    ");
 
   // Destroy the modal upon close
-  dialog.on("hidden.bs.modal", function (e) {
+  dialog[0].addEventListener('hidden.bs.modal', function (e) {
     dialog.remove();
   });
-  dialog.modal({
-    show: false
-  });
-
-  // Fix the backdrop location in the DOM by reparenting it to the chickenpaint container
-  dialog.data("bs.modal").$body = (0, _jquery.default)(parent);
+  // Initialize the modal using Bootstrap 5 methods
+  var modalInstance = new bootstrap.Modal(dialog[0]);
   parent.appendChild(dialog[0]);
   this.show = function () {
-    dialog.modal("show");
+    modalInstance.show();
   };
 }
 module.exports = exports.default;
 
-},{"jquery":265}],24:[function(require,module,exports){
+},{"jquery":296}],24:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -18317,35 +18377,41 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 */
 
 function CPBoxBlurDialog(parent, controller) {
-  var dialog = (0, _jquery.default)("<div class=\"modal fade\" tabindex=\"-1\" role=\"dialog\">\n                <div class=\"modal-dialog\">\n                    <div class=\"modal-content\">\n                        <div class=\"modal-header\">\n                            <h5 class=\"modal-title\">".concat((0, _lang._)("Box blur"), "</h5>\n                            <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\n                                <span aria-hidden=\"true\">&times;</span>\n                            </button>\n                        </div>\n                        <div class=\"modal-body\">\n                            <form>\n                                <div class=\"form-group\">\n                                    <label>").concat((0, _lang._)("Blur amount (pixels)"), "</label>\n                                    <input type=\"text\" class=\"form-control chickenpaint-blur-amount\" value=\"3\">\n                                </div>\n                                <div class=\"form-group\">\n                                    <label>").concat((0, _lang._)("Iterations (1-8, larger gives smoother blur)"), "</label>\n                                    <input type=\"text\" class=\"form-control chickenpaint-blur-iterations\" value=\"1\">\n                                </div>\n                            </form>\n                        </div>\n                        <div class=\"modal-footer\">\n                            <button type=\"button\" class=\"btn btn-light\" data-dismiss=\"modal\">").concat((0, _lang._)("Cancel"), "</button>\n                            <button type=\"button\" class=\"btn btn-primary chickenpaint-apply-box-blur\" data-dismiss=\"modal\">").concat((0, _lang._)("Ok"), "</button>\n                        </div>\n                    </div>\n                </div>\n            </div>\n        ")),
+  var dialog = (0, _jquery.default)("<div class=\"modal fade\" tabindex=\"-1\" role=\"dialog\">\n                <div class=\"modal-dialog\">\n                    <div class=\"modal-content\">\n                        <div class=\"modal-header\">\n                            <h5 class=\"modal-title\">".concat((0, _lang._)("Box blur"), "</h5>\n                            <button type=\"button\" class=\"btn btn-close\" data-bs-dismiss=\"modal\" aria-label=\"btn btn-close\">\n                            </button>\n                        </div>\n                        <div class=\"modal-body\">\n                            <form>\n                                <div class=\"form-group\">\n                                    <label>").concat((0, _lang._)("Blur amount (pixels)"), "</label>\n                                    <input type=\"number\" class=\"form-control chickenpaint-blur-amount\" value=\"3\">\n                                </div>\n                                <div class=\"form-group\">\n                                    <label>").concat((0, _lang._)("Iterations (1-8, larger gives smoother blur)"), "</label>\n                                    <input type=\"number\" class=\"form-control chickenpaint-blur-iterations\" value=\"1\" min=\"1\" max=\"8\">\n                                </div>\n                            </form>\n                        </div>\n                        <div class=\"modal-footer\">\n                            <button type=\"button\" class=\"btn btn-light\" data-bs-dismiss=\"modal\">").concat((0, _lang._)("Cancel"), "</button>\n                            <button type=\"button\" class=\"btn btn-primary chickenpaint-apply-box-blur\" data-bs-dismiss=\"modal\">").concat((0, _lang._)("Ok"), "</button>\n                        </div>\n                    </div>\n                </div>\n            </div>\n        ")),
     blurAmountElem = (0, _jquery.default)(".chickenpaint-blur-amount", dialog),
     blurIterationsElem = (0, _jquery.default)(".chickenpaint-blur-iterations", dialog),
     applyButton = (0, _jquery.default)(".chickenpaint-apply-box-blur", dialog);
+
+  // Bootstrap 5: Modalコンストラクタを使用してmodalを初期化
+  var modal = new bootstrap.Modal(dialog[0]);
   this.show = function () {
-    dialog.modal("show");
+    modal.show();
   };
-  applyButton.on('click', function (e) {
+  applyButton[0].addEventListener('click', function (e) {
     var blur = Math.max(parseInt(blurAmountElem.val(), 10), 1),
       iterations = Math.min(Math.max(parseInt(blurIterationsElem.val(), 10), 1), 8);
     controller.getArtwork().boxBlur(blur, blur, iterations);
+    // modal.hide();
   });
-  dialog.modal({
-    show: false
-  }).on('shown.bs.modal', function () {
+
+  dialog[0].addEventListener('hidden.bs.modal', function (e) {
+    dialog.remove();
+  });
+  dialog[0].addEventListener('shown.bs.modal', function (e) {
     blurAmountElem.trigger('focus');
-  }).on('keypress', function (e) {
-    if (e.key === "Enter") {
+  });
+  dialog[0].addEventListener("keydown", function (e) {
+    if (e.key === "Enter" && dialog.hasClass('show')) {
       applyButton.trigger('click');
+      e.preventDefault(); // デフォルトのフォーム送信を阻止
     }
   });
 
-  // Fix the backdrop location in the DOM by reparenting it to the chickenpaint container
-  dialog.data("bs.modal").$body = (0, _jquery.default)(parent);
   parent.appendChild(dialog[0]);
 }
 module.exports = exports.default;
 
-},{"../languages/lang.js":54,"jquery":265}],25:[function(require,module,exports){
+},{"../languages/lang.js":54,"jquery":296}],25:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -18555,7 +18621,14 @@ function CPBrushPanel(controller) {
   tipCombo.addEventListener("change", function (e) {
     controller.getBrushInfo().tip = parseInt(tipCombo.value, 10);
   });
+  tipCombo.onfocus = function () {
+    //フォーカスを検出したら
+    document.activeElement.blur(); //フォーカスを外す
+    // console.log(document.activeElement);
+  };
+
   tipCombo.className = "form-control form-control-sm";
+  tipCombo.tabIndex = -1;
   fillCombobox(tipCombo, TIP_NAMES);
   panel.appendChild(tipCombo);
   panel.appendChild(brushPreview.getElement());
@@ -18697,7 +18770,7 @@ function CPGradientPanel(controller) {
   gradientEndSwatch.on("alphaChange", updateGradient);
   var title, colorsGroup, colorGroup;
   title = document.createElement("p");
-  title.innerHTML = "Gradient";
+  title.textContent = (0, _lang._)("Gradient");
   gradientPanel.appendChild(title);
   gradientPanel.appendChild(gradientPreview.getElement());
   colorsGroup = document.createElement("div");
@@ -18714,8 +18787,8 @@ function CPGradientPanel(controller) {
 }
 function CPTransformPanel(controller) {
   var TRANSFORM_INTERPOLATION = {
-    smooth: "Smooth",
-    sharp: "Sharp"
+    smooth: (0, _lang._)("Smooth"),
+    sharp: (0, _lang._)("Sharp")
   };
   var panel = document.createElement("div"),
     acceptButton = document.createElement("button"),
@@ -18730,8 +18803,8 @@ function CPTransformPanel(controller) {
   rejectButton.type = "button";
   acceptButton.className = "btn btn-primary btn-block";
   rejectButton.className = "btn btn-light btn-block";
-  acceptButton.innerHTML = "Apply transform";
-  rejectButton.innerHTML = "Cancel";
+  acceptButton.textContent = (0, _lang._)("Apply transform");
+  rejectButton.textContent = (0, _lang._)("Cancel");
   interpCombo.addEventListener("change", function (e) {
     controller.setTransformInterpolation(this.value);
   });
@@ -18740,7 +18813,7 @@ function CPTransformPanel(controller) {
   if ((0, _CPPolyfill.isCanvasInterpolationSupported)()) {
     var interpGroup = document.createElement("div"),
       interpLabel = document.createElement("label");
-    interpLabel.innerHTML = "Transform style";
+    interpLabel.textContent = (0, _lang._)("Transform style");
     interpGroup.className = "form-group";
     interpGroup.appendChild(interpLabel);
     interpGroup.appendChild(interpCombo);
@@ -18766,13 +18839,14 @@ function CPTransformPanel(controller) {
 }
 module.exports = exports.default;
 
-},{"../../lib/keymaster.js":68,"../ChickenPaint.js":1,"../engine/CPColorBmp.js":13,"../languages/lang":54,"../util/CPColor.js":58,"../util/CPPolyfill.js":60,"./CPCheckbox.js":27,"./CPColorSwatch.js":31,"./CPGUIUtils.js":33,"./CPPalette.js":39,"./CPSlider.js":44,"jquery":265}],26:[function(require,module,exports){
+},{"../../lib/keymaster.js":68,"../ChickenPaint.js":1,"../engine/CPColorBmp.js":13,"../languages/lang":54,"../util/CPColor.js":58,"../util/CPPolyfill.js":60,"./CPCheckbox.js":27,"./CPColorSwatch.js":31,"./CPGUIUtils.js":33,"./CPPalette.js":39,"./CPSlider.js":44,"jquery":296}],26:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = CPCanvas;
+var _lang = require("../languages/lang.js");
 var _wolfy87Eventemitter = _interopRequireDefault(require("wolfy87-eventemitter"));
 var _jquery = _interopRequireDefault(require("jquery"));
 var _keymaster = _interopRequireDefault(require("../../lib/keymaster.js"));
@@ -19073,26 +19147,22 @@ function CPCanvas(controller) {
       modeStack.push(colorPickerMode, true);
       // Avoid infinite recursion by only delivering the event to the new mode (don't let it bubble back to us!)
       modeStack.peek().mouseDown(e, button, pressure);
-    } else if (button == BUTTON_WHEEL || spacePressed && button == BUTTON_PRIMARY) {
-      if (e.altKey) {
-        modeStack.push(rotateCanvasMode, true);
-        modeStack.peek().mouseDown(e, button, pressure);
-      } else {
-        modeStack.push(panMode, true);
-        modeStack.peek().mouseDown(e, button, pressure);
-      }
+    } else if (!spacePressed && button == BUTTON_PRIMARY && !e.altKey && _keymaster.default.isPressed("r")) {
+      modeStack.push(rotateCanvasMode, true);
+      modeStack.peek().mouseDown(e, button, pressure);
+    } else if (button == BUTTON_WHEEL || !e.altKey && spacePressed && button == BUTTON_PRIMARY) {
+      modeStack.push(panMode, true);
+      modeStack.peek().mouseDown(e, button, pressure);
     }
   };
   CPDefaultMode.prototype.keyDown = function (e) {
-    if (e.key === " ") {
-      if (e.altKey) {
-        modeStack.push(rotateCanvasMode, true);
-        modeStack.peek().keyDown(e);
-      } else {
-        // We can start the pan mode before the mouse button is even pressed, so that the "grabbable" cursor appears
-        modeStack.push(panMode, true);
-        modeStack.peek().keyDown(e);
-      }
+    if (e.key.toLowerCase() === "r" && e.key !== " ") {
+      modeStack.push(rotateCanvasMode, true);
+      modeStack.peek().keyDown(e);
+    } else if (e.key.toLowerCase() !== "r" && e.key === " " && !e.altKey) {
+      // We can start the pan mode before the mouse button is even pressed, so that the "grabbable" cursor appears
+      modeStack.push(panMode, true);
+      modeStack.peek().keyDown(e);
       return true;
     }
   };
@@ -19168,6 +19238,7 @@ function CPCanvas(controller) {
   CPDrawingMode.prototype.resume = CPDrawingMode.prototype.enter;
   CPDrawingMode.prototype.paint = function () {
     if (this.shouldPaintBrushPreview) {
+      //円カーソルを表示
       this.shouldPaintBrushPreview = false;
       var r = this.getBrushPreviewOval();
       canvasContext.beginPath();
@@ -19205,6 +19276,11 @@ function CPCanvas(controller) {
     }
   };
   CPFreehandMode.prototype.mouseDrag = function (e, pressure) {
+    if (!navigator.maxTouchPoints || navigator.maxTouchPoints < 2) {
+      //タッチデバイスでは無い時に
+      CPDrawingMode.prototype.mouseMove.call(this, e, pressure); //円カーソルをmouseDrag時に表示
+    }
+
     if (this.capture) {
       var pf = coordToDocument({
           x: mouseX,
@@ -19686,7 +19762,7 @@ function CPCanvas(controller) {
   CPMoveToolMode.prototype = Object.create(CPMode.prototype);
   CPMoveToolMode.prototype.constructor = CPMoveToolMode;
   CPMoveToolMode.prototype.mouseMove = function (e) {
-    if (!_keymaster.default.isPressed("space") && !e.altKey) {
+    if (!_keymaster.default.isPressed("r")) {
       setCursor(CURSOR_MOVE);
       return true;
     }
@@ -20101,7 +20177,7 @@ function CPCanvas(controller) {
     this.mouseDown = function (e, button, pressure) {
       if (this.capture) {
         return true;
-      } else if (!this.transient && button == BUTTON_PRIMARY && !e.altKey && !_keymaster.default.isPressed("space") || e.altKey && (button == BUTTON_WHEEL || button == BUTTON_PRIMARY && _keymaster.default.isPressed("space"))) {
+      } else if (!this.transient && button == BUTTON_PRIMARY && !e.altKey && !_keymaster.default.isPressed("space") || button == BUTTON_PRIMARY && !e.altKey && !_keymaster.default.isPressed("space") && _keymaster.default.isPressed("r")) {
         firstClick = {
           x: mouseX,
           y: mouseY
@@ -20170,7 +20246,7 @@ function CPCanvas(controller) {
           that.resetRotation();
         }
         this.capture = false;
-        if (this.transient && !(_keymaster.default.isPressed("space") && _keymaster.default.alt)) {
+        if (this.transient && !_keymaster.default.isPressed("r")) {
           modeStack.pop();
         }
         return true;
@@ -20185,7 +20261,7 @@ function CPCanvas(controller) {
       }
     };
     this.keyDown = function (e) {
-      if (e.key === " " && e.altKey) {
+      if (e.key.toLowerCase() === "r") {
         // That's our hotkey, so stay in this mode (don't forward to CPDefaultMode)
         return true;
       }
@@ -20213,10 +20289,10 @@ function CPCanvas(controller) {
   function checkCurrentLayerIsVisible() {
     var activeLayer = artwork.getActiveLayer();
     if (!(activeLayer.visible && activeLayer.ancestorsAreVisible())) {
-      controller.showLayerNotification(activeLayer, "Whoops! This layer is currently hidden", "layer");
+      controller.showLayerNotification(activeLayer, (0, _lang._)("Whoops! This layer is currently hidden"), "layer");
       return false;
     } else if (activeLayer.alpha == 0) {
-      controller.showLayerNotification(activeLayer, "Whoops! This layer's opacity is currently 0%", "opacity");
+      controller.showLayerNotification(activeLayer, (0, _lang._)("Whoops! This layer's opacity is currently 0%"), "opacity");
       return false;
     }
     return true;
@@ -20231,7 +20307,7 @@ function CPCanvas(controller) {
   function shouldDrawToThisLayer() {
     var activeLayer = artwork.getActiveLayer();
     if (activeLayer instanceof _CPLayerGroup.default && !artwork.isEditingMask()) {
-      controller.showLayerNotification(activeLayer, "Whoops! You can't draw on a group", "layer");
+      controller.showLayerNotification(activeLayer, (0, _lang._)("Whoops! You can't draw on a group"), "layer");
       return false;
     }
     return checkCurrentLayerIsVisible();
@@ -20475,13 +20551,27 @@ function CPCanvas(controller) {
   function zoomOnCenter(zoom) {
     var width = (0, _jquery.default)(canvas).width(),
       height = (0, _jquery.default)(canvas).height();
+    // 拡大を1.41、縮小を0.7092にした関係で、zoomが浮動小数点になるため、1倍2倍に近い時は値をまるめる
+    var roundedZoom = parseFloat(zoom);
+    if (Math.abs(roundedZoom - 1) < 0.01) {
+      zoom = 1;
+    } else if (Math.abs(roundedZoom - 2) < 0.2) {
+      zoom = 2;
+    } else if (Math.abs(roundedZoom - 0.5) < 0.08) {
+      zoom = 0.5;
+    }
+    // console.log("Math.abs(roundedZoom - 1)",Math.abs(roundedZoom - 1));
+    // console.log("Math.abs(roundedZoom - 2)",Math.abs(roundedZoom - 2));
+    // console.log("Math.abs(roundedZoom - 0.5)",Math.abs(roundedZoom - 0.5));
+    // console.log("zoom",zoom);
+
     zoomOnPoint(zoom, width / 2, height / 2);
   }
   this.zoomIn = function () {
-    zoomOnCenter(this.getZoom() * 2);
+    zoomOnCenter(this.getZoom() * 1.41);
   };
   this.zoomOut = function () {
-    zoomOnCenter(this.getZoom() * 0.5);
+    zoomOnCenter(this.getZoom() * 0.7092);
   };
   this.zoom100 = function () {
     zoomOnCenter(1);
@@ -20665,6 +20755,11 @@ function CPCanvas(controller) {
     modeStack.keyDown(e);
   }
   function handleKeyUp(e) {
+    //altキーを押下した直後にショートカットキーが動作しなくなる問題を修正
+    if (e.key.toLowerCase() === "alt") {
+      //altキーが離された時のDefaultの動作をキャンセル
+      e.preventDefault();
+    }
     modeStack.keyUp(e);
   }
 
@@ -20978,7 +21073,9 @@ function CPCanvas(controller) {
     var p = that.getOffset();
     that.setOffset(p.x, -value);
   });
-  this.setInterpolation(false);
+
+  //初期状態で、ズームのアンチエイリアスをOnに
+  this.setInterpolation(true);
   var canvasSpacingWrapper = document.createElement("div");
   canvasSpacingWrapper.className = 'chickenpaint-canvas-container-wrapper';
   canvasSpacingWrapper.appendChild(canvas);
@@ -20995,7 +21092,7 @@ CPCanvas.prototype = Object.create(_wolfy87Eventemitter.default.prototype);
 CPCanvas.prototype.constructor = CPCanvas;
 module.exports = exports.default;
 
-},{"../../lib/keymaster.js":68,"../ChickenPaint.js":1,"../engine/CPBrushInfo.js":8,"../engine/CPLayerGroup.js":17,"../engine/CPMaskView.js":19,"../util/CPBezier.js":57,"../util/CPColor.js":58,"../util/CPPolyfill.js":60,"../util/CPPolygon.js":61,"../util/CPRect.js":63,"../util/CPTransform.js":64,"../util/CPVector.js":65,"../util/CPWacomTablet.js":66,"../util/throttle-debounce":67,"./CPGUIUtils.js":33,"./CPScrollbar.js":41,"jquery":265,"wolfy87-eventemitter":284}],27:[function(require,module,exports){
+},{"../../lib/keymaster.js":68,"../ChickenPaint.js":1,"../engine/CPBrushInfo.js":8,"../engine/CPLayerGroup.js":17,"../engine/CPMaskView.js":19,"../languages/lang.js":54,"../util/CPBezier.js":57,"../util/CPColor.js":58,"../util/CPPolyfill.js":60,"../util/CPPolygon.js":61,"../util/CPRect.js":63,"../util/CPTransform.js":64,"../util/CPVector.js":65,"../util/CPWacomTablet.js":66,"../util/throttle-debounce":67,"./CPGUIUtils.js":33,"./CPScrollbar.js":41,"jquery":296,"wolfy87-eventemitter":314}],27:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -21069,7 +21166,7 @@ CPCheckbox.prototype = Object.create(_wolfy87Eventemitter.default.prototype);
 CPCheckbox.prototype.constructor = CPCheckbox;
 module.exports = exports.default;
 
-},{"wolfy87-eventemitter":284}],28:[function(require,module,exports){
+},{"wolfy87-eventemitter":314}],28:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -21170,30 +21267,33 @@ var _CPColor = _interopRequireDefault(require("../util/CPColor.js"));
 var _CPColorBmp = _interopRequireDefault(require("../engine/CPColorBmp.js"));
 var _CPGUIUtils = require("./CPGUIUtils.js");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor); } }
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; } /*
-                                                                                                                                                                                                                      ChickenPaint
-                                                                                                                                                                                                                  
-                                                                                                                                                                                                                      ChickenPaint is a translation of ChibiPaint from Java to JavaScript
-                                                                                                                                                                                                                      by Nicholas Sherlock / Chicken Smoothie.
-                                                                                                                                                                                                                  
-                                                                                                                                                                                                                      ChibiPaint is Copyright (c) 2006-2008 Marc Schefer
-                                                                                                                                                                                                                  
-                                                                                                                                                                                                                      ChickenPaint is free software: you can redistribute it and/or modify
-                                                                                                                                                                                                                      it under the terms of the GNU General Public License as published by
-                                                                                                                                                                                                                      the Free Software Foundation, either version 3 of the License, or
-                                                                                                                                                                                                                      (at your option) any later version.
-                                                                                                                                                                                                                  
-                                                                                                                                                                                                                      ChickenPaint is distributed in the hope that it will be useful,
-                                                                                                                                                                                                                      but WITHOUT ANY WARRANTY; without even the implied warranty of
-                                                                                                                                                                                                                      MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-                                                                                                                                                                                                                      GNU General Public License for more details.
-                                                                                                                                                                                                                  
-                                                                                                                                                                                                                      You should have received a copy of the GNU General Public License
-                                                                                                                                                                                                                      along with ChickenPaint. If not, see <http://www.gnu.org/licenses/>.
-                                                                                                                                                                                                                  */
+function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); } /*
+                                                                                                                                                                                                                                                                                                                                                                                                  ChickenPaint
+                                                                                                                                                                                                                                                                                                                                                                                              
+                                                                                                                                                                                                                                                                                                                                                                                                  ChickenPaint is a translation of ChibiPaint from Java to JavaScript
+                                                                                                                                                                                                                                                                                                                                                                                                  by Nicholas Sherlock / Chicken Smoothie.
+                                                                                                                                                                                                                                                                                                                                                                                              
+                                                                                                                                                                                                                                                                                                                                                                                                  ChibiPaint is Copyright (c) 2006-2008 Marc Schefer
+                                                                                                                                                                                                                                                                                                                                                                                              
+                                                                                                                                                                                                                                                                                                                                                                                                  ChickenPaint is free software: you can redistribute it and/or modify
+                                                                                                                                                                                                                                                                                                                                                                                                  it under the terms of the GNU General Public License as published by
+                                                                                                                                                                                                                                                                                                                                                                                                  the Free Software Foundation, either version 3 of the License, or
+                                                                                                                                                                                                                                                                                                                                                                                                  (at your option) any later version.
+                                                                                                                                                                                                                                                                                                                                                                                              
+                                                                                                                                                                                                                                                                                                                                                                                                  ChickenPaint is distributed in the hope that it will be useful,
+                                                                                                                                                                                                                                                                                                                                                                                                  but WITHOUT ANY WARRANTY; without even the implied warranty of
+                                                                                                                                                                                                                                                                                                                                                                                                  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+                                                                                                                                                                                                                                                                                                                                                                                                  GNU General Public License for more details.
+                                                                                                                                                                                                                                                                                                                                                                                              
+                                                                                                                                                                                                                                                                                                                                                                                                  You should have received a copy of the GNU General Public License
+                                                                                                                                                                                                                                                                                                                                                                                                  along with ChickenPaint. If not, see <http://www.gnu.org/licenses/>.
+                                                                                                                                                                                                                                                                                                                                                                                              */
 var CONTROL_WIDTH = 128,
   CONTROL_HEIGHT = 128,
   PIXEL_SCALE = window.devicePixelRatio || 1,
@@ -21206,7 +21306,7 @@ var CONTROL_WIDTH = 128,
  * @param {CPColor} initialColor
  * @constructor
  */
-var CPColorSelect = /*#__PURE__*/function () {
+var CPColorSelect = exports.default = /*#__PURE__*/function () {
   function CPColorSelect(controller, initialColor) {
     var _this = this;
     _classCallCheck(this, CPColorSelect);
@@ -21356,10 +21456,9 @@ var CPColorSelect = /*#__PURE__*/function () {
   }]);
   return CPColorSelect;
 }();
-exports.default = CPColorSelect;
 module.exports = exports.default;
 
-},{"../engine/CPColorBmp.js":13,"../util/CPColor.js":58,"./CPGUIUtils.js":33,"jquery":265}],30:[function(require,module,exports){
+},{"../engine/CPColorBmp.js":13,"../util/CPColor.js":58,"./CPGUIUtils.js":33,"jquery":296}],30:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -21371,30 +21470,33 @@ var _CPColor = _interopRequireDefault(require("../util/CPColor.js"));
 var _CPColorBmp = _interopRequireDefault(require("../engine/CPColorBmp.js"));
 var _CPGUIUtils = require("./CPGUIUtils.js");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor); } }
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; } /*
-                                                                                                                                                                                                                      ChickenPaint
-                                                                                                                                                                                                                  
-                                                                                                                                                                                                                      ChickenPaint is a translation of ChibiPaint from Java to JavaScript
-                                                                                                                                                                                                                      by Nicholas Sherlock / Chicken Smoothie.
-                                                                                                                                                                                                                  
-                                                                                                                                                                                                                      ChibiPaint is Copyright (c) 2006-2008 Marc Schefer
-                                                                                                                                                                                                                  
-                                                                                                                                                                                                                      ChickenPaint is free software: you can redistribute it and/or modify
-                                                                                                                                                                                                                      it under the terms of the GNU General Public License as published by
-                                                                                                                                                                                                                      the Free Software Foundation, either version 3 of the License, or
-                                                                                                                                                                                                                      (at your option) any later version.
-                                                                                                                                                                                                                  
-                                                                                                                                                                                                                      ChickenPaint is distributed in the hope that it will be useful,
-                                                                                                                                                                                                                      but WITHOUT ANY WARRANTY; without even the implied warranty of
-                                                                                                                                                                                                                      MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-                                                                                                                                                                                                                      GNU General Public License for more details.
-                                                                                                                                                                                                                  
-                                                                                                                                                                                                                      You should have received a copy of the GNU General Public License
-                                                                                                                                                                                                                      along with ChickenPaint. If not, see <http://www.gnu.org/licenses/>.
-                                                                                                                                                                                                                  */
+function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); } /*
+                                                                                                                                                                                                                                                                                                                                                                                                  ChickenPaint
+                                                                                                                                                                                                                                                                                                                                                                                              
+                                                                                                                                                                                                                                                                                                                                                                                                  ChickenPaint is a translation of ChibiPaint from Java to JavaScript
+                                                                                                                                                                                                                                                                                                                                                                                                  by Nicholas Sherlock / Chicken Smoothie.
+                                                                                                                                                                                                                                                                                                                                                                                              
+                                                                                                                                                                                                                                                                                                                                                                                                  ChibiPaint is Copyright (c) 2006-2008 Marc Schefer
+                                                                                                                                                                                                                                                                                                                                                                                              
+                                                                                                                                                                                                                                                                                                                                                                                                  ChickenPaint is free software: you can redistribute it and/or modify
+                                                                                                                                                                                                                                                                                                                                                                                                  it under the terms of the GNU General Public License as published by
+                                                                                                                                                                                                                                                                                                                                                                                                  the Free Software Foundation, either version 3 of the License, or
+                                                                                                                                                                                                                                                                                                                                                                                                  (at your option) any later version.
+                                                                                                                                                                                                                                                                                                                                                                                              
+                                                                                                                                                                                                                                                                                                                                                                                                  ChickenPaint is distributed in the hope that it will be useful,
+                                                                                                                                                                                                                                                                                                                                                                                                  but WITHOUT ANY WARRANTY; without even the implied warranty of
+                                                                                                                                                                                                                                                                                                                                                                                                  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+                                                                                                                                                                                                                                                                                                                                                                                                  GNU General Public License for more details.
+                                                                                                                                                                                                                                                                                                                                                                                              
+                                                                                                                                                                                                                                                                                                                                                                                                  You should have received a copy of the GNU General Public License
+                                                                                                                                                                                                                                                                                                                                                                                                  along with ChickenPaint. If not, see <http://www.gnu.org/licenses/>.
+                                                                                                                                                                                                                                                                                                                                                                                              */
 var WIDTH = 24,
   HEIGHT = 128;
 
@@ -21416,7 +21518,7 @@ function makeSliderBitmap(imageData) {
     }
   }
 }
-var CPColorSlider = /*#__PURE__*/function () {
+var CPColorSlider = exports.default = /*#__PURE__*/function () {
   function CPColorSlider(controller, selecter, initialHue) {
     var _this = this;
     _classCallCheck(this, CPColorSlider);
@@ -21510,10 +21612,9 @@ var CPColorSlider = /*#__PURE__*/function () {
   }]);
   return CPColorSlider;
 }();
-exports.default = CPColorSlider;
 module.exports = exports.default;
 
-},{"../engine/CPColorBmp.js":13,"../util/CPColor.js":58,"./CPGUIUtils.js":33,"jquery":265}],31:[function(require,module,exports){
+},{"../engine/CPColorBmp.js":13,"../util/CPColor.js":58,"./CPGUIUtils.js":33,"jquery":296}],31:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -21521,6 +21622,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = CPColorSwatch;
 var _jquery = _interopRequireDefault(require("jquery"));
+var _lang = require("../languages/lang.js");
 var _CPColor = _interopRequireDefault(require("../util/CPColor.js"));
 var _CPSlider = _interopRequireDefault(require("./CPSlider.js"));
 var _CPColorSelect = _interopRequireDefault(require("./CPColorSelect.js"));
@@ -21600,7 +21702,7 @@ function CPColorSwatch(initialColor, initialAlpha, containerElement) {
     panel.appendChild(group);
     alphaSlider.value = alpha;
     alphaSlider.title = function (alpha) {
-      return "Opacity: " + alpha;
+      return (0, _lang._)("Opacity: ") + alpha;
     };
     alphaSlider.on("valueChange", function (alpha) {
       that.setAlpha(alpha);
@@ -21618,14 +21720,7 @@ function CPColorSwatch(initialColor, initialAlpha, containerElement) {
   if (initialAlpha) {
     alpha = initialAlpha;
   }
-
-  // Clicking outside the popover will dismiss it
-  var closeClickHandler = function closeClickHandler(e) {
-    if ((0, _jquery.default)(e.target).closest(".popover").length == 0 && (0, _jquery.default)(e.target).closest(".chickenpaint-color-pick-swatch")[0] != element) {
-      (0, _jquery.default)(element).popover("hide");
-    }
-  };
-  (0, _jquery.default)(element).popover({
+  var bootstrapPopover = new bootstrap.Popover(element, {
     html: true,
     content: function content() {
       window.addEventListener("mousedown", closeClickHandler);
@@ -21633,11 +21728,26 @@ function CPColorSwatch(initialColor, initialAlpha, containerElement) {
     },
     trigger: "manual",
     placement: "bottom",
-    container: containerElement || false // Popover requires boolean for empty, not "undefined"
-  }).on("click", function (e) {
+    container: containerElement || false
+  });
+
+  // Clicking outside the popover will dismiss it
+  var closeClickHandler = function closeClickHandler(e) {
+    var colorpicker = e.target;
+    var isColorPicker = colorpicker.closest('.popover-body') || colorpicker.classList.contains('chickenpaint-color-pick-panel') || colorpicker.classList.contains('chickenpaint-colorpicker-select') || colorpicker.classList.contains('chickenpaint-colorpicker-slider');
     e.preventDefault();
-    (0, _jquery.default)(this).popover("toggle");
-  }).on("hidden.bs.popover", function () {
+    // console.log("closeClickHandler",e);
+    if (isColorPicker) {
+      //カラーピッカーをクリックした時は表示したままにする
+      return;
+    }
+    bootstrapPopover.hide();
+  };
+  element.addEventListener("click", function (e) {
+    e.preventDefault();
+    bootstrapPopover.toggle();
+  });
+  element.addEventListener("hidden.bs.popover", function () {
     window.removeEventListener("mousedown", closeClickHandler);
   });
   paint();
@@ -21646,7 +21756,7 @@ CPColorSwatch.prototype = Object.create(_wolfy87Eventemitter.default.prototype);
 CPColorSwatch.prototype.constructor = CPColorSwatch;
 module.exports = exports.default;
 
-},{"../util/CPColor.js":58,"./CPColorSelect.js":29,"./CPColorSlider.js":30,"./CPSlider.js":44,"jquery":265,"wolfy87-eventemitter":284}],32:[function(require,module,exports){
+},{"../languages/lang.js":54,"../util/CPColor.js":58,"./CPColorSelect.js":29,"./CPColorSlider.js":30,"./CPSlider.js":44,"jquery":296,"wolfy87-eventemitter":314}],32:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -21680,7 +21790,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 */
 
 function CPConfirmTransformDialog(parent, controller) {
-  var dialog = (0, _jquery.default)("<div class=\"modal fade\" tabindex=\"-1\" role=\"dialog\">\n\t            <div class=\"modal-dialog\">\n\t                <div class=\"modal-content\">\n\t                    <div class=\"modal-header\">\n\t                        <h5 class=\"modal-title\">Complete transform</h5>\n\t                        <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\n\t                            <span aria-hidden=\"true\">&times;</span>\n\t                        </button>\n\t                    </div>\n\t                    <div class=\"modal-body\">\n\t                        <p>\n\t                            You need to finish transforming this layer before you can do that. What would you like to do with the transform?\n\t\t\t\t\t\t\t</p>\n\t                    </div>\n\t                    <div class=\"modal-footer\">\n\t                        <button type=\"button\" class=\"btn btn-light\" data-dismiss=\"modal\">".concat((0, _lang._)("Cancel"), "</button>\n\t                        <button type=\"button\" class=\"btn btn-light chickenpaint-reject-transform\" data-dismiss=\"modal\">Undo transform</button>\n\t                        <button type=\"button\" class=\"btn btn-primary chickenpaint-accept-transform\" data-dismiss=\"modal\">Apply transform</button>\n\t                    </div>\n\t                </div>\n\t            </div>\n\t        </div>\n\t    ")),
+  var dialog = (0, _jquery.default)("<div class=\"modal fade\" tabindex=\"-1\" role=\"dialog\">\n\t            <div class=\"modal-dialog\">\n\t                <div class=\"modal-content\">\n\t                    <div class=\"modal-header\">\n\t                        <h5 class=\"modal-title\">".concat((0, _lang._)("Complete transform"), "</h5>\n\t                        <button type=\"button\" class=\"btn btn-close\" data-bs-dismiss=\"modal\" aria-label=\"btn btn-close\">\n\t                        </button>\n\t                    </div>\n\t                    <div class=\"modal-body\">\n\t                        <p>\n\t\t\t\t\t\t\t").concat((0, _lang._)("You need to finish transforming this layer before you can do that. What would you like to do with the transform?"), "\n\t\t\t\t\t\t\t</p>\n\t                    </div>\n\t                    <div class=\"modal-footer\">\n\t                        <button type=\"button\" class=\"btn btn-light\" data-bs-dismiss=\"modal\">").concat((0, _lang._)("Cancel"), "</button>\n\t                        <button type=\"button\" class=\"btn btn-light chickenpaint-reject-transform\" data-bs-dismiss=\"modal\">").concat((0, _lang._)("Undo transform"), "</button>\n\t                        <button type=\"button\" class=\"btn btn-primary chickenpaint-accept-transform\" data-bs-dismiss=\"modal\">").concat((0, _lang._)("Apply transform"), "</button>\n\t                    </div>\n\t                </div>\n\t            </div>\n\t        </div>\n\t    ")),
     that = this,
     applyButton = (0, _jquery.default)(".chickenpaint-accept-transform", dialog),
     rejectButton = (0, _jquery.default)(".chickenpaint-reject-transform", dialog);
@@ -21696,31 +21806,36 @@ function CPConfirmTransformDialog(parent, controller) {
     });
     that.emitEvent("reject");
   });
-  dialog.modal({
-    show: false
-  }).on('shown.bs.modal', function () {
-    applyButton.focus();
-  }).on("hidden.bs.modal", function (e) {
-    // Destroy the modal upon close
+
+  // Bootstrap 5 modal initialization
+  var modal = new bootstrap.Modal(dialog[0]);
+  this.show = function () {
+    modal.show();
+  };
+  dialog[0].addEventListener('hidden.bs.modal', function (e) {
     dialog.remove();
-  }).on('keypress', function (e) {
+  });
+  // Enterキーが押されたときの処理
+  parent.addEventListener("keydown", function keydown_EnterKey(e) {
     if (e.key === "Enter") {
-      applyButton.trigger('click');
+      // Enterキーが押されたら非表示にする
+      modal.hide();
+      controller.actionPerformed({
+        action: "CPTransformAccept"
+      }); //変形確定
+      that.emitEvent("accept");
+      parent.removeEventListener("keydown", keydown_EnterKey);
     }
   });
 
   // Fix the backdrop location in the DOM by reparenting it to the chickenpaint container
-  dialog.data("bs.modal").$body = (0, _jquery.default)(parent);
   parent.appendChild(dialog[0]);
-  this.show = function () {
-    dialog.modal("show");
-  };
 }
 CPConfirmTransformDialog.prototype = Object.create(_wolfy87Eventemitter.default.prototype);
 CPConfirmTransformDialog.prototype.constructor = CPConfirmTransformDialog;
 module.exports = exports.default;
 
-},{"../languages/lang.js":54,"jquery":265,"wolfy87-eventemitter":284}],33:[function(require,module,exports){
+},{"../languages/lang.js":54,"jquery":296,"wolfy87-eventemitter":314}],33:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -21822,34 +21937,44 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 */
 
 function CPGridDialog(parent, canvas) {
-  var dialog = (0, _jquery.default)("<div class=\"modal fade\" tabindex=\"-1\" role=\"dialog\">\n                <div class=\"modal-dialog\">\n                    <div class=\"modal-content\">\n                        <div class=\"modal-header\">\n                            <h5 class=\"modal-title\">".concat((0, _lang._)("Grid options"), "</h5>\n                            <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\n                                <span aria-hidden=\"true\">&times;</span>\n                            </button>\n                        </div>\n                        <div class=\"modal-body\">\n                            <form>\n                                <div class=\"form-group\">\n                                    <label>").concat((0, _lang._)("Grid size"), "</label>\n                                    <input type=\"text\" class=\"form-control chickenpaint-grid-size\" value=\"\" autofocus>\n                                </div>\n                            </form>\n                        </div>\n                        <div class=\"modal-footer\">\n                            <button type=\"button\" class=\"btn btn-light\" data-dismiss=\"modal\">").concat((0, _lang._)("Cancel"), "</button>\n                            <button type=\"button\" class=\"btn btn-primary chickenpaint-apply-grid-settings\" data-dismiss=\"modal\">").concat((0, _lang._)("Ok"), "</button>\n                        </div>\n                    </div>\n                </div>\n            </div>\n        ")),
+  var dialog = (0, _jquery.default)("<div class=\"modal fade\" tabindex=\"-1\" role=\"dialog\">\n                <div class=\"modal-dialog\">\n                    <div class=\"modal-content\">\n                        <div class=\"modal-header\">\n                            <h5 class=\"modal-title\">".concat((0, _lang._)("Grid options"), "</h5>\n                            <button type=\"button\" class=\"btn btn-close\" data-bs-dismiss=\"modal\" aria-label=\"btn btn-close\">\n                            </button>\n                        </div>\n                        <div class=\"modal-body\">\n                            <form>\n                                <div class=\"form-group\">\n                                    <label>").concat((0, _lang._)("Grid size"), "</label>\n                                    <input type=\"number\" class=\"form-control chickenpaint-grid-size\" value=\"\" autofocus>\n                                </div>\n                            </form>\n                        </div>\n                        <div class=\"modal-footer\">\n                            <button type=\"button\" class=\"btn btn-light\" data-bs-dismiss=\"modal\">").concat((0, _lang._)("Cancel"), "</button>\n                            <button type=\"button\" class=\"btn btn-primary chickenpaint-apply-grid-settings\" data-bs-dismiss=\"modal\">").concat((0, _lang._)("Ok"), "</button>\n                        </div>\n                    </div>\n                </div>\n            </div>\n        ")),
     gridSizeElem = (0, _jquery.default)(".chickenpaint-grid-size", dialog),
     applyButton = (0, _jquery.default)(".chickenpaint-apply-grid-settings", dialog);
+
+  // Bootstrap 5: Modal コンストラクタを使用して modal を初期化
+  var modal = new bootstrap.Modal(dialog[0]);
+  this.show = function () {
+    modal.show();
+  };
   gridSizeElem.val(canvas.getGridSize());
-  (0, _jquery.default)(".chickenpaint-apply-grid-settings", dialog).on('click', function (e) {
+
+  // Destroy the modal upon close
+  dialog[0].addEventListener('hidden.bs.modal', function (e) {
+    dialog.remove();
+  });
+  applyButton[0].addEventListener('click', function (e) {
     var gridSize = parseInt(gridSizeElem.val(), 10);
     canvas.setGridSize(gridSize);
+    var modal = bootstrap.Modal.getInstance(dialog[0]); // インスタンスを取得
+    modal.hide(); // モーダルを手動で閉じる
   });
-  dialog.modal({
-    show: false
-  }).on('shown.bs.modal', function () {
+
+  dialog[0].addEventListener('shown.bs.modal', function (e) {
     gridSizeElem.trigger('focus');
-  }).on('keypress', function (e) {
+  });
+
+  // Enter キーが押されたときの処理を追加
+  dialog[0].addEventListener('keydown', function (e) {
     if (e.key === "Enter") {
+      e.preventDefault(); // デフォルトのフォーム送信を阻止
       applyButton.trigger('click');
     }
   });
-
-  // Fix the backdrop location in the DOM by reparenting it to the chickenpaint container
-  dialog.data("bs.modal").$body = (0, _jquery.default)(parent);
   parent.appendChild(dialog[0]);
-  this.show = function () {
-    dialog.modal("show");
-  };
 }
 module.exports = exports.default;
 
-},{"../languages/lang.js":54,"jquery":265}],35:[function(require,module,exports){
+},{"../languages/lang.js":54,"jquery":296}],35:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -21865,28 +21990,29 @@ var _CPLayer = _interopRequireDefault(require("../engine/CPLayer.js"));
 var _CPImageLayer = _interopRequireDefault(require("../engine/CPImageLayer.js"));
 var _lang = require("../languages/lang.js");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-/*
-    ChickenPaint
-    
-    ChickenPaint is a translation of ChibiPaint from Java to JavaScript
-    by Nicholas Sherlock / Chicken Smoothie.
-    
-    ChibiPaint is Copyright (c) 2006-2008 Marc Schefer
-
-    ChickenPaint is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    ChickenPaint is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with ChickenPaint. If not, see <http://www.gnu.org/licenses/>.
-*/
-
+function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; } /*
+                                                                                                                                                                                        ChickenPaint
+                                                                                                                                                                                        
+                                                                                                                                                                                        ChickenPaint is a translation of ChibiPaint from Java to JavaScript
+                                                                                                                                                                                        by Nicholas Sherlock / Chicken Smoothie.
+                                                                                                                                                                                        
+                                                                                                                                                                                        ChibiPaint is Copyright (c) 2006-2008 Marc Schefer
+                                                                                                                                                                                    
+                                                                                                                                                                                        ChickenPaint is free software: you can redistribute it and/or modify
+                                                                                                                                                                                        it under the terms of the GNU General Public License as published by
+                                                                                                                                                                                        the Free Software Foundation, either version 3 of the License, or
+                                                                                                                                                                                        (at your option) any later version.
+                                                                                                                                                                                    
+                                                                                                                                                                                        ChickenPaint is distributed in the hope that it will be useful,
+                                                                                                                                                                                        but WITHOUT ANY WARRANTY; without even the implied warranty of
+                                                                                                                                                                                        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+                                                                                                                                                                                        GNU General Public License for more details.
+                                                                                                                                                                                    
+                                                                                                                                                                                        You should have received a copy of the GNU General Public License
+                                                                                                                                                                                        along with ChickenPaint. If not, see <http://www.gnu.org/licenses/>.
+                                                                                                                                                                                    */
 function absorbTouch(e) {
   e.preventDefault();
   e.stopPropagation();
@@ -21912,6 +22038,8 @@ function createChickenPaintIcon(iconName) {
 function wrapBootstrapCheckbox(checkbox, title) {
   var div = document.createElement("div"),
     label = document.createElement("label");
+  label.tabIndex = -1;
+  checkbox.tabIndex = -1;
   div.className = "form-check";
   checkbox.className = "form-check-input";
   label.className = "form-check-label";
@@ -22043,7 +22171,8 @@ function CPLayersPalette(controller) {
       widgetContainer = document.createElement("div"),
       layerContainer = document.createElement("div"),
       scrollContainer = layerContainer,
-      dropdownLayerMenu = createLayerDropdownMenu(),
+      //ドロップダウンメニュー関連項目のコメントアウト
+      // dropdownLayerMenu = createLayerDropdownMenu(),
       dropdownMousePos = {
         x: 0,
         y: 0
@@ -22064,13 +22193,15 @@ function CPLayersPalette(controller) {
           */
       dropdownOnMask = false,
       longPressTimer = null;
-    function onDismissDropdown(e) {
-      // Firefox wrongly fires click events for the right mouse button!
-      if (!("button" in e) || e.button === BUTTON_PRIMARY) {
-        clearDropDown();
-        (0, _jquery.default)(this).off("click", onDismissDropdown);
-      }
-    }
+
+    // function onDismissDropdown(e) {
+    // 	// Firefox wrongly fires click events for the right mouse button!
+    // 	if (!("button" in e) || e.button === BUTTON_PRIMARY) {
+    // 		clearDropDown();
+
+    // 		$(this).off("click", onDismissDropdown);
+    // 	}
+    // }
 
     /**
         * Get the element that represents the layer with the given display index.
@@ -22319,17 +22450,17 @@ function CPLayersPalette(controller) {
       eyeDiv.style.marginRight = 2 + LAYER_IN_GROUP_INDENT * (layer.getDepth() - 1) + "px";
       if (layer.visible) {
         layerDiv.className += " " + CLASSNAME_LAYER_VISIBLE;
-        eyeDiv.appendChild(createFontAwesomeIcon("fa-eye"));
+        eyeDiv.appendChild(createFontAwesomeIcon("icon-eye"));
       } else {
         layerDiv.className += " " + CLASSNAME_LAYER_HIDDEN;
-        eyeDiv.appendChild(createFontAwesomeIcon("fa-eye-slash"));
+        eyeDiv.appendChild(createFontAwesomeIcon("icon-eye-slash"));
       }
       layerDiv.appendChild(eyeDiv);
       mainDiv.className = "chickenpaint-layer-description";
       if (layer instanceof _CPImageLayer.default) {
         if (layer.clip) {
           layerDiv.className += " chickenpaint-layer-clipped";
-          iconsDiv.appendChild(createFontAwesomeIcon("fa-level-down-alt fa-flip-horizontal"));
+          iconsDiv.appendChild(createFontAwesomeIcon("icon-level-down-alt fa-flip-horizontal"));
         }
         if (layer.lockAlpha) {
           var locked = createChickenPaintIcon("lock-alpha");
@@ -22340,10 +22471,10 @@ function CPLayersPalette(controller) {
         layerDiv.className += " chickenpaint-layer-group";
         if (layer.expanded) {
           layerDiv.className += " " + CLASSNAME_LAYER_GROUP_EXPANDED;
-          iconsDiv.appendChild(createFontAwesomeIcon("fa-folder-open chickenpaint-layer-group-toggle"));
+          iconsDiv.appendChild(createFontAwesomeIcon("icon-folder-open chickenpaint-layer-group-toggle"));
         } else {
           layerDiv.className += " " + CLASSNAME_LAYER_GROUP_COLLAPSED;
-          iconsDiv.appendChild(createFontAwesomeIcon("fa-folder chickenpaint-layer-group-toggle"));
+          iconsDiv.appendChild(createFontAwesomeIcon("icon-folder chickenpaint-layer-group-toggle"));
         }
       }
       if (iconsDiv.childNodes.length) {
@@ -22373,8 +22504,9 @@ function CPLayersPalette(controller) {
       statusDiv.className = "chickenpaint-layer-status";
       layerDiv.appendChild(statusDiv);
       layerDiv.setAttribute("data-display-index", "" + index);
-      layerDiv.setAttribute("data-toggle", "dropdown");
-      layerDiv.setAttribute("data-target", "#chickenpaint-layer-pop");
+      // layerDiv.setAttribute("data-toggle", "dropdown");
+      // layerDiv.setAttribute("data-target", "#chickenpaint-layer-pop");
+
       return layerDiv;
     }
     function showRenameBoxForLayer(displayIndex) {
@@ -22398,31 +22530,11 @@ function CPLayersPalette(controller) {
     function showContextMenu(e) {
       var displayIndex = getDisplayIndexFromElem(e.target);
       if (displayIndex != -1) {
-        var layer = artwork.getActiveLayer(),
-          facts = computeLayerPredicates(layer);
-        dropdownLayer = layer;
-        dropdownMousePos = {
-          x: e.clientX,
-          y: e.clientY
-        };
-        for (var _i = 0, _arr = ["image-layer", "layer-group", "clipping-mask", "no-clipping-mask", "no-mask"]; _i < _arr.length; _i++) {
-          var requirement = _arr[_i];
-          (0, _jquery.default)(".chickenpaint-action-require-" + requirement, dropdownLayerMenu).toggle(facts[requirement]);
-        }
-        for (var _i2 = 0, _arr2 = ["mask", "mask-enabled", "mask-disabled"]; _i2 < _arr2.length; _i2++) {
-          var _requirement = _arr2[_i2];
-          (0, _jquery.default)(".chickenpaint-action-require-" + _requirement, dropdownLayerMenu).toggle(dropdownOnMask && facts[_requirement]);
-        }
-        (0, _jquery.default)("[data-action]", dropdownLayerMenu).each(function () {
-          var action = this.getAttribute("data-action");
-          (0, _jquery.default)(this).parent().toggleClass("disabled", action !== "CPRenameLayer" && !controller.isActionAllowed(action));
-        });
-        (0, _jquery.default)(getElemFromDisplayIndex(displayIndex)).dropdown("toggle").off("click.bs.dropdown");
-
-        /* We don't want Bootstrap's default show or hide handlers, since they show the popup menu on left click,
-         * and slow down all clicks on the document, respectively.
-         */
-        (0, _jquery.default)(document).off("click.bs.dropdown.data-api");
+        //コンテキストメニューのBootstrap5対応ができなかったが
+        //マウス使用時にレイヤー名を変更できないと困るので
+        //右クリックでレイヤー名の変更になるように動作を変更した。
+        showRenameBoxForLayer(getDisplayIndexFromElem(e.target));
+        e.preventDefault();
       }
     }
     function onPointerDown(e) {
@@ -22445,7 +22557,7 @@ function CPLayersPalette(controller) {
         } else {
           var layerChanged = artwork.getActiveLayer() != layer;
           dropdownOnMask = (0, _jquery.default)(e.target).closest("." + CLASSNAME_LAYER_MASK_THUMBNAIL).length > 0 || layer instanceof _CPLayerGroup.default && layer.mask !== null && layerChanged;
-          if (e.button == BUTTON_PRIMARY && e.shiftKey && dropdownOnMask) {
+          if (e.button == BUTTON_PRIMARY && e.shiftKey && !(e.ctrlKey || e.metaKey) && dropdownOnMask) {
             controller.actionPerformed({
               action: "CPSetMaskVisible",
               layer: layer,
@@ -22474,6 +22586,14 @@ function CPLayersPalette(controller) {
               controller.actionPerformed({
                 action: "CPToggleMaskView"
               });
+            } else if (selectMask && !e.shiftKey && (e.ctrlKey || e.metaKey)) {
+              controller.actionPerformed({
+                action: "CPApplyLayerMask"
+              });
+            } else if (selectMask && e.shiftKey && (e.ctrlKey || e.metaKey)) {
+              controller.actionPerformed({
+                action: "CPRemoveLayerMask"
+              });
             } else if (e.button == BUTTON_PRIMARY) {
               if (e.pointerType === "pen" || e.pointerType === "touch") {
                 drag.state = DRAG_STATE_PRE_PAN;
@@ -22500,7 +22620,7 @@ function CPLayersPalette(controller) {
               layerContainer.setPointerCapture(e.pointerId);
               layerContainer.addEventListener("pointermove", onPointerDragged);
               layerContainer.addEventListener("pointerup", onPointerUp);
-            } else if (e.button == BUTTON_SECONDARY) {
+            } else if (e.button == BUTTON_SECONDARY && !layerChanged) {
               e.preventDefault();
               showContextMenu(e);
             }
@@ -22715,87 +22835,117 @@ function CPLayersPalette(controller) {
       scrollContainer.scrollTop + layerRect.bottom - containerRect.bottom), scrollContainer.scrollTop + layerRect.top - containerRect.top), 0);
       return layerElem;
     };
-    function clearDropDown() {
-      if ((0, _jquery.default)(dropdownParent).hasClass("show")) {
-        (0, _jquery.default)(dropdownParent).dropdown("toggle").off("click.bs.dropdown");
-      }
-    }
-    function createLayerDropdownMenu() {
-      var menu = document.createElement("div"),
-        actions = [{
-          title: "Rename...",
-          action: "CPRenameLayer"
-        }, {
-          require: ["image-layer"],
-          title: "Delete layer",
-          action: "CPRemoveLayer"
-        }, {
-          require: ["layer-group"],
-          title: "Delete group",
-          action: "CPRemoveLayer"
-        }, {
-          require: ["image-layer", "no-clipping-mask"],
-          title: "Clip to the layer below",
-          action: "CPCreateClippingMask"
-        }, {
-          require: ["image-layer", "clipping-mask"],
-          title: "Unclip from the layer below",
-          action: "CPReleaseClippingMask"
-        }, {
-          require: ["no-mask"],
-          title: "Add mask",
-          action: "CPAddLayerMask"
-        }, {
-          require: ["mask"],
-          title: "Delete mask",
-          action: "CPRemoveLayerMask"
-        }, {
-          require: ["mask"],
-          title: "Apply mask",
-          action: "CPApplyLayerMask"
-        }, {
-          require: ["layer-group"],
-          title: "Merge group",
-          action: "CPGroupMerge"
-        }, {
-          require: ["mask-enabled"],
-          title: "Disable mask",
-          action: "CPSetMaskVisible",
-          actionData: {
-            visible: "false"
-          }
-        }, {
-          require: ["mask-disabled"],
-          title: "Enable mask",
-          action: "CPSetMaskVisible",
-          actionData: {
-            visible: "true"
-          }
-        }];
-      menu.className = "dropdown-menu";
-      for (var _i3 = 0, _actions = actions; _i3 < _actions.length; _i3++) {
-        var action = _actions[_i3];
-        var menuItemElem = document.createElement("a");
-        menuItemElem.className = "dropdown-item";
-        if (action.require) {
-          menuItemElem.className = menuItemElem.className + " " + action.require.map(function (requirement) {
-            return "chickenpaint-action-require-" + requirement;
-          }).join(" ");
-        }
-        menuItemElem.href = "#";
-        menuItemElem.innerHTML = (0, _lang._)(action.title);
-        menuItemElem.setAttribute("data-action", action.action);
-        if (action.actionData) {
-          for (var key in action.actionData) {
-            if (action.actionData.hasOwnProperty(key)) {
-              menuItemElem.setAttribute("data-action-" + key, action.actionData[key]);
-            }
-          }
-        }
-        menu.appendChild(menuItemElem);
-      }
-      return menu;
-    }
+
+    // function clearDropDown() {
+
+    // 	if ($(dropdownParent).hasClass("show")) {
+    // 		var collapseInstance = new bootstrap.Collapse(dropdownParent);
+    // 		collapseInstance.hide();
+    // 		$(dropdownParent)
+    // 			.collapse("hide")
+    // 			.off("click");
+    // 	}
+    // }
+
+    //ドロップダウンメニュー関連項目のコメントアウト
+
+    // function createLayerDropdownMenu() {
+
+    //     const
+    //         menu = document.createElement("div"),
+
+    //         actions = [
+    //             {
+    //                 title: "Rename...",
+    //                 action: "CPRenameLayer"
+    //             },
+    //             {
+    //                 require: ["image-layer"],
+    //                 title: "Delete layer",
+    //                 action: "CPRemoveLayer"
+    //             },
+    //             {
+    //                 require: ["layer-group"],
+    //                 title: "Delete group",
+    //                 action: "CPRemoveLayer"
+    //             },
+    //             {
+    //                 require: ["image-layer", "no-clipping-mask"],
+    //                 title: "Clip to the layer below",
+    //                 action: "CPCreateClippingMask"
+    //             },
+    //             {
+    //                 require: ["image-layer", "clipping-mask"],
+    //                 title: "Unclip from the layer below",
+    //                 action: "CPReleaseClippingMask"
+    //             },
+    //             {
+    //                 require: ["no-mask"],
+    //                 title: "Add mask",
+    //                 action: "CPAddLayerMask"
+    //             },
+    //             {
+    //                 require: ["mask"],
+    //                 title: "Delete mask",
+    //                 action: "CPRemoveLayerMask"
+    //             },
+    //             {
+    //                 require: ["mask"],
+    //                 title: "Apply mask",
+    //                 action: "CPApplyLayerMask"
+    //             },
+    //             {
+    //                 require: ["layer-group"],
+    //                 title: "Merge group",
+    //                 action: "CPGroupMerge"
+    //             },
+    //             {
+    //                 require: ["mask-enabled"],
+    //                 title: "Disable mask",
+    //                 action: "CPSetMaskVisible",
+    //                 actionData: {
+    //                     visible: "false"
+    //                 }
+    //             },
+    //             {
+    //                 require: ["mask-disabled"],
+    //                 title: "Enable mask",
+    //                 action: "CPSetMaskVisible",
+    //                 actionData: {
+    //                     visible: "true"
+    //                 }
+    //            }
+    //         ];
+
+    //     menu.className = "dropdown-menu";
+
+    //     for (let action of actions) {
+    //         let
+    //             menuItemElem = document.createElement("a");
+
+    //         menuItemElem.className = "dropdown-item";
+
+    //         if (action.require) {
+    //             menuItemElem.className = menuItemElem.className + " " + action.require.map(requirement => "chickenpaint-action-require-" + requirement).join(" ");
+    //         }
+    //         menuItemElem.href = "#";
+    //         menuItemElem.innerHTML = _(action.title);
+    //         menuItemElem.setAttribute("data-action", action.action);
+
+    //         if (action.actionData) {
+    //             for (let key in action.actionData) {
+    //                 if (action.actionData.hasOwnProperty(key)) {
+    //                     menuItemElem.setAttribute("data-action-" + key, action.actionData[key]);
+    //                 }
+    //             }
+    //         }
+
+    //         menu.appendChild(menuItemElem);
+    //     }
+
+    //     return menu;
+    // }
+
     function onDropdownActionClick(e) {
       var action = e.target.getAttribute("data-action");
       if (!action) {
@@ -22838,35 +22988,43 @@ function CPLayersPalette(controller) {
       return e.preventDefault();
     }, true /* Capture phase, prevent context menu on all children */);
 
-    dropdownLayerMenu.addEventListener("click", onDropdownActionClick);
+    //ドロップダウンメニュー関連項目のコメントアウト
+    // dropdownLayerMenu.addEventListener("click", onDropdownActionClick);
+
     layerContainer.className = "list-group";
     layerContainer.addEventListener("dblclick", onDoubleClick);
     layerContainer.addEventListener("pointerdown", onPointerDown);
     layerContainer.setAttribute("touch-action", "none");
-    for (var _i4 = 0, _arr3 = ["ontouchstart", "ontouchmove", "ontouchend", "ontouchcancel"]; _i4 < _arr3.length; _i4++) {
-      var eventName = _arr3[_i4];
+    for (var _i = 0, _arr = ["ontouchstart", "ontouchmove", "ontouchend", "ontouchcancel"]; _i < _arr.length; _i++) {
+      var eventName = _arr[_i];
       layerContainer.addEventListener(eventName, absorbTouch);
     }
     widgetContainer.appendChild(layerContainer);
-    widgetContainer.appendChild(dropdownLayerMenu);
-    (0, _jquery.default)(dropdownParent).on("show.bs.dropdown", function (e) {
-      var layerElem = (0, _jquery.default)(e.relatedTarget)[0],
-        $dropdownElem = (0, _jquery.default)(dropdownParent).find(".dropdown-menu"),
-        layerPos = layerElem.getBoundingClientRect(),
-        positionRootPos = dropdownParent.getBoundingClientRect();
 
-      // Convert the offset to palette-relative coordinates (since that's its offset parent)
-      $dropdownElem.css({
-        left: dropdownMousePos.x - $dropdownElem.outerWidth(true) - positionRootPos.left + 1 + "px",
-        top: layerPos.top - $dropdownElem.outerHeight(true) / 2 - positionRootPos.top + "px"
-      });
+    //ドロップダウンメニュー関連項目のコメントアウト
+    // widgetContainer.appendChild(dropdownLayerMenu);
+    // $(dropdownParent)
+    //     .on("show.bs.dropdown", function(e) {
+    //         let
+    //             layerElem = $(e.relatedTarget)[0],
+    //             $dropdownElem = $(dropdownParent).find(".dropdown-menu"),
 
-      /* Instead of Bootstrap's extremely expensive data API, we'll only listen for dismiss clicks on the
-       * document *while the menu is open!*
-       */
-      (0, _jquery.default)(document).on("click", onDismissDropdown);
-    });
+    //             layerPos = layerElem.getBoundingClientRect(),
+    //             positionRootPos = dropdownParent.getBoundingClientRect();
+
+    //         // Convert the offset to palette-relative coordinates (since that's its offset parent)
+    //         $dropdownElem.css({
+    //             left: (dropdownMousePos.x - $dropdownElem.outerWidth(true) - positionRootPos.left + 1) + "px",
+    //             top: ((layerPos.top - $dropdownElem.outerHeight(true) / 2) - positionRootPos.top) + "px"
+    //         });
+
+    //         /* Instead of Bootstrap's extremely expensive data API, we'll only listen for dismiss clicks on the
+    //          * document *while the menu is open!*
+    //          */
+    //         $(document).on("click", onDismissDropdown);
+    //     });
   }
+
   function updateAvailableBlendModes() {
     var activeLayer = artwork.getActiveLayer();
     while (blendCombo.lastChild) {
@@ -22890,35 +23048,49 @@ function CPLayersPalette(controller) {
   function createLayerActionButtons() {
     var buttons = [{
         title: "Add layer",
-        icon: createFontAwesomeIcon("fa-file"),
+        icon: createFontAwesomeIcon("icon-file"),
         action: "CPAddLayer"
       }, {
-        title: "Add group",
-        icon: createFontAwesomeIcon("fa-folder"),
-        action: "CPAddGroup"
+        title: "Merge down",
+        icon: createFontAwesomeIcon("icon-arrow-down"),
+        action: "CPLayerMergeDown"
       }, {
         title: "Add layer mask",
         icon: createChickenPaintIcon("mask"),
-        action: "CPAddLayerMask"
+        action: "CPAddLayerMask",
+        require: ["no-mask"]
+      }, {
+        title: "Apply mask",
+        icon: createChickenPaintIcon("mask"),
+        action: "CPApplyLayerMask",
+        require: ["mask"]
       }, {
         title: "Clip to the layer below",
-        icon: createFontAwesomeIcon("fa-level-down-alt fa-flip-horizontal"),
+        icon: createFontAwesomeIcon("icon-level-down-alt fa-flip-horizontal"),
         action: "CPCreateClippingMask",
         require: "no-clipping-mask-or-is-group"
       }, {
         title: "Unclip from the layer below",
-        icon: createFontAwesomeIcon("fa-level-down-alt fa-flip-horizontal"),
+        icon: createFontAwesomeIcon("icon-level-down-alt fa-flip-horizontal"),
         action: "CPReleaseClippingMask",
         require: "clipping-mask"
       }, {
+        title: "Add group",
+        icon: createFontAwesomeIcon("icon-folder"),
+        action: "CPAddGroup"
+      }, {
+        title: "Merge group",
+        icon: createFontAwesomeIcon("icon-compress-arrows-alt"),
+        action: "CPGroupMerge"
+      }, {
         title: "Delete layer",
-        icon: createFontAwesomeIcon("fa-trash"),
+        icon: createFontAwesomeIcon("icon-trash"),
         action: "CPRemoveLayer"
       }],
       layerButtonsList = document.createElement("ul");
     layerButtonsList.className = 'chickenpaint-layer-buttons list-unstyled';
     var _loop = function _loop() {
-      var button = _buttons[_i5];
+      var button = _buttons[_i2];
       var elem = document.createElement("li");
       elem.setAttribute("data-action", button.action);
       elem.className = 'chickenpaint-small-toolbar-button ' + (button.require ? "chickenpaint-action-require-" + button.require : "");
@@ -22931,7 +23103,7 @@ function CPLayersPalette(controller) {
       });
       layerButtonsList.appendChild(elem);
     };
-    for (var _i5 = 0, _buttons = buttons; _i5 < _buttons.length; _i5++) {
+    for (var _i2 = 0, _buttons = buttons; _i2 < _buttons.length; _i2++) {
       _loop();
     }
     return layerButtonsList;
@@ -22939,13 +23111,26 @@ function CPLayersPalette(controller) {
   function updateActiveLayerActionButtons() {
     var activeLayer = artwork.getActiveLayer(),
       facts = computeLayerPredicates(activeLayer);
-    for (var _i6 = 0, _arr4 = ["clipping-mask", "no-clipping-mask-or-is-group"]; _i6 < _arr4.length; _i6++) {
-      var requirement = _arr4[_i6];
-      (0, _jquery.default)(".chickenpaint-action-require-" + requirement, layerActionButtons).css("display", facts[requirement] ? "inline-block" : "none");
+    for (var _i3 = 0, _arr2 = ["mask", "no-mask", "clipping-mask", "no-clipping-mask-or-is-group"]; _i3 < _arr2.length; _i3++) {
+      var requirement = _arr2[_i3];
+      var elements = layerActionButtons.getElementsByClassName("chickenpaint-action-require-" + requirement);
+      var _iterator = _createForOfIteratorHelper(elements),
+        _step;
+      try {
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          var element = _step.value;
+          element.style.display = facts[requirement] ? "inline-block" : "none";
+        }
+      } catch (err) {
+        _iterator.e(err);
+      } finally {
+        _iterator.f();
+      }
     }
-    (0, _jquery.default)("[data-action]", layerActionButtons).each(function () {
-      var action = this.getAttribute("data-action");
-      (0, _jquery.default)(this).toggleClass("disabled", !controller.isActionAllowed(action));
+    var actions = layerActionButtons.querySelectorAll("[data-action]");
+    actions.forEach(function (element) {
+      var action = element.getAttribute("data-action");
+      element.classList.toggle("disabled", !controller.isActionAllowed(action));
     });
   }
   function updateActiveLayerControls() {
@@ -23044,7 +23229,19 @@ function CPLayersPalette(controller) {
       layer = _layer;
       origName = layer.name;
       textBox.value = origName;
-      (0, _jquery.default)(".chickenpaint-layer-name", _layerElem).empty().append(textBox);
+      var layerNameElem = _layerElem.querySelector('.chickenpaint-layer-name');
+      if (layerNameElem) {
+        // 親ノードから削除されている場合にのみ処理を実行
+        if (layerNameElem.parentNode) {
+          // 現在の子ノードを取得
+          var currentChild = layerNameElem.firstChild;
+          // テキストノードが存在する場合にのみ削除
+          if (currentChild && currentChild.nodeType === Node.TEXT_NODE) {
+            layerNameElem.removeChild(currentChild);
+            layerNameElem.appendChild(textBox);
+          }
+        }
+      }
       textBox.select();
     };
     textBox.type = "text";
@@ -23053,7 +23250,7 @@ function CPLayersPalette(controller) {
       // Prevent other keyhandlers (CPCanvas) from getting their grubby hands on the input
       e.stopPropagation();
     });
-    textBox.addEventListener("keypress", function (e) {
+    textBox.addEventListener("keydown", function (e) {
       if (e.key === "Enter") {
         // Enter
         that.renameAndHide();
@@ -23102,8 +23299,9 @@ function CPLayersPalette(controller) {
   this.dismissNotification = function () {
     (0, _jquery.default)(".chickenpaint-layer[aria-describedby],.chickenpaint-slider[aria-describedby]", body).each(function (index, elem) {
       elem = (0, _jquery.default)(elem);
-      if (elem.data('bs.popover')) {
-        elem.popover("dispose");
+      var popoverInstance = bootstrap.Popover.getInstance(elem[0]);
+      if (popoverInstance) {
+        popoverInstance.dispose();
       }
     });
     if (notificationDismissTimer) {
@@ -23120,7 +23318,7 @@ function CPLayersPalette(controller) {
       target = layerWidget.revealLayer(notificationLayerIndex);
     }
     _this.dismissNotification();
-    (0, _jquery.default)(target).popover({
+    var popoverInstance = new bootstrap.Popover(target, {
       html: false,
       content: message,
       placement: "left",
@@ -23128,13 +23326,15 @@ function CPLayersPalette(controller) {
       fallbackPlacement: [],
       boundary: "window",
       container: palette.getElement()
-    }).popover("show");
+    });
+    popoverInstance.show();
     notificationDismissTimer = setTimeout(function () {
       notificationDismissTimer = false;
       _this.dismissNotification();
     }, Math.max(Math.round(message.length * NOTIFICATION_HIDE_DELAY_MS_PER_CHAR), NOTIFICATION_HIDE_DELAY_MIN));
   };
   blendCombo.className = "form-control form-control-sm";
+  blendCombo.tabIndex = -1;
   blendCombo.title = (0, _lang._)("Layer blending mode");
   blendCombo.addEventListener("change", function (e) {
     controller.actionPerformed({
@@ -23142,6 +23342,12 @@ function CPLayersPalette(controller) {
       blendMode: parseInt(blendCombo.value, 10)
     });
   });
+  blendCombo.onfocus = function () {
+    //フォーカスを検出したら
+    document.activeElement.blur(); //フォーカスを外す
+    // console.log(document.activeElement);
+  };
+
   body.appendChild(blendCombo);
   alphaSlider.title = function (value) {
     return (0, _lang._)("Opacity") + ": " + value + "%";
@@ -23157,6 +23363,7 @@ function CPLayersPalette(controller) {
   cbSampleAllLayers.type = "checkbox";
   cbSampleAllLayers.addEventListener("click", function (e) {
     artwork.setSampleAllLayers(cbSampleAllLayers.checked);
+    document.activeElement.blur();
   });
   body.appendChild(wrapBootstrapCheckbox(cbSampleAllLayers, (0, _lang._)("Sample all layers")));
   cbLockAlpha.id = "chickenpaint-chk-lock-alpha";
@@ -23166,6 +23373,7 @@ function CPLayersPalette(controller) {
       action: "CPSetLayerLockAlpha",
       lock: cbLockAlpha.checked
     });
+    document.activeElement.blur();
   });
   body.appendChild(wrapBootstrapCheckbox(cbLockAlpha, (0, _lang._)("Lock transparency")));
   body.appendChild(layerWidget.getElement());
@@ -23185,7 +23393,7 @@ CPLayersPalette.prototype = Object.create(_CPPalette.default.prototype);
 CPLayersPalette.prototype.constructor = CPLayersPalette;
 module.exports = exports.default;
 
-},{"../engine/CPBlend.js":5,"../engine/CPImageLayer.js":15,"../engine/CPLayer.js":16,"../engine/CPLayerGroup.js":17,"../languages/lang.js":54,"./CPPalette.js":39,"./CPSlider.js":44,"jquery":265}],36:[function(require,module,exports){
+},{"../engine/CPBlend.js":5,"../engine/CPImageLayer.js":15,"../engine/CPLayer.js":16,"../engine/CPLayerGroup.js":17,"../languages/lang.js":54,"./CPPalette.js":39,"./CPSlider.js":44,"jquery":296}],36:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -23303,7 +23511,7 @@ CPMainGUI.prototype = Object.create(_wolfy87Eventemitter.default.prototype);
 CPMainGUI.prototype.constructor = CPMainGUI;
 module.exports = exports.default;
 
-},{"./CPCanvas.js":26,"./CPMainMenu.js":37,"./CPPaletteManager.js":40,"jquery":265,"wolfy87-eventemitter":284}],37:[function(require,module,exports){
+},{"./CPCanvas.js":26,"./CPMainMenu.js":37,"./CPPaletteManager.js":40,"jquery":296,"wolfy87-eventemitter":314}],37:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -23357,19 +23565,17 @@ var MENU_ENTRIES = [{
     name: "Undo",
     action: "CPUndo",
     mnemonic: "U",
-    shortcut: "ctrl+z",
-    title: "Undoes the most recent action"
+    shortcut: "ctrl+z"
   }, {
     name: "Redo",
     action: "CPRedo",
     mnemonic: "R",
-    shortcut: "shift+ctrl+z",
-    title: "Redoes a previously undone action"
+    shortcut: "ctrl+y"
   }, {
     name: "Clear history",
     action: "CPClearHistory",
     mnemonic: "H",
-    title: "Removes all undo/redo information to regain memory"
+    title: (0, _lang._)("Removes all undo/redo information to regain memory")
   }, {
     name: "-"
   }, {
@@ -23410,7 +23616,7 @@ var MENU_ENTRIES = [{
     name: "Transform",
     action: "CPTransform",
     mnemonic: "T",
-    shortcut: "ctrl+y"
+    shortcut: "ctrl+h"
   }]
 }, {
   name: "Layers",
@@ -23419,26 +23625,24 @@ var MENU_ENTRIES = [{
     name: "Duplicate",
     action: "CPLayerDuplicate",
     mnemonic: "D",
-    shortcut: "shift+ctrl+d",
-    title: "Creates a copy of the currently selected layer"
+    shortcut: "shift+ctrl+d"
   }, {
     name: "-"
   }, {
     name: "Merge down",
     action: "CPLayerMergeDown",
     mnemonic: "E",
-    shortcut: "ctrl+e",
-    title: "Merges the currently selected layer with the one directly below it"
+    shortcut: "ctrl+e"
   }, {
     name: "Merge group",
     action: "CPGroupMerge",
     mnemonic: "G",
-    title: "Merges the contents of the selected group"
+    shortcut: "shift+ctrl+g"
   }, {
     name: "Merge all layers",
     action: "CPLayerMergeAll",
-    mnemonic: "A",
-    title: "Merges all the layers"
+    shortcut: "shift+ctrl+e",
+    mnemonic: "A"
   }, {
     name: "-"
   }, {
@@ -23448,11 +23652,13 @@ var MENU_ENTRIES = [{
   }, {
     hideIfNotAvailable: true,
     name: "Delete layer mask",
-    action: "CPRemoveLayerMask"
+    action: "CPRemoveLayerMask",
+    shortcut: "shift+m"
   }, {
     hideIfNotAvailable: true,
     name: "Apply layer mask",
-    action: "CPApplyLayerMask"
+    action: "CPApplyLayerMask",
+    shortcut: "ctrl+m"
   }, {
     name: "-"
   }, {
@@ -23471,48 +23677,44 @@ var MENU_ENTRIES = [{
     name: "Clear",
     action: "CPClear",
     mnemonic: "D",
-    shortcut: "del,backspace",
-    title: "Clears the selected area"
+    shortcut: "del,backspace"
   }, {
     name: "Fill",
     action: "CPFill",
     mnemonic: "F",
-    shortcut: "ctrl+f",
-    title: "Fills the selected area with the current color"
+    shortcut: "ctrl+f"
   }, {
     name: "Flip horizontal",
     action: "CPHFlip",
     mnemonic: "H",
-    title: "Flips the current selected area horizontally"
+    shortcut: "h"
   }, {
     name: "Flip vertical",
     action: "CPVFlip",
-    mnemonic: "V",
-    title: "Flips the current selected area vertically"
+    mnemonic: "V"
   }, {
     name: "Invert",
     action: "CPFXInvert",
     mnemonic: "I",
-    title: "Invert the image colors"
+    title: (0, _lang._)("Invert the image colors")
   }, {
     name: "-"
   }, {
     name: "Box blur...",
     action: "CPFXBoxBlur",
-    mnemonic: "B",
-    title: "Blur effect"
+    mnemonic: "B"
   }, {
     name: "-"
   }, {
     name: "Monochromatic noise",
     action: "CPMNoise",
     mnemonic: "M",
-    title: "Fills the selection with noise"
+    title: (0, _lang._)("Fills the selection with noise")
   }, {
     name: "Color noise",
     action: "CPCNoise",
     mnemonic: "C",
-    title: "Fills the selection with colored noise"
+    title: (0, _lang._)("Fills the selection with colored noise")
   }]
 }, {
   name: "View",
@@ -23529,20 +23731,17 @@ var MENU_ENTRIES = [{
     name: "Zoom in",
     action: "CPZoomIn",
     mnemonic: "I",
-    shortcut: "ctrl+=",
-    title: "Zooms in"
+    shortcut: "ctrl+="
   }, {
     name: "Zoom out",
     action: "CPZoomOut",
     mnemonic: "O",
-    shortcut: "ctrl+-",
-    title: "Zooms out"
+    shortcut: "ctrl+-"
   }, {
     name: "Zoom 100%",
     action: "CPZoom100",
     mnemonic: "1",
-    shortcut: "ctrl+0",
-    title: "Resets the zoom factor to 100%"
+    shortcut: "ctrl+0"
   }, {
     action: "CPLinearInterpolation",
     name: "-"
@@ -23550,8 +23749,9 @@ var MENU_ENTRIES = [{
     name: "Smooth-out zoomed canvas",
     action: "CPLinearInterpolation",
     mnemonic: "L",
-    title: "Linear interpolation is used to give a smoothed looked to the picture when zoomed in",
-    checkbox: true
+    title: (0, _lang._)("Linear interpolation is used to give a smoothed looked to the picture when zoomed in"),
+    checkbox: true,
+    checked: true //初期状態でズームのアンチエイリアスをOnに
   }, {
     name: "-"
   }, {
@@ -23559,14 +23759,12 @@ var MENU_ENTRIES = [{
     action: "CPToggleGrid",
     mnemonic: "G",
     shortcut: "ctrl+g",
-    title: "Displays a grid over the image",
     checkbox: true,
     checked: false
   }, {
     name: "Grid options...",
     action: "CPGridOptions",
-    mnemonic: "D",
-    title: "Shows the grid options dialog box"
+    mnemonic: "D"
   }]
 }, {
   name: "Palettes",
@@ -23574,13 +23772,13 @@ var MENU_ENTRIES = [{
   children: [{
     name: "Rearrange",
     action: "CPArrangePalettes",
-    title: "Rearrange the palette windows"
+    title: (0, _lang._)("Rearrange the palette windows")
   }, {
     name: "Toggle palettes",
     action: "CPTogglePalettes",
     mnemonic: "P",
     shortcut: "tab",
-    title: "Hides or shows all palettes"
+    title: (0, _lang._)("Hides or shows all palettes")
   }, {
     name: "Use old icons",
     action: "CPToolbarStyle",
@@ -23643,20 +23841,17 @@ var MENU_ENTRIES = [{
   children: [{
     name: "Tablet support",
     mnemonic: "T",
-    action: "CPTabletSupport",
-    title: "Help with getting a drawing tablet working"
+    action: "CPTabletSupport"
   }, {
     name: "Shortcuts",
     mnemonic: "S",
-    action: "CPShortcuts",
-    title: "List of keyboard and mouse shortcuts"
+    action: "CPShortcuts"
   }, {
     name: "-"
   }, {
     name: "About",
     mnemonic: "A",
-    action: "CPAbout",
-    title: "Displays some information about ChickenPaint"
+    action: "CPAbout"
   }]
 }];
 
@@ -23667,8 +23862,10 @@ var MENU_ENTRIES = [{
  * @constructor
  */
 function CPMainMenu(controller, mainGUI) {
-  var bar = (0, _jquery.default)('<nav class="navbar navbar-expand-md navbar-light bg-light">' + '<a class="navbar-brand" href="#">ChickenPaint</a>' + '<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#chickenpaint-main-menu-content" aria-controls="chickenpaint-main-menu-content" aria-expanded="false" aria-label="Toggle main menu">' + '<span class="navbar-toggler-icon"></span>' + '</button>' + '<div class="collapse navbar-collapse" id="chickenpaint-main-menu-content">' + '<ul class="navbar-nav mr-auto">' + '</ul>' + '</div>' + '<div class="widget-nav" id="chickenpaint-palette-toggler-content"/>' + '</nav>'),
-    macPlatform = /^Mac/i.test(navigator.platform);
+  var bar = (0, _jquery.default)('<nav class="navbar navbar-expand-md navbar-light bg-light">' + '<a class="navbar-brand" href="#">ChickenPaint Be</a>' + '<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#chickenpaint-main-menu-content" aria-controls="chickenpaint-main-menu-content" aria-expanded="false" aria-label="Toggle main menu">' + '<span class="navbar-toggler-icon"></span>' + '</button>' + '<div class="collapse navbar-collapse" id="chickenpaint-main-menu-content">' + '<div class="navbar-nav mr-auto">' + '</div>' + '</div>' + '<div class="widget-nav" id="chickenpaint-palette-toggler-content"></div>' + '</nav>');
+  // macPlatform = /^Mac/i.test(navigator.platform),
+
+  var macPlatform = navigator.userAgent.toLowerCase().includes('mac os');
   function menuItemClicked(target) {
     var action = target.data('action'),
       checkbox = target.data('checkbox'),
@@ -23694,7 +23891,7 @@ function CPMainMenu(controller, mainGUI) {
     shortcut = shortcut.replace(/(,.+)$/, "");
 
     // Although the keycode for zoom in is "=", we'll present it to the user as "+"
-    shortcut = shortcut.replace("ctrl+=", "ctrl++");
+    shortcut = shortcut.replace("CTRL+=", "CTRL++");
     shortcut = shortcut.replace("⌘+=", "⌘++");
     if (macPlatform) {
       shortcut = shortcut.replace(/([^+])\+/g, "$1");
@@ -23734,21 +23931,28 @@ function CPMainMenu(controller, mainGUI) {
   }
   function fillMenu(menuElem, entries) {
     menuElem.append(entries.map(function (topLevelMenuEntry) {
-      var topLevelMenuElem = (0, _jquery.default)('<li class="nav-item dropdown">' + '<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">' + (0, _lang._)(topLevelMenuEntry.name) + '</a>' + '<div class="dropdown-menu">' + '</div>' + '</li>');
-      (0, _jquery.default)(".dropdown-toggle", topLevelMenuElem).dropdown();
-      topLevelMenuElem.on("show.bs.dropdown", function () {
+      var topLevelMenuElem = (0, _jquery.default)('<div class="nav-item dropdown">' + '<a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' + (0, _lang._)(topLevelMenuEntry.name) + '</a>' + '<ul class="dropdown-menu">' + '</ul>' + '</div>');
+      var dropdownToggle = (0, _jquery.default)(".dropdown-toggle", topLevelMenuElem);
+      var dropdownMenu = (0, _jquery.default)(".dropdown-menu", topLevelMenuElem);
+
+      //data-bs-toggle="dropdown"を指定ずみのため、初期化不要
+      // Bootstrap 5: ドロップダウンを初期化
+      // var dropdown = new bootstrap.Dropdown(dropdownToggle[0]);
+      dropdownToggle[0].addEventListener('show.bs.dropdown', function (e) {
         updateMenuStates(topLevelMenuElem);
 
         /* Instead of Bootstrap's extremely expensive data API, we'll only listen for dismiss clicks on the
          * document *while the menu is open!*
          */
-        (0, _jquery.default)(document).one("click", function () {
-          if (topLevelMenuElem.hasClass("show")) {
-            (0, _jquery.default)(".dropdown-toggle", topLevelMenuElem).dropdown("toggle");
-          }
-        });
+        //メニューが表示されなくなってしまうのでコメントアウト
+        // $(document).one("click", function () {
+        // 	if (dropdownMenu.hasClass("show")) {
+        // 		dropdown.hide(); // Bootstrap 5: ドロップダウンを非表示にする
+        // 	}
+        // });
       });
-      (0, _jquery.default)(".dropdown-menu", topLevelMenuElem).append(topLevelMenuEntry.children.map(function (entry) {
+
+      dropdownMenu.append(topLevelMenuEntry.children.map(function (entry) {
         if (entry.action && !controller.isActionSupported(entry.action)) {
           return;
         }
@@ -23759,7 +23963,7 @@ function CPMainMenu(controller, mainGUI) {
         }
         var entryElem;
         if (entry.name == '-') {
-          entryElem = (0, _jquery.default)('<div class="dropdown-divider"></div>');
+          entryElem = (0, _jquery.default)('<hr class="dropdown-divider"></hr>');
         } else {
           entryElem = (0, _jquery.default)('<a class="dropdown-item" href="#" data-action="' + entry.action + '"><span>' + (0, _lang._)(entry.name) + '</span></a>');
           if (entry.checkbox) {
@@ -23773,8 +23977,8 @@ function CPMainMenu(controller, mainGUI) {
           entryElem.attr('title', (0, _lang._)(entry.title));
         }
         if (entry.shortcut) {
-          var menuLink = entryElem,
-            shortcutDesc = document.createElement("small");
+          var menuLink = entryElem;
+          var shortcutDesc = document.createElement("small");
 
           // Rewrite the shortcuts to Mac-style
           if (macPlatform) {
@@ -23783,7 +23987,7 @@ function CPMainMenu(controller, mainGUI) {
             entry.shortcut = entry.shortcut.replace(/CTRL/im, "⌘");
           }
           shortcutDesc.className = "chickenpaint-shortcut";
-          shortcutDesc.innerHTML = presentShortcutText(entry.shortcut);
+          shortcutDesc.textContent = presentShortcutText(entry.shortcut);
           menuLink.append(shortcutDesc);
           (0, _keymaster.default)(entry.shortcut, function (e) {
             menuItemClicked(menuLink);
@@ -23792,6 +23996,8 @@ function CPMainMenu(controller, mainGUI) {
             return false;
           });
         }
+        // entryElemをliタグで囲う
+        entryElem = (0, _jquery.default)('<li>').append(entryElem);
         return entryElem;
       }));
       return topLevelMenuElem;
@@ -23821,7 +24027,10 @@ function CPMainMenu(controller, mainGUI) {
 
   // Since we don't use the data-api
   (0, _jquery.default)(".navbar-toggler", bar).on('click', function (e) {
-    (0, _jquery.default)('.collapse', bar).collapse('toggle');
+    //ハンバーガーメニューをクリックした時
+    //元のコードをbootstrap5形式に対応させようとするとエラーが出る
+    //コメントアウトしても動作に支障は出ていない
+    // $('.collapse', bar).collapse('toggle');
     e.preventDefault();
   });
   function onPaletteVisChange(paletteName, show) {
@@ -23843,7 +24052,7 @@ function CPMainMenu(controller, mainGUI) {
 }
 module.exports = exports.default;
 
-},{"../../lib/keymaster.js":68,"../languages/lang.js":54,"jquery":265}],38:[function(require,module,exports){
+},{"../../lib/keymaster.js":68,"../languages/lang.js":54,"jquery":296}],38:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -23941,7 +24150,7 @@ CPMiscPalette.prototype = Object.create(_CPPalette.default.prototype);
 CPMiscPalette.prototype.constructor = CPMiscPalette;
 module.exports = exports.default;
 
-},{"../languages/lang.js":54,"./CPPalette.js":39,"jquery":265}],39:[function(require,module,exports){
+},{"../languages/lang.js":54,"./CPPalette.js":39,"jquery":296}],39:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -24066,7 +24275,7 @@ function CPPalette(cpController, className, title, options) {
       oldHeight = this.getHeight(),
       oldBottom = this.getY() + oldHeight;
     $containerElement.toggleClass("collapsed", collapse);
-    (0, _jquery.default)(collapseIcon).toggleClass("fa-angle-down", !collapse).toggleClass("fa-angle-up", collapse);
+    (0, _jquery.default)(collapseIcon).toggleClass("icon-angle-down", !collapse).toggleClass("icon-angle-up", collapse);
     if (collapse) {
       // Move the header down to the old base position
       if (options.collapseDownwards) {
@@ -24201,10 +24410,11 @@ function CPPalette(cpController, className, title, options) {
     horzHandle.addEventListener("pointerup", horzHandlePointerUp);
     containerElement.appendChild(horzHandle);
   }
-  collapseIcon.className = "collapse-icon fas fa-angle-down";
+  collapseIcon.className = "collapse-icon fas icon-angle-down";
   closeButton.type = "button";
-  closeButton.className = "close";
-  closeButton.innerHTML = "&times;";
+  closeButton.className = "btn btn-close";
+  closeButton.textContent = "";
+  closeButton.tabIndex = -1;
   containerElement.className = "chickenpaint-palette chickenpaint-palette-" + className;
   headElement.className = "chickenpaint-palette-head";
   headElement.setAttribute("touch-action", "none");
@@ -24234,7 +24444,7 @@ CPPalette.prototype = Object.create(_wolfy87Eventemitter.default.prototype);
 CPPalette.prototype.constructor = _wolfy87Eventemitter.default;
 module.exports = exports.default;
 
-},{"../languages/lang":54,"jquery":265,"wolfy87-eventemitter":284}],40:[function(require,module,exports){
+},{"../languages/lang":54,"jquery":296,"wolfy87-eventemitter":314}],40:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -24311,9 +24521,13 @@ function CPPaletteManager(cpController) {
   function showPalette(palette, show) {
     var palElement = palette.getElement();
     if (show) {
-      parentElem.appendChild(palElement);
+      if (!parentElem.contains(palElement)) {
+        parentElem.appendChild(palElement);
+      }
     } else {
-      parentElem.removeChild(palElement);
+      if (parentElem.contains(palElement)) {
+        parentElem.removeChild(palElement);
+      }
     }
     that.emitEvent("paletteVisChange", [palette.name, show]);
 
@@ -24443,7 +24657,7 @@ CPPaletteManager.prototype = Object.create(_wolfy87Eventemitter.default.prototyp
 CPPaletteManager.prototype.constructor = CPPaletteManager;
 module.exports = exports.default;
 
-},{"./CPBrushPalette.js":25,"./CPColorPalette.js":28,"./CPLayersPalette.js":35,"./CPMiscPalette.js":38,"./CPStrokePalette.js":46,"./CPSwatchesPalette.js":47,"./CPTexturePalette.js":49,"./CPToolPalette.js":50,"jquery":265,"wolfy87-eventemitter":284}],41:[function(require,module,exports){
+},{"./CPBrushPalette.js":25,"./CPColorPalette.js":28,"./CPLayersPalette.js":35,"./CPMiscPalette.js":38,"./CPStrokePalette.js":46,"./CPSwatchesPalette.js":47,"./CPTexturePalette.js":49,"./CPToolPalette.js":50,"jquery":296,"wolfy87-eventemitter":314}],41:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -24586,7 +24800,7 @@ CPScrollbar.prototype = Object.create(_wolfy87Eventemitter.default.prototype);
 CPScrollbar.prototype.constructor = CPScrollbar;
 module.exports = exports.default;
 
-},{"jquery":265,"wolfy87-eventemitter":284}],42:[function(require,module,exports){
+},{"jquery":296,"wolfy87-eventemitter":314}],42:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -24620,7 +24834,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 */
 
 function CPSendDialog(controller, parent, resourceSaver) {
-  var dialog = (0, _jquery.default)("<div class=\"modal fade chickenpaint-send-dialog\" tabindex=\"-1\" role=\"dialog\">\n                <div class=\"modal-dialog\">\n                    <div class=\"modal-content\" data-stage=\"saving\">\n                        <div class=\"modal-header\">\n                            <h5 class=\"modal-title\">".concat((0, _lang._)("Saving drawing..."), "</h5>\n                            <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\n                                <span aria-hidden=\"true\">&times;</span>\n                            </button>\n                        </div>\n                        <div class=\"modal-body\">\n                            <p class=\"chickenpaint-saving-progress-message\">").concat((0, _lang._)("Preparing your drawing to be saved, please wait..."), "</p>\n                            <pre class=\"chickenpaint-saving-error-message pre-scrollable\"></pre>\n                            <div class=\"progress\">\n                                <div class=\"progress-bar\" role=\"progressbar\" aria-valuenow=\"0\" aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width: 0%;\"></div>\n                            </div>\n                        </div>\n                        <div class=\"modal-footer\">\n                            <button type=\"button\" class=\"btn btn-light chickenpaint-send-cancel\" data-dismiss=\"modal\">").concat((0, _lang._)("Cancel"), "</button>\n                        </div>\n                    </div>\n                    <div class=\"modal-content\" data-stage=\"success-not-previously-posted\" style=\"display:none\">\n                        <div class=\"modal-header\">\n                            <h5 class=\"modal-title\">").concat((0, _lang._)("Drawing saved!"), "</h5>\n                            <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\n                                <span aria-hidden=\"true\">&times;</span>\n                            </button>\n                        </div>\n                        <div class=\"modal-body\">\n                            <p>").concat((0, _lang._)("Your drawing has been saved, would you like to post it to the forum now?"), "</p>\n                        </div>\n                        <div class=\"modal-footer\">\n                            <button type=\"button\" class=\"btn btn-primary chickenpaint-post-drawing\" data-dismiss=\"modal\">").concat((0, _lang._)("Yes, post it now"), "</button>\n                            <button type=\"button\" class=\"btn btn-light chickenpaint-continue-drawing\" data-dismiss=\"modal\">").concat((0, _lang._)("No, keep drawing"), "</button>\n                            <button type=\"button\" class=\"btn btn-light chickenpaint-exit\" data-dismiss=\"modal\">").concat((0, _lang._)("No, quit and I'll finish it later"), "</button>\n                        </div>\n                    </div>\n                    <div class=\"modal-content\" data-stage=\"success-already-posted\" style=\"display:none\">\n                        <div class=\"modal-header\">\n                            <h5 class=\"modal-title\">Drawing saved!</h5>\n                            <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\n                                <span aria-hidden=\"true\">&times;</span>\n                            </button>\n                        </div>\n                        <div class=\"modal-body\">\n                            <p>").concat((0, _lang._)("Your drawing has been saved, would you like to view it on the forum now?"), "</p>\n                        </div>\n                        <div class=\"modal-footer\">\n                            <button type=\"button\" class=\"btn btn-primary chickenpaint-post-drawing\" data-dismiss=\"modal\">").concat((0, _lang._)("Yes, view the post"), "</button>\n                            <button type=\"button\" class=\"btn btn-light chickenpaint-continue-drawing\" data-dismiss=\"modal\">").concat((0, _lang._)("No, keep drawing"), "</button>\n                        </div>\n                    </div>\n                    <div class=\"modal-content\" data-stage=\"success-redirect\" style=\"display:none\">\n                        <div class=\"modal-header\">\n                            <h5 class=\"modal-title\">Drawing saved!</h5>\n                            <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\n                                <span aria-hidden=\"true\">&times;</span>\n                            </button>\n                        </div>\n                        <div class=\"modal-body\">\n                            <p>").concat((0, _lang._)("Your drawing has been saved, redirecting you to view your new post now..."), "</p>\n                        </div>\n                    </div>\n                </div>\n            </div>\n        ")),
+  var dialog = (0, _jquery.default)("<div class=\"modal fade chickenpaint-send-dialog\" tabindex=\"-1\" role=\"dialog\">\n                <div class=\"modal-dialog\">\n                    <div class=\"modal-content\" data-stage=\"saving\">\n                        <div class=\"modal-header\">\n                            <h5 class=\"modal-title\">".concat((0, _lang._)("Saving drawing..."), "</h5>\n                            <button type=\"button\" class=\"btn btn-close\" data-bs-dismiss=\"modal\" aria-label=\"btn btn-close\">\n                            </button>\n                        </div>\n                        <div class=\"modal-body\">\n                            <p class=\"chickenpaint-saving-progress-message\">").concat((0, _lang._)("Preparing your drawing to be saved, please wait..."), "</p>\n                            <pre class=\"chickenpaint-saving-error-message pre-scrollable\"></pre>\n                            <div class=\"progress\">\n                                <div class=\"progress-bar\" role=\"progressbar\" aria-valuenow=\"0\" aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width: 0%;\"></div>\n                            </div>\n                        </div>\n                        <div class=\"modal-footer\">\n                            <button type=\"button\" class=\"btn btn-light chickenpaint-send-cancel\" data-bs-dismiss=\"modal\">").concat((0, _lang._)("Cancel"), "</button>\n                        </div>\n                    </div>\n                    <div class=\"modal-content\" data-stage=\"success-not-previously-posted\" style=\"display:none\">\n                        <div class=\"modal-header\">\n                            <h5 class=\"modal-title\">").concat((0, _lang._)("Drawing saved!"), "</h5>\n                            <button type=\"button\" class=\"btn btn-close\" data-bs-dismiss=\"modal\" aria-label=\"btn btn-close\">\n                            </button>\n                        </div>\n                        <div class=\"modal-body\">\n                            <p>").concat((0, _lang._)("Your drawing has been saved, would you like to post it to the forum now?"), "</p>\n                        </div>\n                        <div class=\"modal-footer\">\n                            <button type=\"button\" class=\"btn btn-primary chickenpaint-post-drawing\" data-bs-dismiss=\"modal\">").concat((0, _lang._)("Yes, post it now"), "</button>\n                            <button type=\"button\" class=\"btn btn-light chickenpaint-continue-drawing\" data-bs-dismiss=\"modal\">").concat((0, _lang._)("No, keep drawing"), "</button>\n                            <button type=\"button\" class=\"btn btn-light chickenpaint-exit\" data-bs-dismiss=\"modal\">").concat((0, _lang._)("No, quit and I'll finish it later"), "</button>\n                        </div>\n                    </div>\n                    <div class=\"modal-content\" data-stage=\"success-already-posted\" style=\"display:none\">\n                        <div class=\"modal-header\">\n                            <h5 class=\"modal-title\">Drawing saved!</h5>\n                            <button type=\"button\" class=\"btn btn-close\" data-bs-dismiss=\"modal\" aria-label=\"btn btn-close\">\n                            </button>\n                        </div>\n                        <div class=\"modal-body\">\n                            <p>").concat((0, _lang._)("Your drawing has been saved, would you like to view it on the forum now?"), "</p>\n                        </div>\n                        <div class=\"modal-footer\">\n                            <button type=\"button\" class=\"btn btn-primary chickenpaint-post-drawing\" data-bs-dismiss=\"modal\">").concat((0, _lang._)("Yes, view the post"), "</button>\n                            <button type=\"button\" class=\"btn btn-light chickenpaint-continue-drawing\" data-bs-dismiss=\"modal\">").concat((0, _lang._)("No, keep drawing"), "</button>\n                        </div>\n                    </div>\n                    <div class=\"modal-content\" data-stage=\"success-redirect\" style=\"display:none\">\n                        <div class=\"modal-header\">\n                            <h5 class=\"modal-title\">Drawing saved!</h5>\n                            <button type=\"button\" class=\"btn btn-close\" data-bs-dismiss=\"modal\" aria-label=\"btn btn-close\">\n                            </button>\n                        </div>\n                        <div class=\"modal-body\">\n                            <p>").concat((0, _lang._)("Your drawing has been saved, redirecting you to view your new post now..."), "</p>\n                        </div>\n                    </div>\n                </div>\n            </div>\n        ")),
     progressMessageElem = (0, _jquery.default)(".chickenpaint-saving-progress-message", dialog),
     progressError = (0, _jquery.default)(".chickenpaint-saving-error-message", dialog),
     progressElem = (0, _jquery.default)(".progress-bar", dialog),
@@ -24648,7 +24862,7 @@ function CPSendDialog(controller, parent, resourceSaver) {
     if (serverMessage) {
       serverMessage = serverMessage.replace(/^CHIBIERROR\s*/, "");
       if (serverMessage.length > 0) {
-        errorMessage += "<br><br>The error returned from the server was:";
+        errorMessage += "<br><br>".concat((0, _lang._)("The error returned from the server was"), ":");
         progressError.text(serverMessage).show();
       }
       progressMessageElem.html(errorMessage);
@@ -24667,31 +24881,27 @@ function CPSendDialog(controller, parent, resourceSaver) {
   });
   (0, _jquery.default)(".chickenpaint-send-cancel", dialog).on('click', function () {
     resourceSaver.cancel();
+    // dialog.modal('hide');
   });
 
   // Destroy the modal upon close
-  dialog.on("hidden.bs.modal", function (e) {
+  dialog[0].addEventListener('hidden.bs.modal', function (e) {
     dialog.remove();
   });
-  dialog.modal({
-    show: false
-  });
-  dialog.on('shown.bs.modal', function () {
-    that.emitEvent("shown");
-  });
+  dialog.appendTo(parent);
 
-  // Fix the backdrop location in the DOM by reparenting it to the chickenpaint container
-  dialog.data("bs.modal").$body = (0, _jquery.default)(parent);
-  parent.appendChild(dialog[0]);
+  // Bootstrap 5のModalを初期化
+  var modal = new bootstrap.Modal(dialog[0]);
   this.show = function () {
-    dialog.modal("show");
+    modal.show();
+    that.emitEvent("shown");
   };
 }
 CPSendDialog.prototype = Object.create(_wolfy87Eventemitter.default.prototype);
-CPSendDialog.prototype.contructor = CPSendDialog;
+CPSendDialog.prototype.constructor = CPSendDialog;
 module.exports = exports.default;
 
-},{"../languages/lang.js":54,"jquery":265,"wolfy87-eventemitter":284}],43:[function(require,module,exports){
+},{"../languages/lang.js":54,"jquery":296,"wolfy87-eventemitter":314}],43:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -24699,6 +24909,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = CPShortcutsDialog;
 var _jquery = _interopRequireDefault(require("jquery"));
+var _lang = require("../languages/lang.js");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 /*
     ChickenPaint
@@ -24722,27 +24933,27 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
     along with ChickenPaint. If not, see <http://www.gnu.org/licenses/>.
 */
 
+// const macPlatform = /^Mac/i.test(navigator.platform);
+var macPlatform = navigator.userAgent.toLowerCase().includes('mac os');
+var Ctrl = macPlatform ? "⌘" : "Ctrl";
 function CPShortcutsDialog(parent) {
-  var dialog = (0, _jquery.default)("<div class=\"modal fade chickenpaint-shortcuts-dialog\" tabindex=\"-1\" role=\"dialog\">\n                <div class=\"modal-dialog modal-lg\">\n                    <div class=\"modal-content\">\n                        <div class=\"modal-header\">\n                            <h5 class=\"modal-title\">Shortcuts</h5>\n                            <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\n                                <span aria-hidden=\"true\">&times;</span>\n                            </button>\n                        </div>\n                        <div class=\"modal-body\">\n                            <p>\n                                Many of the menu options and painting tools have keyboard shortcuts which are\n                                written next to them or appear when you hover.\n                            </p>\n                            <p>\n                                Here are some other shortcuts which are not as obvious!\n                            </p>\n                            <div class=\"chickenpaint-shortcuts-sections\">\n                                <div class=\"chickenpaint-shortcuts-section\">\n                                    <h5>Color swatches palette</h5>\n                                    <ul class=\"chickenpaint-shortcuts-list list-unstyled\">\n                                        <li>\n                                            <dl>\n                                                <dt>\n                                                    <span class=\"chickenpaint-shortcut\"><span class=\"fa fa-mouse-pointer\"></span> Left</span>\n                                                </dt>\n                                                <dd>\n                                                    Use as the drawing color\n                                                </dd>\n                                                <dt>\n                                                    <span class=\"chickenpaint-shortcut\"><span class=\"fa fa-mouse-pointer\"></span> Right</span>\n                                                </dt>\n                                                <dd>\n                                                    Remove or replace a color swatch\n                                                </dd>\n                                             </dl>\n                                        </li>\n                                    </ul>\n                                </div>\n                                <div class=\"chickenpaint-shortcuts-section\">\n                                    <h5>Line drawing mode</h5>\n                                    <ul class=\"chickenpaint-shortcuts-list list-unstyled\">\n                                        <li>\n                                            <dl>\n                                                <dt>\n                                                    <span class=\"chickenpaint-shortcut\"><span class=\"chickenpaint-shortcut-key\">Shift</span> + <span class=\"fa fa-mouse-pointer\"></span> Left</span>\n                                                </dt>\n                                                <dd>\n                                                    Snap line to nearest 45 degrees\n                                                </dd>\n                                             </dl>\n                                        </li>\n                                    </ul>\n                                </div>\n                                <div class=\"chickenpaint-shortcuts-section\">\n                                    <h5>Painting tools</h5>\n                                    <ul class=\"chickenpaint-shortcuts-list list-unstyled\">\n                                        <li>\n                                            <dl>\n                                                <dt>\n                                                    <span class=\"chickenpaint-shortcut\"><span class=\"chickenpaint-shortcut-key\">1</span> - <span class=\"chickenpaint-shortcut-key\">9</span> , <span class=\"chickenpaint-shortcut-key\">0</span></span>\n                                                </dt>\n                                                <dd>\n                                                    Change brush opacity\n                                                </dd>\n                                                <dt>\n                                                    <span class=\"chickenpaint-shortcut\"><span class=\"chickenpaint-shortcut-key\">[</span> , <span class=\"chickenpaint-shortcut-key\">]</span></span>\n                                                </dt>\n                                                <dd>\n                                                    Change brush size\n                                                </dd>\n                                            </dl>\n                                        </li>\n                                    </ul>\n                                </div>\n                                <div class=\"chickenpaint-shortcuts-section\">\n                                    <h5>Brush palette</h5>\n                                    <ul class=\"chickenpaint-shortcuts-list list-unstyled\">\n                                        <li>\n                                            <dl>\n                                                <dt>\n                                                    <span class=\"chickenpaint-shortcut\"><span class=\"fa fa-mouse-pointer\"></span> Right drag</span>\n                                                </dt>\n                                                <dd>\n                                                    Adjust brush sliders more precisely\n                                                </dd>\n                                            </dl>\n                                        </li>\n                                    </ul>\n                                </div>\n                                <div class=\"chickenpaint-shortcuts-section\">\n                                    <h5>Drawing canvas</h5>\n                                    <ul class=\"chickenpaint-shortcuts-list list-unstyled\">\n                                        <li>\n                                            <dl>\n                                                <dt>\n                                                    <span class=\"chickenpaint-shortcut\"><span class=\"fa fa-mouse-pointer\"></span> Middle</span> <span class=\"chickenpaint-shortcut-alternate\">or</span> <span class=\"chickenpaint-shortcut\"><span class=\"chickenpaint-shortcut-key\">Space</span> + <span class=\"fa fa-mouse-pointer\"></span> Left</span>\n                                                </dt>\n                                                <dd>\n                                                    Move the canvas around\n                                                </dd>\n                                                <dt>\n                                                    <span class=\"chickenpaint-shortcut\"><span class=\"chickenpaint-shortcut-key\">Alt</span> + <span class=\"fa fa-mouse-pointer\"></span> Middle</span> <span class=\"chickenpaint-shortcut-alternate\">or</span> <span class=\"chickenpaint-shortcut\"><span class=\"chickenpaint-shortcut-key\">Alt</span> + <span class=\"chickenpaint-shortcut-key\">Space</span> + <span class=\"fa fa-mouse-pointer\"></span> Left</span>\n                                                </dt>\n                                                <dd>\n                                                    Rotate the canvas\n                                                </dd>\n                                                <dt>\n                                                    <span class=\"chickenpaint-shortcut\"><span class=\"fa fa-mouse-pointer\"></span> Right</span> <span class=\"chickenpaint-shortcut-alternate\">or</span> <span class=\"chickenpaint-shortcut\"><span class=\"chickenpaint-shortcut-key\">Alt</span> + <span class=\"fa fa-mouse-pointer\"></span> Left</span>\n                                                </dt>\n                                                <dd>\n                                                    Sample the color under the cursor\n                                                </dd>\n                                             </dl>\n                                        </li>\n                                    </ul>\n                                </div>\n                                <div class=\"chickenpaint-shortcuts-section\">\n                                    <h5>Layers palette</h5>\n                                    <ul class=\"chickenpaint-shortcuts-list list-unstyled\">\n                                        <li>\n                                            <dl>\n                                                <dt>\n                                                    <span class=\"chickenpaint-shortcut\"><span class=\"fa fa-mouse-pointer\"></span> Double click</span>\n                                                </dt>\n                                                <dd>\n                                                    Rename layer\n                                                </dd>\n                                             </dl>\n                                        </li>\n                                    </ul>\n                                </div>\n                            </div>\n                        </div>\n                    </div>\n                </div>\n            ");
+  var dialog = (0, _jquery.default)("<div class=\"modal fade chickenpaint-shortcuts-dialog\" tabindex=\"-1\" role=\"dialog\">\n                <div class=\"modal-dialog modal-lg\">\n                    <div class=\"modal-content\">\n                        <div class=\"modal-header\">\n                            <h5 class=\"modal-title\">".concat((0, _lang._)("Shortcuts"), "</h5>\n                            <button type=\"button\" class=\"btn btn-close\" data-bs-dismiss=\"modal\" aria-label=\"btn btn-close\">\n                            </button>\n                        </div>\n                        <div class=\"modal-body\">\n                            <p>\n                                ").concat((0, _lang._)("Many of the menu options and painting tools have keyboard shortcuts which are written next to them or appear when you hover."), "\n                            </p>\n                            <p>\n                                ").concat((0, _lang._)("Here are some other shortcuts which are not as obvious!"), "\n                            </p>\n                            <div class=\"chickenpaint-shortcuts-sections\">\n                                <div class=\"chickenpaint-shortcuts-section\">\n                                    <h5>").concat((0, _lang._)("Color swatches palette"), "</h5>\n                                    <ul class=\"chickenpaint-shortcuts-list list-unstyled\">\n                                        <li>\n                                            <dl>\n                                                <dt>\n                                                    <span class=\"chickenpaint-shortcut\"><span class=\"fa icon-mouse-pointer\"></span> ").concat((0, _lang._)("Left"), "</span>\n                                                </dt>\n                                                <dd>\n                                                    ").concat((0, _lang._)("Use as the drawing color"), "\n                                                </dd>\n                                                <dt>\n                                                    <span class=\"chickenpaint-shortcut\"><span class=\"fa icon-mouse-pointer\"></span> ").concat((0, _lang._)("Right"), "</span>\n                                                </dt>\n                                                <dd>\n                                                    ").concat((0, _lang._)("Remove or replace a color swatch"), "\n                                                </dd>\n                                             </dl>\n                                        </li>\n                                    </ul>\n                                </div>\n                                <div class=\"chickenpaint-shortcuts-section\">\n                                    <h5>").concat((0, _lang._)("Line drawing mode"), "</h5>\n                                    <ul class=\"chickenpaint-shortcuts-list list-unstyled\">\n                                        <li>\n                                            <dl>\n                                                <dt>\n                                                    <span class=\"chickenpaint-shortcut\"><span class=\"chickenpaint-shortcut-key\">Shift</span> + <span class=\"fa icon-mouse-pointer\"></span> ").concat((0, _lang._)("Left"), "</span>\n                                                </dt>\n                                                <dd>\n                                                   ").concat((0, _lang._)("Snap line to nearest 45 degrees"), "\n                                                </dd>\n                                             </dl>\n                                        </li>\n                                    </ul>\n                                </div>\n                                <div class=\"chickenpaint-shortcuts-section\">\n                                    <h5>").concat((0, _lang._)("Painting tools"), "</h5>\n                                    <ul class=\"chickenpaint-shortcuts-list list-unstyled\">\n                                        <li>\n                                            <dl>\n                                                <dt>\n                                                    <span class=\"chickenpaint-shortcut\"><span class=\"chickenpaint-shortcut-key\">1</span> - <span class=\"chickenpaint-shortcut-key\">9</span> , <span class=\"chickenpaint-shortcut-key\">0</span></span>\n                                                </dt>\n                                                <dd>\n                                                    ").concat((0, _lang._)("Change brush opacity"), "\n                                                </dd>\n                                                <dt>\n                                                    <span class=\"chickenpaint-shortcut\"><span class=\"chickenpaint-shortcut-key\">[</span> , <span class=\"chickenpaint-shortcut-key\">]</span></span>\n                                                </dt>\n                                                <dd>\n                                                    ").concat((0, _lang._)("Change brush size"), "\n                                                </dd>\n                                            </dl>\n                                        </li>\n                                    </ul>\n                                </div>\n                                <div class=\"chickenpaint-shortcuts-section\">\n                                    <h5>").concat((0, _lang._)("Brush palette"), "</h5>\n                                    <ul class=\"chickenpaint-shortcuts-list list-unstyled\">\n                                        <li>\n                                            <dl>\n                                                <dt>\n                                                    <span class=\"chickenpaint-shortcut\"><span class=\"fa icon-mouse-pointer\"></span> ").concat((0, _lang._)("Right"), "</span>\n\t\t\t\t\t\t\t\t\t\t\t\t\t<span class=\"chickenpaint-shortcut-alternate\">").concat((0, _lang._)("or"), "</span>\n\t\t\t\t\t\t\t\t\t\t\t\t\t<span class=\"chickenpaint-shortcut\"><span class=\"chickenpaint-shortcut-key\">Shift</span> + <span class=\"fa icon-mouse-pointer\"></span> ").concat((0, _lang._)("Left"), "</span>\n                                                </dt>\n                                                <dd>\n                                                    ").concat((0, _lang._)("Adjust brush sliders more precisely"), "\n                                                </dd>\n                                            </dl>\n                                        </li>\n                                    </ul>\n                                </div>\n                                <div class=\"chickenpaint-shortcuts-section\">\n                                    <h5>").concat((0, _lang._)("Drawing canvas"), "</h5>\n                                    <ul class=\"chickenpaint-shortcuts-list list-unstyled\">\n                                        <li>\n                                            <dl>\n                                                <dt>\n                                                    <span class=\"chickenpaint-shortcut\"><span class=\"fa icon-mouse-pointer\"></span> ").concat((0, _lang._)("Middle"), "</span> <span class=\"chickenpaint-shortcut-alternate\">").concat((0, _lang._)("or"), "</span> <span class=\"chickenpaint-shortcut\"><span class=\"chickenpaint-shortcut-key\">Space</span> + <span class=\"fa icon-mouse-pointer\"></span> ").concat((0, _lang._)("Left"), "</span>\n                                                </dt>\n                                                <dd>\n                                                    ").concat((0, _lang._)("Move the canvas around"), "\n                                                </dd>\n                                                <dt>\n                                                    <span class=\"chickenpaint-shortcut\"><span class=\"chickenpaint-shortcut-key\">R</span> + <span class=\"fa icon-mouse-pointer\"></span> ").concat((0, _lang._)("Left"), "</span>\n                                                </dt>\n                                                <dd>\n                                                    ").concat((0, _lang._)("Rotate the canvas"), "\n                                                </dd>\n                                                <dt>\n                                                    <span class=\"chickenpaint-shortcut\"><span class=\"fa icon-mouse-pointer\"></span> ").concat((0, _lang._)("Right"), "</span> <span class=\"chickenpaint-shortcut-alternate\">").concat((0, _lang._)("or"), "</span> <span class=\"chickenpaint-shortcut\"><span class=\"chickenpaint-shortcut-key\">Alt</span> + <span class=\"fa icon-mouse-pointer\"></span> ").concat((0, _lang._)("Left"), "</span>\n                                                </dt>\n                                                <dd>\n                                                    ").concat((0, _lang._)("Sample the color under the cursor"), "\n                                                </dd>\n                                             </dl>\n                                        </li>\n                                    </ul>\n                                </div>\n                                <div class=\"chickenpaint-shortcuts-section\">\n                                    <h5>").concat((0, _lang._)("Layers palette"), "</h5>\n                                    <ul class=\"chickenpaint-shortcuts-list list-unstyled\">\n                                        <li>\n                                            <dl>\n                                                <dt>\n                                                    <span class=\"chickenpaint-shortcut\"><span class=\"fa icon-mouse-pointer\"></span> ").concat((0, _lang._)("Double click"), "</span> <span class=\"chickenpaint-shortcut-alternate\">").concat((0, _lang._)("or"), "</span> <span class=\"chickenpaint-shortcut\"><span class=\"fa icon-mouse-pointer\"></span> ").concat((0, _lang._)("Right"), "</span>\n                                                </dt>\n                                                <dd>\n                                                    ").concat((0, _lang._)("Rename layer"), "\n                                                </dd>\n                                                <dt>\n\t\t\t\t\t\t\t\t\t\t\t\t<span class=\"chickenpaint-shortcut\"><span class=\"chickenpaint-shortcut-key\">Shift</span> + <span class=\"fa icon-mouse-pointer\"></span> ").concat((0, _lang._)("Left"), "</span>\n                                                </dt>\n                                                <dd>\n                                                    ").concat((0, _lang._)("Toggle mask enable/disable"), "\n                                                </dd>\n                                                <dt>\n\t\t\t\t\t\t\t\t\t\t\t\t<span class=\"chickenpaint-shortcut\"><span class=\"chickenpaint-shortcut-key\">Alt</span> + <span class=\"fa icon-mouse-pointer\"></span> ").concat((0, _lang._)("Left"), "</span>\n                                                </dt>\n                                                <dd>\n                                                    ").concat((0, _lang._)("Toggle mask View"), "\n                                                </dd>\n\t\t\t\t\t\t\t\t\t\t\t\t<dt>\n\t\t\t\t\t\t\t\t\t\t\t\t<span class=\"chickenpaint-shortcut\"><span class=\"chickenpaint-shortcut-key\">").concat(Ctrl, "</span> + <span class=\"fa icon-mouse-pointer\"></span> ").concat((0, _lang._)("Left"), "</span>\n                                                </dt>\n                                                <dd>\n                                                    ").concat((0, _lang._)("Apply layer mask"), "\n                                                </dd>\n\t\t\t\t\t\t\t\t\t\t\t\t<dt>\n\t\t\t\t\t\t\t\t\t\t\t\t<span class=\"chickenpaint-shortcut\"><span class=\"chickenpaint-shortcut-key\">Shift</span></span> +\n\t\t\t\t\t\t\t\t\t\t\t\t<span class=\"chickenpaint-shortcut\"><span class=\"chickenpaint-shortcut-key\">").concat(Ctrl, "</span> + <span class=\"fa icon-mouse-pointer\"></span> ").concat((0, _lang._)("Left"), "</span>\n                                                </dt>\n                                                <dd>\n                                                    ").concat((0, _lang._)("Delete layer mask"), "\n                                                </dd>\n                                             </dl>\n                                        </li>\n                                    </ul>\n                                </div>\n                            </div>\n                        </div>\n                    </div>\n                </div>\n            "));
 
   // Destroy the modal upon close
-  dialog.on("hidden.bs.modal", function (e) {
+  dialog[0].addEventListener('hidden.bs.modal', function (e) {
     dialog.remove();
   });
-  dialog.modal({
-    show: false
-  });
 
-  // Fix the backdrop location in the DOM by reparenting it to the chickenpaint container
-  dialog.data("bs.modal").$body = (0, _jquery.default)(parent);
+  // Initialize the modal using Bootstrap 5 methods
+  var modalInstance = new bootstrap.Modal(dialog[0]);
   parent.appendChild(dialog[0]);
   this.show = function () {
-    dialog.modal("show");
+    modalInstance.show();
   };
 }
 module.exports = exports.default;
 
-},{"jquery":265}],44:[function(require,module,exports){
+},{"../languages/lang.js":54,"jquery":296}],44:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -24867,45 +25078,51 @@ function CPSlider(minValue, maxValue, centerMode, expMode) {
   function pointerDragged(e) {
     switch (dragMode) {
       case DRAG_MODE_NORMAL:
-        mouseSelect(e);
-        break;
+        return mouseSelect(e);
       case DRAG_MODE_PRECISE:
+        var title = that.title();
+        //ブラシサイズと不透明度以外は細やかなスライダーの動作をしない
+        if (!(title.includes((0, _lang._)("Brush size")) || title.includes((0, _lang._)("Opacity")))) {
+          return mouseSelect(e);
+        }
         var diff = (e.pageX - dragPreciseX) / PRECISE_DRAG_SCALE;
         if (diff !== 0) {
-          var unrounded = that.value + diff,
-            rounded = unrounded | 0;
+          var unrounded = that.value + diff;
+          var rounded = Math.floor(unrounded);
           that.setValue(rounded);
 
           /* Tweak the "old mouseX" position such that the fractional part of the value we were unable to set
-           * will be accumulated
-           */
+          	* will be accumulated
+          	*/
           dragPreciseX = e.pageX - (unrounded - rounded) * PRECISE_DRAG_SCALE;
         }
         break;
     }
   }
-  function pointerUp(e) {
+  canvas.addEventListener("pointerup", function (e) {
+    if (dragMode === DRAG_MODE_IDLE) {
+      canvas.releasePointerCapture(e.pointerId);
+      return canvas.removeEventListener("pointermove", pointerDragged);
+    }
     if (dragMode !== DRAG_MODE_IDLE) {
       switch (dragMode) {
         case DRAG_MODE_NORMAL:
-          if (e.button === 0) {
+          if (e.button === 0 && !e.shiftKey) {
             dragMode = DRAG_MODE_IDLE;
           }
           break;
         case DRAG_MODE_PRECISE:
-          if (e.button == 2) {
+          if (e.button == 2 || e.button === 0 && e.shiftKey) {
             dragMode = DRAG_MODE_IDLE;
           }
           break;
         default:
           return;
       }
-      if (dragMode === DRAG_MODE_IDLE) {
-        canvas.releasePointerCapture(e.pointerId);
-        canvas.removeEventListener("pointermove", pointerDragged);
-      }
     }
-  }
+    canvas.releasePointerCapture(e.pointerId);
+    return canvas.removeEventListener("pointermove", pointerDragged);
+  });
   this.setValue = function (_value) {
     _value = ~~Math.max(minValue, Math.min(maxValue, _value));
     if (this.value != _value) {
@@ -24943,25 +25160,17 @@ function CPSlider(minValue, maxValue, centerMode, expMode) {
   };
   canvas.addEventListener("pointerdown", function (e) {
     if (dragMode === DRAG_MODE_IDLE) {
-      switch (e.button) {
-        case 0:
-          // Left
-          dragMode = DRAG_MODE_NORMAL;
-          mouseSelect(e);
-          break;
-        case 2:
-          // Right
-          dragMode = DRAG_MODE_PRECISE;
-          dragPreciseX = e.pageX;
-          break;
-        default:
-          return;
+      if (e.button === 2 || e.button === 0 && e.shiftKey) {
+        dragMode = DRAG_MODE_PRECISE;
+        dragPreciseX = e.pageX;
+      } else {
+        dragMode = DRAG_MODE_NORMAL;
+        mouseSelect(e);
       }
       canvas.setPointerCapture(e.pointerId);
       canvas.addEventListener("pointermove", pointerDragged);
     }
   });
-  canvas.addEventListener("pointerup", pointerUp);
   canvas.addEventListener("contextmenu", function (e) {
     e.preventDefault();
   });
@@ -24976,7 +25185,7 @@ CPSlider.prototype = Object.create(_wolfy87Eventemitter.default.prototype);
 CPSlider.prototype.constructor = CPSlider;
 module.exports = exports.default;
 
-},{"../languages/lang":54,"jquery":265,"wolfy87-eventemitter":284}],45:[function(require,module,exports){
+},{"../languages/lang":54,"jquery":296,"wolfy87-eventemitter":314}],45:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -25204,7 +25413,7 @@ CPStrokePalette.prototype = Object.create(_CPPalette.default.prototype);
 CPStrokePalette.prototype.constructor = CPStrokePalette;
 module.exports = exports.default;
 
-},{"../engine/CPBrushInfo.js":8,"../languages/lang":54,"./CPPalette.js":39,"jquery":265}],47:[function(require,module,exports){
+},{"../engine/CPBrushInfo.js":8,"../languages/lang":54,"./CPPalette.js":39,"jquery":296}],47:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -25274,10 +25483,12 @@ function CPSwatchesPalette(controller) {
     this.setColor(color);
     swatchElem.href = "#";
     swatchElem.className = "chickenpaint-color-swatch dropdown-toggle";
-    swatchElem.setAttribute("data-toggle", "dropdown");
+    //"data-bs-toggle"に設定しない 
+    // swatchElem.setAttribute("data-bs-toggle", "dropdown");
+
     mnuRemove.className = "dropdown-item";
     mnuRemove.href = "#";
-    mnuRemove.innerHTML = (0, _lang._)("Remove");
+    mnuRemove.textContent = (0, _lang._)("Remove");
     mnuRemove.addEventListener("click", function (e) {
       e.preventDefault();
       (0, _jquery.default)(wrapper).remove();
@@ -25285,26 +25496,22 @@ function CPSwatchesPalette(controller) {
     });
     mnuSetToCurrent.className = "dropdown-item";
     mnuSetToCurrent.href = "#";
-    mnuSetToCurrent.innerHTML = (0, _lang._)("Replace with current color");
+    mnuSetToCurrent.textContent = (0, _lang._)("Replace with current color");
     mnuSetToCurrent.addEventListener("click", function (e) {
       e.preventDefault();
       that.setColor(controller.getCurColor().getRgb());
       modified = true;
     });
     swatchMenu.className = "dropdown-menu";
-    swatchMenu.appendChild(mnuRemove);
-    swatchMenu.appendChild(mnuSetToCurrent);
+    var liRemove = document.createElement("li");
+    var liSetToCurrent = document.createElement("li");
+    liRemove.appendChild(mnuRemove); //liで囲う
+    liSetToCurrent.appendChild(mnuSetToCurrent); //liで囲う
+    swatchMenu.appendChild(liRemove);
+    swatchMenu.appendChild(liSetToCurrent);
     wrapper.className = "chickenpaint-color-swatch-wrapper";
     wrapper.appendChild(swatchElem);
     wrapper.appendChild(swatchMenu);
-    (0, _jquery.default)(wrapper).on("show.bs.dropdown", function () {
-      var $btnDropDown = (0, _jquery.default)(this).find(".dropdown-toggle"),
-        $listHolder = (0, _jquery.default)(this).find(".dropdown-menu");
-      $listHolder.css({
-        "top": $btnDropDown.position().top + $btnDropDown.outerHeight(true) + "px",
-        "left": $btnDropDown.position().left + "px"
-      });
-    });
   }
   function clearSwatches() {
     while (swatchPanel.lastChild) {
@@ -25369,9 +25576,14 @@ function CPSwatchesPalette(controller) {
     }
     swatchPanel.addEventListener("click", function (e) {
       var swatch = e.target;
-      if (!/chickenpaint-color-swatch/.test(swatch.className)) {
-        return;
+      if (!/^<a data-color=/i.test(swatch.outerHTML) || !/chickenpaint-color-swatch/.test(swatch.className)) {
+        return; //<a data-color=で始まらない場合もreturn
       }
+      //"data-bs-toggle"に設定していなければ必要ないため、コメントアウト
+      //コンテキストメニューを閉じる
+      // let dropdown = new bootstrap.Dropdown($(swatch)); // Bootstrap 5: ドロップダウンを初期化
+      // dropdown.hide();
+
       if (e.button == 0 /* Left */ && swatch.getAttribute("data-color") !== undefined) {
         controller.setCurColor(new _CPColor.default(parseInt(swatch.getAttribute("data-color"), 10)));
         e.stopPropagation();
@@ -25381,33 +25593,30 @@ function CPSwatchesPalette(controller) {
     });
     swatchPanel.addEventListener("contextmenu", function (e) {
       var swatch = e.target;
-      if (!/chickenpaint-color-swatch/.test(swatch.className)) {
-        return;
+      if (!/^<a data-color=/i.test(swatch.outerHTML) || !/chickenpaint-color-swatch/.test(swatch.className)) {
+        return; //<a data-color=で始まらない場合もreturn
       }
-      e.preventDefault();
-      (0, _jquery.default)(swatch).dropdown("toggle").off("click.bs.dropdown"); // Remove Bootstrap's left-click handler installed by toggle
 
-      var onDismissSwatchMenu = function onDismissSwatchMenu(e) {
-        // Firefox wrongly fires click events for the right mouse button!
-        if (!("button" in e) || e.button === 0) {
-          if ((0, _jquery.default)(swatch).closest(".chickenpaint-color-swatch-wrapper").hasClass("show")) {
-            (0, _jquery.default)(swatch).closest(".dropdown-toggle").dropdown("toggle");
-          }
-          (0, _jquery.default)(this).off("click", onDismissSwatchMenu);
-        }
-      };
-      (0, _jquery.default)(document).on("click", onDismissSwatchMenu);
+      e.preventDefault();
+      var dropdown = new bootstrap.Dropdown((0, _jquery.default)(swatch)); // Bootstrap 5: ドロップダウンを初期化
+      dropdown.toggle();
+
+      // ドロップダウンメニュー内のクリックを検出して、メニューを閉じる
+      document.addEventListener("click", function onDocumentClick(event) {
+        dropdown.hide();
+        document.removeEventListener("click", onDocumentClick);
+      });
     });
   }
   function createIcon(iconName) {
     var icon = document.createElement("span");
-    icon.className = "fa fa-" + iconName;
+    icon.className = "fa icon-" + iconName;
     return icon;
   }
   function initButtonsPanel() {
     var btnSettings = document.createElement("button"),
       btnAdd = document.createElement("button"),
-      settingsMenu = document.createElement("div"),
+      settingsMenu = document.createElement("ul"),
       mnuSave = document.createElement("a"),
       mnuLoad = document.createElement("a");
     btnAdd.type = "button";
@@ -25416,46 +25625,34 @@ function CPSwatchesPalette(controller) {
     btnAdd.appendChild(createIcon("plus"));
     btnSettings.type = "button";
     btnSettings.className = "btn dropdown-toggle chickenpaint-small-toolbar-button chickenpaint-color-swatch-settings";
-    btnSettings.setAttribute("data-toggle", "dropdown");
+    //"data-bs-toggle"に設定 bs5
+    btnSettings.setAttribute("data-bs-toggle", "dropdown");
     btnSettings.appendChild(createIcon("cog"));
     mnuSave.className = "dropdown-item";
     mnuSave.href = "#";
-    mnuSave.innerHTML = (0, _lang._)("Save swatches to your computer...");
+    mnuSave.textContent = (0, _lang._)("Save swatches to your computer...");
     mnuSave.addEventListener("click", function (e) {
       e.preventDefault();
       saveSwatches();
     });
     mnuLoad.className = "dropdown-item";
     mnuLoad.href = "#";
-    mnuLoad.innerHTML = (0, _lang._)("Load swatches from your computer...");
+    mnuLoad.textContent = (0, _lang._)("Load swatches from your computer...");
     mnuLoad.addEventListener("click", function (e) {
       e.preventDefault();
       loadSwatches();
     });
     settingsMenu.className = "dropdown-menu";
-    settingsMenu.appendChild(mnuSave);
-    settingsMenu.appendChild(mnuLoad);
+    var limnuSave = document.createElement("li");
+    var limnuLoad = document.createElement("li");
+    limnuSave.appendChild(mnuSave); //liで囲う
+    limnuLoad.appendChild(mnuLoad); //liで囲う
+    settingsMenu.appendChild(limnuSave);
+    settingsMenu.appendChild(limnuLoad);
     var btnSettingsContainer = document.createElement("div");
     btnSettingsContainer.className = "btn-group dropright";
     btnSettingsContainer.appendChild(btnSettings);
     btnSettingsContainer.appendChild(settingsMenu);
-    (0, _jquery.default)(btnSettings).dropdown();
-    var onDismissSettingsMenu = function onDismissSettingsMenu(e) {
-      // Firefox wrongly fires click events for the right mouse button!
-      if (!("button" in e) || e.button === 0) {
-        if ((0, _jquery.default)(btnSettingsContainer).hasClass("show")) {
-          (0, _jquery.default)(btnSettings).dropdown("toggle");
-        }
-        (0, _jquery.default)(this).off("click", onDismissSettingsMenu);
-      }
-    };
-    (0, _jquery.default)(btnSettingsContainer).on("show.bs.dropdown", function () {
-      /* Instead of Bootstrap's extremely expensive data API, we'll only listen for dismiss clicks on the
-       * document *while the menu is open!*
-       */
-
-      (0, _jquery.default)(document).on("click", onDismissSettingsMenu);
-    });
     btnAdd.addEventListener("click", function (e) {
       addSwatch(controller.getCurColor().getRgb());
       modified = true;
@@ -25482,7 +25679,7 @@ CPSwatchesPalette.prototype = Object.create(_CPPalette.default.prototype);
 CPSwatchesPalette.prototype.constructor = CPSwatchesPalette;
 module.exports = exports.default;
 
-},{"../languages/lang":54,"../util/AdobeColorTable.js":55,"../util/CPColor.js":58,"./CPPalette.js":39,"file-saver":264,"jquery":265}],48:[function(require,module,exports){
+},{"../languages/lang":54,"../util/AdobeColorTable.js":55,"../util/CPColor.js":58,"./CPPalette.js":39,"file-saver":295,"jquery":296}],48:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -25515,7 +25712,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 */
 
 function CPTabletDialog(parent) {
-  var dialog = (0, _jquery.default)("<div class=\"modal fade\" tabindex=\"-1\" role=\"dialog\">\n                <div class=\"modal-dialog\" role=\"document\">\n                    <div class=\"modal-content\">\n                        <div class=\"modal-header\">\n                            <h5 class=\"modal-title\">Drawing tablet support</h5>\n                            <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\n                                <span aria-hidden=\"true\">&times;</span>\n                            </button>\n                        </div>\n                        <div class=\"modal-body\">\n                            <p class=\"chickenpaint-tablet-there-are-two-options\">\n                                There are two ways you could use your tablet's pen pressure support with ChickenPaint.\n                            </p>\n                            <div class=\"chickenpaint-tablet-support chickenpaint-wacom-support\">\n                                <h5>\n                                    Plugin for Wacom tablets\n                                </h5>\n                                <div class=\"chickenpaint-supported-browsers\">\n                                    <div class=\"chickenpaint-supported-browser\">\n                                        <span class=\"fab fa-internet-explorer\"></span>\n                                        IE 10, 11\n                                    </div>\n                                    <div class=\"chickenpaint-supported-browser\">\n                                        <span class=\"fab fa-firefox\"></span>\n                                        Firefox (32-bit only)\n                                    </div>\n                                    <div class=\"chickenpaint-supported-browser\">\n                                        <span class=\"fab fa-safari\"></span>\n                                        Safari\n                                    </div>\n                                        <div class=\"chickenpaint-supported-browser\">\n                                        <span class=\"fab fa-opera\"></span>\n                                        Opera\n                                    </div>\n                                </div>\n                                <p class=\"chickenpaint-not-installed\">\n                                    The plugin for Wacom tablets doesn't seem to be installed in your browser yet.\n                                </p>\n                                <p class=\"chickenpaint-not-installed\">\n                                    Please make sure that you've installed the latest drivers for your tablet from the \n                                    <a href=\"http://www.wacom.com/en-us/support/product-support/drivers\" target=\"_blank\">Wacom drivers page</a>,\n                                    then restart your browser.\n                                </p>\n                                <p class=\"chickenpaint-not-supported\">\n                                    Your browser doesn't support the Wacom tablet plugin, please \n                                    try one of the browsers listed above instead.\n                                </p>\n                                <p class=\"chickenpaint-supported alert alert-success\">\n                                    The Wacom tablet plugin is installed and working.\n                                </p>\n                            </div>\n                            <div class=\"chickenpaint-tablet-support chickenpaint-pointerevents-support\">\n                                <h5>\n                                    Built-in support for most tablets.\n                                    <small>macOS, Windows 8 or newer</small>\n                                </h5>\n                                <div class=\"chickenpaint-supported-browsers\">\n                                    <div class=\"chickenpaint-supported-browser\">\n                                        <span class=\"fab fa-internet-explorer\"></span>\n                                        IE (Windows 8)\n                                    </div>\n                                        <div class=\"chickenpaint-supported-browser\">\n                                        <span class=\"fab fa-edge\"></span>\n                                        Edge (Windows 10)\n                                    </div>\n                                    <div class=\"chickenpaint-supported-browser\">\n                                        <span class=\"fab fa-firefox\"></span>\n                                        Firefox (<a href=\"https://github.com/thenickdude/chickenpaint/blob/master/help/Firefox pressure support.md\" target=\"_blank\">help <i class=\"fa fa-external-link-alt\"></i></a>)\n                                    </div>\n                                    <div class=\"chickenpaint-supported-browser\">\n                                        <span class=\"fab fa-chrome\"></span>\n                                        Chrome\n                                    </div>\n                                </div>\n                                <p class=\"chickenpaint-not-supported\">\n                                    Your browser doesn't have built-in support for drawing tablets, please try\n                                    one of the other browsers listed above.\n                                </p>\n                                <p class=\"chickenpaint-supported alert alert-success\">\n                                    Your browser has built-in support for drawing tablets!\n                                </p>\n                            </div>\n                        </div>\n                    </div>\n                </div>\n            </div>\n       ");
+  var dialog = (0, _jquery.default)("<div class=\"modal fade\" tabindex=\"-1\" role=\"dialog\">\n                <div class=\"modal-dialog\" role=\"document\">\n                    <div class=\"modal-content\">\n                        <div class=\"modal-header\">\n                            <h5 class=\"modal-title\">Drawing tablet support</h5>\n                            <button type=\"button\" class=\"btn btn-close\" data-bs-dismiss=\"modal\" aria-label=\"btn btn-close\">\n                            </button>\n                        </div>\n                        <div class=\"modal-body\">\n                            <p class=\"chickenpaint-tablet-there-are-two-options\">\n                                There are two ways you could use your tablet's pen pressure support with ChickenPaint.\n                            </p>\n                            <div class=\"chickenpaint-tablet-support chickenpaint-wacom-support\">\n                                <h5>\n                                    Plugin for Wacom tablets\n                                </h5>\n                                <div class=\"chickenpaint-supported-browsers\">\n                                    <div class=\"chickenpaint-supported-browser\">\n                                        <span class=\"icon-firefox\"></span>\n                                        Firefox (32-bit only)\n                                    </div>\n                                    <div class=\"chickenpaint-supported-browser\">\n                                        <span class=\"icon-safari\"></span>\n                                        Safari\n                                    </div>\n                                        <div class=\"chickenpaint-supported-browser\">\n                                        <span class=\"icon-opera\"></span>\n                                        Opera\n                                    </div>\n                                </div>\n                                <p class=\"chickenpaint-not-installed\">\n                                    The plugin for Wacom tablets doesn't seem to be installed in your browser yet.\n                                </p>\n                                <p class=\"chickenpaint-not-installed\">\n                                    Please make sure that you've installed the latest drivers for your tablet from the \n                                    <a href=\"http://www.wacom.com/en-us/support/product-support/drivers\" target=\"_blank\">Wacom drivers page</a>,\n                                    then restart your browser.\n                                </p>\n                                <p class=\"chickenpaint-not-supported\">\n                                    Your browser doesn't support the Wacom tablet plugin, please \n                                    try one of the browsers listed above instead.\n                                </p>\n                                <p class=\"chickenpaint-supported alert alert-success\">\n                                    The Wacom tablet plugin is installed and working.\n                                </p>\n                            </div>\n                            <div class=\"chickenpaint-tablet-support chickenpaint-pointerevents-support\">\n                                <h5>\n                                    Built-in support for most tablets.\n                                    <small>macOS, Windows 10 or newer</small>\n                                </h5>\n                                <div class=\"chickenpaint-supported-browsers\">\n\t\t\t\t\t\t\t\t\t<div class=\"chickenpaint-supported-browser\">\n\t\t\t\t\t\t\t\t\t<span class=\"icon-chrome\"></span>\n\t\t\t\t\t\t\t\t\t\tChrome\n\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t\t<div class=\"chickenpaint-supported-browser\">\n                                        <span class=\"icon-edge\"></span>\n                                        Edge (Windows 10)\n                                    </div>\n                                    <div class=\"chickenpaint-supported-browser\">\n                                        <span class=\"icon-firefox\"></span>\n                                        Firefox (<a href=\"https://github.com/satopian/ChickenPaint_Be/blob/main/help/Firefox%20pressure%20support.md\" target=\"_blank\" rel=\"noopener\">help <i class=\"fa icon-external-link-alt\"></i></a>)\n                                    </div>\n                                </div>\n                                <p class=\"chickenpaint-not-supported\">\n                                    Your browser doesn't have built-in support for drawing tablets, please try\n                                    one of the other browsers listed above.\n                                </p>\n                                <p class=\"chickenpaint-supported alert alert-success\">\n                                    Your browser has built-in support for drawing tablets!\n                                </p>\n                            </div>\n                        </div>\n                    </div>\n                </div>\n            </div>\n       ");
   var wacomSupportElem = (0, _jquery.default)(".chickenpaint-wacom-support", dialog),
     peSupportElem = (0, _jquery.default)(".chickenpaint-pointerevents-support", dialog),
     bothOptionsElem = (0, _jquery.default)(".chickenpaint-tablet-there-are-two-options", dialog),
@@ -25540,20 +25737,24 @@ function CPTabletDialog(parent) {
   }
   peSupportElem.toggleClass("supported", peSupported);
   peSupportElem.toggleClass("not-supported", !peSupported);
-  dialog.modal({
-    show: false
+
+  // Destroy the modal upon close
+  dialog[0].addEventListener('hidden.bs.modal', function (e) {
+    dialog.remove();
   });
 
-  // Fix the backdrop location in the DOM by reparenting it to the chickenpaint container
-  dialog.data("bs.modal").$body = (0, _jquery.default)(parent);
+  // Initialize the modal using Bootstrap 5 methods
+  var modalInstance = new bootstrap.Modal(dialog[0]);
   parent.appendChild(dialog[0]);
+
+  // Show method
   this.show = function () {
-    dialog.modal("show");
+    modalInstance.show();
   };
 }
 module.exports = exports.default;
 
-},{"../util/CPWacomTablet.js":66,"jquery":265}],49:[function(require,module,exports){
+},{"../util/CPWacomTablet.js":66,"jquery":296}],49:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -25797,6 +25998,17 @@ function CPTexturePalette(controller) {
       sampleSwatch = new CPTextureSwatch(null, TEXTURE_PREVIEW_SIZE, TEXTURE_PREVIEW_SIZE),
       btnCustomize = document.createElement("button"),
       textureControlsPanel;
+    // Bootstrap Popover インスタンス
+    var bootstrapPopover = new bootstrap.Popover(btnCustomize, {
+      html: true,
+      content: function content() {
+        return textureControlsPanel;
+      },
+      trigger: "manual",
+      placement: "right",
+      // ツールチップの位置を右に指定
+      container: body
+    });
     function updatePopoverControls() {
       cbInverse.checked = inverse;
       cbMirror.checked = mirror;
@@ -25838,15 +26050,15 @@ function CPTexturePalette(controller) {
       panel.appendChild(slContrast.getElement());
       var okayButton = document.createElement("button"),
         resetButton = document.createElement("button");
-      okayButton.innerHTML = "Ok";
+      okayButton.textContent = "Ok";
       okayButton.className = "btn btn-primary btn-sm";
       okayButton.type = "button";
       okayButton.addEventListener("click", function (e) {
-        (0, _jquery.default)(btnCustomize).popover('hide');
+        bootstrapPopover.hide();
       });
       panel.appendChild(okayButton);
       panel.appendChild(document.createTextNode(" "));
-      resetButton.innerHTML = "Reset";
+      resetButton.textContent = "Reset";
       resetButton.className = "btn btn-secondary btn-sm";
       resetButton.type = "button";
       resetButton.addEventListener("click", function (e) {
@@ -25874,17 +26086,12 @@ function CPTexturePalette(controller) {
     panel.appendChild(sampleSwatch.getElement());
     btnCustomize.type = "button";
     btnCustomize.className = "btn btn-light btn-sm";
-    btnCustomize.innerHTML = (0, _lang._)("Customize");
+    btnCustomize.setAttribute("data-bs-toggle", "popover");
+    btnCustomize.setAttribute("data-bs-placement", "right");
+    btnCustomize.textContent = (0, _lang._)("Customize");
     textureControlsPanel = buildTextureControlsPanel();
-    (0, _jquery.default)(btnCustomize).popover({
-      html: true,
-      content: function content() {
-        return textureControlsPanel;
-      },
-      trigger: "manual",
-      container: body
-    }).on("click", function () {
-      (0, _jquery.default)(this).popover("toggle");
+    btnCustomize.addEventListener("click", function () {
+      bootstrapPopover.toggle();
     });
     panel.appendChild(btnCustomize);
     this.updateTexture();
@@ -25942,7 +26149,7 @@ CPTexturePalette.prototype = Object.create(_CPPalette.default.prototype);
 CPTexturePalette.prototype.constructor = CPTexturePalette;
 module.exports = exports.default;
 
-},{"../engine/CPGreyBmp.js":14,"../engine/CPLookUpTable.js":18,"../languages/lang":54,"./CPPalette.js":39,"./CPSlider.js":44,"jquery":265,"wolfy87-eventemitter":284}],50:[function(require,module,exports){
+},{"../engine/CPGreyBmp.js":14,"../engine/CPLookUpTable.js":18,"../languages/lang":54,"./CPPalette.js":39,"./CPSlider.js":44,"jquery":296,"wolfy87-eventemitter":314}],50:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -26036,12 +26243,14 @@ function CPToolPalette(cpController) {
       className: "chickenpaint-tool-airbrush",
       command: "CPAirbrush",
       toolTip: "Airbrush",
+      shortcut: "a",
       mode: _ChickenPaint.default.M_DRAW,
       tool: _ChickenPaint.default.T_AIRBRUSH
     }, {
       className: "chickenpaint-tool-water",
       command: "CPWater",
       toolTip: "Waterpaint",
+      shortcut: "w",
       mode: _ChickenPaint.default.M_DRAW,
       tool: _ChickenPaint.default.T_WATER
     }, {
@@ -26055,18 +26264,21 @@ function CPToolPalette(cpController) {
       className: "chickenpaint-tool-soft-eraser",
       command: "CPSoftEraser",
       toolTip: "Soft eraser",
+      shortcut: "s",
       mode: _ChickenPaint.default.M_DRAW,
       tool: _ChickenPaint.default.T_SOFTERASER
     }, {
       className: "chickenpaint-tool-smudge",
       command: "CPSmudge",
       toolTip: "Smudge",
+      shortcut: "d",
       mode: _ChickenPaint.default.M_DRAW,
       tool: _ChickenPaint.default.T_SMUDGE
     }, {
       className: "chickenpaint-tool-blender",
       command: "CPBlender",
       toolTip: "Blender",
+      shortcut: "c",
       mode: _ChickenPaint.default.M_DRAW,
       tool: _ChickenPaint.default.T_BLENDER
     }, {
@@ -26167,7 +26379,7 @@ CPToolPalette.prototype = Object.create(_CPPalette.default.prototype);
 CPToolPalette.prototype.constructor = CPToolPalette;
 module.exports = exports.default;
 
-},{"../../lib/keymaster.js":68,"../ChickenPaint.js":1,"../languages/lang":54,"./CPPalette.js":39,"jquery":265}],51:[function(require,module,exports){
+},{"../../lib/keymaster.js":68,"../ChickenPaint.js":1,"../languages/lang":54,"./CPPalette.js":39,"jquery":296}],51:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -26176,33 +26388,34 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = void 0;
 var _wolfy87Eventemitter = _interopRequireDefault(require("wolfy87-eventemitter"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor); } }
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); Object.defineProperty(subClass, "prototype", { writable: false }); if (superClass) _setPrototypeOf(subClass, superClass); }
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } else if (call !== void 0) { throw new TypeError("Derived constructors may only return object or undefined"); } return _assertThisInitialized(self); }
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
 var DEFAULTS = {
     toolbarStyle: "new"
   },
   LOCAL_STORAGE_KEY_NAME = "chickenpaint-prefs";
-var CPUserPreferences = /*#__PURE__*/function (_EventEmitter) {
+var CPUserPreferences = exports.default = /*#__PURE__*/function (_EventEmitter) {
   _inherits(CPUserPreferences, _EventEmitter);
   var _super = _createSuper(CPUserPreferences);
-  /**
-   * Either "new" or "old"
-   */
-
   function CPUserPreferences() {
     var _this;
     _classCallCheck(this, CPUserPreferences);
     _this = _super.call(this);
+    /**
+     * Either "new" or "old"
+     */
     _defineProperty(_assertThisInitialized(_this), "toolbarStyle", void 0);
     _this.setDefaults();
     return _this;
@@ -26278,10 +26491,9 @@ var CPUserPreferences = /*#__PURE__*/function (_EventEmitter) {
   }]);
   return CPUserPreferences;
 }(_wolfy87Eventemitter.default);
-exports.default = CPUserPreferences;
 module.exports = exports.default;
 
-},{"wolfy87-eventemitter":284}],52:[function(require,module,exports){
+},{"wolfy87-eventemitter":314}],52:[function(require,module,exports){
 module.exports={
   "Dodge (tool)": "Dodge",
   "Burn (tool)": "Burn",
@@ -26329,6 +26541,7 @@ module.exports={
     "Flip vertical": "上下反転",
     "Invert": "ネガポジ反転",
     "Box blur...": "ぼかし",
+    "Box blur": "ぼかし",
     "Blur amount (pixels)": "ぼかし量(ピクセル単位)",
     "Iterations (1-8, larger gives smoother blur)": "反復(1-8,大きいほどぼかしが滑らか)",
     "Monochromatic noise": "単色ノイズ",
@@ -26360,9 +26573,20 @@ module.exports={
   "Help": "ヘルプ",
     "Tablet support":  "タブレットサポート",
     "Shortcuts": "ショートカット",
-    "About": "ChickenPaintについて",
+    "About": "ChickenPaint Beについて",
   
-  "Misc": "操作",
+	"Removes all undo/redo information to regain memory": "履歴をクリアしてメモリを開放します",
+	"Clears the selected area":	"消去",
+	"Invert the image colors": "ネガポジ反転",
+	"Blur effect": "ぼかしフィルタ",
+	"Fills the selection with noise": "単色ノイズで塗り潰し",
+	"Fills the selection with colored noise": "カラーノイズで塗り潰し",
+	"Linear interpolation is used to give a smoothed looked to the picture when zoomed in":
+	"画像の拡大時に補完して滑らかに表示します",
+	"Rearrange the palette windows": "パレットを再配置",
+	"Hides or shows all palettes": "パレットの表示/非表示",
+
+"Misc": "操作",
   
   "Round Pixelated": "円ピクセル",
   "Round Hard Edge": "円ハードエッジ",
@@ -26389,7 +26613,7 @@ module.exports={
     "Load swatches from your computer...": "カラーセットをPCから読み込み",
     "Add the current brush color as a new swatch": "選択中の色を追加",
 
-  "Sample all layers": "全レイヤー参照",
+  "Sample all layers": "全レイヤー混合",
   "Lock transparency": "透明部分を保護",
   
   "Textures": "テクスチャ",
@@ -26400,7 +26624,7 @@ module.exports={
     "Contrast": "コントラスト",
     "Reset": "リセット",
   
-  "Blending mode": "合成モード",
+	"Layer blending mode": "合成モード",
     "Normal": "通常",
     "Multiply": "乗算",
     "Add": "加算",
@@ -26454,6 +26678,15 @@ module.exports={
   "Add mask": "レイヤーマスク追加",
   
   "Gradient": "グラデーション作成",
+  "Transform style": "変形スタイル", 
+  "Apply transform": "変形確定",
+  "Complete transform": "変形を完了",
+  "Undo transform": "取り消し",
+  "You need to finish transforming this layer before you can do that. What would you like to do with the transform?":
+   "続行するために変形を完了します。",
+  "Smooth": "スムーズ",
+  "Sharp": "シャープ",
+  "Opacity: ":"不透明度:",
 
   "Please enter a color in hex format": "16進形式で色を入力してください（#xxxxxxの形）",
   
@@ -26462,9 +26695,57 @@ module.exports={
   "Okay": "OK",
   "OK": "OK",
 
+  "Whoops! This layer is currently hidden": "非表示レイヤーです。",
+  "Whoops! This layer's opacity is currently 0%": "レイヤーの不透明度が0%です",
+  "Whoops! You can't draw on a group": "グループフォルダには描けません",
+  "Whoops! All of the selected pixels are transparent!": "レイヤーが空です",
+ 
+  "Image": "画像",
+  "Layer mask": "レイヤーマスク",
+
+  "Sorry, you can't remove the last remaining layer in the drawing.": "最後の1つなので削除できません。",
+ 
   "Are you sure you want to send your drawing to the server and finish drawing now?": "お絵かきをサーバーに送信します。終了してもよろしいですか？",
   "Your drawing has unsaved changes! Are you sure to want to navigate away?": "お絵かきに未保存の変更があります。終了してもよろしいですか？",
-          
+
+
+"Many of the menu options and painting tools have keyboard shortcuts which are written next to them or appear when you hover.":
+ "利用可能なキーボードショートカットのいくつかはメニューの横やツールチップに表示されています。",
+
+"Here are some other shortcuts which are not as obvious!": "この一覧はそれ以外のショートカットをまとめたものです。",
+
+"Right" : "右",
+"Left" : "左",
+"Middle": "中",
+"or": "または",
+"Double click": "ダブルクリック",
+
+"Color swatches palette": "カラーセット",
+"Use as the drawing color": "パレットの色を取得",
+"Remove or replace a color swatch": "パレットの変更･削除",
+
+"Line drawing mode": "直線モード",
+"Snap line to nearest 45 degrees": "45°単位でスナップ",
+
+"Painting tools": "ツール",
+"Change brush opacity": "ブラシの不透明度",
+"Change brush size": "ブラシサイズ",
+
+"Brush palette": "ブラシパレット",
+"Adjust brush sliders more precisely": "ブラシスライダーをより細かく調整",
+
+"Drawing canvas": "キャンバス",
+
+"Move the canvas around": "キャンバスを移動",
+"Rotate the canvas": "キャンバスの回転",
+
+"Sample the color under the cursor": "キャンバスの色をスポイト",
+"Layers palette": "レイヤーパレット",
+"Rename layer": "レイヤー名変更",
+"Toggle mask enable/disable": "マスクの有効/無効切り替え",
+"Toggle mask View":"マスクの表示/非表示切り替え",
+
+
   "Save Oekaki": "保存",
   
   "Saving drawing...": "お絵かきを保存中…",
@@ -26474,20 +26755,22 @@ module.exports={
   "Your drawing has been saved, would you like to post it to the forum now?": "お絵かきが保存されました。フォーラムへ投稿しますか？",
   "Yes, post it now": "はい、投稿します",
   "No, keep drawing": "まだ描きます",
-  "No, quit and I'll finish it later": "アプリを終了し続きを後で描く",
+  "No, quit and I'll finish it later": "アプリを終了して続きを後で描く",
 
   "Your drawing has been saved, would you like to view it on the forum now?": "お絵かきが保存されました。フォーラムへ投稿しますか？",
   "Yes, view the post": "はい、投稿します。",
 
   "Your drawing has been saved, redirecting you to view your new post now...": "お絵かきが保存されました。投稿先に移動します。",
 
-  "Sorry, your drawing could not be saved, please try again later.": "お絵かきが保存できませんでした。再度投稿してみてください。"
+  "Sorry, your drawing could not be saved, please try again later.": "お絵かきが保存できませんでした。再度投稿してみてください。",
+
+  "The error returned from the server was": "サーバから返って来たエラー"
 }
 
 },{}],54:[function(require,module,exports){
 "use strict";
 
-function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -26497,11 +26780,11 @@ exports.guessLanguage = guessLanguage;
 exports.setLanguage = setLanguage;
 var en = _interopRequireWildcard(require("./en.json"));
 var ja = _interopRequireWildcard(require("./ja.json"));
-function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
-function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(e) { return e ? t : r; })(e); }
+function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != _typeof(e) && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && Object.prototype.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
 function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
 var languages = {
   ja: ja,
   en: en
@@ -26509,7 +26792,8 @@ var languages = {
 var currentLang = en,
   currentLangName = "en";
 function setLanguage(languageCode) {
-  languageCode = languageCode.replace(/[-_].+$/, "").toLowerCase();
+  //取得した言語がja-jpなら、jaのみにする
+  languageCode = languageCode.split(/[-_]/, 1)[0].toLowerCase();
   if (languageCode in languages) {
     currentLang = languages[languageCode];
     currentLangName = languageCode;
@@ -27510,7 +27794,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = CPRect;
-function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 /*
     ChickenPaint
     
@@ -28708,12 +28992,8 @@ function debounce(delay, at_begin, callback) {
       '.': 190,
       '/': 191,
       '`': 192,
-      '-': function _() {
-        return getBrowserName() == "firefox" ? 173 : 189;
-      },
-      '=': function _() {
-        return getBrowserName() == "firefox" ? 61 : 187;
-      },
+      '-': 189,
+      '=': 187,
       ';': 186,
       '\'': 222,
       '[': 219,
@@ -28725,16 +29005,12 @@ function debounce(delay, at_begin, callback) {
       return typeof code === "function" ? code() : code;
     },
     _downKeys = [];
-  for (k = 1; k < 20; k++) {
-    _MAP['f' + k] = 111 + k;
-  }
+  for (k = 1; k < 20; k++) _MAP['f' + k] = 111 + k;
 
   // IE doesn't support Array#indexOf, so have a simple replacement
   function index(array, item) {
     var i = array.length;
-    while (i--) {
-      if (array[i] === item) return i;
-    }
+    while (i--) if (array[i] === item) return i;
     return -1;
   }
 
@@ -28756,9 +29032,7 @@ function debounce(delay, at_begin, callback) {
     91: 'metaKey'
   };
   function updateModifierKey(event) {
-    for (k in _mods) {
-      _mods[k] = event[modifierMap[k]];
-    }
+    for (k in _mods) _mods[k] = event[modifierMap[k]];
   }
   ;
 
@@ -28772,13 +29046,10 @@ function debounce(delay, at_begin, callback) {
     }
 
     // if a modifier key, set the key.<modifierkeyname> property to true and return
-    if (key == 93 || key == 224) key = 91; // right command on webkit, command on Gecko
     if (key in _mods) {
       _mods[key] = true;
       // 'assignKey' from inside this closure is exported to window.key
-      for (k in _MODIFIERS) {
-        if (_MODIFIERS[k] == key) assignKey[k] = true;
-      }
+      for (k in _MODIFIERS) if (_MODIFIERS[k] == key) assignKey[k] = true;
       return;
     }
     updateModifierKey(event);
@@ -28799,9 +29070,7 @@ function debounce(delay, at_begin, callback) {
       if (handler.scope == scope || handler.scope == 'all') {
         // check if modifiers match if any
         modifiersMatch = handler.mods.length > 0;
-        for (k in _mods) {
-          if (!_mods[k] && index(handler.mods, +k) > -1 || _mods[k] && index(handler.mods, +k) == -1) modifiersMatch = false;
-        }
+        for (k in _mods) if (!_mods[k] && index(handler.mods, +k) > -1 || _mods[k] && index(handler.mods, +k) == -1) modifiersMatch = false;
         // call the handler and stop the event if neccessary
         if (handler.mods.length == 0 && !_mods[16] && !_mods[18] && !_mods[17] && !_mods[91] || modifiersMatch) {
           if (handler.method(event, handler) === false) {
@@ -28826,22 +29095,15 @@ function debounce(delay, at_begin, callback) {
     if (i >= 0) {
       _downKeys.splice(i, 1);
     }
-    if (key == 93 || key == 224) key = 91;
     if (key in _mods) {
       _mods[key] = false;
-      for (k in _MODIFIERS) {
-        if (_MODIFIERS[k] == key) assignKey[k] = false;
-      }
+      for (k in _MODIFIERS) if (_MODIFIERS[k] == key) assignKey[k] = false;
     }
   }
   ;
   function resetModifiers() {
-    for (k in _mods) {
-      _mods[k] = false;
-    }
-    for (k in _MODIFIERS) {
-      assignKey[k] = false;
-    }
+    for (k in _mods) _mods[k] = false;
+    for (k in _MODIFIERS) assignKey[k] = false;
   }
   ;
 
@@ -28930,9 +29192,7 @@ function debounce(delay, at_begin, callback) {
   }
 
   // initialize key.<modifier> to false
-  for (k in _MODIFIERS) {
-    assignKey[k] = false;
-  }
+  for (k in _MODIFIERS) assignKey[k] = false;
 
   // set current scope (default 'all')
   function setScope(scope) {
@@ -28970,17 +29230,15 @@ function debounce(delay, at_begin, callback) {
   // abstract mods logic for assign and unassign
   function getMods(key) {
     var mods = key.slice(0, key.length - 1);
-    for (var mi = 0; mi < mods.length; mi++) {
-      mods[mi] = _MODIFIERS[mods[mi]];
-    }
+    for (var mi = 0; mi < mods.length; mi++) mods[mi] = _MODIFIERS[mods[mi]];
     return mods;
   }
 
   // cross-browser events
   function addEvent(object, event, method) {
-    if (object.addEventListener) object.addEventListener(event, method, false);else if (object.attachEvent) object.attachEvent('on' + event, function () {
-      method(window.event);
-    });
+    if (object.addEventListener) object.addEventListener(event, method, false);
+    //   else if(object.attachEvent)
+    // 	object.attachEvent('on'+event, function(){ method(window.event) });
   }
   ;
 
@@ -29045,7 +29303,14 @@ function getKeyCodeFromKey(key) {
     '-': 189,
     '=': 187,
     '+': 187,
-    ';': 187
+    ';': 187,
+    'META': 91,
+    'LEFTMETA': 91,
+    'RIGHTMETA': 91,
+    'ALT': 18,
+    'ALTGRAPH': 18,
+    'OPTION': 18,
+    'CONTROL': 17
   };
   for (var i = 65; i <= 90; i++) {
     var Alphabet_key = String.fromCharCode(i);
@@ -29091,4377 +29356,22 @@ function getKeyCodeFromKey(key) {
 })();
 
 },{}],70:[function(require,module,exports){
-/*!
-  * Bootstrap v4.6.2 (https://getbootstrap.com/)
-  * Copyright 2011-2022 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
-  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
-  */
-(function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('jquery'), require('popper.js')) :
-  typeof define === 'function' && define.amd ? define(['exports', 'jquery', 'popper.js'], factory) :
-  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.bootstrap = {}, global.jQuery, global.Popper));
-})(this, (function (exports, $, Popper) { 'use strict';
-
-  function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
-
-  var $__default = /*#__PURE__*/_interopDefaultLegacy($);
-  var Popper__default = /*#__PURE__*/_interopDefaultLegacy(Popper);
-
-  function _defineProperties(target, props) {
-    for (var i = 0; i < props.length; i++) {
-      var descriptor = props[i];
-      descriptor.enumerable = descriptor.enumerable || false;
-      descriptor.configurable = true;
-      if ("value" in descriptor) descriptor.writable = true;
-      Object.defineProperty(target, descriptor.key, descriptor);
-    }
-  }
-
-  function _createClass(Constructor, protoProps, staticProps) {
-    if (protoProps) _defineProperties(Constructor.prototype, protoProps);
-    if (staticProps) _defineProperties(Constructor, staticProps);
-    Object.defineProperty(Constructor, "prototype", {
-      writable: false
-    });
-    return Constructor;
-  }
-
-  function _extends() {
-    _extends = Object.assign ? Object.assign.bind() : function (target) {
-      for (var i = 1; i < arguments.length; i++) {
-        var source = arguments[i];
-
-        for (var key in source) {
-          if (Object.prototype.hasOwnProperty.call(source, key)) {
-            target[key] = source[key];
-          }
-        }
-      }
-
-      return target;
-    };
-    return _extends.apply(this, arguments);
-  }
-
-  function _inheritsLoose(subClass, superClass) {
-    subClass.prototype = Object.create(superClass.prototype);
-    subClass.prototype.constructor = subClass;
-
-    _setPrototypeOf(subClass, superClass);
-  }
-
-  function _setPrototypeOf(o, p) {
-    _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) {
-      o.__proto__ = p;
-      return o;
-    };
-    return _setPrototypeOf(o, p);
-  }
-
-  /**
-   * --------------------------------------------------------------------------
-   * Bootstrap (v4.6.2): util.js
-   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
-   * --------------------------------------------------------------------------
-   */
-  /**
-   * Private TransitionEnd Helpers
-   */
-
-  var TRANSITION_END = 'transitionend';
-  var MAX_UID = 1000000;
-  var MILLISECONDS_MULTIPLIER = 1000; // Shoutout AngusCroll (https://goo.gl/pxwQGp)
-
-  function toType(obj) {
-    if (obj === null || typeof obj === 'undefined') {
-      return "" + obj;
-    }
-
-    return {}.toString.call(obj).match(/\s([a-z]+)/i)[1].toLowerCase();
-  }
-
-  function getSpecialTransitionEndEvent() {
-    return {
-      bindType: TRANSITION_END,
-      delegateType: TRANSITION_END,
-      handle: function handle(event) {
-        if ($__default["default"](event.target).is(this)) {
-          return event.handleObj.handler.apply(this, arguments); // eslint-disable-line prefer-rest-params
-        }
-
-        return undefined;
-      }
-    };
-  }
-
-  function transitionEndEmulator(duration) {
-    var _this = this;
-
-    var called = false;
-    $__default["default"](this).one(Util.TRANSITION_END, function () {
-      called = true;
-    });
-    setTimeout(function () {
-      if (!called) {
-        Util.triggerTransitionEnd(_this);
-      }
-    }, duration);
-    return this;
-  }
-
-  function setTransitionEndSupport() {
-    $__default["default"].fn.emulateTransitionEnd = transitionEndEmulator;
-    $__default["default"].event.special[Util.TRANSITION_END] = getSpecialTransitionEndEvent();
-  }
-  /**
-   * Public Util API
-   */
-
-
-  var Util = {
-    TRANSITION_END: 'bsTransitionEnd',
-    getUID: function getUID(prefix) {
-      do {
-        // eslint-disable-next-line no-bitwise
-        prefix += ~~(Math.random() * MAX_UID); // "~~" acts like a faster Math.floor() here
-      } while (document.getElementById(prefix));
-
-      return prefix;
-    },
-    getSelectorFromElement: function getSelectorFromElement(element) {
-      var selector = element.getAttribute('data-target');
-
-      if (!selector || selector === '#') {
-        var hrefAttr = element.getAttribute('href');
-        selector = hrefAttr && hrefAttr !== '#' ? hrefAttr.trim() : '';
-      }
-
-      try {
-        return document.querySelector(selector) ? selector : null;
-      } catch (_) {
-        return null;
-      }
-    },
-    getTransitionDurationFromElement: function getTransitionDurationFromElement(element) {
-      if (!element) {
-        return 0;
-      } // Get transition-duration of the element
-
-
-      var transitionDuration = $__default["default"](element).css('transition-duration');
-      var transitionDelay = $__default["default"](element).css('transition-delay');
-      var floatTransitionDuration = parseFloat(transitionDuration);
-      var floatTransitionDelay = parseFloat(transitionDelay); // Return 0 if element or transition duration is not found
-
-      if (!floatTransitionDuration && !floatTransitionDelay) {
-        return 0;
-      } // If multiple durations are defined, take the first
-
-
-      transitionDuration = transitionDuration.split(',')[0];
-      transitionDelay = transitionDelay.split(',')[0];
-      return (parseFloat(transitionDuration) + parseFloat(transitionDelay)) * MILLISECONDS_MULTIPLIER;
-    },
-    reflow: function reflow(element) {
-      return element.offsetHeight;
-    },
-    triggerTransitionEnd: function triggerTransitionEnd(element) {
-      $__default["default"](element).trigger(TRANSITION_END);
-    },
-    supportsTransitionEnd: function supportsTransitionEnd() {
-      return Boolean(TRANSITION_END);
-    },
-    isElement: function isElement(obj) {
-      return (obj[0] || obj).nodeType;
-    },
-    typeCheckConfig: function typeCheckConfig(componentName, config, configTypes) {
-      for (var property in configTypes) {
-        if (Object.prototype.hasOwnProperty.call(configTypes, property)) {
-          var expectedTypes = configTypes[property];
-          var value = config[property];
-          var valueType = value && Util.isElement(value) ? 'element' : toType(value);
-
-          if (!new RegExp(expectedTypes).test(valueType)) {
-            throw new Error(componentName.toUpperCase() + ": " + ("Option \"" + property + "\" provided type \"" + valueType + "\" ") + ("but expected type \"" + expectedTypes + "\"."));
-          }
-        }
-      }
-    },
-    findShadowRoot: function findShadowRoot(element) {
-      if (!document.documentElement.attachShadow) {
-        return null;
-      } // Can find the shadow root otherwise it'll return the document
-
-
-      if (typeof element.getRootNode === 'function') {
-        var root = element.getRootNode();
-        return root instanceof ShadowRoot ? root : null;
-      }
-
-      if (element instanceof ShadowRoot) {
-        return element;
-      } // when we don't find a shadow root
-
-
-      if (!element.parentNode) {
-        return null;
-      }
-
-      return Util.findShadowRoot(element.parentNode);
-    },
-    jQueryDetection: function jQueryDetection() {
-      if (typeof $__default["default"] === 'undefined') {
-        throw new TypeError('Bootstrap\'s JavaScript requires jQuery. jQuery must be included before Bootstrap\'s JavaScript.');
-      }
-
-      var version = $__default["default"].fn.jquery.split(' ')[0].split('.');
-      var minMajor = 1;
-      var ltMajor = 2;
-      var minMinor = 9;
-      var minPatch = 1;
-      var maxMajor = 4;
-
-      if (version[0] < ltMajor && version[1] < minMinor || version[0] === minMajor && version[1] === minMinor && version[2] < minPatch || version[0] >= maxMajor) {
-        throw new Error('Bootstrap\'s JavaScript requires at least jQuery v1.9.1 but less than v4.0.0');
-      }
-    }
-  };
-  Util.jQueryDetection();
-  setTransitionEndSupport();
-
-  /**
-   * Constants
-   */
-
-  var NAME$a = 'alert';
-  var VERSION$a = '4.6.2';
-  var DATA_KEY$a = 'bs.alert';
-  var EVENT_KEY$a = "." + DATA_KEY$a;
-  var DATA_API_KEY$7 = '.data-api';
-  var JQUERY_NO_CONFLICT$a = $__default["default"].fn[NAME$a];
-  var CLASS_NAME_ALERT = 'alert';
-  var CLASS_NAME_FADE$5 = 'fade';
-  var CLASS_NAME_SHOW$7 = 'show';
-  var EVENT_CLOSE = "close" + EVENT_KEY$a;
-  var EVENT_CLOSED = "closed" + EVENT_KEY$a;
-  var EVENT_CLICK_DATA_API$6 = "click" + EVENT_KEY$a + DATA_API_KEY$7;
-  var SELECTOR_DISMISS = '[data-dismiss="alert"]';
-  /**
-   * Class definition
-   */
-
-  var Alert = /*#__PURE__*/function () {
-    function Alert(element) {
-      this._element = element;
-    } // Getters
-
-
-    var _proto = Alert.prototype;
-
-    // Public
-    _proto.close = function close(element) {
-      var rootElement = this._element;
-
-      if (element) {
-        rootElement = this._getRootElement(element);
-      }
-
-      var customEvent = this._triggerCloseEvent(rootElement);
-
-      if (customEvent.isDefaultPrevented()) {
-        return;
-      }
-
-      this._removeElement(rootElement);
-    };
-
-    _proto.dispose = function dispose() {
-      $__default["default"].removeData(this._element, DATA_KEY$a);
-      this._element = null;
-    } // Private
-    ;
-
-    _proto._getRootElement = function _getRootElement(element) {
-      var selector = Util.getSelectorFromElement(element);
-      var parent = false;
-
-      if (selector) {
-        parent = document.querySelector(selector);
-      }
-
-      if (!parent) {
-        parent = $__default["default"](element).closest("." + CLASS_NAME_ALERT)[0];
-      }
-
-      return parent;
-    };
-
-    _proto._triggerCloseEvent = function _triggerCloseEvent(element) {
-      var closeEvent = $__default["default"].Event(EVENT_CLOSE);
-      $__default["default"](element).trigger(closeEvent);
-      return closeEvent;
-    };
-
-    _proto._removeElement = function _removeElement(element) {
-      var _this = this;
-
-      $__default["default"](element).removeClass(CLASS_NAME_SHOW$7);
-
-      if (!$__default["default"](element).hasClass(CLASS_NAME_FADE$5)) {
-        this._destroyElement(element);
-
-        return;
-      }
-
-      var transitionDuration = Util.getTransitionDurationFromElement(element);
-      $__default["default"](element).one(Util.TRANSITION_END, function (event) {
-        return _this._destroyElement(element, event);
-      }).emulateTransitionEnd(transitionDuration);
-    };
-
-    _proto._destroyElement = function _destroyElement(element) {
-      $__default["default"](element).detach().trigger(EVENT_CLOSED).remove();
-    } // Static
-    ;
-
-    Alert._jQueryInterface = function _jQueryInterface(config) {
-      return this.each(function () {
-        var $element = $__default["default"](this);
-        var data = $element.data(DATA_KEY$a);
-
-        if (!data) {
-          data = new Alert(this);
-          $element.data(DATA_KEY$a, data);
-        }
-
-        if (config === 'close') {
-          data[config](this);
-        }
-      });
-    };
-
-    Alert._handleDismiss = function _handleDismiss(alertInstance) {
-      return function (event) {
-        if (event) {
-          event.preventDefault();
-        }
-
-        alertInstance.close(this);
-      };
-    };
-
-    _createClass(Alert, null, [{
-      key: "VERSION",
-      get: function get() {
-        return VERSION$a;
-      }
-    }]);
-
-    return Alert;
-  }();
-  /**
-   * Data API implementation
-   */
-
-
-  $__default["default"](document).on(EVENT_CLICK_DATA_API$6, SELECTOR_DISMISS, Alert._handleDismiss(new Alert()));
-  /**
-   * jQuery
-   */
-
-  $__default["default"].fn[NAME$a] = Alert._jQueryInterface;
-  $__default["default"].fn[NAME$a].Constructor = Alert;
-
-  $__default["default"].fn[NAME$a].noConflict = function () {
-    $__default["default"].fn[NAME$a] = JQUERY_NO_CONFLICT$a;
-    return Alert._jQueryInterface;
-  };
-
-  /**
-   * Constants
-   */
-
-  var NAME$9 = 'button';
-  var VERSION$9 = '4.6.2';
-  var DATA_KEY$9 = 'bs.button';
-  var EVENT_KEY$9 = "." + DATA_KEY$9;
-  var DATA_API_KEY$6 = '.data-api';
-  var JQUERY_NO_CONFLICT$9 = $__default["default"].fn[NAME$9];
-  var CLASS_NAME_ACTIVE$3 = 'active';
-  var CLASS_NAME_BUTTON = 'btn';
-  var CLASS_NAME_FOCUS = 'focus';
-  var EVENT_CLICK_DATA_API$5 = "click" + EVENT_KEY$9 + DATA_API_KEY$6;
-  var EVENT_FOCUS_BLUR_DATA_API = "focus" + EVENT_KEY$9 + DATA_API_KEY$6 + " " + ("blur" + EVENT_KEY$9 + DATA_API_KEY$6);
-  var EVENT_LOAD_DATA_API$2 = "load" + EVENT_KEY$9 + DATA_API_KEY$6;
-  var SELECTOR_DATA_TOGGLE_CARROT = '[data-toggle^="button"]';
-  var SELECTOR_DATA_TOGGLES = '[data-toggle="buttons"]';
-  var SELECTOR_DATA_TOGGLE$4 = '[data-toggle="button"]';
-  var SELECTOR_DATA_TOGGLES_BUTTONS = '[data-toggle="buttons"] .btn';
-  var SELECTOR_INPUT = 'input:not([type="hidden"])';
-  var SELECTOR_ACTIVE$2 = '.active';
-  var SELECTOR_BUTTON = '.btn';
-  /**
-   * Class definition
-   */
-
-  var Button = /*#__PURE__*/function () {
-    function Button(element) {
-      this._element = element;
-      this.shouldAvoidTriggerChange = false;
-    } // Getters
-
-
-    var _proto = Button.prototype;
-
-    // Public
-    _proto.toggle = function toggle() {
-      var triggerChangeEvent = true;
-      var addAriaPressed = true;
-      var rootElement = $__default["default"](this._element).closest(SELECTOR_DATA_TOGGLES)[0];
-
-      if (rootElement) {
-        var input = this._element.querySelector(SELECTOR_INPUT);
-
-        if (input) {
-          if (input.type === 'radio') {
-            if (input.checked && this._element.classList.contains(CLASS_NAME_ACTIVE$3)) {
-              triggerChangeEvent = false;
-            } else {
-              var activeElement = rootElement.querySelector(SELECTOR_ACTIVE$2);
-
-              if (activeElement) {
-                $__default["default"](activeElement).removeClass(CLASS_NAME_ACTIVE$3);
-              }
-            }
-          }
-
-          if (triggerChangeEvent) {
-            // if it's not a radio button or checkbox don't add a pointless/invalid checked property to the input
-            if (input.type === 'checkbox' || input.type === 'radio') {
-              input.checked = !this._element.classList.contains(CLASS_NAME_ACTIVE$3);
-            }
-
-            if (!this.shouldAvoidTriggerChange) {
-              $__default["default"](input).trigger('change');
-            }
-          }
-
-          input.focus();
-          addAriaPressed = false;
-        }
-      }
-
-      if (!(this._element.hasAttribute('disabled') || this._element.classList.contains('disabled'))) {
-        if (addAriaPressed) {
-          this._element.setAttribute('aria-pressed', !this._element.classList.contains(CLASS_NAME_ACTIVE$3));
-        }
-
-        if (triggerChangeEvent) {
-          $__default["default"](this._element).toggleClass(CLASS_NAME_ACTIVE$3);
-        }
-      }
-    };
-
-    _proto.dispose = function dispose() {
-      $__default["default"].removeData(this._element, DATA_KEY$9);
-      this._element = null;
-    } // Static
-    ;
-
-    Button._jQueryInterface = function _jQueryInterface(config, avoidTriggerChange) {
-      return this.each(function () {
-        var $element = $__default["default"](this);
-        var data = $element.data(DATA_KEY$9);
-
-        if (!data) {
-          data = new Button(this);
-          $element.data(DATA_KEY$9, data);
-        }
-
-        data.shouldAvoidTriggerChange = avoidTriggerChange;
-
-        if (config === 'toggle') {
-          data[config]();
-        }
-      });
-    };
-
-    _createClass(Button, null, [{
-      key: "VERSION",
-      get: function get() {
-        return VERSION$9;
-      }
-    }]);
-
-    return Button;
-  }();
-  /**
-   * Data API implementation
-   */
-
-
-  $__default["default"](document).on(EVENT_CLICK_DATA_API$5, SELECTOR_DATA_TOGGLE_CARROT, function (event) {
-    var button = event.target;
-    var initialButton = button;
-
-    if (!$__default["default"](button).hasClass(CLASS_NAME_BUTTON)) {
-      button = $__default["default"](button).closest(SELECTOR_BUTTON)[0];
-    }
-
-    if (!button || button.hasAttribute('disabled') || button.classList.contains('disabled')) {
-      event.preventDefault(); // work around Firefox bug #1540995
-    } else {
-      var inputBtn = button.querySelector(SELECTOR_INPUT);
-
-      if (inputBtn && (inputBtn.hasAttribute('disabled') || inputBtn.classList.contains('disabled'))) {
-        event.preventDefault(); // work around Firefox bug #1540995
-
-        return;
-      }
-
-      if (initialButton.tagName === 'INPUT' || button.tagName !== 'LABEL') {
-        Button._jQueryInterface.call($__default["default"](button), 'toggle', initialButton.tagName === 'INPUT');
-      }
-    }
-  }).on(EVENT_FOCUS_BLUR_DATA_API, SELECTOR_DATA_TOGGLE_CARROT, function (event) {
-    var button = $__default["default"](event.target).closest(SELECTOR_BUTTON)[0];
-    $__default["default"](button).toggleClass(CLASS_NAME_FOCUS, /^focus(in)?$/.test(event.type));
-  });
-  $__default["default"](window).on(EVENT_LOAD_DATA_API$2, function () {
-    // ensure correct active class is set to match the controls' actual values/states
-    // find all checkboxes/readio buttons inside data-toggle groups
-    var buttons = [].slice.call(document.querySelectorAll(SELECTOR_DATA_TOGGLES_BUTTONS));
-
-    for (var i = 0, len = buttons.length; i < len; i++) {
-      var button = buttons[i];
-      var input = button.querySelector(SELECTOR_INPUT);
-
-      if (input.checked || input.hasAttribute('checked')) {
-        button.classList.add(CLASS_NAME_ACTIVE$3);
-      } else {
-        button.classList.remove(CLASS_NAME_ACTIVE$3);
-      }
-    } // find all button toggles
-
-
-    buttons = [].slice.call(document.querySelectorAll(SELECTOR_DATA_TOGGLE$4));
-
-    for (var _i = 0, _len = buttons.length; _i < _len; _i++) {
-      var _button = buttons[_i];
-
-      if (_button.getAttribute('aria-pressed') === 'true') {
-        _button.classList.add(CLASS_NAME_ACTIVE$3);
-      } else {
-        _button.classList.remove(CLASS_NAME_ACTIVE$3);
-      }
-    }
-  });
-  /**
-   * jQuery
-   */
-
-  $__default["default"].fn[NAME$9] = Button._jQueryInterface;
-  $__default["default"].fn[NAME$9].Constructor = Button;
-
-  $__default["default"].fn[NAME$9].noConflict = function () {
-    $__default["default"].fn[NAME$9] = JQUERY_NO_CONFLICT$9;
-    return Button._jQueryInterface;
-  };
-
-  /**
-   * Constants
-   */
-
-  var NAME$8 = 'carousel';
-  var VERSION$8 = '4.6.2';
-  var DATA_KEY$8 = 'bs.carousel';
-  var EVENT_KEY$8 = "." + DATA_KEY$8;
-  var DATA_API_KEY$5 = '.data-api';
-  var JQUERY_NO_CONFLICT$8 = $__default["default"].fn[NAME$8];
-  var ARROW_LEFT_KEYCODE = 'ArrowLeft'; // Keyboardevent.key value for left arrow key
-
-  var ARROW_RIGHT_KEYCODE = 'ArrowRight'; // Keyboardevent.key value for right arrow key
-
-  var TOUCHEVENT_COMPAT_WAIT = 500; // Time for mouse compat events to fire after touch
-
-  var SWIPE_THRESHOLD = 40;
-  var CLASS_NAME_CAROUSEL = 'carousel';
-  var CLASS_NAME_ACTIVE$2 = 'active';
-  var CLASS_NAME_SLIDE = 'slide';
-  var CLASS_NAME_RIGHT = 'carousel-item-right';
-  var CLASS_NAME_LEFT = 'carousel-item-left';
-  var CLASS_NAME_NEXT = 'carousel-item-next';
-  var CLASS_NAME_PREV = 'carousel-item-prev';
-  var CLASS_NAME_POINTER_EVENT = 'pointer-event';
-  var DIRECTION_NEXT = 'next';
-  var DIRECTION_PREV = 'prev';
-  var DIRECTION_LEFT = 'left';
-  var DIRECTION_RIGHT = 'right';
-  var EVENT_SLIDE = "slide" + EVENT_KEY$8;
-  var EVENT_SLID = "slid" + EVENT_KEY$8;
-  var EVENT_KEYDOWN = "keydown" + EVENT_KEY$8;
-  var EVENT_MOUSEENTER = "mouseenter" + EVENT_KEY$8;
-  var EVENT_MOUSELEAVE = "mouseleave" + EVENT_KEY$8;
-  var EVENT_TOUCHSTART = "touchstart" + EVENT_KEY$8;
-  var EVENT_TOUCHMOVE = "touchmove" + EVENT_KEY$8;
-  var EVENT_TOUCHEND = "touchend" + EVENT_KEY$8;
-  var EVENT_POINTERDOWN = "pointerdown" + EVENT_KEY$8;
-  var EVENT_POINTERUP = "pointerup" + EVENT_KEY$8;
-  var EVENT_DRAG_START = "dragstart" + EVENT_KEY$8;
-  var EVENT_LOAD_DATA_API$1 = "load" + EVENT_KEY$8 + DATA_API_KEY$5;
-  var EVENT_CLICK_DATA_API$4 = "click" + EVENT_KEY$8 + DATA_API_KEY$5;
-  var SELECTOR_ACTIVE$1 = '.active';
-  var SELECTOR_ACTIVE_ITEM = '.active.carousel-item';
-  var SELECTOR_ITEM = '.carousel-item';
-  var SELECTOR_ITEM_IMG = '.carousel-item img';
-  var SELECTOR_NEXT_PREV = '.carousel-item-next, .carousel-item-prev';
-  var SELECTOR_INDICATORS = '.carousel-indicators';
-  var SELECTOR_DATA_SLIDE = '[data-slide], [data-slide-to]';
-  var SELECTOR_DATA_RIDE = '[data-ride="carousel"]';
-  var Default$7 = {
-    interval: 5000,
-    keyboard: true,
-    slide: false,
-    pause: 'hover',
-    wrap: true,
-    touch: true
-  };
-  var DefaultType$7 = {
-    interval: '(number|boolean)',
-    keyboard: 'boolean',
-    slide: '(boolean|string)',
-    pause: '(string|boolean)',
-    wrap: 'boolean',
-    touch: 'boolean'
-  };
-  var PointerType = {
-    TOUCH: 'touch',
-    PEN: 'pen'
-  };
-  /**
-   * Class definition
-   */
-
-  var Carousel = /*#__PURE__*/function () {
-    function Carousel(element, config) {
-      this._items = null;
-      this._interval = null;
-      this._activeElement = null;
-      this._isPaused = false;
-      this._isSliding = false;
-      this.touchTimeout = null;
-      this.touchStartX = 0;
-      this.touchDeltaX = 0;
-      this._config = this._getConfig(config);
-      this._element = element;
-      this._indicatorsElement = this._element.querySelector(SELECTOR_INDICATORS);
-      this._touchSupported = 'ontouchstart' in document.documentElement || navigator.maxTouchPoints > 0;
-      this._pointerEvent = Boolean(window.PointerEvent || window.MSPointerEvent);
-
-      this._addEventListeners();
-    } // Getters
-
-
-    var _proto = Carousel.prototype;
-
-    // Public
-    _proto.next = function next() {
-      if (!this._isSliding) {
-        this._slide(DIRECTION_NEXT);
-      }
-    };
-
-    _proto.nextWhenVisible = function nextWhenVisible() {
-      var $element = $__default["default"](this._element); // Don't call next when the page isn't visible
-      // or the carousel or its parent isn't visible
-
-      if (!document.hidden && $element.is(':visible') && $element.css('visibility') !== 'hidden') {
-        this.next();
-      }
-    };
-
-    _proto.prev = function prev() {
-      if (!this._isSliding) {
-        this._slide(DIRECTION_PREV);
-      }
-    };
-
-    _proto.pause = function pause(event) {
-      if (!event) {
-        this._isPaused = true;
-      }
-
-      if (this._element.querySelector(SELECTOR_NEXT_PREV)) {
-        Util.triggerTransitionEnd(this._element);
-        this.cycle(true);
-      }
-
-      clearInterval(this._interval);
-      this._interval = null;
-    };
-
-    _proto.cycle = function cycle(event) {
-      if (!event) {
-        this._isPaused = false;
-      }
-
-      if (this._interval) {
-        clearInterval(this._interval);
-        this._interval = null;
-      }
-
-      if (this._config.interval && !this._isPaused) {
-        this._updateInterval();
-
-        this._interval = setInterval((document.visibilityState ? this.nextWhenVisible : this.next).bind(this), this._config.interval);
-      }
-    };
-
-    _proto.to = function to(index) {
-      var _this = this;
-
-      this._activeElement = this._element.querySelector(SELECTOR_ACTIVE_ITEM);
-
-      var activeIndex = this._getItemIndex(this._activeElement);
-
-      if (index > this._items.length - 1 || index < 0) {
-        return;
-      }
-
-      if (this._isSliding) {
-        $__default["default"](this._element).one(EVENT_SLID, function () {
-          return _this.to(index);
-        });
-        return;
-      }
-
-      if (activeIndex === index) {
-        this.pause();
-        this.cycle();
-        return;
-      }
-
-      var direction = index > activeIndex ? DIRECTION_NEXT : DIRECTION_PREV;
-
-      this._slide(direction, this._items[index]);
-    };
-
-    _proto.dispose = function dispose() {
-      $__default["default"](this._element).off(EVENT_KEY$8);
-      $__default["default"].removeData(this._element, DATA_KEY$8);
-      this._items = null;
-      this._config = null;
-      this._element = null;
-      this._interval = null;
-      this._isPaused = null;
-      this._isSliding = null;
-      this._activeElement = null;
-      this._indicatorsElement = null;
-    } // Private
-    ;
-
-    _proto._getConfig = function _getConfig(config) {
-      config = _extends({}, Default$7, config);
-      Util.typeCheckConfig(NAME$8, config, DefaultType$7);
-      return config;
-    };
-
-    _proto._handleSwipe = function _handleSwipe() {
-      var absDeltax = Math.abs(this.touchDeltaX);
-
-      if (absDeltax <= SWIPE_THRESHOLD) {
-        return;
-      }
-
-      var direction = absDeltax / this.touchDeltaX;
-      this.touchDeltaX = 0; // swipe left
-
-      if (direction > 0) {
-        this.prev();
-      } // swipe right
-
-
-      if (direction < 0) {
-        this.next();
-      }
-    };
-
-    _proto._addEventListeners = function _addEventListeners() {
-      var _this2 = this;
-
-      if (this._config.keyboard) {
-        $__default["default"](this._element).on(EVENT_KEYDOWN, function (event) {
-          return _this2._keydown(event);
-        });
-      }
-
-      if (this._config.pause === 'hover') {
-        $__default["default"](this._element).on(EVENT_MOUSEENTER, function (event) {
-          return _this2.pause(event);
-        }).on(EVENT_MOUSELEAVE, function (event) {
-          return _this2.cycle(event);
-        });
-      }
-
-      if (this._config.touch) {
-        this._addTouchEventListeners();
-      }
-    };
-
-    _proto._addTouchEventListeners = function _addTouchEventListeners() {
-      var _this3 = this;
-
-      if (!this._touchSupported) {
-        return;
-      }
-
-      var start = function start(event) {
-        if (_this3._pointerEvent && PointerType[event.originalEvent.pointerType.toUpperCase()]) {
-          _this3.touchStartX = event.originalEvent.clientX;
-        } else if (!_this3._pointerEvent) {
-          _this3.touchStartX = event.originalEvent.touches[0].clientX;
-        }
-      };
-
-      var move = function move(event) {
-        // ensure swiping with one touch and not pinching
-        _this3.touchDeltaX = event.originalEvent.touches && event.originalEvent.touches.length > 1 ? 0 : event.originalEvent.touches[0].clientX - _this3.touchStartX;
-      };
-
-      var end = function end(event) {
-        if (_this3._pointerEvent && PointerType[event.originalEvent.pointerType.toUpperCase()]) {
-          _this3.touchDeltaX = event.originalEvent.clientX - _this3.touchStartX;
-        }
-
-        _this3._handleSwipe();
-
-        if (_this3._config.pause === 'hover') {
-          // If it's a touch-enabled device, mouseenter/leave are fired as
-          // part of the mouse compatibility events on first tap - the carousel
-          // would stop cycling until user tapped out of it;
-          // here, we listen for touchend, explicitly pause the carousel
-          // (as if it's the second time we tap on it, mouseenter compat event
-          // is NOT fired) and after a timeout (to allow for mouse compatibility
-          // events to fire) we explicitly restart cycling
-          _this3.pause();
-
-          if (_this3.touchTimeout) {
-            clearTimeout(_this3.touchTimeout);
-          }
-
-          _this3.touchTimeout = setTimeout(function (event) {
-            return _this3.cycle(event);
-          }, TOUCHEVENT_COMPAT_WAIT + _this3._config.interval);
-        }
-      };
-
-      $__default["default"](this._element.querySelectorAll(SELECTOR_ITEM_IMG)).on(EVENT_DRAG_START, function (e) {
-        return e.preventDefault();
-      });
-
-      if (this._pointerEvent) {
-        $__default["default"](this._element).on(EVENT_POINTERDOWN, function (event) {
-          return start(event);
-        });
-        $__default["default"](this._element).on(EVENT_POINTERUP, function (event) {
-          return end(event);
-        });
-
-        this._element.classList.add(CLASS_NAME_POINTER_EVENT);
-      } else {
-        $__default["default"](this._element).on(EVENT_TOUCHSTART, function (event) {
-          return start(event);
-        });
-        $__default["default"](this._element).on(EVENT_TOUCHMOVE, function (event) {
-          return move(event);
-        });
-        $__default["default"](this._element).on(EVENT_TOUCHEND, function (event) {
-          return end(event);
-        });
-      }
-    };
-
-    _proto._keydown = function _keydown(event) {
-      if (/input|textarea/i.test(event.target.tagName)) {
-        return;
-      }
-
-      switch (event.key) {
-        case ARROW_LEFT_KEYCODE:
-          event.preventDefault();
-          this.prev();
-          break;
-
-        case ARROW_RIGHT_KEYCODE:
-          event.preventDefault();
-          this.next();
-          break;
-      }
-    };
-
-    _proto._getItemIndex = function _getItemIndex(element) {
-      this._items = element && element.parentNode ? [].slice.call(element.parentNode.querySelectorAll(SELECTOR_ITEM)) : [];
-      return this._items.indexOf(element);
-    };
-
-    _proto._getItemByDirection = function _getItemByDirection(direction, activeElement) {
-      var isNextDirection = direction === DIRECTION_NEXT;
-      var isPrevDirection = direction === DIRECTION_PREV;
-
-      var activeIndex = this._getItemIndex(activeElement);
-
-      var lastItemIndex = this._items.length - 1;
-      var isGoingToWrap = isPrevDirection && activeIndex === 0 || isNextDirection && activeIndex === lastItemIndex;
-
-      if (isGoingToWrap && !this._config.wrap) {
-        return activeElement;
-      }
-
-      var delta = direction === DIRECTION_PREV ? -1 : 1;
-      var itemIndex = (activeIndex + delta) % this._items.length;
-      return itemIndex === -1 ? this._items[this._items.length - 1] : this._items[itemIndex];
-    };
-
-    _proto._triggerSlideEvent = function _triggerSlideEvent(relatedTarget, eventDirectionName) {
-      var targetIndex = this._getItemIndex(relatedTarget);
-
-      var fromIndex = this._getItemIndex(this._element.querySelector(SELECTOR_ACTIVE_ITEM));
-
-      var slideEvent = $__default["default"].Event(EVENT_SLIDE, {
-        relatedTarget: relatedTarget,
-        direction: eventDirectionName,
-        from: fromIndex,
-        to: targetIndex
-      });
-      $__default["default"](this._element).trigger(slideEvent);
-      return slideEvent;
-    };
-
-    _proto._setActiveIndicatorElement = function _setActiveIndicatorElement(element) {
-      if (this._indicatorsElement) {
-        var indicators = [].slice.call(this._indicatorsElement.querySelectorAll(SELECTOR_ACTIVE$1));
-        $__default["default"](indicators).removeClass(CLASS_NAME_ACTIVE$2);
-
-        var nextIndicator = this._indicatorsElement.children[this._getItemIndex(element)];
-
-        if (nextIndicator) {
-          $__default["default"](nextIndicator).addClass(CLASS_NAME_ACTIVE$2);
-        }
-      }
-    };
-
-    _proto._updateInterval = function _updateInterval() {
-      var element = this._activeElement || this._element.querySelector(SELECTOR_ACTIVE_ITEM);
-
-      if (!element) {
-        return;
-      }
-
-      var elementInterval = parseInt(element.getAttribute('data-interval'), 10);
-
-      if (elementInterval) {
-        this._config.defaultInterval = this._config.defaultInterval || this._config.interval;
-        this._config.interval = elementInterval;
-      } else {
-        this._config.interval = this._config.defaultInterval || this._config.interval;
-      }
-    };
-
-    _proto._slide = function _slide(direction, element) {
-      var _this4 = this;
-
-      var activeElement = this._element.querySelector(SELECTOR_ACTIVE_ITEM);
-
-      var activeElementIndex = this._getItemIndex(activeElement);
-
-      var nextElement = element || activeElement && this._getItemByDirection(direction, activeElement);
-
-      var nextElementIndex = this._getItemIndex(nextElement);
-
-      var isCycling = Boolean(this._interval);
-      var directionalClassName;
-      var orderClassName;
-      var eventDirectionName;
-
-      if (direction === DIRECTION_NEXT) {
-        directionalClassName = CLASS_NAME_LEFT;
-        orderClassName = CLASS_NAME_NEXT;
-        eventDirectionName = DIRECTION_LEFT;
-      } else {
-        directionalClassName = CLASS_NAME_RIGHT;
-        orderClassName = CLASS_NAME_PREV;
-        eventDirectionName = DIRECTION_RIGHT;
-      }
-
-      if (nextElement && $__default["default"](nextElement).hasClass(CLASS_NAME_ACTIVE$2)) {
-        this._isSliding = false;
-        return;
-      }
-
-      var slideEvent = this._triggerSlideEvent(nextElement, eventDirectionName);
-
-      if (slideEvent.isDefaultPrevented()) {
-        return;
-      }
-
-      if (!activeElement || !nextElement) {
-        // Some weirdness is happening, so we bail
-        return;
-      }
-
-      this._isSliding = true;
-
-      if (isCycling) {
-        this.pause();
-      }
-
-      this._setActiveIndicatorElement(nextElement);
-
-      this._activeElement = nextElement;
-      var slidEvent = $__default["default"].Event(EVENT_SLID, {
-        relatedTarget: nextElement,
-        direction: eventDirectionName,
-        from: activeElementIndex,
-        to: nextElementIndex
-      });
-
-      if ($__default["default"](this._element).hasClass(CLASS_NAME_SLIDE)) {
-        $__default["default"](nextElement).addClass(orderClassName);
-        Util.reflow(nextElement);
-        $__default["default"](activeElement).addClass(directionalClassName);
-        $__default["default"](nextElement).addClass(directionalClassName);
-        var transitionDuration = Util.getTransitionDurationFromElement(activeElement);
-        $__default["default"](activeElement).one(Util.TRANSITION_END, function () {
-          $__default["default"](nextElement).removeClass(directionalClassName + " " + orderClassName).addClass(CLASS_NAME_ACTIVE$2);
-          $__default["default"](activeElement).removeClass(CLASS_NAME_ACTIVE$2 + " " + orderClassName + " " + directionalClassName);
-          _this4._isSliding = false;
-          setTimeout(function () {
-            return $__default["default"](_this4._element).trigger(slidEvent);
-          }, 0);
-        }).emulateTransitionEnd(transitionDuration);
-      } else {
-        $__default["default"](activeElement).removeClass(CLASS_NAME_ACTIVE$2);
-        $__default["default"](nextElement).addClass(CLASS_NAME_ACTIVE$2);
-        this._isSliding = false;
-        $__default["default"](this._element).trigger(slidEvent);
-      }
-
-      if (isCycling) {
-        this.cycle();
-      }
-    } // Static
-    ;
-
-    Carousel._jQueryInterface = function _jQueryInterface(config) {
-      return this.each(function () {
-        var data = $__default["default"](this).data(DATA_KEY$8);
-
-        var _config = _extends({}, Default$7, $__default["default"](this).data());
-
-        if (typeof config === 'object') {
-          _config = _extends({}, _config, config);
-        }
-
-        var action = typeof config === 'string' ? config : _config.slide;
-
-        if (!data) {
-          data = new Carousel(this, _config);
-          $__default["default"](this).data(DATA_KEY$8, data);
-        }
-
-        if (typeof config === 'number') {
-          data.to(config);
-        } else if (typeof action === 'string') {
-          if (typeof data[action] === 'undefined') {
-            throw new TypeError("No method named \"" + action + "\"");
-          }
-
-          data[action]();
-        } else if (_config.interval && _config.ride) {
-          data.pause();
-          data.cycle();
-        }
-      });
-    };
-
-    Carousel._dataApiClickHandler = function _dataApiClickHandler(event) {
-      var selector = Util.getSelectorFromElement(this);
-
-      if (!selector) {
-        return;
-      }
-
-      var target = $__default["default"](selector)[0];
-
-      if (!target || !$__default["default"](target).hasClass(CLASS_NAME_CAROUSEL)) {
-        return;
-      }
-
-      var config = _extends({}, $__default["default"](target).data(), $__default["default"](this).data());
-
-      var slideIndex = this.getAttribute('data-slide-to');
-
-      if (slideIndex) {
-        config.interval = false;
-      }
-
-      Carousel._jQueryInterface.call($__default["default"](target), config);
-
-      if (slideIndex) {
-        $__default["default"](target).data(DATA_KEY$8).to(slideIndex);
-      }
-
-      event.preventDefault();
-    };
-
-    _createClass(Carousel, null, [{
-      key: "VERSION",
-      get: function get() {
-        return VERSION$8;
-      }
-    }, {
-      key: "Default",
-      get: function get() {
-        return Default$7;
-      }
-    }]);
-
-    return Carousel;
-  }();
-  /**
-   * Data API implementation
-   */
-
-
-  $__default["default"](document).on(EVENT_CLICK_DATA_API$4, SELECTOR_DATA_SLIDE, Carousel._dataApiClickHandler);
-  $__default["default"](window).on(EVENT_LOAD_DATA_API$1, function () {
-    var carousels = [].slice.call(document.querySelectorAll(SELECTOR_DATA_RIDE));
-
-    for (var i = 0, len = carousels.length; i < len; i++) {
-      var $carousel = $__default["default"](carousels[i]);
-
-      Carousel._jQueryInterface.call($carousel, $carousel.data());
-    }
-  });
-  /**
-   * jQuery
-   */
-
-  $__default["default"].fn[NAME$8] = Carousel._jQueryInterface;
-  $__default["default"].fn[NAME$8].Constructor = Carousel;
-
-  $__default["default"].fn[NAME$8].noConflict = function () {
-    $__default["default"].fn[NAME$8] = JQUERY_NO_CONFLICT$8;
-    return Carousel._jQueryInterface;
-  };
-
-  /**
-   * Constants
-   */
-
-  var NAME$7 = 'collapse';
-  var VERSION$7 = '4.6.2';
-  var DATA_KEY$7 = 'bs.collapse';
-  var EVENT_KEY$7 = "." + DATA_KEY$7;
-  var DATA_API_KEY$4 = '.data-api';
-  var JQUERY_NO_CONFLICT$7 = $__default["default"].fn[NAME$7];
-  var CLASS_NAME_SHOW$6 = 'show';
-  var CLASS_NAME_COLLAPSE = 'collapse';
-  var CLASS_NAME_COLLAPSING = 'collapsing';
-  var CLASS_NAME_COLLAPSED = 'collapsed';
-  var DIMENSION_WIDTH = 'width';
-  var DIMENSION_HEIGHT = 'height';
-  var EVENT_SHOW$4 = "show" + EVENT_KEY$7;
-  var EVENT_SHOWN$4 = "shown" + EVENT_KEY$7;
-  var EVENT_HIDE$4 = "hide" + EVENT_KEY$7;
-  var EVENT_HIDDEN$4 = "hidden" + EVENT_KEY$7;
-  var EVENT_CLICK_DATA_API$3 = "click" + EVENT_KEY$7 + DATA_API_KEY$4;
-  var SELECTOR_ACTIVES = '.show, .collapsing';
-  var SELECTOR_DATA_TOGGLE$3 = '[data-toggle="collapse"]';
-  var Default$6 = {
-    toggle: true,
-    parent: ''
-  };
-  var DefaultType$6 = {
-    toggle: 'boolean',
-    parent: '(string|element)'
-  };
-  /**
-   * Class definition
-   */
-
-  var Collapse = /*#__PURE__*/function () {
-    function Collapse(element, config) {
-      this._isTransitioning = false;
-      this._element = element;
-      this._config = this._getConfig(config);
-      this._triggerArray = [].slice.call(document.querySelectorAll("[data-toggle=\"collapse\"][href=\"#" + element.id + "\"]," + ("[data-toggle=\"collapse\"][data-target=\"#" + element.id + "\"]")));
-      var toggleList = [].slice.call(document.querySelectorAll(SELECTOR_DATA_TOGGLE$3));
-
-      for (var i = 0, len = toggleList.length; i < len; i++) {
-        var elem = toggleList[i];
-        var selector = Util.getSelectorFromElement(elem);
-        var filterElement = [].slice.call(document.querySelectorAll(selector)).filter(function (foundElem) {
-          return foundElem === element;
-        });
-
-        if (selector !== null && filterElement.length > 0) {
-          this._selector = selector;
-
-          this._triggerArray.push(elem);
-        }
-      }
-
-      this._parent = this._config.parent ? this._getParent() : null;
-
-      if (!this._config.parent) {
-        this._addAriaAndCollapsedClass(this._element, this._triggerArray);
-      }
-
-      if (this._config.toggle) {
-        this.toggle();
-      }
-    } // Getters
-
-
-    var _proto = Collapse.prototype;
-
-    // Public
-    _proto.toggle = function toggle() {
-      if ($__default["default"](this._element).hasClass(CLASS_NAME_SHOW$6)) {
-        this.hide();
-      } else {
-        this.show();
-      }
-    };
-
-    _proto.show = function show() {
-      var _this = this;
-
-      if (this._isTransitioning || $__default["default"](this._element).hasClass(CLASS_NAME_SHOW$6)) {
-        return;
-      }
-
-      var actives;
-      var activesData;
-
-      if (this._parent) {
-        actives = [].slice.call(this._parent.querySelectorAll(SELECTOR_ACTIVES)).filter(function (elem) {
-          if (typeof _this._config.parent === 'string') {
-            return elem.getAttribute('data-parent') === _this._config.parent;
-          }
-
-          return elem.classList.contains(CLASS_NAME_COLLAPSE);
-        });
-
-        if (actives.length === 0) {
-          actives = null;
-        }
-      }
-
-      if (actives) {
-        activesData = $__default["default"](actives).not(this._selector).data(DATA_KEY$7);
-
-        if (activesData && activesData._isTransitioning) {
-          return;
-        }
-      }
-
-      var startEvent = $__default["default"].Event(EVENT_SHOW$4);
-      $__default["default"](this._element).trigger(startEvent);
-
-      if (startEvent.isDefaultPrevented()) {
-        return;
-      }
-
-      if (actives) {
-        Collapse._jQueryInterface.call($__default["default"](actives).not(this._selector), 'hide');
-
-        if (!activesData) {
-          $__default["default"](actives).data(DATA_KEY$7, null);
-        }
-      }
-
-      var dimension = this._getDimension();
-
-      $__default["default"](this._element).removeClass(CLASS_NAME_COLLAPSE).addClass(CLASS_NAME_COLLAPSING);
-      this._element.style[dimension] = 0;
-
-      if (this._triggerArray.length) {
-        $__default["default"](this._triggerArray).removeClass(CLASS_NAME_COLLAPSED).attr('aria-expanded', true);
-      }
-
-      this.setTransitioning(true);
-
-      var complete = function complete() {
-        $__default["default"](_this._element).removeClass(CLASS_NAME_COLLAPSING).addClass(CLASS_NAME_COLLAPSE + " " + CLASS_NAME_SHOW$6);
-        _this._element.style[dimension] = '';
-
-        _this.setTransitioning(false);
-
-        $__default["default"](_this._element).trigger(EVENT_SHOWN$4);
-      };
-
-      var capitalizedDimension = dimension[0].toUpperCase() + dimension.slice(1);
-      var scrollSize = "scroll" + capitalizedDimension;
-      var transitionDuration = Util.getTransitionDurationFromElement(this._element);
-      $__default["default"](this._element).one(Util.TRANSITION_END, complete).emulateTransitionEnd(transitionDuration);
-      this._element.style[dimension] = this._element[scrollSize] + "px";
-    };
-
-    _proto.hide = function hide() {
-      var _this2 = this;
-
-      if (this._isTransitioning || !$__default["default"](this._element).hasClass(CLASS_NAME_SHOW$6)) {
-        return;
-      }
-
-      var startEvent = $__default["default"].Event(EVENT_HIDE$4);
-      $__default["default"](this._element).trigger(startEvent);
-
-      if (startEvent.isDefaultPrevented()) {
-        return;
-      }
-
-      var dimension = this._getDimension();
-
-      this._element.style[dimension] = this._element.getBoundingClientRect()[dimension] + "px";
-      Util.reflow(this._element);
-      $__default["default"](this._element).addClass(CLASS_NAME_COLLAPSING).removeClass(CLASS_NAME_COLLAPSE + " " + CLASS_NAME_SHOW$6);
-      var triggerArrayLength = this._triggerArray.length;
-
-      if (triggerArrayLength > 0) {
-        for (var i = 0; i < triggerArrayLength; i++) {
-          var trigger = this._triggerArray[i];
-          var selector = Util.getSelectorFromElement(trigger);
-
-          if (selector !== null) {
-            var $elem = $__default["default"]([].slice.call(document.querySelectorAll(selector)));
-
-            if (!$elem.hasClass(CLASS_NAME_SHOW$6)) {
-              $__default["default"](trigger).addClass(CLASS_NAME_COLLAPSED).attr('aria-expanded', false);
-            }
-          }
-        }
-      }
-
-      this.setTransitioning(true);
-
-      var complete = function complete() {
-        _this2.setTransitioning(false);
-
-        $__default["default"](_this2._element).removeClass(CLASS_NAME_COLLAPSING).addClass(CLASS_NAME_COLLAPSE).trigger(EVENT_HIDDEN$4);
-      };
-
-      this._element.style[dimension] = '';
-      var transitionDuration = Util.getTransitionDurationFromElement(this._element);
-      $__default["default"](this._element).one(Util.TRANSITION_END, complete).emulateTransitionEnd(transitionDuration);
-    };
-
-    _proto.setTransitioning = function setTransitioning(isTransitioning) {
-      this._isTransitioning = isTransitioning;
-    };
-
-    _proto.dispose = function dispose() {
-      $__default["default"].removeData(this._element, DATA_KEY$7);
-      this._config = null;
-      this._parent = null;
-      this._element = null;
-      this._triggerArray = null;
-      this._isTransitioning = null;
-    } // Private
-    ;
-
-    _proto._getConfig = function _getConfig(config) {
-      config = _extends({}, Default$6, config);
-      config.toggle = Boolean(config.toggle); // Coerce string values
-
-      Util.typeCheckConfig(NAME$7, config, DefaultType$6);
-      return config;
-    };
-
-    _proto._getDimension = function _getDimension() {
-      var hasWidth = $__default["default"](this._element).hasClass(DIMENSION_WIDTH);
-      return hasWidth ? DIMENSION_WIDTH : DIMENSION_HEIGHT;
-    };
-
-    _proto._getParent = function _getParent() {
-      var _this3 = this;
-
-      var parent;
-
-      if (Util.isElement(this._config.parent)) {
-        parent = this._config.parent; // It's a jQuery object
-
-        if (typeof this._config.parent.jquery !== 'undefined') {
-          parent = this._config.parent[0];
-        }
-      } else {
-        parent = document.querySelector(this._config.parent);
-      }
-
-      var selector = "[data-toggle=\"collapse\"][data-parent=\"" + this._config.parent + "\"]";
-      var children = [].slice.call(parent.querySelectorAll(selector));
-      $__default["default"](children).each(function (i, element) {
-        _this3._addAriaAndCollapsedClass(Collapse._getTargetFromElement(element), [element]);
-      });
-      return parent;
-    };
-
-    _proto._addAriaAndCollapsedClass = function _addAriaAndCollapsedClass(element, triggerArray) {
-      var isOpen = $__default["default"](element).hasClass(CLASS_NAME_SHOW$6);
-
-      if (triggerArray.length) {
-        $__default["default"](triggerArray).toggleClass(CLASS_NAME_COLLAPSED, !isOpen).attr('aria-expanded', isOpen);
-      }
-    } // Static
-    ;
-
-    Collapse._getTargetFromElement = function _getTargetFromElement(element) {
-      var selector = Util.getSelectorFromElement(element);
-      return selector ? document.querySelector(selector) : null;
-    };
-
-    Collapse._jQueryInterface = function _jQueryInterface(config) {
-      return this.each(function () {
-        var $element = $__default["default"](this);
-        var data = $element.data(DATA_KEY$7);
-
-        var _config = _extends({}, Default$6, $element.data(), typeof config === 'object' && config ? config : {});
-
-        if (!data && _config.toggle && typeof config === 'string' && /show|hide/.test(config)) {
-          _config.toggle = false;
-        }
-
-        if (!data) {
-          data = new Collapse(this, _config);
-          $element.data(DATA_KEY$7, data);
-        }
-
-        if (typeof config === 'string') {
-          if (typeof data[config] === 'undefined') {
-            throw new TypeError("No method named \"" + config + "\"");
-          }
-
-          data[config]();
-        }
-      });
-    };
-
-    _createClass(Collapse, null, [{
-      key: "VERSION",
-      get: function get() {
-        return VERSION$7;
-      }
-    }, {
-      key: "Default",
-      get: function get() {
-        return Default$6;
-      }
-    }]);
-
-    return Collapse;
-  }();
-  /**
-   * Data API implementation
-   */
-
-
-  $__default["default"](document).on(EVENT_CLICK_DATA_API$3, SELECTOR_DATA_TOGGLE$3, function (event) {
-    // preventDefault only for <a> elements (which change the URL) not inside the collapsible element
-    if (event.currentTarget.tagName === 'A') {
-      event.preventDefault();
-    }
-
-    var $trigger = $__default["default"](this);
-    var selector = Util.getSelectorFromElement(this);
-    var selectors = [].slice.call(document.querySelectorAll(selector));
-    $__default["default"](selectors).each(function () {
-      var $target = $__default["default"](this);
-      var data = $target.data(DATA_KEY$7);
-      var config = data ? 'toggle' : $trigger.data();
-
-      Collapse._jQueryInterface.call($target, config);
-    });
-  });
-  /**
-   * jQuery
-   */
-
-  $__default["default"].fn[NAME$7] = Collapse._jQueryInterface;
-  $__default["default"].fn[NAME$7].Constructor = Collapse;
-
-  $__default["default"].fn[NAME$7].noConflict = function () {
-    $__default["default"].fn[NAME$7] = JQUERY_NO_CONFLICT$7;
-    return Collapse._jQueryInterface;
-  };
-
-  /**
-   * Constants
-   */
-
-  var NAME$6 = 'dropdown';
-  var VERSION$6 = '4.6.2';
-  var DATA_KEY$6 = 'bs.dropdown';
-  var EVENT_KEY$6 = "." + DATA_KEY$6;
-  var DATA_API_KEY$3 = '.data-api';
-  var JQUERY_NO_CONFLICT$6 = $__default["default"].fn[NAME$6];
-  var ESCAPE_KEYCODE$1 = 'Escape'; // KeyboardEvent.key value for Escape (Esc) key
-
-  var SPACE_KEYCODE = ' '; // KeyboardEvent.key value for space key
-
-  var TAB_KEYCODE = 'Tab'; // KeyboardEvent.key value for tab key
-
-  var ARROW_UP_KEYCODE =  'ArrowUp'; // KeyboardEvent.which value for up arrow key
-
-  var ARROW_DOWN_KEYCODE = 'ArrowDown'; // KeyboardEvent.which value for down arrow key
-
-  var RIGHT_MOUSE_BUTTON_WHICH = 2; // MouseEvent.which value for the right button (assuming a right-handed mouse)
-
-  var REGEXP_KEYDOWN = new RegExp(ARROW_UP_KEYCODE + "|" + ARROW_DOWN_KEYCODE + "|" + ESCAPE_KEYCODE$1);
-  var CLASS_NAME_DISABLED$1 = 'disabled';
-  var CLASS_NAME_SHOW$5 = 'show';
-  var CLASS_NAME_DROPUP = 'dropup';
-  var CLASS_NAME_DROPRIGHT = 'dropright';
-  var CLASS_NAME_DROPLEFT = 'dropleft';
-  var CLASS_NAME_MENURIGHT = 'dropdown-menu-right';
-  var CLASS_NAME_POSITION_STATIC = 'position-static';
-  var EVENT_HIDE$3 = "hide" + EVENT_KEY$6;
-  var EVENT_HIDDEN$3 = "hidden" + EVENT_KEY$6;
-  var EVENT_SHOW$3 = "show" + EVENT_KEY$6;
-  var EVENT_SHOWN$3 = "shown" + EVENT_KEY$6;
-  var EVENT_CLICK = "click" + EVENT_KEY$6;
-  var EVENT_CLICK_DATA_API$2 = "click" + EVENT_KEY$6 + DATA_API_KEY$3;
-  var EVENT_KEYDOWN_DATA_API = "keydown" + EVENT_KEY$6 + DATA_API_KEY$3;
-  var EVENT_KEYUP_DATA_API = "keyup" + EVENT_KEY$6 + DATA_API_KEY$3;
-  var SELECTOR_DATA_TOGGLE$2 = '[data-toggle="dropdown"]';
-  var SELECTOR_FORM_CHILD = '.dropdown form';
-  var SELECTOR_MENU = '.dropdown-menu';
-  var SELECTOR_NAVBAR_NAV = '.navbar-nav';
-  var SELECTOR_VISIBLE_ITEMS = '.dropdown-menu .dropdown-item:not(.disabled):not(:disabled)';
-  var PLACEMENT_TOP = 'top-start';
-  var PLACEMENT_TOPEND = 'top-end';
-  var PLACEMENT_BOTTOM = 'bottom-start';
-  var PLACEMENT_BOTTOMEND = 'bottom-end';
-  var PLACEMENT_RIGHT = 'right-start';
-  var PLACEMENT_LEFT = 'left-start';
-  var Default$5 = {
-    offset: 0,
-    flip: true,
-    boundary: 'scrollParent',
-    reference: 'toggle',
-    display: 'dynamic',
-    popperConfig: null
-  };
-  var DefaultType$5 = {
-    offset: '(number|string|function)',
-    flip: 'boolean',
-    boundary: '(string|element)',
-    reference: '(string|element)',
-    display: 'string',
-    popperConfig: '(null|object)'
-  };
-  /**
-   * Class definition
-   */
-
-  var Dropdown = /*#__PURE__*/function () {
-    function Dropdown(element, config) {
-      this._element = element;
-      this._popper = null;
-      this._config = this._getConfig(config);
-      this._menu = this._getMenuElement();
-      this._inNavbar = this._detectNavbar();
-
-      this._addEventListeners();
-    } // Getters
-
-
-    var _proto = Dropdown.prototype;
-
-    // Public
-    _proto.toggle = function toggle() {
-      if (this._element.disabled || $__default["default"](this._element).hasClass(CLASS_NAME_DISABLED$1)) {
-        return;
-      }
-
-      var isActive = $__default["default"](this._menu).hasClass(CLASS_NAME_SHOW$5);
-
-      Dropdown._clearMenus();
-
-      if (isActive) {
-        return;
-      }
-
-      this.show(true);
-    };
-
-    _proto.show = function show(usePopper) {
-      if (usePopper === void 0) {
-        usePopper = false;
-      }
-
-      if (this._element.disabled || $__default["default"](this._element).hasClass(CLASS_NAME_DISABLED$1) || $__default["default"](this._menu).hasClass(CLASS_NAME_SHOW$5)) {
-        return;
-      }
-
-      var relatedTarget = {
-        relatedTarget: this._element
-      };
-      var showEvent = $__default["default"].Event(EVENT_SHOW$3, relatedTarget);
-
-      var parent = Dropdown._getParentFromElement(this._element);
-
-      $__default["default"](parent).trigger(showEvent);
-
-      if (showEvent.isDefaultPrevented()) {
-        return;
-      } // Totally disable Popper for Dropdowns in Navbar
-
-
-      if (!this._inNavbar && usePopper) {
-        // Check for Popper dependency
-        if (typeof Popper__default["default"] === 'undefined') {
-          throw new TypeError('Bootstrap\'s dropdowns require Popper (https://popper.js.org)');
-        }
-
-        var referenceElement = this._element;
-
-        if (this._config.reference === 'parent') {
-          referenceElement = parent;
-        } else if (Util.isElement(this._config.reference)) {
-          referenceElement = this._config.reference; // Check if it's jQuery element
-
-          if (typeof this._config.reference.jquery !== 'undefined') {
-            referenceElement = this._config.reference[0];
-          }
-        } // If boundary is not `scrollParent`, then set position to `static`
-        // to allow the menu to "escape" the scroll parent's boundaries
-        // https://github.com/twbs/bootstrap/issues/24251
-
-
-        if (this._config.boundary !== 'scrollParent') {
-          $__default["default"](parent).addClass(CLASS_NAME_POSITION_STATIC);
-        }
-
-        this._popper = new Popper__default["default"](referenceElement, this._menu, this._getPopperConfig());
-      } // If this is a touch-enabled device we add extra
-      // empty mouseover listeners to the body's immediate children;
-      // only needed because of broken event delegation on iOS
-      // https://www.quirksmode.org/blog/archives/2014/02/mouse_event_bub.html
-
-
-      if ('ontouchstart' in document.documentElement && $__default["default"](parent).closest(SELECTOR_NAVBAR_NAV).length === 0) {
-        $__default["default"](document.body).children().on('mouseover', null, $__default["default"].noop);
-      }
-
-      this._element.focus();
-
-      this._element.setAttribute('aria-expanded', true);
-
-      $__default["default"](this._menu).toggleClass(CLASS_NAME_SHOW$5);
-      $__default["default"](parent).toggleClass(CLASS_NAME_SHOW$5).trigger($__default["default"].Event(EVENT_SHOWN$3, relatedTarget));
-    };
-
-    _proto.hide = function hide() {
-      if (this._element.disabled || $__default["default"](this._element).hasClass(CLASS_NAME_DISABLED$1) || !$__default["default"](this._menu).hasClass(CLASS_NAME_SHOW$5)) {
-        return;
-      }
-
-      var relatedTarget = {
-        relatedTarget: this._element
-      };
-      var hideEvent = $__default["default"].Event(EVENT_HIDE$3, relatedTarget);
-
-      var parent = Dropdown._getParentFromElement(this._element);
-
-      $__default["default"](parent).trigger(hideEvent);
-
-      if (hideEvent.isDefaultPrevented()) {
-        return;
-      }
-
-      if (this._popper) {
-        this._popper.destroy();
-      }
-
-      $__default["default"](this._menu).toggleClass(CLASS_NAME_SHOW$5);
-      $__default["default"](parent).toggleClass(CLASS_NAME_SHOW$5).trigger($__default["default"].Event(EVENT_HIDDEN$3, relatedTarget));
-    };
-
-    _proto.dispose = function dispose() {
-      $__default["default"].removeData(this._element, DATA_KEY$6);
-      $__default["default"](this._element).off(EVENT_KEY$6);
-      this._element = null;
-      this._menu = null;
-
-      if (this._popper !== null) {
-        this._popper.destroy();
-
-        this._popper = null;
-      }
-    };
-
-    _proto.update = function update() {
-      this._inNavbar = this._detectNavbar();
-
-      if (this._popper !== null) {
-        this._popper.scheduleUpdate();
-      }
-    } // Private
-    ;
-
-    _proto._addEventListeners = function _addEventListeners() {
-      var _this = this;
-
-      $__default["default"](this._element).on(EVENT_CLICK, function (event) {
-        event.preventDefault();
-        event.stopPropagation();
-
-        _this.toggle();
-      });
-    };
-
-    _proto._getConfig = function _getConfig(config) {
-      config = _extends({}, this.constructor.Default, $__default["default"](this._element).data(), config);
-      Util.typeCheckConfig(NAME$6, config, this.constructor.DefaultType);
-      return config;
-    };
-
-    _proto._getMenuElement = function _getMenuElement() {
-      if (!this._menu) {
-        var parent = Dropdown._getParentFromElement(this._element);
-
-        if (parent) {
-          this._menu = parent.querySelector(SELECTOR_MENU);
-        }
-      }
-
-      return this._menu;
-    };
-
-    _proto._getPlacement = function _getPlacement() {
-      var $parentDropdown = $__default["default"](this._element.parentNode);
-      var placement = PLACEMENT_BOTTOM; // Handle dropup
-
-      if ($parentDropdown.hasClass(CLASS_NAME_DROPUP)) {
-        placement = $__default["default"](this._menu).hasClass(CLASS_NAME_MENURIGHT) ? PLACEMENT_TOPEND : PLACEMENT_TOP;
-      } else if ($parentDropdown.hasClass(CLASS_NAME_DROPRIGHT)) {
-        placement = PLACEMENT_RIGHT;
-      } else if ($parentDropdown.hasClass(CLASS_NAME_DROPLEFT)) {
-        placement = PLACEMENT_LEFT;
-      } else if ($__default["default"](this._menu).hasClass(CLASS_NAME_MENURIGHT)) {
-        placement = PLACEMENT_BOTTOMEND;
-      }
-
-      return placement;
-    };
-
-    _proto._detectNavbar = function _detectNavbar() {
-      return $__default["default"](this._element).closest('.navbar').length > 0;
-    };
-
-    _proto._getOffset = function _getOffset() {
-      var _this2 = this;
-
-      var offset = {};
-
-      if (typeof this._config.offset === 'function') {
-        offset.fn = function (data) {
-          data.offsets = _extends({}, data.offsets, _this2._config.offset(data.offsets, _this2._element));
-          return data;
-        };
-      } else {
-        offset.offset = this._config.offset;
-      }
-
-      return offset;
-    };
-
-    _proto._getPopperConfig = function _getPopperConfig() {
-      var popperConfig = {
-        placement: this._getPlacement(),
-        modifiers: {
-          offset: this._getOffset(),
-          flip: {
-            enabled: this._config.flip
-          },
-          preventOverflow: {
-            boundariesElement: this._config.boundary
-          }
-        }
-      }; // Disable Popper if we have a static display
-
-      if (this._config.display === 'static') {
-        popperConfig.modifiers.applyStyle = {
-          enabled: false
-        };
-      }
-
-      return _extends({}, popperConfig, this._config.popperConfig);
-    } // Static
-    ;
-
-    Dropdown._jQueryInterface = function _jQueryInterface(config) {
-      return this.each(function () {
-        var data = $__default["default"](this).data(DATA_KEY$6);
-
-        var _config = typeof config === 'object' ? config : null;
-
-        if (!data) {
-          data = new Dropdown(this, _config);
-          $__default["default"](this).data(DATA_KEY$6, data);
-        }
-
-        if (typeof config === 'string') {
-          if (typeof data[config] === 'undefined') {
-            throw new TypeError("No method named \"" + config + "\"");
-          }
-
-          data[config]();
-        }
-      });
-    };
-
-    Dropdown._clearMenus = function _clearMenus(event) {
-      if (event && (event.button === RIGHT_MOUSE_BUTTON_WHICH || event.type === 'keyup' && event.key !== TAB_KEYCODE)) {
-        return;
-      }
-
-      var toggles = [].slice.call(document.querySelectorAll(SELECTOR_DATA_TOGGLE$2));
-
-      for (var i = 0, len = toggles.length; i < len; i++) {
-        var parent = Dropdown._getParentFromElement(toggles[i]);
-
-        var context = $__default["default"](toggles[i]).data(DATA_KEY$6);
-        var relatedTarget = {
-          relatedTarget: toggles[i]
-        };
-
-        if (event && event.type === 'click') {
-          relatedTarget.clickEvent = event;
-        }
-
-        if (!context) {
-          continue;
-        }
-
-        var dropdownMenu = context._menu;
-
-        if (!$__default["default"](parent).hasClass(CLASS_NAME_SHOW$5)) {
-          continue;
-        }
-
-        if (event && (event.type === 'click' && /input|textarea/i.test(event.target.tagName) || event.type === 'keyup' && event.key === TAB_KEYCODE) && $__default["default"].contains(parent, event.target)) {
-          continue;
-        }
-
-        var hideEvent = $__default["default"].Event(EVENT_HIDE$3, relatedTarget);
-        $__default["default"](parent).trigger(hideEvent);
-
-        if (hideEvent.isDefaultPrevented()) {
-          continue;
-        } // If this is a touch-enabled device we remove the extra
-        // empty mouseover listeners we added for iOS support
-
-
-        if ('ontouchstart' in document.documentElement) {
-          $__default["default"](document.body).children().off('mouseover', null, $__default["default"].noop);
-        }
-
-        toggles[i].setAttribute('aria-expanded', 'false');
-
-        if (context._popper) {
-          context._popper.destroy();
-        }
-
-        $__default["default"](dropdownMenu).removeClass(CLASS_NAME_SHOW$5);
-        $__default["default"](parent).removeClass(CLASS_NAME_SHOW$5).trigger($__default["default"].Event(EVENT_HIDDEN$3, relatedTarget));
-      }
-    };
-
-    Dropdown._getParentFromElement = function _getParentFromElement(element) {
-      var parent;
-      var selector = Util.getSelectorFromElement(element);
-
-      if (selector) {
-        parent = document.querySelector(selector);
-      }
-
-      return parent || element.parentNode;
-    } // eslint-disable-next-line complexity
-    ;
-
-    Dropdown._dataApiKeydownHandler = function _dataApiKeydownHandler(event) {
-      // If not input/textarea:
-      //  - And not a key in REGEXP_KEYDOWN => not a dropdown command
-      // If input/textarea:
-      //  - If space key => not a dropdown command
-      //  - If key is other than escape
-      //    - If key is not up or down => not a dropdown command
-      //    - If trigger inside the menu => not a dropdown command
-      if (/input|textarea/i.test(event.target.tagName) ? event.key === SPACE_KEYCODE || event.key !== ESCAPE_KEYCODE$1 && (event.key !== ARROW_DOWN_KEYCODE && event.key !== ARROW_UP_KEYCODE || $__default["default"](event.target).closest(SELECTOR_MENU).length) : !REGEXP_KEYDOWN.test(event.key)) {
-        return;
-      }
-
-      if (this.disabled || $__default["default"](this).hasClass(CLASS_NAME_DISABLED$1)) {
-        return;
-      }
-
-      var parent = Dropdown._getParentFromElement(this);
-
-      var isActive = $__default["default"](parent).hasClass(CLASS_NAME_SHOW$5);
-
-      if (!isActive && event.key === ESCAPE_KEYCODE$1) {
-        return;
-      }
-
-      event.preventDefault();
-      event.stopPropagation();
-
-      if (!isActive || event.key === ESCAPE_KEYCODE$1 || event.key === SPACE_KEYCODE) {
-        if (event.key === ESCAPE_KEYCODE$1) {
-          $__default["default"](parent.querySelector(SELECTOR_DATA_TOGGLE$2)).trigger('focus');
-        }
-
-        $__default["default"](this).trigger('click');
-        return;
-      }
-
-      var items = [].slice.call(parent.querySelectorAll(SELECTOR_VISIBLE_ITEMS)).filter(function (item) {
-        return $__default["default"](item).is(':visible');
-      });
-
-      if (items.length === 0) {
-        return;
-      }
-
-      var index = items.indexOf(event.target);
-
-      if (event.key === ARROW_UP_KEYCODE && index > 0) {
-        // Up
-        index--;
-      }
-
-      if (event.key === ARROW_DOWN_KEYCODE && index < items.length - 1) {
-        // Down
-        index++;
-      }
-
-      if (index < 0) {
-        index = 0;
-      }
-
-      items[index].focus();
-    };
-
-    _createClass(Dropdown, null, [{
-      key: "VERSION",
-      get: function get() {
-        return VERSION$6;
-      }
-    }, {
-      key: "Default",
-      get: function get() {
-        return Default$5;
-      }
-    }, {
-      key: "DefaultType",
-      get: function get() {
-        return DefaultType$5;
-      }
-    }]);
-
-    return Dropdown;
-  }();
-  /**
-   * Data API implementation
-   */
-
-
-  $__default["default"](document).on(EVENT_KEYDOWN_DATA_API, SELECTOR_DATA_TOGGLE$2, Dropdown._dataApiKeydownHandler).on(EVENT_KEYDOWN_DATA_API, SELECTOR_MENU, Dropdown._dataApiKeydownHandler).on(EVENT_CLICK_DATA_API$2 + " " + EVENT_KEYUP_DATA_API, Dropdown._clearMenus).on(EVENT_CLICK_DATA_API$2, SELECTOR_DATA_TOGGLE$2, function (event) {
-    event.preventDefault();
-    event.stopPropagation();
-
-    Dropdown._jQueryInterface.call($__default["default"](this), 'toggle');
-  }).on(EVENT_CLICK_DATA_API$2, SELECTOR_FORM_CHILD, function (e) {
-    e.stopPropagation();
-  });
-  /**
-   * jQuery
-   */
-
-  $__default["default"].fn[NAME$6] = Dropdown._jQueryInterface;
-  $__default["default"].fn[NAME$6].Constructor = Dropdown;
-
-  $__default["default"].fn[NAME$6].noConflict = function () {
-    $__default["default"].fn[NAME$6] = JQUERY_NO_CONFLICT$6;
-    return Dropdown._jQueryInterface;
-  };
-
-  /**
-   * Constants
-   */
-
-  var NAME$5 = 'modal';
-  var VERSION$5 = '4.6.2';
-  var DATA_KEY$5 = 'bs.modal';
-  var EVENT_KEY$5 = "." + DATA_KEY$5;
-  var DATA_API_KEY$2 = '.data-api';
-  var JQUERY_NO_CONFLICT$5 = $__default["default"].fn[NAME$5];
-  var ESCAPE_KEYCODE = 27; // Keyboardevent.key value for Escape (Esc) key
-
-  var CLASS_NAME_SCROLLABLE = 'modal-dialog-scrollable';
-  var CLASS_NAME_SCROLLBAR_MEASURER = 'modal-scrollbar-measure';
-  var CLASS_NAME_BACKDROP = 'modal-backdrop';
-  var CLASS_NAME_OPEN = 'modal-open';
-  var CLASS_NAME_FADE$4 = 'fade';
-  var CLASS_NAME_SHOW$4 = 'show';
-  var CLASS_NAME_STATIC = 'modal-static';
-  var EVENT_HIDE$2 = "hide" + EVENT_KEY$5;
-  var EVENT_HIDE_PREVENTED = "hidePrevented" + EVENT_KEY$5;
-  var EVENT_HIDDEN$2 = "hidden" + EVENT_KEY$5;
-  var EVENT_SHOW$2 = "show" + EVENT_KEY$5;
-  var EVENT_SHOWN$2 = "shown" + EVENT_KEY$5;
-  var EVENT_FOCUSIN = "focusin" + EVENT_KEY$5;
-  var EVENT_RESIZE = "resize" + EVENT_KEY$5;
-  var EVENT_CLICK_DISMISS$1 = "click.dismiss" + EVENT_KEY$5;
-  var EVENT_KEYDOWN_DISMISS = "keydown.dismiss" + EVENT_KEY$5;
-  var EVENT_MOUSEUP_DISMISS = "mouseup.dismiss" + EVENT_KEY$5;
-  var EVENT_MOUSEDOWN_DISMISS = "mousedown.dismiss" + EVENT_KEY$5;
-  var EVENT_CLICK_DATA_API$1 = "click" + EVENT_KEY$5 + DATA_API_KEY$2;
-  var SELECTOR_DIALOG = '.modal-dialog';
-  var SELECTOR_MODAL_BODY = '.modal-body';
-  var SELECTOR_DATA_TOGGLE$1 = '[data-toggle="modal"]';
-  var SELECTOR_DATA_DISMISS$1 = '[data-dismiss="modal"]';
-  var SELECTOR_FIXED_CONTENT = '.fixed-top, .fixed-bottom, .is-fixed, .sticky-top';
-  var SELECTOR_STICKY_CONTENT = '.sticky-top';
-  var Default$4 = {
-    backdrop: true,
-    keyboard: true,
-    focus: true,
-    show: true
-  };
-  var DefaultType$4 = {
-    backdrop: '(boolean|string)',
-    keyboard: 'boolean',
-    focus: 'boolean',
-    show: 'boolean'
-  };
-  /**
-   * Class definition
-   */
-
-  var Modal = /*#__PURE__*/function () {
-    function Modal(element, config) {
-      this._config = this._getConfig(config);
-      this._element = element;
-      this._dialog = element.querySelector(SELECTOR_DIALOG);
-      this._backdrop = null;
-      this._isShown = false;
-      this._isBodyOverflowing = false;
-      this._ignoreBackdropClick = false;
-      this._isTransitioning = false;
-      this._scrollbarWidth = 0;
-    } // Getters
-
-
-    var _proto = Modal.prototype;
-
-    // Public
-    _proto.toggle = function toggle(relatedTarget) {
-      return this._isShown ? this.hide() : this.show(relatedTarget);
-    };
-
-    _proto.show = function show(relatedTarget) {
-      var _this = this;
-
-      if (this._isShown || this._isTransitioning) {
-        return;
-      }
-
-      var showEvent = $__default["default"].Event(EVENT_SHOW$2, {
-        relatedTarget: relatedTarget
-      });
-      $__default["default"](this._element).trigger(showEvent);
-
-      if (showEvent.isDefaultPrevented()) {
-        return;
-      }
-
-      this._isShown = true;
-
-      if ($__default["default"](this._element).hasClass(CLASS_NAME_FADE$4)) {
-        this._isTransitioning = true;
-      }
-
-      this._checkScrollbar();
-
-      this._setScrollbar();
-
-      this._adjustDialog();
-
-      this._setEscapeEvent();
-
-      this._setResizeEvent();
-
-      $__default["default"](this._element).on(EVENT_CLICK_DISMISS$1, SELECTOR_DATA_DISMISS$1, function (event) {
-        return _this.hide(event);
-      });
-      $__default["default"](this._dialog).on(EVENT_MOUSEDOWN_DISMISS, function () {
-        $__default["default"](_this._element).one(EVENT_MOUSEUP_DISMISS, function (event) {
-          if ($__default["default"](event.target).is(_this._element)) {
-            _this._ignoreBackdropClick = true;
-          }
-        });
-      });
-
-      this._showBackdrop(function () {
-        return _this._showElement(relatedTarget);
-      });
-    };
-
-    _proto.hide = function hide(event) {
-      var _this2 = this;
-
-      if (event) {
-        event.preventDefault();
-      }
-
-      if (!this._isShown || this._isTransitioning) {
-        return;
-      }
-
-      var hideEvent = $__default["default"].Event(EVENT_HIDE$2);
-      $__default["default"](this._element).trigger(hideEvent);
-
-      if (!this._isShown || hideEvent.isDefaultPrevented()) {
-        return;
-      }
-
-      this._isShown = false;
-      var transition = $__default["default"](this._element).hasClass(CLASS_NAME_FADE$4);
-
-      if (transition) {
-        this._isTransitioning = true;
-      }
-
-      this._setEscapeEvent();
-
-      this._setResizeEvent();
-
-      $__default["default"](document).off(EVENT_FOCUSIN);
-      $__default["default"](this._element).removeClass(CLASS_NAME_SHOW$4);
-      $__default["default"](this._element).off(EVENT_CLICK_DISMISS$1);
-      $__default["default"](this._dialog).off(EVENT_MOUSEDOWN_DISMISS);
-
-      if (transition) {
-        var transitionDuration = Util.getTransitionDurationFromElement(this._element);
-        $__default["default"](this._element).one(Util.TRANSITION_END, function (event) {
-          return _this2._hideModal(event);
-        }).emulateTransitionEnd(transitionDuration);
-      } else {
-        this._hideModal();
-      }
-    };
-
-    _proto.dispose = function dispose() {
-      [window, this._element, this._dialog].forEach(function (htmlElement) {
-        return $__default["default"](htmlElement).off(EVENT_KEY$5);
-      });
-      /**
-       * `document` has 2 events `EVENT_FOCUSIN` and `EVENT_CLICK_DATA_API`
-       * Do not move `document` in `htmlElements` array
-       * It will remove `EVENT_CLICK_DATA_API` event that should remain
-       */
-
-      $__default["default"](document).off(EVENT_FOCUSIN);
-      $__default["default"].removeData(this._element, DATA_KEY$5);
-      this._config = null;
-      this._element = null;
-      this._dialog = null;
-      this._backdrop = null;
-      this._isShown = null;
-      this._isBodyOverflowing = null;
-      this._ignoreBackdropClick = null;
-      this._isTransitioning = null;
-      this._scrollbarWidth = null;
-    };
-
-    _proto.handleUpdate = function handleUpdate() {
-      this._adjustDialog();
-    } // Private
-    ;
-
-    _proto._getConfig = function _getConfig(config) {
-      config = _extends({}, Default$4, config);
-      Util.typeCheckConfig(NAME$5, config, DefaultType$4);
-      return config;
-    };
-
-    _proto._triggerBackdropTransition = function _triggerBackdropTransition() {
-      var _this3 = this;
-
-      var hideEventPrevented = $__default["default"].Event(EVENT_HIDE_PREVENTED);
-      $__default["default"](this._element).trigger(hideEventPrevented);
-
-      if (hideEventPrevented.isDefaultPrevented()) {
-        return;
-      }
-
-      var isModalOverflowing = this._element.scrollHeight > document.documentElement.clientHeight;
-
-      if (!isModalOverflowing) {
-        this._element.style.overflowY = 'hidden';
-      }
-
-      this._element.classList.add(CLASS_NAME_STATIC);
-
-      var modalTransitionDuration = Util.getTransitionDurationFromElement(this._dialog);
-      $__default["default"](this._element).off(Util.TRANSITION_END);
-      $__default["default"](this._element).one(Util.TRANSITION_END, function () {
-        _this3._element.classList.remove(CLASS_NAME_STATIC);
-
-        if (!isModalOverflowing) {
-          $__default["default"](_this3._element).one(Util.TRANSITION_END, function () {
-            _this3._element.style.overflowY = '';
-          }).emulateTransitionEnd(_this3._element, modalTransitionDuration);
-        }
-      }).emulateTransitionEnd(modalTransitionDuration);
-
-      this._element.focus();
-    };
-
-    _proto._showElement = function _showElement(relatedTarget) {
-      var _this4 = this;
-
-      var transition = $__default["default"](this._element).hasClass(CLASS_NAME_FADE$4);
-      var modalBody = this._dialog ? this._dialog.querySelector(SELECTOR_MODAL_BODY) : null;
-
-      if (!this._element.parentNode || this._element.parentNode.nodeType !== Node.ELEMENT_NODE) {
-        // Don't move modal's DOM position
-        document.body.appendChild(this._element);
-      }
-
-      this._element.style.display = 'block';
-
-      this._element.removeAttribute('aria-hidden');
-
-      this._element.setAttribute('aria-modal', true);
-
-      this._element.setAttribute('role', 'dialog');
-
-      if ($__default["default"](this._dialog).hasClass(CLASS_NAME_SCROLLABLE) && modalBody) {
-        modalBody.scrollTop = 0;
-      } else {
-        this._element.scrollTop = 0;
-      }
-
-      if (transition) {
-        Util.reflow(this._element);
-      }
-
-      $__default["default"](this._element).addClass(CLASS_NAME_SHOW$4);
-
-      if (this._config.focus) {
-        this._enforceFocus();
-      }
-
-      var shownEvent = $__default["default"].Event(EVENT_SHOWN$2, {
-        relatedTarget: relatedTarget
-      });
-
-      var transitionComplete = function transitionComplete() {
-        if (_this4._config.focus) {
-          _this4._element.focus();
-        }
-
-        _this4._isTransitioning = false;
-        $__default["default"](_this4._element).trigger(shownEvent);
-      };
-
-      if (transition) {
-        var transitionDuration = Util.getTransitionDurationFromElement(this._dialog);
-        $__default["default"](this._dialog).one(Util.TRANSITION_END, transitionComplete).emulateTransitionEnd(transitionDuration);
-      } else {
-        transitionComplete();
-      }
-    };
-
-    _proto._enforceFocus = function _enforceFocus() {
-      var _this5 = this;
-
-      $__default["default"](document).off(EVENT_FOCUSIN) // Guard against infinite focus loop
-      .on(EVENT_FOCUSIN, function (event) {
-        if (document !== event.target && _this5._element !== event.target && $__default["default"](_this5._element).has(event.target).length === 0) {
-          _this5._element.focus();
-        }
-      });
-    };
-
-    _proto._setEscapeEvent = function _setEscapeEvent() {
-      var _this6 = this;
-
-      if (this._isShown) {
-        $__default["default"](this._element).on(EVENT_KEYDOWN_DISMISS, function (event) {
-          if (_this6._config.keyboard && event.key === ESCAPE_KEYCODE) {
-            event.preventDefault();
-
-            _this6.hide();
-          } else if (!_this6._config.keyboard && event.key === ESCAPE_KEYCODE) {
-            _this6._triggerBackdropTransition();
-          }
-        });
-      } else if (!this._isShown) {
-        $__default["default"](this._element).off(EVENT_KEYDOWN_DISMISS);
-      }
-    };
-
-    _proto._setResizeEvent = function _setResizeEvent() {
-      var _this7 = this;
-
-      if (this._isShown) {
-        $__default["default"](window).on(EVENT_RESIZE, function (event) {
-          return _this7.handleUpdate(event);
-        });
-      } else {
-        $__default["default"](window).off(EVENT_RESIZE);
-      }
-    };
-
-    _proto._hideModal = function _hideModal() {
-      var _this8 = this;
-
-      this._element.style.display = 'none';
-
-      this._element.setAttribute('aria-hidden', true);
-
-      this._element.removeAttribute('aria-modal');
-
-      this._element.removeAttribute('role');
-
-      this._isTransitioning = false;
-
-      this._showBackdrop(function () {
-        $__default["default"](document.body).removeClass(CLASS_NAME_OPEN);
-
-        _this8._resetAdjustments();
-
-        _this8._resetScrollbar();
-
-        $__default["default"](_this8._element).trigger(EVENT_HIDDEN$2);
-      });
-    };
-
-    _proto._removeBackdrop = function _removeBackdrop() {
-      if (this._backdrop) {
-        $__default["default"](this._backdrop).remove();
-        this._backdrop = null;
-      }
-    };
-
-    _proto._showBackdrop = function _showBackdrop(callback) {
-      var _this9 = this;
-
-      var animate = $__default["default"](this._element).hasClass(CLASS_NAME_FADE$4) ? CLASS_NAME_FADE$4 : '';
-
-      if (this._isShown && this._config.backdrop) {
-        this._backdrop = document.createElement('div');
-        this._backdrop.className = CLASS_NAME_BACKDROP;
-
-        if (animate) {
-          this._backdrop.classList.add(animate);
-        }
-
-        $__default["default"](this._backdrop).appendTo(document.body);
-        $__default["default"](this._element).on(EVENT_CLICK_DISMISS$1, function (event) {
-          if (_this9._ignoreBackdropClick) {
-            _this9._ignoreBackdropClick = false;
-            return;
-          }
-
-          if (event.target !== event.currentTarget) {
-            return;
-          }
-
-          if (_this9._config.backdrop === 'static') {
-            _this9._triggerBackdropTransition();
-          } else {
-            _this9.hide();
-          }
-        });
-
-        if (animate) {
-          Util.reflow(this._backdrop);
-        }
-
-        $__default["default"](this._backdrop).addClass(CLASS_NAME_SHOW$4);
-
-        if (!callback) {
-          return;
-        }
-
-        if (!animate) {
-          callback();
-          return;
-        }
-
-        var backdropTransitionDuration = Util.getTransitionDurationFromElement(this._backdrop);
-        $__default["default"](this._backdrop).one(Util.TRANSITION_END, callback).emulateTransitionEnd(backdropTransitionDuration);
-      } else if (!this._isShown && this._backdrop) {
-        $__default["default"](this._backdrop).removeClass(CLASS_NAME_SHOW$4);
-
-        var callbackRemove = function callbackRemove() {
-          _this9._removeBackdrop();
-
-          if (callback) {
-            callback();
-          }
-        };
-
-        if ($__default["default"](this._element).hasClass(CLASS_NAME_FADE$4)) {
-          var _backdropTransitionDuration = Util.getTransitionDurationFromElement(this._backdrop);
-
-          $__default["default"](this._backdrop).one(Util.TRANSITION_END, callbackRemove).emulateTransitionEnd(_backdropTransitionDuration);
-        } else {
-          callbackRemove();
-        }
-      } else if (callback) {
-        callback();
-      }
-    } // ----------------------------------------------------------------------
-    // the following methods are used to handle overflowing modals
-    // todo (fat): these should probably be refactored out of modal.js
-    // ----------------------------------------------------------------------
-    ;
-
-    _proto._adjustDialog = function _adjustDialog() {
-      var isModalOverflowing = this._element.scrollHeight > document.documentElement.clientHeight;
-
-      if (!this._isBodyOverflowing && isModalOverflowing) {
-        this._element.style.paddingLeft = this._scrollbarWidth + "px";
-      }
-
-      if (this._isBodyOverflowing && !isModalOverflowing) {
-        this._element.style.paddingRight = this._scrollbarWidth + "px";
-      }
-    };
-
-    _proto._resetAdjustments = function _resetAdjustments() {
-      this._element.style.paddingLeft = '';
-      this._element.style.paddingRight = '';
-    };
-
-    _proto._checkScrollbar = function _checkScrollbar() {
-      var rect = document.body.getBoundingClientRect();
-      this._isBodyOverflowing = Math.round(rect.left + rect.right) < window.innerWidth;
-      this._scrollbarWidth = this._getScrollbarWidth();
-    };
-
-    _proto._setScrollbar = function _setScrollbar() {
-      var _this10 = this;
-
-      if (this._isBodyOverflowing) {
-        // Note: DOMNode.style.paddingRight returns the actual value or '' if not set
-        //   while $(DOMNode).css('padding-right') returns the calculated value or 0 if not set
-        var fixedContent = [].slice.call(document.querySelectorAll(SELECTOR_FIXED_CONTENT));
-        var stickyContent = [].slice.call(document.querySelectorAll(SELECTOR_STICKY_CONTENT)); // Adjust fixed content padding
-
-        $__default["default"](fixedContent).each(function (index, element) {
-          var actualPadding = element.style.paddingRight;
-          var calculatedPadding = $__default["default"](element).css('padding-right');
-          $__default["default"](element).data('padding-right', actualPadding).css('padding-right', parseFloat(calculatedPadding) + _this10._scrollbarWidth + "px");
-        }); // Adjust sticky content margin
-
-        $__default["default"](stickyContent).each(function (index, element) {
-          var actualMargin = element.style.marginRight;
-          var calculatedMargin = $__default["default"](element).css('margin-right');
-          $__default["default"](element).data('margin-right', actualMargin).css('margin-right', parseFloat(calculatedMargin) - _this10._scrollbarWidth + "px");
-        }); // Adjust body padding
-
-        var actualPadding = document.body.style.paddingRight;
-        var calculatedPadding = $__default["default"](document.body).css('padding-right');
-        $__default["default"](document.body).data('padding-right', actualPadding).css('padding-right', parseFloat(calculatedPadding) + this._scrollbarWidth + "px");
-      }
-
-      $__default["default"](document.body).addClass(CLASS_NAME_OPEN);
-    };
-
-    _proto._resetScrollbar = function _resetScrollbar() {
-      // Restore fixed content padding
-      var fixedContent = [].slice.call(document.querySelectorAll(SELECTOR_FIXED_CONTENT));
-      $__default["default"](fixedContent).each(function (index, element) {
-        var padding = $__default["default"](element).data('padding-right');
-        $__default["default"](element).removeData('padding-right');
-        element.style.paddingRight = padding ? padding : '';
-      }); // Restore sticky content
-
-      var elements = [].slice.call(document.querySelectorAll("" + SELECTOR_STICKY_CONTENT));
-      $__default["default"](elements).each(function (index, element) {
-        var margin = $__default["default"](element).data('margin-right');
-
-        if (typeof margin !== 'undefined') {
-          $__default["default"](element).css('margin-right', margin).removeData('margin-right');
-        }
-      }); // Restore body padding
-
-      var padding = $__default["default"](document.body).data('padding-right');
-      $__default["default"](document.body).removeData('padding-right');
-      document.body.style.paddingRight = padding ? padding : '';
-    };
-
-    _proto._getScrollbarWidth = function _getScrollbarWidth() {
-      // thx d.walsh
-      var scrollDiv = document.createElement('div');
-      scrollDiv.className = CLASS_NAME_SCROLLBAR_MEASURER;
-      document.body.appendChild(scrollDiv);
-      var scrollbarWidth = scrollDiv.getBoundingClientRect().width - scrollDiv.clientWidth;
-      document.body.removeChild(scrollDiv);
-      return scrollbarWidth;
-    } // Static
-    ;
-
-    Modal._jQueryInterface = function _jQueryInterface(config, relatedTarget) {
-      return this.each(function () {
-        var data = $__default["default"](this).data(DATA_KEY$5);
-
-        var _config = _extends({}, Default$4, $__default["default"](this).data(), typeof config === 'object' && config ? config : {});
-
-        if (!data) {
-          data = new Modal(this, _config);
-          $__default["default"](this).data(DATA_KEY$5, data);
-        }
-
-        if (typeof config === 'string') {
-          if (typeof data[config] === 'undefined') {
-            throw new TypeError("No method named \"" + config + "\"");
-          }
-
-          data[config](relatedTarget);
-        } else if (_config.show) {
-          data.show(relatedTarget);
-        }
-      });
-    };
-
-    _createClass(Modal, null, [{
-      key: "VERSION",
-      get: function get() {
-        return VERSION$5;
-      }
-    }, {
-      key: "Default",
-      get: function get() {
-        return Default$4;
-      }
-    }]);
-
-    return Modal;
-  }();
-  /**
-   * Data API implementation
-   */
-
-
-  $__default["default"](document).on(EVENT_CLICK_DATA_API$1, SELECTOR_DATA_TOGGLE$1, function (event) {
-    var _this11 = this;
-
-    var target;
-    var selector = Util.getSelectorFromElement(this);
-
-    if (selector) {
-      target = document.querySelector(selector);
-    }
-
-    var config = $__default["default"](target).data(DATA_KEY$5) ? 'toggle' : _extends({}, $__default["default"](target).data(), $__default["default"](this).data());
-
-    if (this.tagName === 'A' || this.tagName === 'AREA') {
-      event.preventDefault();
-    }
-
-    var $target = $__default["default"](target).one(EVENT_SHOW$2, function (showEvent) {
-      if (showEvent.isDefaultPrevented()) {
-        // Only register focus restorer if modal will actually get shown
-        return;
-      }
-
-      $target.one(EVENT_HIDDEN$2, function () {
-        if ($__default["default"](_this11).is(':visible')) {
-          _this11.focus();
-        }
-      });
-    });
-
-    Modal._jQueryInterface.call($__default["default"](target), config, this);
-  });
-  /**
-   * jQuery
-   */
-
-  $__default["default"].fn[NAME$5] = Modal._jQueryInterface;
-  $__default["default"].fn[NAME$5].Constructor = Modal;
-
-  $__default["default"].fn[NAME$5].noConflict = function () {
-    $__default["default"].fn[NAME$5] = JQUERY_NO_CONFLICT$5;
-    return Modal._jQueryInterface;
-  };
-
-  /**
-   * --------------------------------------------------------------------------
-   * Bootstrap (v4.6.2): tools/sanitizer.js
-   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
-   * --------------------------------------------------------------------------
-   */
-  var uriAttrs = ['background', 'cite', 'href', 'itemtype', 'longdesc', 'poster', 'src', 'xlink:href'];
-  var ARIA_ATTRIBUTE_PATTERN = /^aria-[\w-]*$/i;
-  var DefaultWhitelist = {
-    // Global attributes allowed on any supplied element below.
-    '*': ['class', 'dir', 'id', 'lang', 'role', ARIA_ATTRIBUTE_PATTERN],
-    a: ['target', 'href', 'title', 'rel'],
-    area: [],
-    b: [],
-    br: [],
-    col: [],
-    code: [],
-    div: [],
-    em: [],
-    hr: [],
-    h1: [],
-    h2: [],
-    h3: [],
-    h4: [],
-    h5: [],
-    h6: [],
-    i: [],
-    img: ['src', 'srcset', 'alt', 'title', 'width', 'height'],
-    li: [],
-    ol: [],
-    p: [],
-    pre: [],
-    s: [],
-    small: [],
-    span: [],
-    sub: [],
-    sup: [],
-    strong: [],
-    u: [],
-    ul: []
-  };
-  /**
-   * A pattern that recognizes a commonly useful subset of URLs that are safe.
-   *
-   * Shoutout to Angular https://github.com/angular/angular/blob/12.2.x/packages/core/src/sanitization/url_sanitizer.ts
-   */
-
-  var SAFE_URL_PATTERN = /^(?:(?:https?|mailto|ftp|tel|file|sms):|[^#&/:?]*(?:[#/?]|$))/i;
-  /**
-   * A pattern that matches safe data URLs. Only matches image, video and audio types.
-   *
-   * Shoutout to Angular https://github.com/angular/angular/blob/12.2.x/packages/core/src/sanitization/url_sanitizer.ts
-   */
-
-  var DATA_URL_PATTERN = /^data:(?:image\/(?:bmp|gif|jpeg|jpg|png|tiff|webp)|video\/(?:mpeg|mp4|ogg|webm)|audio\/(?:mp3|oga|ogg|opus));base64,[\d+/a-z]+=*$/i;
-
-  function allowedAttribute(attr, allowedAttributeList) {
-    var attrName = attr.nodeName.toLowerCase();
-
-    if (allowedAttributeList.indexOf(attrName) !== -1) {
-      if (uriAttrs.indexOf(attrName) !== -1) {
-        return Boolean(SAFE_URL_PATTERN.test(attr.nodeValue) || DATA_URL_PATTERN.test(attr.nodeValue));
-      }
-
-      return true;
-    }
-
-    var regExp = allowedAttributeList.filter(function (attrRegex) {
-      return attrRegex instanceof RegExp;
-    }); // Check if a regular expression validates the attribute.
-
-    for (var i = 0, len = regExp.length; i < len; i++) {
-      if (regExp[i].test(attrName)) {
-        return true;
-      }
-    }
-
-    return false;
-  }
-
-  function sanitizeHtml(unsafeHtml, whiteList, sanitizeFn) {
-    if (unsafeHtml.length === 0) {
-      return unsafeHtml;
-    }
-
-    if (sanitizeFn && typeof sanitizeFn === 'function') {
-      return sanitizeFn(unsafeHtml);
-    }
-
-    var domParser = new window.DOMParser();
-    var createdDocument = domParser.parseFromString(unsafeHtml, 'text/html');
-    var whitelistKeys = Object.keys(whiteList);
-    var elements = [].slice.call(createdDocument.body.querySelectorAll('*'));
-
-    var _loop = function _loop(i, len) {
-      var el = elements[i];
-      var elName = el.nodeName.toLowerCase();
-
-      if (whitelistKeys.indexOf(el.nodeName.toLowerCase()) === -1) {
-        el.parentNode.removeChild(el);
-        return "continue";
-      }
-
-      var attributeList = [].slice.call(el.attributes); // eslint-disable-next-line unicorn/prefer-spread
-
-      var whitelistedAttributes = [].concat(whiteList['*'] || [], whiteList[elName] || []);
-      attributeList.forEach(function (attr) {
-        if (!allowedAttribute(attr, whitelistedAttributes)) {
-          el.removeAttribute(attr.nodeName);
-        }
-      });
-    };
-
-    for (var i = 0, len = elements.length; i < len; i++) {
-      var _ret = _loop(i);
-
-      if (_ret === "continue") continue;
-    }
-
-    return createdDocument.body.innerHTML;
-  }
-
-  /**
-   * Constants
-   */
-
-  var NAME$4 = 'tooltip';
-  var VERSION$4 = '4.6.2';
-  var DATA_KEY$4 = 'bs.tooltip';
-  var EVENT_KEY$4 = "." + DATA_KEY$4;
-  var JQUERY_NO_CONFLICT$4 = $__default["default"].fn[NAME$4];
-  var CLASS_PREFIX$1 = 'bs-tooltip';
-  var BSCLS_PREFIX_REGEX$1 = new RegExp("(^|\\s)" + CLASS_PREFIX$1 + "\\S+", 'g');
-  var DISALLOWED_ATTRIBUTES = ['sanitize', 'whiteList', 'sanitizeFn'];
-  var CLASS_NAME_FADE$3 = 'fade';
-  var CLASS_NAME_SHOW$3 = 'show';
-  var HOVER_STATE_SHOW = 'show';
-  var HOVER_STATE_OUT = 'out';
-  var SELECTOR_TOOLTIP_INNER = '.tooltip-inner';
-  var SELECTOR_ARROW = '.arrow';
-  var TRIGGER_HOVER = 'hover';
-  var TRIGGER_FOCUS = 'focus';
-  var TRIGGER_CLICK = 'click';
-  var TRIGGER_MANUAL = 'manual';
-  var AttachmentMap = {
-    AUTO: 'auto',
-    TOP: 'top',
-    RIGHT: 'right',
-    BOTTOM: 'bottom',
-    LEFT: 'left'
-  };
-  var Default$3 = {
-    animation: true,
-    template: '<div class="tooltip" role="tooltip">' + '<div class="arrow"></div>' + '<div class="tooltip-inner"></div></div>',
-    trigger: 'hover focus',
-    title: '',
-    delay: 0,
-    html: false,
-    selector: false,
-    placement: 'top',
-    offset: 0,
-    container: false,
-    fallbackPlacement: 'flip',
-    boundary: 'scrollParent',
-    customClass: '',
-    sanitize: true,
-    sanitizeFn: null,
-    whiteList: DefaultWhitelist,
-    popperConfig: null
-  };
-  var DefaultType$3 = {
-    animation: 'boolean',
-    template: 'string',
-    title: '(string|element|function)',
-    trigger: 'string',
-    delay: '(number|object)',
-    html: 'boolean',
-    selector: '(string|boolean)',
-    placement: '(string|function)',
-    offset: '(number|string|function)',
-    container: '(string|element|boolean)',
-    fallbackPlacement: '(string|array)',
-    boundary: '(string|element)',
-    customClass: '(string|function)',
-    sanitize: 'boolean',
-    sanitizeFn: '(null|function)',
-    whiteList: 'object',
-    popperConfig: '(null|object)'
-  };
-  var Event$1 = {
-    HIDE: "hide" + EVENT_KEY$4,
-    HIDDEN: "hidden" + EVENT_KEY$4,
-    SHOW: "show" + EVENT_KEY$4,
-    SHOWN: "shown" + EVENT_KEY$4,
-    INSERTED: "inserted" + EVENT_KEY$4,
-    CLICK: "click" + EVENT_KEY$4,
-    FOCUSIN: "focusin" + EVENT_KEY$4,
-    FOCUSOUT: "focusout" + EVENT_KEY$4,
-    MOUSEENTER: "mouseenter" + EVENT_KEY$4,
-    MOUSELEAVE: "mouseleave" + EVENT_KEY$4
-  };
-  /**
-   * Class definition
-   */
-
-  var Tooltip = /*#__PURE__*/function () {
-    function Tooltip(element, config) {
-      if (typeof Popper__default["default"] === 'undefined') {
-        throw new TypeError('Bootstrap\'s tooltips require Popper (https://popper.js.org)');
-      } // Private
-
-
-      this._isEnabled = true;
-      this._timeout = 0;
-      this._hoverState = '';
-      this._activeTrigger = {};
-      this._popper = null; // Protected
-
-      this.element = element;
-      this.config = this._getConfig(config);
-      this.tip = null;
-
-      this._setListeners();
-    } // Getters
-
-
-    var _proto = Tooltip.prototype;
-
-    // Public
-    _proto.enable = function enable() {
-      this._isEnabled = true;
-    };
-
-    _proto.disable = function disable() {
-      this._isEnabled = false;
-    };
-
-    _proto.toggleEnabled = function toggleEnabled() {
-      this._isEnabled = !this._isEnabled;
-    };
-
-    _proto.toggle = function toggle(event) {
-      if (!this._isEnabled) {
-        return;
-      }
-
-      if (event) {
-        var dataKey = this.constructor.DATA_KEY;
-        var context = $__default["default"](event.currentTarget).data(dataKey);
-
-        if (!context) {
-          context = new this.constructor(event.currentTarget, this._getDelegateConfig());
-          $__default["default"](event.currentTarget).data(dataKey, context);
-        }
-
-        context._activeTrigger.click = !context._activeTrigger.click;
-
-        if (context._isWithActiveTrigger()) {
-          context._enter(null, context);
-        } else {
-          context._leave(null, context);
-        }
-      } else {
-        if ($__default["default"](this.getTipElement()).hasClass(CLASS_NAME_SHOW$3)) {
-          this._leave(null, this);
-
-          return;
-        }
-
-        this._enter(null, this);
-      }
-    };
-
-    _proto.dispose = function dispose() {
-      clearTimeout(this._timeout);
-      $__default["default"].removeData(this.element, this.constructor.DATA_KEY);
-      $__default["default"](this.element).off(this.constructor.EVENT_KEY);
-      $__default["default"](this.element).closest('.modal').off('hide.bs.modal', this._hideModalHandler);
-
-      if (this.tip) {
-        $__default["default"](this.tip).remove();
-      }
-
-      this._isEnabled = null;
-      this._timeout = null;
-      this._hoverState = null;
-      this._activeTrigger = null;
-
-      if (this._popper) {
-        this._popper.destroy();
-      }
-
-      this._popper = null;
-      this.element = null;
-      this.config = null;
-      this.tip = null;
-    };
-
-    _proto.show = function show() {
-      var _this = this;
-
-      if ($__default["default"](this.element).css('display') === 'none') {
-        throw new Error('Please use show on visible elements');
-      }
-
-      var showEvent = $__default["default"].Event(this.constructor.Event.SHOW);
-
-      if (this.isWithContent() && this._isEnabled) {
-        $__default["default"](this.element).trigger(showEvent);
-        var shadowRoot = Util.findShadowRoot(this.element);
-        var isInTheDom = $__default["default"].contains(shadowRoot !== null ? shadowRoot : this.element.ownerDocument.documentElement, this.element);
-
-        if (showEvent.isDefaultPrevented() || !isInTheDom) {
-          return;
-        }
-
-        var tip = this.getTipElement();
-        var tipId = Util.getUID(this.constructor.NAME);
-        tip.setAttribute('id', tipId);
-        this.element.setAttribute('aria-describedby', tipId);
-        this.setContent();
-
-        if (this.config.animation) {
-          $__default["default"](tip).addClass(CLASS_NAME_FADE$3);
-        }
-
-        var placement = typeof this.config.placement === 'function' ? this.config.placement.call(this, tip, this.element) : this.config.placement;
-
-        var attachment = this._getAttachment(placement);
-
-        this.addAttachmentClass(attachment);
-
-        var container = this._getContainer();
-
-        $__default["default"](tip).data(this.constructor.DATA_KEY, this);
-
-        if (!$__default["default"].contains(this.element.ownerDocument.documentElement, this.tip)) {
-          $__default["default"](tip).appendTo(container);
-        }
-
-        $__default["default"](this.element).trigger(this.constructor.Event.INSERTED);
-        this._popper = new Popper__default["default"](this.element, tip, this._getPopperConfig(attachment));
-        $__default["default"](tip).addClass(CLASS_NAME_SHOW$3);
-        $__default["default"](tip).addClass(this.config.customClass); // If this is a touch-enabled device we add extra
-        // empty mouseover listeners to the body's immediate children;
-        // only needed because of broken event delegation on iOS
-        // https://www.quirksmode.org/blog/archives/2014/02/mouse_event_bub.html
-
-        if ('ontouchstart' in document.documentElement) {
-          $__default["default"](document.body).children().on('mouseover', null, $__default["default"].noop);
-        }
-
-        var complete = function complete() {
-          if (_this.config.animation) {
-            _this._fixTransition();
-          }
-
-          var prevHoverState = _this._hoverState;
-          _this._hoverState = null;
-          $__default["default"](_this.element).trigger(_this.constructor.Event.SHOWN);
-
-          if (prevHoverState === HOVER_STATE_OUT) {
-            _this._leave(null, _this);
-          }
-        };
-
-        if ($__default["default"](this.tip).hasClass(CLASS_NAME_FADE$3)) {
-          var transitionDuration = Util.getTransitionDurationFromElement(this.tip);
-          $__default["default"](this.tip).one(Util.TRANSITION_END, complete).emulateTransitionEnd(transitionDuration);
-        } else {
-          complete();
-        }
-      }
-    };
-
-    _proto.hide = function hide(callback) {
-      var _this2 = this;
-
-      var tip = this.getTipElement();
-      var hideEvent = $__default["default"].Event(this.constructor.Event.HIDE);
-
-      var complete = function complete() {
-        if (_this2._hoverState !== HOVER_STATE_SHOW && tip.parentNode) {
-          tip.parentNode.removeChild(tip);
-        }
-
-        _this2._cleanTipClass();
-
-        _this2.element.removeAttribute('aria-describedby');
-
-        $__default["default"](_this2.element).trigger(_this2.constructor.Event.HIDDEN);
-
-        if (_this2._popper !== null) {
-          _this2._popper.destroy();
-        }
-
-        if (callback) {
-          callback();
-        }
-      };
-
-      $__default["default"](this.element).trigger(hideEvent);
-
-      if (hideEvent.isDefaultPrevented()) {
-        return;
-      }
-
-      $__default["default"](tip).removeClass(CLASS_NAME_SHOW$3); // If this is a touch-enabled device we remove the extra
-      // empty mouseover listeners we added for iOS support
-
-      if ('ontouchstart' in document.documentElement) {
-        $__default["default"](document.body).children().off('mouseover', null, $__default["default"].noop);
-      }
-
-      this._activeTrigger[TRIGGER_CLICK] = false;
-      this._activeTrigger[TRIGGER_FOCUS] = false;
-      this._activeTrigger[TRIGGER_HOVER] = false;
-
-      if ($__default["default"](this.tip).hasClass(CLASS_NAME_FADE$3)) {
-        var transitionDuration = Util.getTransitionDurationFromElement(tip);
-        $__default["default"](tip).one(Util.TRANSITION_END, complete).emulateTransitionEnd(transitionDuration);
-      } else {
-        complete();
-      }
-
-      this._hoverState = '';
-    };
-
-    _proto.update = function update() {
-      if (this._popper !== null) {
-        this._popper.scheduleUpdate();
-      }
-    } // Protected
-    ;
-
-    _proto.isWithContent = function isWithContent() {
-      return Boolean(this.getTitle());
-    };
-
-    _proto.addAttachmentClass = function addAttachmentClass(attachment) {
-      $__default["default"](this.getTipElement()).addClass(CLASS_PREFIX$1 + "-" + attachment);
-    };
-
-    _proto.getTipElement = function getTipElement() {
-      this.tip = this.tip || $__default["default"](this.config.template)[0];
-      return this.tip;
-    };
-
-    _proto.setContent = function setContent() {
-      var tip = this.getTipElement();
-      this.setElementContent($__default["default"](tip.querySelectorAll(SELECTOR_TOOLTIP_INNER)), this.getTitle());
-      $__default["default"](tip).removeClass(CLASS_NAME_FADE$3 + " " + CLASS_NAME_SHOW$3);
-    };
-
-    _proto.setElementContent = function setElementContent($element, content) {
-      if (typeof content === 'object' && (content.nodeType || content.jquery)) {
-        // Content is a DOM node or a jQuery
-        if (this.config.html) {
-          if (!$__default["default"](content).parent().is($element)) {
-            $element.empty().append(content);
-          }
-        } else {
-          $element.text($__default["default"](content).text());
-        }
-
-        return;
-      }
-
-      if (this.config.html) {
-        if (this.config.sanitize) {
-          content = sanitizeHtml(content, this.config.whiteList, this.config.sanitizeFn);
-        }
-
-        $element.html(content);
-      } else {
-        $element.text(content);
-      }
-    };
-
-    _proto.getTitle = function getTitle() {
-      var title = this.element.getAttribute('data-original-title');
-
-      if (!title) {
-        title = typeof this.config.title === 'function' ? this.config.title.call(this.element) : this.config.title;
-      }
-
-      return title;
-    } // Private
-    ;
-
-    _proto._getPopperConfig = function _getPopperConfig(attachment) {
-      var _this3 = this;
-
-      var defaultBsConfig = {
-        placement: attachment,
-        modifiers: {
-          offset: this._getOffset(),
-          flip: {
-            behavior: this.config.fallbackPlacement
-          },
-          arrow: {
-            element: SELECTOR_ARROW
-          },
-          preventOverflow: {
-            boundariesElement: this.config.boundary
-          }
-        },
-        onCreate: function onCreate(data) {
-          if (data.originalPlacement !== data.placement) {
-            _this3._handlePopperPlacementChange(data);
-          }
-        },
-        onUpdate: function onUpdate(data) {
-          return _this3._handlePopperPlacementChange(data);
-        }
-      };
-      return _extends({}, defaultBsConfig, this.config.popperConfig);
-    };
-
-    _proto._getOffset = function _getOffset() {
-      var _this4 = this;
-
-      var offset = {};
-
-      if (typeof this.config.offset === 'function') {
-        offset.fn = function (data) {
-          data.offsets = _extends({}, data.offsets, _this4.config.offset(data.offsets, _this4.element));
-          return data;
-        };
-      } else {
-        offset.offset = this.config.offset;
-      }
-
-      return offset;
-    };
-
-    _proto._getContainer = function _getContainer() {
-      if (this.config.container === false) {
-        return document.body;
-      }
-
-      if (Util.isElement(this.config.container)) {
-        return $__default["default"](this.config.container);
-      }
-
-      return $__default["default"](document).find(this.config.container);
-    };
-
-    _proto._getAttachment = function _getAttachment(placement) {
-      return AttachmentMap[placement.toUpperCase()];
-    };
-
-    _proto._setListeners = function _setListeners() {
-      var _this5 = this;
-
-      var triggers = this.config.trigger.split(' ');
-      triggers.forEach(function (trigger) {
-        if (trigger === 'click') {
-          $__default["default"](_this5.element).on(_this5.constructor.Event.CLICK, _this5.config.selector, function (event) {
-            return _this5.toggle(event);
-          });
-        } else if (trigger !== TRIGGER_MANUAL) {
-          var eventIn = trigger === TRIGGER_HOVER ? _this5.constructor.Event.MOUSEENTER : _this5.constructor.Event.FOCUSIN;
-          var eventOut = trigger === TRIGGER_HOVER ? _this5.constructor.Event.MOUSELEAVE : _this5.constructor.Event.FOCUSOUT;
-          $__default["default"](_this5.element).on(eventIn, _this5.config.selector, function (event) {
-            return _this5._enter(event);
-          }).on(eventOut, _this5.config.selector, function (event) {
-            return _this5._leave(event);
-          });
-        }
-      });
-
-      this._hideModalHandler = function () {
-        if (_this5.element) {
-          _this5.hide();
-        }
-      };
-
-      $__default["default"](this.element).closest('.modal').on('hide.bs.modal', this._hideModalHandler);
-
-      if (this.config.selector) {
-        this.config = _extends({}, this.config, {
-          trigger: 'manual',
-          selector: ''
-        });
-      } else {
-        this._fixTitle();
-      }
-    };
-
-    _proto._fixTitle = function _fixTitle() {
-      var titleType = typeof this.element.getAttribute('data-original-title');
-
-      if (this.element.getAttribute('title') || titleType !== 'string') {
-        this.element.setAttribute('data-original-title', this.element.getAttribute('title') || '');
-        this.element.setAttribute('title', '');
-      }
-    };
-
-    _proto._enter = function _enter(event, context) {
-      var dataKey = this.constructor.DATA_KEY;
-      context = context || $__default["default"](event.currentTarget).data(dataKey);
-
-      if (!context) {
-        context = new this.constructor(event.currentTarget, this._getDelegateConfig());
-        $__default["default"](event.currentTarget).data(dataKey, context);
-      }
-
-      if (event) {
-        context._activeTrigger[event.type === 'focusin' ? TRIGGER_FOCUS : TRIGGER_HOVER] = true;
-      }
-
-      if ($__default["default"](context.getTipElement()).hasClass(CLASS_NAME_SHOW$3) || context._hoverState === HOVER_STATE_SHOW) {
-        context._hoverState = HOVER_STATE_SHOW;
-        return;
-      }
-
-      clearTimeout(context._timeout);
-      context._hoverState = HOVER_STATE_SHOW;
-
-      if (!context.config.delay || !context.config.delay.show) {
-        context.show();
-        return;
-      }
-
-      context._timeout = setTimeout(function () {
-        if (context._hoverState === HOVER_STATE_SHOW) {
-          context.show();
-        }
-      }, context.config.delay.show);
-    };
-
-    _proto._leave = function _leave(event, context) {
-      var dataKey = this.constructor.DATA_KEY;
-      context = context || $__default["default"](event.currentTarget).data(dataKey);
-
-      if (!context) {
-        context = new this.constructor(event.currentTarget, this._getDelegateConfig());
-        $__default["default"](event.currentTarget).data(dataKey, context);
-      }
-
-      if (event) {
-        context._activeTrigger[event.type === 'focusout' ? TRIGGER_FOCUS : TRIGGER_HOVER] = false;
-      }
-
-      if (context._isWithActiveTrigger()) {
-        return;
-      }
-
-      clearTimeout(context._timeout);
-      context._hoverState = HOVER_STATE_OUT;
-
-      if (!context.config.delay || !context.config.delay.hide) {
-        context.hide();
-        return;
-      }
-
-      context._timeout = setTimeout(function () {
-        if (context._hoverState === HOVER_STATE_OUT) {
-          context.hide();
-        }
-      }, context.config.delay.hide);
-    };
-
-    _proto._isWithActiveTrigger = function _isWithActiveTrigger() {
-      for (var trigger in this._activeTrigger) {
-        if (this._activeTrigger[trigger]) {
-          return true;
-        }
-      }
-
-      return false;
-    };
-
-    _proto._getConfig = function _getConfig(config) {
-      var dataAttributes = $__default["default"](this.element).data();
-      Object.keys(dataAttributes).forEach(function (dataAttr) {
-        if (DISALLOWED_ATTRIBUTES.indexOf(dataAttr) !== -1) {
-          delete dataAttributes[dataAttr];
-        }
-      });
-      config = _extends({}, this.constructor.Default, dataAttributes, typeof config === 'object' && config ? config : {});
-
-      if (typeof config.delay === 'number') {
-        config.delay = {
-          show: config.delay,
-          hide: config.delay
-        };
-      }
-
-      if (typeof config.title === 'number') {
-        config.title = config.title.toString();
-      }
-
-      if (typeof config.content === 'number') {
-        config.content = config.content.toString();
-      }
-
-      Util.typeCheckConfig(NAME$4, config, this.constructor.DefaultType);
-
-      if (config.sanitize) {
-        config.template = sanitizeHtml(config.template, config.whiteList, config.sanitizeFn);
-      }
-
-      return config;
-    };
-
-    _proto._getDelegateConfig = function _getDelegateConfig() {
-      var config = {};
-
-      if (this.config) {
-        for (var key in this.config) {
-          if (this.constructor.Default[key] !== this.config[key]) {
-            config[key] = this.config[key];
-          }
-        }
-      }
-
-      return config;
-    };
-
-    _proto._cleanTipClass = function _cleanTipClass() {
-      var $tip = $__default["default"](this.getTipElement());
-      var tabClass = $tip.attr('class').match(BSCLS_PREFIX_REGEX$1);
-
-      if (tabClass !== null && tabClass.length) {
-        $tip.removeClass(tabClass.join(''));
-      }
-    };
-
-    _proto._handlePopperPlacementChange = function _handlePopperPlacementChange(popperData) {
-      this.tip = popperData.instance.popper;
-
-      this._cleanTipClass();
-
-      this.addAttachmentClass(this._getAttachment(popperData.placement));
-    };
-
-    _proto._fixTransition = function _fixTransition() {
-      var tip = this.getTipElement();
-      var initConfigAnimation = this.config.animation;
-
-      if (tip.getAttribute('x-placement') !== null) {
-        return;
-      }
-
-      $__default["default"](tip).removeClass(CLASS_NAME_FADE$3);
-      this.config.animation = false;
-      this.hide();
-      this.show();
-      this.config.animation = initConfigAnimation;
-    } // Static
-    ;
-
-    Tooltip._jQueryInterface = function _jQueryInterface(config) {
-      return this.each(function () {
-        var $element = $__default["default"](this);
-        var data = $element.data(DATA_KEY$4);
-
-        var _config = typeof config === 'object' && config;
-
-        if (!data && /dispose|hide/.test(config)) {
-          return;
-        }
-
-        if (!data) {
-          data = new Tooltip(this, _config);
-          $element.data(DATA_KEY$4, data);
-        }
-
-        if (typeof config === 'string') {
-          if (typeof data[config] === 'undefined') {
-            throw new TypeError("No method named \"" + config + "\"");
-          }
-
-          data[config]();
-        }
-      });
-    };
-
-    _createClass(Tooltip, null, [{
-      key: "VERSION",
-      get: function get() {
-        return VERSION$4;
-      }
-    }, {
-      key: "Default",
-      get: function get() {
-        return Default$3;
-      }
-    }, {
-      key: "NAME",
-      get: function get() {
-        return NAME$4;
-      }
-    }, {
-      key: "DATA_KEY",
-      get: function get() {
-        return DATA_KEY$4;
-      }
-    }, {
-      key: "Event",
-      get: function get() {
-        return Event$1;
-      }
-    }, {
-      key: "EVENT_KEY",
-      get: function get() {
-        return EVENT_KEY$4;
-      }
-    }, {
-      key: "DefaultType",
-      get: function get() {
-        return DefaultType$3;
-      }
-    }]);
-
-    return Tooltip;
-  }();
-  /**
-   * jQuery
-   */
-
-
-  $__default["default"].fn[NAME$4] = Tooltip._jQueryInterface;
-  $__default["default"].fn[NAME$4].Constructor = Tooltip;
-
-  $__default["default"].fn[NAME$4].noConflict = function () {
-    $__default["default"].fn[NAME$4] = JQUERY_NO_CONFLICT$4;
-    return Tooltip._jQueryInterface;
-  };
-
-  /**
-   * Constants
-   */
-
-  var NAME$3 = 'popover';
-  var VERSION$3 = '4.6.2';
-  var DATA_KEY$3 = 'bs.popover';
-  var EVENT_KEY$3 = "." + DATA_KEY$3;
-  var JQUERY_NO_CONFLICT$3 = $__default["default"].fn[NAME$3];
-  var CLASS_PREFIX = 'bs-popover';
-  var BSCLS_PREFIX_REGEX = new RegExp("(^|\\s)" + CLASS_PREFIX + "\\S+", 'g');
-  var CLASS_NAME_FADE$2 = 'fade';
-  var CLASS_NAME_SHOW$2 = 'show';
-  var SELECTOR_TITLE = '.popover-header';
-  var SELECTOR_CONTENT = '.popover-body';
-
-  var Default$2 = _extends({}, Tooltip.Default, {
-    placement: 'right',
-    trigger: 'click',
-    content: '',
-    template: '<div class="popover" role="tooltip">' + '<div class="arrow"></div>' + '<h3 class="popover-header"></h3>' + '<div class="popover-body"></div></div>'
-  });
-
-  var DefaultType$2 = _extends({}, Tooltip.DefaultType, {
-    content: '(string|element|function)'
-  });
-
-  var Event = {
-    HIDE: "hide" + EVENT_KEY$3,
-    HIDDEN: "hidden" + EVENT_KEY$3,
-    SHOW: "show" + EVENT_KEY$3,
-    SHOWN: "shown" + EVENT_KEY$3,
-    INSERTED: "inserted" + EVENT_KEY$3,
-    CLICK: "click" + EVENT_KEY$3,
-    FOCUSIN: "focusin" + EVENT_KEY$3,
-    FOCUSOUT: "focusout" + EVENT_KEY$3,
-    MOUSEENTER: "mouseenter" + EVENT_KEY$3,
-    MOUSELEAVE: "mouseleave" + EVENT_KEY$3
-  };
-  /**
-   * Class definition
-   */
-
-  var Popover = /*#__PURE__*/function (_Tooltip) {
-    _inheritsLoose(Popover, _Tooltip);
-
-    function Popover() {
-      return _Tooltip.apply(this, arguments) || this;
-    }
-
-    var _proto = Popover.prototype;
-
-    // Overrides
-    _proto.isWithContent = function isWithContent() {
-      return this.getTitle() || this._getContent();
-    };
-
-    _proto.addAttachmentClass = function addAttachmentClass(attachment) {
-      $__default["default"](this.getTipElement()).addClass(CLASS_PREFIX + "-" + attachment);
-    };
-
-    _proto.getTipElement = function getTipElement() {
-      this.tip = this.tip || $__default["default"](this.config.template)[0];
-      return this.tip;
-    };
-
-    _proto.setContent = function setContent() {
-      var $tip = $__default["default"](this.getTipElement()); // We use append for html objects to maintain js events
-
-      this.setElementContent($tip.find(SELECTOR_TITLE), this.getTitle());
-
-      var content = this._getContent();
-
-      if (typeof content === 'function') {
-        content = content.call(this.element);
-      }
-
-      this.setElementContent($tip.find(SELECTOR_CONTENT), content);
-      $tip.removeClass(CLASS_NAME_FADE$2 + " " + CLASS_NAME_SHOW$2);
-    } // Private
-    ;
-
-    _proto._getContent = function _getContent() {
-      return this.element.getAttribute('data-content') || this.config.content;
-    };
-
-    _proto._cleanTipClass = function _cleanTipClass() {
-      var $tip = $__default["default"](this.getTipElement());
-      var tabClass = $tip.attr('class').match(BSCLS_PREFIX_REGEX);
-
-      if (tabClass !== null && tabClass.length > 0) {
-        $tip.removeClass(tabClass.join(''));
-      }
-    } // Static
-    ;
-
-    Popover._jQueryInterface = function _jQueryInterface(config) {
-      return this.each(function () {
-        var data = $__default["default"](this).data(DATA_KEY$3);
-
-        var _config = typeof config === 'object' ? config : null;
-
-        if (!data && /dispose|hide/.test(config)) {
-          return;
-        }
-
-        if (!data) {
-          data = new Popover(this, _config);
-          $__default["default"](this).data(DATA_KEY$3, data);
-        }
-
-        if (typeof config === 'string') {
-          if (typeof data[config] === 'undefined') {
-            throw new TypeError("No method named \"" + config + "\"");
-          }
-
-          data[config]();
-        }
-      });
-    };
-
-    _createClass(Popover, null, [{
-      key: "VERSION",
-      get: // Getters
-      function get() {
-        return VERSION$3;
-      }
-    }, {
-      key: "Default",
-      get: function get() {
-        return Default$2;
-      }
-    }, {
-      key: "NAME",
-      get: function get() {
-        return NAME$3;
-      }
-    }, {
-      key: "DATA_KEY",
-      get: function get() {
-        return DATA_KEY$3;
-      }
-    }, {
-      key: "Event",
-      get: function get() {
-        return Event;
-      }
-    }, {
-      key: "EVENT_KEY",
-      get: function get() {
-        return EVENT_KEY$3;
-      }
-    }, {
-      key: "DefaultType",
-      get: function get() {
-        return DefaultType$2;
-      }
-    }]);
-
-    return Popover;
-  }(Tooltip);
-  /**
-   * jQuery
-   */
-
-
-  $__default["default"].fn[NAME$3] = Popover._jQueryInterface;
-  $__default["default"].fn[NAME$3].Constructor = Popover;
-
-  $__default["default"].fn[NAME$3].noConflict = function () {
-    $__default["default"].fn[NAME$3] = JQUERY_NO_CONFLICT$3;
-    return Popover._jQueryInterface;
-  };
-
-  /**
-   * Constants
-   */
-
-  var NAME$2 = 'scrollspy';
-  var VERSION$2 = '4.6.2';
-  var DATA_KEY$2 = 'bs.scrollspy';
-  var EVENT_KEY$2 = "." + DATA_KEY$2;
-  var DATA_API_KEY$1 = '.data-api';
-  var JQUERY_NO_CONFLICT$2 = $__default["default"].fn[NAME$2];
-  var CLASS_NAME_DROPDOWN_ITEM = 'dropdown-item';
-  var CLASS_NAME_ACTIVE$1 = 'active';
-  var EVENT_ACTIVATE = "activate" + EVENT_KEY$2;
-  var EVENT_SCROLL = "scroll" + EVENT_KEY$2;
-  var EVENT_LOAD_DATA_API = "load" + EVENT_KEY$2 + DATA_API_KEY$1;
-  var METHOD_OFFSET = 'offset';
-  var METHOD_POSITION = 'position';
-  var SELECTOR_DATA_SPY = '[data-spy="scroll"]';
-  var SELECTOR_NAV_LIST_GROUP$1 = '.nav, .list-group';
-  var SELECTOR_NAV_LINKS = '.nav-link';
-  var SELECTOR_NAV_ITEMS = '.nav-item';
-  var SELECTOR_LIST_ITEMS = '.list-group-item';
-  var SELECTOR_DROPDOWN$1 = '.dropdown';
-  var SELECTOR_DROPDOWN_ITEMS = '.dropdown-item';
-  var SELECTOR_DROPDOWN_TOGGLE$1 = '.dropdown-toggle';
-  var Default$1 = {
-    offset: 10,
-    method: 'auto',
-    target: ''
-  };
-  var DefaultType$1 = {
-    offset: 'number',
-    method: 'string',
-    target: '(string|element)'
-  };
-  /**
-   * Class definition
-   */
-
-  var ScrollSpy = /*#__PURE__*/function () {
-    function ScrollSpy(element, config) {
-      var _this = this;
-
-      this._element = element;
-      this._scrollElement = element.tagName === 'BODY' ? window : element;
-      this._config = this._getConfig(config);
-      this._selector = this._config.target + " " + SELECTOR_NAV_LINKS + "," + (this._config.target + " " + SELECTOR_LIST_ITEMS + ",") + (this._config.target + " " + SELECTOR_DROPDOWN_ITEMS);
-      this._offsets = [];
-      this._targets = [];
-      this._activeTarget = null;
-      this._scrollHeight = 0;
-      $__default["default"](this._scrollElement).on(EVENT_SCROLL, function (event) {
-        return _this._process(event);
-      });
-      this.refresh();
-
-      this._process();
-    } // Getters
-
-
-    var _proto = ScrollSpy.prototype;
-
-    // Public
-    _proto.refresh = function refresh() {
-      var _this2 = this;
-
-      var autoMethod = this._scrollElement === this._scrollElement.window ? METHOD_OFFSET : METHOD_POSITION;
-      var offsetMethod = this._config.method === 'auto' ? autoMethod : this._config.method;
-      var offsetBase = offsetMethod === METHOD_POSITION ? this._getScrollTop() : 0;
-      this._offsets = [];
-      this._targets = [];
-      this._scrollHeight = this._getScrollHeight();
-      var targets = [].slice.call(document.querySelectorAll(this._selector));
-      targets.map(function (element) {
-        var target;
-        var targetSelector = Util.getSelectorFromElement(element);
-
-        if (targetSelector) {
-          target = document.querySelector(targetSelector);
-        }
-
-        if (target) {
-          var targetBCR = target.getBoundingClientRect();
-
-          if (targetBCR.width || targetBCR.height) {
-            // TODO (fat): remove sketch reliance on jQuery position/offset
-            return [$__default["default"](target)[offsetMethod]().top + offsetBase, targetSelector];
-          }
-        }
-
-        return null;
-      }).filter(Boolean).sort(function (a, b) {
-        return a[0] - b[0];
-      }).forEach(function (item) {
-        _this2._offsets.push(item[0]);
-
-        _this2._targets.push(item[1]);
-      });
-    };
-
-    _proto.dispose = function dispose() {
-      $__default["default"].removeData(this._element, DATA_KEY$2);
-      $__default["default"](this._scrollElement).off(EVENT_KEY$2);
-      this._element = null;
-      this._scrollElement = null;
-      this._config = null;
-      this._selector = null;
-      this._offsets = null;
-      this._targets = null;
-      this._activeTarget = null;
-      this._scrollHeight = null;
-    } // Private
-    ;
-
-    _proto._getConfig = function _getConfig(config) {
-      config = _extends({}, Default$1, typeof config === 'object' && config ? config : {});
-
-      if (typeof config.target !== 'string' && Util.isElement(config.target)) {
-        var id = $__default["default"](config.target).attr('id');
-
-        if (!id) {
-          id = Util.getUID(NAME$2);
-          $__default["default"](config.target).attr('id', id);
-        }
-
-        config.target = "#" + id;
-      }
-
-      Util.typeCheckConfig(NAME$2, config, DefaultType$1);
-      return config;
-    };
-
-    _proto._getScrollTop = function _getScrollTop() {
-      return this._scrollElement === window ? this._scrollElement.pageYOffset : this._scrollElement.scrollTop;
-    };
-
-    _proto._getScrollHeight = function _getScrollHeight() {
-      return this._scrollElement.scrollHeight || Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
-    };
-
-    _proto._getOffsetHeight = function _getOffsetHeight() {
-      return this._scrollElement === window ? window.innerHeight : this._scrollElement.getBoundingClientRect().height;
-    };
-
-    _proto._process = function _process() {
-      var scrollTop = this._getScrollTop() + this._config.offset;
-
-      var scrollHeight = this._getScrollHeight();
-
-      var maxScroll = this._config.offset + scrollHeight - this._getOffsetHeight();
-
-      if (this._scrollHeight !== scrollHeight) {
-        this.refresh();
-      }
-
-      if (scrollTop >= maxScroll) {
-        var target = this._targets[this._targets.length - 1];
-
-        if (this._activeTarget !== target) {
-          this._activate(target);
-        }
-
-        return;
-      }
-
-      if (this._activeTarget && scrollTop < this._offsets[0] && this._offsets[0] > 0) {
-        this._activeTarget = null;
-
-        this._clear();
-
-        return;
-      }
-
-      for (var i = this._offsets.length; i--;) {
-        var isActiveTarget = this._activeTarget !== this._targets[i] && scrollTop >= this._offsets[i] && (typeof this._offsets[i + 1] === 'undefined' || scrollTop < this._offsets[i + 1]);
-
-        if (isActiveTarget) {
-          this._activate(this._targets[i]);
-        }
-      }
-    };
-
-    _proto._activate = function _activate(target) {
-      this._activeTarget = target;
-
-      this._clear();
-
-      var queries = this._selector.split(',').map(function (selector) {
-        return selector + "[data-target=\"" + target + "\"]," + selector + "[href=\"" + target + "\"]";
-      });
-
-      var $link = $__default["default"]([].slice.call(document.querySelectorAll(queries.join(','))));
-
-      if ($link.hasClass(CLASS_NAME_DROPDOWN_ITEM)) {
-        $link.closest(SELECTOR_DROPDOWN$1).find(SELECTOR_DROPDOWN_TOGGLE$1).addClass(CLASS_NAME_ACTIVE$1);
-        $link.addClass(CLASS_NAME_ACTIVE$1);
-      } else {
-        // Set triggered link as active
-        $link.addClass(CLASS_NAME_ACTIVE$1); // Set triggered links parents as active
-        // With both <ul> and <nav> markup a parent is the previous sibling of any nav ancestor
-
-        $link.parents(SELECTOR_NAV_LIST_GROUP$1).prev(SELECTOR_NAV_LINKS + ", " + SELECTOR_LIST_ITEMS).addClass(CLASS_NAME_ACTIVE$1); // Handle special case when .nav-link is inside .nav-item
-
-        $link.parents(SELECTOR_NAV_LIST_GROUP$1).prev(SELECTOR_NAV_ITEMS).children(SELECTOR_NAV_LINKS).addClass(CLASS_NAME_ACTIVE$1);
-      }
-
-      $__default["default"](this._scrollElement).trigger(EVENT_ACTIVATE, {
-        relatedTarget: target
-      });
-    };
-
-    _proto._clear = function _clear() {
-      [].slice.call(document.querySelectorAll(this._selector)).filter(function (node) {
-        return node.classList.contains(CLASS_NAME_ACTIVE$1);
-      }).forEach(function (node) {
-        return node.classList.remove(CLASS_NAME_ACTIVE$1);
-      });
-    } // Static
-    ;
-
-    ScrollSpy._jQueryInterface = function _jQueryInterface(config) {
-      return this.each(function () {
-        var data = $__default["default"](this).data(DATA_KEY$2);
-
-        var _config = typeof config === 'object' && config;
-
-        if (!data) {
-          data = new ScrollSpy(this, _config);
-          $__default["default"](this).data(DATA_KEY$2, data);
-        }
-
-        if (typeof config === 'string') {
-          if (typeof data[config] === 'undefined') {
-            throw new TypeError("No method named \"" + config + "\"");
-          }
-
-          data[config]();
-        }
-      });
-    };
-
-    _createClass(ScrollSpy, null, [{
-      key: "VERSION",
-      get: function get() {
-        return VERSION$2;
-      }
-    }, {
-      key: "Default",
-      get: function get() {
-        return Default$1;
-      }
-    }]);
-
-    return ScrollSpy;
-  }();
-  /**
-   * Data API implementation
-   */
-
-
-  $__default["default"](window).on(EVENT_LOAD_DATA_API, function () {
-    var scrollSpys = [].slice.call(document.querySelectorAll(SELECTOR_DATA_SPY));
-    var scrollSpysLength = scrollSpys.length;
-
-    for (var i = scrollSpysLength; i--;) {
-      var $spy = $__default["default"](scrollSpys[i]);
-
-      ScrollSpy._jQueryInterface.call($spy, $spy.data());
-    }
-  });
-  /**
-   * jQuery
-   */
-
-  $__default["default"].fn[NAME$2] = ScrollSpy._jQueryInterface;
-  $__default["default"].fn[NAME$2].Constructor = ScrollSpy;
-
-  $__default["default"].fn[NAME$2].noConflict = function () {
-    $__default["default"].fn[NAME$2] = JQUERY_NO_CONFLICT$2;
-    return ScrollSpy._jQueryInterface;
-  };
-
-  /**
-   * Constants
-   */
-
-  var NAME$1 = 'tab';
-  var VERSION$1 = '4.6.2';
-  var DATA_KEY$1 = 'bs.tab';
-  var EVENT_KEY$1 = "." + DATA_KEY$1;
-  var DATA_API_KEY = '.data-api';
-  var JQUERY_NO_CONFLICT$1 = $__default["default"].fn[NAME$1];
-  var CLASS_NAME_DROPDOWN_MENU = 'dropdown-menu';
-  var CLASS_NAME_ACTIVE = 'active';
-  var CLASS_NAME_DISABLED = 'disabled';
-  var CLASS_NAME_FADE$1 = 'fade';
-  var CLASS_NAME_SHOW$1 = 'show';
-  var EVENT_HIDE$1 = "hide" + EVENT_KEY$1;
-  var EVENT_HIDDEN$1 = "hidden" + EVENT_KEY$1;
-  var EVENT_SHOW$1 = "show" + EVENT_KEY$1;
-  var EVENT_SHOWN$1 = "shown" + EVENT_KEY$1;
-  var EVENT_CLICK_DATA_API = "click" + EVENT_KEY$1 + DATA_API_KEY;
-  var SELECTOR_DROPDOWN = '.dropdown';
-  var SELECTOR_NAV_LIST_GROUP = '.nav, .list-group';
-  var SELECTOR_ACTIVE = '.active';
-  var SELECTOR_ACTIVE_UL = '> li > .active';
-  var SELECTOR_DATA_TOGGLE = '[data-toggle="tab"], [data-toggle="pill"], [data-toggle="list"]';
-  var SELECTOR_DROPDOWN_TOGGLE = '.dropdown-toggle';
-  var SELECTOR_DROPDOWN_ACTIVE_CHILD = '> .dropdown-menu .active';
-  /**
-   * Class definition
-   */
-
-  var Tab = /*#__PURE__*/function () {
-    function Tab(element) {
-      this._element = element;
-    } // Getters
-
-
-    var _proto = Tab.prototype;
-
-    // Public
-    _proto.show = function show() {
-      var _this = this;
-
-      if (this._element.parentNode && this._element.parentNode.nodeType === Node.ELEMENT_NODE && $__default["default"](this._element).hasClass(CLASS_NAME_ACTIVE) || $__default["default"](this._element).hasClass(CLASS_NAME_DISABLED) || this._element.hasAttribute('disabled')) {
-        return;
-      }
-
-      var target;
-      var previous;
-      var listElement = $__default["default"](this._element).closest(SELECTOR_NAV_LIST_GROUP)[0];
-      var selector = Util.getSelectorFromElement(this._element);
-
-      if (listElement) {
-        var itemSelector = listElement.nodeName === 'UL' || listElement.nodeName === 'OL' ? SELECTOR_ACTIVE_UL : SELECTOR_ACTIVE;
-        previous = $__default["default"].makeArray($__default["default"](listElement).find(itemSelector));
-        previous = previous[previous.length - 1];
-      }
-
-      var hideEvent = $__default["default"].Event(EVENT_HIDE$1, {
-        relatedTarget: this._element
-      });
-      var showEvent = $__default["default"].Event(EVENT_SHOW$1, {
-        relatedTarget: previous
-      });
-
-      if (previous) {
-        $__default["default"](previous).trigger(hideEvent);
-      }
-
-      $__default["default"](this._element).trigger(showEvent);
-
-      if (showEvent.isDefaultPrevented() || hideEvent.isDefaultPrevented()) {
-        return;
-      }
-
-      if (selector) {
-        target = document.querySelector(selector);
-      }
-
-      this._activate(this._element, listElement);
-
-      var complete = function complete() {
-        var hiddenEvent = $__default["default"].Event(EVENT_HIDDEN$1, {
-          relatedTarget: _this._element
-        });
-        var shownEvent = $__default["default"].Event(EVENT_SHOWN$1, {
-          relatedTarget: previous
-        });
-        $__default["default"](previous).trigger(hiddenEvent);
-        $__default["default"](_this._element).trigger(shownEvent);
-      };
-
-      if (target) {
-        this._activate(target, target.parentNode, complete);
-      } else {
-        complete();
-      }
-    };
-
-    _proto.dispose = function dispose() {
-      $__default["default"].removeData(this._element, DATA_KEY$1);
-      this._element = null;
-    } // Private
-    ;
-
-    _proto._activate = function _activate(element, container, callback) {
-      var _this2 = this;
-
-      var activeElements = container && (container.nodeName === 'UL' || container.nodeName === 'OL') ? $__default["default"](container).find(SELECTOR_ACTIVE_UL) : $__default["default"](container).children(SELECTOR_ACTIVE);
-      var active = activeElements[0];
-      var isTransitioning = callback && active && $__default["default"](active).hasClass(CLASS_NAME_FADE$1);
-
-      var complete = function complete() {
-        return _this2._transitionComplete(element, active, callback);
-      };
-
-      if (active && isTransitioning) {
-        var transitionDuration = Util.getTransitionDurationFromElement(active);
-        $__default["default"](active).removeClass(CLASS_NAME_SHOW$1).one(Util.TRANSITION_END, complete).emulateTransitionEnd(transitionDuration);
-      } else {
-        complete();
-      }
-    };
-
-    _proto._transitionComplete = function _transitionComplete(element, active, callback) {
-      if (active) {
-        $__default["default"](active).removeClass(CLASS_NAME_ACTIVE);
-        var dropdownChild = $__default["default"](active.parentNode).find(SELECTOR_DROPDOWN_ACTIVE_CHILD)[0];
-
-        if (dropdownChild) {
-          $__default["default"](dropdownChild).removeClass(CLASS_NAME_ACTIVE);
-        }
-
-        if (active.getAttribute('role') === 'tab') {
-          active.setAttribute('aria-selected', false);
-        }
-      }
-
-      $__default["default"](element).addClass(CLASS_NAME_ACTIVE);
-
-      if (element.getAttribute('role') === 'tab') {
-        element.setAttribute('aria-selected', true);
-      }
-
-      Util.reflow(element);
-
-      if (element.classList.contains(CLASS_NAME_FADE$1)) {
-        element.classList.add(CLASS_NAME_SHOW$1);
-      }
-
-      var parent = element.parentNode;
-
-      if (parent && parent.nodeName === 'LI') {
-        parent = parent.parentNode;
-      }
-
-      if (parent && $__default["default"](parent).hasClass(CLASS_NAME_DROPDOWN_MENU)) {
-        var dropdownElement = $__default["default"](element).closest(SELECTOR_DROPDOWN)[0];
-
-        if (dropdownElement) {
-          var dropdownToggleList = [].slice.call(dropdownElement.querySelectorAll(SELECTOR_DROPDOWN_TOGGLE));
-          $__default["default"](dropdownToggleList).addClass(CLASS_NAME_ACTIVE);
-        }
-
-        element.setAttribute('aria-expanded', true);
-      }
-
-      if (callback) {
-        callback();
-      }
-    } // Static
-    ;
-
-    Tab._jQueryInterface = function _jQueryInterface(config) {
-      return this.each(function () {
-        var $this = $__default["default"](this);
-        var data = $this.data(DATA_KEY$1);
-
-        if (!data) {
-          data = new Tab(this);
-          $this.data(DATA_KEY$1, data);
-        }
-
-        if (typeof config === 'string') {
-          if (typeof data[config] === 'undefined') {
-            throw new TypeError("No method named \"" + config + "\"");
-          }
-
-          data[config]();
-        }
-      });
-    };
-
-    _createClass(Tab, null, [{
-      key: "VERSION",
-      get: function get() {
-        return VERSION$1;
-      }
-    }]);
-
-    return Tab;
-  }();
-  /**
-   * Data API implementation
-   */
-
-
-  $__default["default"](document).on(EVENT_CLICK_DATA_API, SELECTOR_DATA_TOGGLE, function (event) {
-    event.preventDefault();
-
-    Tab._jQueryInterface.call($__default["default"](this), 'show');
-  });
-  /**
-   * jQuery
-   */
-
-  $__default["default"].fn[NAME$1] = Tab._jQueryInterface;
-  $__default["default"].fn[NAME$1].Constructor = Tab;
-
-  $__default["default"].fn[NAME$1].noConflict = function () {
-    $__default["default"].fn[NAME$1] = JQUERY_NO_CONFLICT$1;
-    return Tab._jQueryInterface;
-  };
-
-  /**
-   * Constants
-   */
-
-  var NAME = 'toast';
-  var VERSION = '4.6.2';
-  var DATA_KEY = 'bs.toast';
-  var EVENT_KEY = "." + DATA_KEY;
-  var JQUERY_NO_CONFLICT = $__default["default"].fn[NAME];
-  var CLASS_NAME_FADE = 'fade';
-  var CLASS_NAME_HIDE = 'hide';
-  var CLASS_NAME_SHOW = 'show';
-  var CLASS_NAME_SHOWING = 'showing';
-  var EVENT_CLICK_DISMISS = "click.dismiss" + EVENT_KEY;
-  var EVENT_HIDE = "hide" + EVENT_KEY;
-  var EVENT_HIDDEN = "hidden" + EVENT_KEY;
-  var EVENT_SHOW = "show" + EVENT_KEY;
-  var EVENT_SHOWN = "shown" + EVENT_KEY;
-  var SELECTOR_DATA_DISMISS = '[data-dismiss="toast"]';
-  var Default = {
-    animation: true,
-    autohide: true,
-    delay: 500
-  };
-  var DefaultType = {
-    animation: 'boolean',
-    autohide: 'boolean',
-    delay: 'number'
-  };
-  /**
-   * Class definition
-   */
-
-  var Toast = /*#__PURE__*/function () {
-    function Toast(element, config) {
-      this._element = element;
-      this._config = this._getConfig(config);
-      this._timeout = null;
-
-      this._setListeners();
-    } // Getters
-
-
-    var _proto = Toast.prototype;
-
-    // Public
-    _proto.show = function show() {
-      var _this = this;
-
-      var showEvent = $__default["default"].Event(EVENT_SHOW);
-      $__default["default"](this._element).trigger(showEvent);
-
-      if (showEvent.isDefaultPrevented()) {
-        return;
-      }
-
-      this._clearTimeout();
-
-      if (this._config.animation) {
-        this._element.classList.add(CLASS_NAME_FADE);
-      }
-
-      var complete = function complete() {
-        _this._element.classList.remove(CLASS_NAME_SHOWING);
-
-        _this._element.classList.add(CLASS_NAME_SHOW);
-
-        $__default["default"](_this._element).trigger(EVENT_SHOWN);
-
-        if (_this._config.autohide) {
-          _this._timeout = setTimeout(function () {
-            _this.hide();
-          }, _this._config.delay);
-        }
-      };
-
-      this._element.classList.remove(CLASS_NAME_HIDE);
-
-      Util.reflow(this._element);
-
-      this._element.classList.add(CLASS_NAME_SHOWING);
-
-      if (this._config.animation) {
-        var transitionDuration = Util.getTransitionDurationFromElement(this._element);
-        $__default["default"](this._element).one(Util.TRANSITION_END, complete).emulateTransitionEnd(transitionDuration);
-      } else {
-        complete();
-      }
-    };
-
-    _proto.hide = function hide() {
-      if (!this._element.classList.contains(CLASS_NAME_SHOW)) {
-        return;
-      }
-
-      var hideEvent = $__default["default"].Event(EVENT_HIDE);
-      $__default["default"](this._element).trigger(hideEvent);
-
-      if (hideEvent.isDefaultPrevented()) {
-        return;
-      }
-
-      this._close();
-    };
-
-    _proto.dispose = function dispose() {
-      this._clearTimeout();
-
-      if (this._element.classList.contains(CLASS_NAME_SHOW)) {
-        this._element.classList.remove(CLASS_NAME_SHOW);
-      }
-
-      $__default["default"](this._element).off(EVENT_CLICK_DISMISS);
-      $__default["default"].removeData(this._element, DATA_KEY);
-      this._element = null;
-      this._config = null;
-    } // Private
-    ;
-
-    _proto._getConfig = function _getConfig(config) {
-      config = _extends({}, Default, $__default["default"](this._element).data(), typeof config === 'object' && config ? config : {});
-      Util.typeCheckConfig(NAME, config, this.constructor.DefaultType);
-      return config;
-    };
-
-    _proto._setListeners = function _setListeners() {
-      var _this2 = this;
-
-      $__default["default"](this._element).on(EVENT_CLICK_DISMISS, SELECTOR_DATA_DISMISS, function () {
-        return _this2.hide();
-      });
-    };
-
-    _proto._close = function _close() {
-      var _this3 = this;
-
-      var complete = function complete() {
-        _this3._element.classList.add(CLASS_NAME_HIDE);
-
-        $__default["default"](_this3._element).trigger(EVENT_HIDDEN);
-      };
-
-      this._element.classList.remove(CLASS_NAME_SHOW);
-
-      if (this._config.animation) {
-        var transitionDuration = Util.getTransitionDurationFromElement(this._element);
-        $__default["default"](this._element).one(Util.TRANSITION_END, complete).emulateTransitionEnd(transitionDuration);
-      } else {
-        complete();
-      }
-    };
-
-    _proto._clearTimeout = function _clearTimeout() {
-      clearTimeout(this._timeout);
-      this._timeout = null;
-    } // Static
-    ;
-
-    Toast._jQueryInterface = function _jQueryInterface(config) {
-      return this.each(function () {
-        var $element = $__default["default"](this);
-        var data = $element.data(DATA_KEY);
-
-        var _config = typeof config === 'object' && config;
-
-        if (!data) {
-          data = new Toast(this, _config);
-          $element.data(DATA_KEY, data);
-        }
-
-        if (typeof config === 'string') {
-          if (typeof data[config] === 'undefined') {
-            throw new TypeError("No method named \"" + config + "\"");
-          }
-
-          data[config](this);
-        }
-      });
-    };
-
-    _createClass(Toast, null, [{
-      key: "VERSION",
-      get: function get() {
-        return VERSION;
-      }
-    }, {
-      key: "DefaultType",
-      get: function get() {
-        return DefaultType;
-      }
-    }, {
-      key: "Default",
-      get: function get() {
-        return Default;
-      }
-    }]);
-
-    return Toast;
-  }();
-  /**
-   * jQuery
-   */
-
-
-  $__default["default"].fn[NAME] = Toast._jQueryInterface;
-  $__default["default"].fn[NAME].Constructor = Toast;
-
-  $__default["default"].fn[NAME].noConflict = function () {
-    $__default["default"].fn[NAME] = JQUERY_NO_CONFLICT;
-    return Toast._jQueryInterface;
-  };
-
-  exports.Alert = Alert;
-  exports.Button = Button;
-  exports.Carousel = Carousel;
-  exports.Collapse = Collapse;
-  exports.Dropdown = Dropdown;
-  exports.Modal = Modal;
-  exports.Popover = Popover;
-  exports.Scrollspy = ScrollSpy;
-  exports.Tab = Tab;
-  exports.Toast = Toast;
-  exports.Tooltip = Tooltip;
-  exports.Util = Util;
-
-  Object.defineProperty(exports, '__esModule', { value: true });
-
-}));
-
-
-},{"jquery":265,"popper.js":283}],71:[function(require,module,exports){
+'use strict';
 require('../../modules/es.array.fill');
 var entryUnbind = require('../../internals/entry-unbind');
 
 module.exports = entryUnbind('Array', 'fill');
 
-},{"../../internals/entry-unbind":123,"../../modules/es.array.fill":223}],72:[function(require,module,exports){
+},{"../../internals/entry-unbind":126,"../../modules/es.array.fill":241}],71:[function(require,module,exports){
+'use strict';
 require('../../modules/es.array.iterator');
 require('../../modules/es.object.to-string');
 var entryUnbind = require('../../internals/entry-unbind');
 
 module.exports = entryUnbind('Array', 'values');
 
-},{"../../internals/entry-unbind":123,"../../modules/es.array.iterator":224,"../../modules/es.object.to-string":228}],73:[function(require,module,exports){
+},{"../../internals/entry-unbind":126,"../../modules/es.array.iterator":242,"../../modules/es.object.to-string":249}],72:[function(require,module,exports){
+'use strict';
 require('../../modules/es.array.iterator');
 require('../../modules/es.map');
 require('../../modules/es.object.to-string');
@@ -33470,7 +29380,8 @@ var path = require('../../internals/path');
 
 module.exports = path.Map;
 
-},{"../../internals/path":189,"../../modules/es.array.iterator":224,"../../modules/es.map":226,"../../modules/es.object.to-string":228,"../../modules/es.string.iterator":236}],74:[function(require,module,exports){
+},{"../../internals/path":199,"../../modules/es.array.iterator":242,"../../modules/es.map":246,"../../modules/es.object.to-string":249,"../../modules/es.string.iterator":264}],73:[function(require,module,exports){
+'use strict';
 require('../../modules/es.aggregate-error');
 require('../../modules/es.array.iterator');
 require('../../modules/es.object.to-string');
@@ -33483,7 +29394,8 @@ var path = require('../../internals/path');
 
 module.exports = path.Promise;
 
-},{"../../internals/path":189,"../../modules/es.aggregate-error":221,"../../modules/es.array.iterator":224,"../../modules/es.object.to-string":228,"../../modules/es.promise":232,"../../modules/es.promise.all-settled":229,"../../modules/es.promise.any":230,"../../modules/es.promise.finally":231,"../../modules/es.string.iterator":236}],75:[function(require,module,exports){
+},{"../../internals/path":199,"../../modules/es.aggregate-error":239,"../../modules/es.array.iterator":242,"../../modules/es.object.to-string":249,"../../modules/es.promise":256,"../../modules/es.promise.all-settled":250,"../../modules/es.promise.any":252,"../../modules/es.promise.finally":255,"../../modules/es.string.iterator":264}],74:[function(require,module,exports){
+'use strict';
 require('../../modules/es.array.iterator');
 require('../../modules/es.object.to-string');
 require('../../modules/es.set');
@@ -33492,13 +29404,15 @@ var path = require('../../internals/path');
 
 module.exports = path.Set;
 
-},{"../../internals/path":189,"../../modules/es.array.iterator":224,"../../modules/es.object.to-string":228,"../../modules/es.set":234,"../../modules/es.string.iterator":236}],76:[function(require,module,exports){
+},{"../../internals/path":199,"../../modules/es.array.iterator":242,"../../modules/es.object.to-string":249,"../../modules/es.set":262,"../../modules/es.string.iterator":264}],75:[function(require,module,exports){
+'use strict';
 require('../../modules/es.string.ends-with');
 var entryUnbind = require('../../internals/entry-unbind');
 
 module.exports = entryUnbind('String', 'endsWith');
 
-},{"../../internals/entry-unbind":123,"../../modules/es.string.ends-with":235}],77:[function(require,module,exports){
+},{"../../internals/entry-unbind":126,"../../modules/es.string.ends-with":263}],76:[function(require,module,exports){
+'use strict';
 require('../../modules/es.array.concat');
 require('../../modules/es.object.to-string');
 require('../../modules/es.symbol');
@@ -33523,62 +29437,65 @@ var path = require('../../internals/path');
 
 module.exports = path.Symbol;
 
-},{"../../internals/path":189,"../../modules/es.array.concat":222,"../../modules/es.json.to-string-tag":225,"../../modules/es.math.to-string-tag":227,"../../modules/es.object.to-string":228,"../../modules/es.reflect.to-string-tag":233,"../../modules/es.symbol":242,"../../modules/es.symbol.async-iterator":237,"../../modules/es.symbol.description":238,"../../modules/es.symbol.has-instance":239,"../../modules/es.symbol.is-concat-spreadable":240,"../../modules/es.symbol.iterator":241,"../../modules/es.symbol.match":244,"../../modules/es.symbol.match-all":243,"../../modules/es.symbol.replace":245,"../../modules/es.symbol.search":246,"../../modules/es.symbol.species":247,"../../modules/es.symbol.split":248,"../../modules/es.symbol.to-primitive":249,"../../modules/es.symbol.to-string-tag":250,"../../modules/es.symbol.unscopables":251}],78:[function(require,module,exports){
+},{"../../internals/path":199,"../../modules/es.array.concat":240,"../../modules/es.json.to-string-tag":244,"../../modules/es.math.to-string-tag":247,"../../modules/es.object.to-string":249,"../../modules/es.reflect.to-string-tag":260,"../../modules/es.symbol":272,"../../modules/es.symbol.async-iterator":265,"../../modules/es.symbol.description":267,"../../modules/es.symbol.has-instance":269,"../../modules/es.symbol.is-concat-spreadable":270,"../../modules/es.symbol.iterator":271,"../../modules/es.symbol.match":275,"../../modules/es.symbol.match-all":274,"../../modules/es.symbol.replace":276,"../../modules/es.symbol.search":277,"../../modules/es.symbol.species":278,"../../modules/es.symbol.split":279,"../../modules/es.symbol.to-primitive":280,"../../modules/es.symbol.to-string-tag":281,"../../modules/es.symbol.unscopables":282}],77:[function(require,module,exports){
+'use strict';
 require('../../modules/es.typed-array.fill');
 
-},{"../../modules/es.typed-array.fill":252}],79:[function(require,module,exports){
+},{"../../modules/es.typed-array.fill":283}],78:[function(require,module,exports){
+'use strict';
 require('../../modules/es.typed-array.slice');
 
-},{"../../modules/es.typed-array.slice":253}],80:[function(require,module,exports){
-var global = require('../internals/global');
+},{"../../modules/es.typed-array.slice":284}],79:[function(require,module,exports){
+'use strict';
 var isCallable = require('../internals/is-callable');
 var tryToString = require('../internals/try-to-string');
 
-var TypeError = global.TypeError;
+var $TypeError = TypeError;
 
 // `Assert: IsCallable(argument) is true`
 module.exports = function (argument) {
   if (isCallable(argument)) return argument;
-  throw TypeError(tryToString(argument) + ' is not a function');
+  throw new $TypeError(tryToString(argument) + ' is not a function');
 };
 
-},{"../internals/global":139,"../internals/is-callable":153,"../internals/try-to-string":214}],81:[function(require,module,exports){
-var global = require('../internals/global');
+},{"../internals/is-callable":161,"../internals/try-to-string":228}],80:[function(require,module,exports){
+'use strict';
 var isConstructor = require('../internals/is-constructor');
 var tryToString = require('../internals/try-to-string');
 
-var TypeError = global.TypeError;
+var $TypeError = TypeError;
 
 // `Assert: IsConstructor(argument) is true`
 module.exports = function (argument) {
   if (isConstructor(argument)) return argument;
-  throw TypeError(tryToString(argument) + ' is not a constructor');
+  throw new $TypeError(tryToString(argument) + ' is not a constructor');
 };
 
-},{"../internals/global":139,"../internals/is-constructor":154,"../internals/try-to-string":214}],82:[function(require,module,exports){
-var global = require('../internals/global');
+},{"../internals/is-constructor":162,"../internals/try-to-string":228}],81:[function(require,module,exports){
+'use strict';
 var isCallable = require('../internals/is-callable');
 
-var String = global.String;
-var TypeError = global.TypeError;
+var $String = String;
+var $TypeError = TypeError;
 
 module.exports = function (argument) {
   if (typeof argument == 'object' || isCallable(argument)) return argument;
-  throw TypeError("Can't set " + String(argument) + ' as a prototype');
+  throw new $TypeError("Can't set " + $String(argument) + ' as a prototype');
 };
 
-},{"../internals/global":139,"../internals/is-callable":153}],83:[function(require,module,exports){
+},{"../internals/is-callable":161}],82:[function(require,module,exports){
+'use strict';
 var wellKnownSymbol = require('../internals/well-known-symbol');
 var create = require('../internals/object-create');
-var definePropertyModule = require('../internals/object-define-property');
+var defineProperty = require('../internals/object-define-property').f;
 
 var UNSCOPABLES = wellKnownSymbol('unscopables');
 var ArrayPrototype = Array.prototype;
 
 // Array.prototype[@@unscopables]
 // https://tc39.es/ecma262/#sec-array.prototype-@@unscopables
-if (ArrayPrototype[UNSCOPABLES] == undefined) {
-  definePropertyModule.f(ArrayPrototype, UNSCOPABLES, {
+if (ArrayPrototype[UNSCOPABLES] === undefined) {
+  defineProperty(ArrayPrototype, UNSCOPABLES, {
     configurable: true,
     value: create(null)
   });
@@ -33589,35 +29506,37 @@ module.exports = function (key) {
   ArrayPrototype[UNSCOPABLES][key] = true;
 };
 
-},{"../internals/object-create":172,"../internals/object-define-property":174,"../internals/well-known-symbol":220}],84:[function(require,module,exports){
-var global = require('../internals/global');
+},{"../internals/object-create":182,"../internals/object-define-property":184,"../internals/well-known-symbol":237}],83:[function(require,module,exports){
+'use strict';
 var isPrototypeOf = require('../internals/object-is-prototype-of');
 
-var TypeError = global.TypeError;
+var $TypeError = TypeError;
 
 module.exports = function (it, Prototype) {
   if (isPrototypeOf(Prototype, it)) return it;
-  throw TypeError('Incorrect invocation');
+  throw new $TypeError('Incorrect invocation');
 };
 
-},{"../internals/global":139,"../internals/object-is-prototype-of":181}],85:[function(require,module,exports){
-var global = require('../internals/global');
+},{"../internals/object-is-prototype-of":191}],84:[function(require,module,exports){
+'use strict';
 var isObject = require('../internals/is-object');
 
-var String = global.String;
-var TypeError = global.TypeError;
+var $String = String;
+var $TypeError = TypeError;
 
 // `Assert: Type(argument) is Object`
 module.exports = function (argument) {
   if (isObject(argument)) return argument;
-  throw TypeError(String(argument) + ' is not an object');
+  throw new $TypeError($String(argument) + ' is not an object');
 };
 
-},{"../internals/global":139,"../internals/is-object":156}],86:[function(require,module,exports){
+},{"../internals/is-object":165}],85:[function(require,module,exports){
+'use strict';
 // eslint-disable-next-line es/no-typed-arrays -- safe
 module.exports = typeof ArrayBuffer != 'undefined' && typeof DataView != 'undefined';
 
-},{}],87:[function(require,module,exports){
+},{}],86:[function(require,module,exports){
+'use strict';
 // FF26- bug: ArrayBuffers are non-extensible, but Object.isExtensible does not report it
 var fails = require('../internals/fails');
 
@@ -33629,9 +29548,9 @@ module.exports = fails(function () {
   }
 });
 
-},{"../internals/fails":127}],88:[function(require,module,exports){
+},{"../internals/fails":132}],87:[function(require,module,exports){
 'use strict';
-var NATIVE_ARRAY_BUFFER = require('../internals/array-buffer-native');
+var NATIVE_ARRAY_BUFFER = require('../internals/array-buffer-basic-detection');
 var DESCRIPTORS = require('../internals/descriptors');
 var global = require('../internals/global');
 var isCallable = require('../internals/is-callable');
@@ -33640,14 +29559,17 @@ var hasOwn = require('../internals/has-own-property');
 var classof = require('../internals/classof');
 var tryToString = require('../internals/try-to-string');
 var createNonEnumerableProperty = require('../internals/create-non-enumerable-property');
-var redefine = require('../internals/redefine');
-var defineProperty = require('../internals/object-define-property').f;
+var defineBuiltIn = require('../internals/define-built-in');
+var defineBuiltInAccessor = require('../internals/define-built-in-accessor');
 var isPrototypeOf = require('../internals/object-is-prototype-of');
 var getPrototypeOf = require('../internals/object-get-prototype-of');
 var setPrototypeOf = require('../internals/object-set-prototype-of');
 var wellKnownSymbol = require('../internals/well-known-symbol');
 var uid = require('../internals/uid');
+var InternalStateModule = require('../internals/internal-state');
 
+var enforceInternalState = InternalStateModule.enforce;
+var getInternalState = InternalStateModule.get;
 var Int8Array = global.Int8Array;
 var Int8ArrayPrototype = Int8Array && Int8Array.prototype;
 var Uint8ClampedArray = global.Uint8ClampedArray;
@@ -33659,7 +29581,7 @@ var TypeError = global.TypeError;
 
 var TO_STRING_TAG = wellKnownSymbol('toStringTag');
 var TYPED_ARRAY_TAG = uid('TYPED_ARRAY_TAG');
-var TYPED_ARRAY_CONSTRUCTOR = uid('TYPED_ARRAY_CONSTRUCTOR');
+var TYPED_ARRAY_CONSTRUCTOR = 'TypedArrayConstructor';
 // Fixing native typed arrays in Opera Presto crashes the browser, see #595
 var NATIVE_ARRAY_BUFFER_VIEWS = NATIVE_ARRAY_BUFFER && !!setPrototypeOf && classof(global.opera) !== 'Opera';
 var TYPED_ARRAY_TAG_REQUIRED = false;
@@ -33690,6 +29612,13 @@ var isView = function isView(it) {
     || hasOwn(BigIntArrayConstructorsList, klass);
 };
 
+var getTypedArrayConstructor = function (it) {
+  var proto = getPrototypeOf(it);
+  if (!isObject(proto)) return;
+  var state = getInternalState(proto);
+  return (state && hasOwn(state, TYPED_ARRAY_CONSTRUCTOR)) ? state[TYPED_ARRAY_CONSTRUCTOR] : getTypedArrayConstructor(proto);
+};
+
 var isTypedArray = function (it) {
   if (!isObject(it)) return false;
   var klass = classof(it);
@@ -33699,12 +29628,12 @@ var isTypedArray = function (it) {
 
 var aTypedArray = function (it) {
   if (isTypedArray(it)) return it;
-  throw TypeError('Target is not a typed array');
+  throw new TypeError('Target is not a typed array');
 };
 
 var aTypedArrayConstructor = function (C) {
   if (isCallable(C) && (!setPrototypeOf || isPrototypeOf(TypedArray, C))) return C;
-  throw TypeError(tryToString(C) + ' is not a typed array constructor');
+  throw new TypeError(tryToString(C) + ' is not a typed array constructor');
 };
 
 var exportTypedArrayMethod = function (KEY, property, forced, options) {
@@ -33721,7 +29650,7 @@ var exportTypedArrayMethod = function (KEY, property, forced, options) {
     }
   }
   if (!TypedArrayPrototype[KEY] || forced) {
-    redefine(TypedArrayPrototype, KEY, forced ? property
+    defineBuiltIn(TypedArrayPrototype, KEY, forced ? property
       : NATIVE_ARRAY_BUFFER_VIEWS && Int8ArrayPrototype[KEY] || property, options);
   }
 };
@@ -33739,14 +29668,14 @@ var exportTypedArrayStaticMethod = function (KEY, property, forced) {
     if (!TypedArray[KEY] || forced) {
       // V8 ~ Chrome 49-50 `%TypedArray%` methods are non-writable non-configurable
       try {
-        return redefine(TypedArray, KEY, forced ? property : NATIVE_ARRAY_BUFFER_VIEWS && TypedArray[KEY] || property);
+        return defineBuiltIn(TypedArray, KEY, forced ? property : NATIVE_ARRAY_BUFFER_VIEWS && TypedArray[KEY] || property);
       } catch (error) { /* empty */ }
     } else return;
   }
   for (ARRAY in TypedArrayConstructorsList) {
     TypedArrayConstructor = global[ARRAY];
     if (TypedArrayConstructor && (!TypedArrayConstructor[KEY] || forced)) {
-      redefine(TypedArrayConstructor, KEY, property);
+      defineBuiltIn(TypedArrayConstructor, KEY, property);
     }
   }
 };
@@ -33754,21 +29683,21 @@ var exportTypedArrayStaticMethod = function (KEY, property, forced) {
 for (NAME in TypedArrayConstructorsList) {
   Constructor = global[NAME];
   Prototype = Constructor && Constructor.prototype;
-  if (Prototype) createNonEnumerableProperty(Prototype, TYPED_ARRAY_CONSTRUCTOR, Constructor);
+  if (Prototype) enforceInternalState(Prototype)[TYPED_ARRAY_CONSTRUCTOR] = Constructor;
   else NATIVE_ARRAY_BUFFER_VIEWS = false;
 }
 
 for (NAME in BigIntArrayConstructorsList) {
   Constructor = global[NAME];
   Prototype = Constructor && Constructor.prototype;
-  if (Prototype) createNonEnumerableProperty(Prototype, TYPED_ARRAY_CONSTRUCTOR, Constructor);
+  if (Prototype) enforceInternalState(Prototype)[TYPED_ARRAY_CONSTRUCTOR] = Constructor;
 }
 
 // WebKit bug - typed arrays constructors prototype is Object.prototype
 if (!NATIVE_ARRAY_BUFFER_VIEWS || !isCallable(TypedArray) || TypedArray === Function.prototype) {
   // eslint-disable-next-line no-shadow -- safe
   TypedArray = function TypedArray() {
-    throw TypeError('Incorrect invocation');
+    throw new TypeError('Incorrect invocation');
   };
   if (NATIVE_ARRAY_BUFFER_VIEWS) for (NAME in TypedArrayConstructorsList) {
     if (global[NAME]) setPrototypeOf(global[NAME], TypedArray);
@@ -33789,9 +29718,12 @@ if (NATIVE_ARRAY_BUFFER_VIEWS && getPrototypeOf(Uint8ClampedArrayPrototype) !== 
 
 if (DESCRIPTORS && !hasOwn(TypedArrayPrototype, TO_STRING_TAG)) {
   TYPED_ARRAY_TAG_REQUIRED = true;
-  defineProperty(TypedArrayPrototype, TO_STRING_TAG, { get: function () {
-    return isObject(this) ? this[TYPED_ARRAY_TAG] : undefined;
-  } });
+  defineBuiltInAccessor(TypedArrayPrototype, TO_STRING_TAG, {
+    configurable: true,
+    get: function () {
+      return isObject(this) ? this[TYPED_ARRAY_TAG] : undefined;
+    }
+  });
   for (NAME in TypedArrayConstructorsList) if (global[NAME]) {
     createNonEnumerableProperty(global[NAME], TYPED_ARRAY_TAG, NAME);
   }
@@ -33799,19 +29731,19 @@ if (DESCRIPTORS && !hasOwn(TypedArrayPrototype, TO_STRING_TAG)) {
 
 module.exports = {
   NATIVE_ARRAY_BUFFER_VIEWS: NATIVE_ARRAY_BUFFER_VIEWS,
-  TYPED_ARRAY_CONSTRUCTOR: TYPED_ARRAY_CONSTRUCTOR,
   TYPED_ARRAY_TAG: TYPED_ARRAY_TAG_REQUIRED && TYPED_ARRAY_TAG,
   aTypedArray: aTypedArray,
   aTypedArrayConstructor: aTypedArrayConstructor,
   exportTypedArrayMethod: exportTypedArrayMethod,
   exportTypedArrayStaticMethod: exportTypedArrayStaticMethod,
+  getTypedArrayConstructor: getTypedArrayConstructor,
   isView: isView,
   isTypedArray: isTypedArray,
   TypedArray: TypedArray,
   TypedArrayPrototype: TypedArrayPrototype
 };
 
-},{"../internals/array-buffer-native":86,"../internals/classof":99,"../internals/create-non-enumerable-property":107,"../internals/descriptors":112,"../internals/global":139,"../internals/has-own-property":140,"../internals/is-callable":153,"../internals/is-object":156,"../internals/object-define-property":174,"../internals/object-get-prototype-of":179,"../internals/object-is-prototype-of":181,"../internals/object-set-prototype-of":185,"../internals/redefine":194,"../internals/try-to-string":214,"../internals/uid":216,"../internals/well-known-symbol":220}],89:[function(require,module,exports){
+},{"../internals/array-buffer-basic-detection":85,"../internals/classof":98,"../internals/create-non-enumerable-property":105,"../internals/define-built-in":109,"../internals/define-built-in-accessor":108,"../internals/descriptors":112,"../internals/global":147,"../internals/has-own-property":148,"../internals/internal-state":158,"../internals/is-callable":161,"../internals/is-object":165,"../internals/object-get-prototype-of":189,"../internals/object-is-prototype-of":191,"../internals/object-set-prototype-of":195,"../internals/try-to-string":228,"../internals/uid":230,"../internals/well-known-symbol":237}],88:[function(require,module,exports){
 'use strict';
 var toObject = require('../internals/to-object');
 var toAbsoluteIndex = require('../internals/to-absolute-index');
@@ -33830,7 +29762,8 @@ module.exports = function fill(value /* , start = 0, end = @length */) {
   return O;
 };
 
-},{"../internals/length-of-array-like":164,"../internals/to-absolute-index":205,"../internals/to-object":209}],90:[function(require,module,exports){
+},{"../internals/length-of-array-like":175,"../internals/to-absolute-index":218,"../internals/to-object":223}],89:[function(require,module,exports){
+'use strict';
 var toIndexedObject = require('../internals/to-indexed-object');
 var toAbsoluteIndex = require('../internals/to-absolute-index');
 var lengthOfArrayLike = require('../internals/length-of-array-like');
@@ -33844,10 +29777,10 @@ var createMethod = function (IS_INCLUDES) {
     var value;
     // Array#includes uses SameValueZero equality algorithm
     // eslint-disable-next-line no-self-compare -- NaN check
-    if (IS_INCLUDES && el != el) while (length > index) {
+    if (IS_INCLUDES && el !== el) while (length > index) {
       value = O[index++];
       // eslint-disable-next-line no-self-compare -- NaN check
-      if (value != value) return true;
+      if (value !== value) return true;
     // Array#indexOf ignores holes, Array#includes - not
     } else for (;length > index; index++) {
       if ((IS_INCLUDES || index in O) && O[index] === el) return IS_INCLUDES || index || 0;
@@ -33864,7 +29797,8 @@ module.exports = {
   indexOf: createMethod(false)
 };
 
-},{"../internals/length-of-array-like":164,"../internals/to-absolute-index":205,"../internals/to-indexed-object":206}],91:[function(require,module,exports){
+},{"../internals/length-of-array-like":175,"../internals/to-absolute-index":218,"../internals/to-indexed-object":220}],90:[function(require,module,exports){
+'use strict';
 var bind = require('../internals/function-bind-context');
 var uncurryThis = require('../internals/function-uncurry-this');
 var IndexedObject = require('../internals/indexed-object');
@@ -33876,13 +29810,13 @@ var push = uncurryThis([].push);
 
 // `Array.prototype.{ forEach, map, filter, some, every, find, findIndex, filterReject }` methods implementation
 var createMethod = function (TYPE) {
-  var IS_MAP = TYPE == 1;
-  var IS_FILTER = TYPE == 2;
-  var IS_SOME = TYPE == 3;
-  var IS_EVERY = TYPE == 4;
-  var IS_FIND_INDEX = TYPE == 6;
-  var IS_FILTER_REJECT = TYPE == 7;
-  var NO_HOLES = TYPE == 5 || IS_FIND_INDEX;
+  var IS_MAP = TYPE === 1;
+  var IS_FILTER = TYPE === 2;
+  var IS_SOME = TYPE === 3;
+  var IS_EVERY = TYPE === 4;
+  var IS_FIND_INDEX = TYPE === 6;
+  var IS_FILTER_REJECT = TYPE === 7;
+  var NO_HOLES = TYPE === 5 || IS_FIND_INDEX;
   return function ($this, callbackfn, that, specificCreate) {
     var O = toObject($this);
     var self = IndexedObject(O);
@@ -33939,7 +29873,8 @@ module.exports = {
   filterReject: createMethod(7)
 };
 
-},{"../internals/array-species-create":96,"../internals/function-bind-context":130,"../internals/function-uncurry-this":134,"../internals/indexed-object":145,"../internals/length-of-array-like":164,"../internals/to-object":209}],92:[function(require,module,exports){
+},{"../internals/array-species-create":95,"../internals/function-bind-context":135,"../internals/function-uncurry-this":141,"../internals/indexed-object":153,"../internals/length-of-array-like":175,"../internals/to-object":223}],91:[function(require,module,exports){
+'use strict';
 var fails = require('../internals/fails');
 var wellKnownSymbol = require('../internals/well-known-symbol');
 var V8_VERSION = require('../internals/engine-v8-version');
@@ -33960,39 +29895,41 @@ module.exports = function (METHOD_NAME) {
   });
 };
 
-},{"../internals/engine-v8-version":122,"../internals/fails":127,"../internals/well-known-symbol":220}],93:[function(require,module,exports){
-var global = require('../internals/global');
+},{"../internals/engine-v8-version":125,"../internals/fails":132,"../internals/well-known-symbol":237}],92:[function(require,module,exports){
+'use strict';
 var toAbsoluteIndex = require('../internals/to-absolute-index');
 var lengthOfArrayLike = require('../internals/length-of-array-like');
 var createProperty = require('../internals/create-property');
 
-var Array = global.Array;
+var $Array = Array;
 var max = Math.max;
 
 module.exports = function (O, start, end) {
   var length = lengthOfArrayLike(O);
   var k = toAbsoluteIndex(start, length);
   var fin = toAbsoluteIndex(end === undefined ? length : end, length);
-  var result = Array(max(fin - k, 0));
-  for (var n = 0; k < fin; k++, n++) createProperty(result, n, O[k]);
+  var result = $Array(max(fin - k, 0));
+  var n = 0;
+  for (; k < fin; k++, n++) createProperty(result, n, O[k]);
   result.length = n;
   return result;
 };
 
-},{"../internals/create-property":109,"../internals/global":139,"../internals/length-of-array-like":164,"../internals/to-absolute-index":205}],94:[function(require,module,exports){
+},{"../internals/create-property":107,"../internals/length-of-array-like":175,"../internals/to-absolute-index":218}],93:[function(require,module,exports){
+'use strict';
 var uncurryThis = require('../internals/function-uncurry-this');
 
 module.exports = uncurryThis([].slice);
 
-},{"../internals/function-uncurry-this":134}],95:[function(require,module,exports){
-var global = require('../internals/global');
+},{"../internals/function-uncurry-this":141}],94:[function(require,module,exports){
+'use strict';
 var isArray = require('../internals/is-array');
 var isConstructor = require('../internals/is-constructor');
 var isObject = require('../internals/is-object');
 var wellKnownSymbol = require('../internals/well-known-symbol');
 
 var SPECIES = wellKnownSymbol('species');
-var Array = global.Array;
+var $Array = Array;
 
 // a part of `ArraySpeciesCreate` abstract operation
 // https://tc39.es/ecma262/#sec-arrayspeciescreate
@@ -34001,15 +29938,16 @@ module.exports = function (originalArray) {
   if (isArray(originalArray)) {
     C = originalArray.constructor;
     // cross-realm fallback
-    if (isConstructor(C) && (C === Array || isArray(C.prototype))) C = undefined;
+    if (isConstructor(C) && (C === $Array || isArray(C.prototype))) C = undefined;
     else if (isObject(C)) {
       C = C[SPECIES];
       if (C === null) C = undefined;
     }
-  } return C === undefined ? Array : C;
+  } return C === undefined ? $Array : C;
 };
 
-},{"../internals/global":139,"../internals/is-array":152,"../internals/is-constructor":154,"../internals/is-object":156,"../internals/well-known-symbol":220}],96:[function(require,module,exports){
+},{"../internals/is-array":160,"../internals/is-constructor":162,"../internals/is-object":165,"../internals/well-known-symbol":237}],95:[function(require,module,exports){
+'use strict';
 var arraySpeciesConstructor = require('../internals/array-species-constructor');
 
 // `ArraySpeciesCreate` abstract operation
@@ -34018,7 +29956,8 @@ module.exports = function (originalArray, length) {
   return new (arraySpeciesConstructor(originalArray))(length === 0 ? 0 : length);
 };
 
-},{"../internals/array-species-constructor":95}],97:[function(require,module,exports){
+},{"../internals/array-species-constructor":94}],96:[function(require,module,exports){
+'use strict';
 var wellKnownSymbol = require('../internals/well-known-symbol');
 
 var ITERATOR = wellKnownSymbol('iterator');
@@ -34042,7 +29981,9 @@ try {
 } catch (error) { /* empty */ }
 
 module.exports = function (exec, SKIP_CLOSING) {
-  if (!SKIP_CLOSING && !SAFE_CLOSING) return false;
+  try {
+    if (!SKIP_CLOSING && !SAFE_CLOSING) return false;
+  } catch (error) { return false; } // workaround of old WebKit + `eval` bug
   var ITERATION_SUPPORT = false;
   try {
     var object = {};
@@ -34058,7 +29999,8 @@ module.exports = function (exec, SKIP_CLOSING) {
   return ITERATION_SUPPORT;
 };
 
-},{"../internals/well-known-symbol":220}],98:[function(require,module,exports){
+},{"../internals/well-known-symbol":237}],97:[function(require,module,exports){
+'use strict';
 var uncurryThis = require('../internals/function-uncurry-this');
 
 var toString = uncurryThis({}.toString);
@@ -34068,18 +30010,18 @@ module.exports = function (it) {
   return stringSlice(toString(it), 8, -1);
 };
 
-},{"../internals/function-uncurry-this":134}],99:[function(require,module,exports){
-var global = require('../internals/global');
+},{"../internals/function-uncurry-this":141}],98:[function(require,module,exports){
+'use strict';
 var TO_STRING_TAG_SUPPORT = require('../internals/to-string-tag-support');
 var isCallable = require('../internals/is-callable');
 var classofRaw = require('../internals/classof-raw');
 var wellKnownSymbol = require('../internals/well-known-symbol');
 
 var TO_STRING_TAG = wellKnownSymbol('toStringTag');
-var Object = global.Object;
+var $Object = Object;
 
 // ES3 wrong here
-var CORRECT_ARGUMENTS = classofRaw(function () { return arguments; }()) == 'Arguments';
+var CORRECT_ARGUMENTS = classofRaw(function () { return arguments; }()) === 'Arguments';
 
 // fallback for IE11 Script Access Denied error
 var tryGet = function (it, key) {
@@ -34093,37 +30035,24 @@ module.exports = TO_STRING_TAG_SUPPORT ? classofRaw : function (it) {
   var O, tag, result;
   return it === undefined ? 'Undefined' : it === null ? 'Null'
     // @@toStringTag case
-    : typeof (tag = tryGet(O = Object(it), TO_STRING_TAG)) == 'string' ? tag
+    : typeof (tag = tryGet(O = $Object(it), TO_STRING_TAG)) == 'string' ? tag
     // builtinTag case
     : CORRECT_ARGUMENTS ? classofRaw(O)
     // ES3 arguments fallback
-    : (result = classofRaw(O)) == 'Object' && isCallable(O.callee) ? 'Arguments' : result;
+    : (result = classofRaw(O)) === 'Object' && isCallable(O.callee) ? 'Arguments' : result;
 };
 
-},{"../internals/classof-raw":98,"../internals/global":139,"../internals/is-callable":153,"../internals/to-string-tag-support":212,"../internals/well-known-symbol":220}],100:[function(require,module,exports){
-var uncurryThis = require('../internals/function-uncurry-this');
-
-var replace = uncurryThis(''.replace);
-
-var TEST = (function (arg) { return String(Error(arg).stack); })('zxcasd');
-var V8_OR_CHAKRA_STACK_ENTRY = /\n\s*at [^:]*:[^\n]*/;
-var IS_V8_OR_CHAKRA_STACK = V8_OR_CHAKRA_STACK_ENTRY.test(TEST);
-
-module.exports = function (stack, dropEntries) {
-  if (IS_V8_OR_CHAKRA_STACK && typeof stack == 'string') {
-    while (dropEntries--) stack = replace(stack, V8_OR_CHAKRA_STACK_ENTRY, '');
-  } return stack;
-};
-
-},{"../internals/function-uncurry-this":134}],101:[function(require,module,exports){
+},{"../internals/classof-raw":97,"../internals/is-callable":161,"../internals/to-string-tag-support":226,"../internals/well-known-symbol":237}],99:[function(require,module,exports){
 'use strict';
-var defineProperty = require('../internals/object-define-property').f;
 var create = require('../internals/object-create');
-var redefineAll = require('../internals/redefine-all');
+var defineBuiltInAccessor = require('../internals/define-built-in-accessor');
+var defineBuiltIns = require('../internals/define-built-ins');
 var bind = require('../internals/function-bind-context');
 var anInstance = require('../internals/an-instance');
+var isNullOrUndefined = require('../internals/is-null-or-undefined');
 var iterate = require('../internals/iterate');
-var defineIterator = require('../internals/define-iterator');
+var defineIterator = require('../internals/iterator-define');
+var createIterResultObject = require('../internals/create-iter-result-object');
 var setSpecies = require('../internals/set-species');
 var DESCRIPTORS = require('../internals/descriptors');
 var fastKey = require('../internals/internal-metadata').fastKey;
@@ -34144,7 +30073,7 @@ module.exports = {
         size: 0
       });
       if (!DESCRIPTORS) that.size = 0;
-      if (iterable != undefined) iterate(iterable, that[ADDER], { that: that, AS_ENTRIES: IS_MAP });
+      if (!isNullOrUndefined(iterable)) iterate(iterable, that[ADDER], { that: that, AS_ENTRIES: IS_MAP });
     });
 
     var Prototype = Constructor.prototype;
@@ -34185,11 +30114,11 @@ module.exports = {
       if (index !== 'F') return state.index[index];
       // frozen object case
       for (entry = state.first; entry; entry = entry.next) {
-        if (entry.key == key) return entry;
+        if (entry.key === key) return entry;
       }
     };
 
-    redefineAll(Prototype, {
+    defineBuiltIns(Prototype, {
       // `{ Map, Set }.prototype.clear()` methods
       // https://tc39.es/ecma262/#sec-map.prototype.clear
       // https://tc39.es/ecma262/#sec-set.prototype.clear
@@ -34222,8 +30151,8 @@ module.exports = {
           entry.removed = true;
           if (prev) prev.next = next;
           if (next) next.previous = prev;
-          if (state.first == entry) state.first = next;
-          if (state.last == entry) state.last = prev;
+          if (state.first === entry) state.first = next;
+          if (state.last === entry) state.last = prev;
           if (DESCRIPTORS) state.size--;
           else that.size--;
         } return !!entry;
@@ -34249,7 +30178,7 @@ module.exports = {
       }
     });
 
-    redefineAll(Prototype, IS_MAP ? {
+    defineBuiltIns(Prototype, IS_MAP ? {
       // `Map.prototype.get(key)` method
       // https://tc39.es/ecma262/#sec-map.prototype.get
       get: function get(key) {
@@ -34268,7 +30197,8 @@ module.exports = {
         return define(this, value = value === 0 ? 0 : value, value);
       }
     });
-    if (DESCRIPTORS) defineProperty(Prototype, 'size', {
+    if (DESCRIPTORS) defineBuiltInAccessor(Prototype, 'size', {
+      configurable: true,
       get: function () {
         return getInternalState(this).size;
       }
@@ -34306,12 +30236,12 @@ module.exports = {
       if (!state.target || !(state.last = entry = entry ? entry.next : state.state.first)) {
         // or finish the iteration
         state.target = undefined;
-        return { value: undefined, done: true };
+        return createIterResultObject(undefined, true);
       }
       // return step by kind
-      if (kind == 'keys') return { value: entry.key, done: false };
-      if (kind == 'values') return { value: entry.value, done: false };
-      return { value: [entry.key, entry.value], done: false };
+      if (kind === 'keys') return createIterResultObject(entry.key, false);
+      if (kind === 'values') return createIterResultObject(entry.value, false);
+      return createIterResultObject([entry.key, entry.value], false);
     }, IS_MAP ? 'entries' : 'values', !IS_MAP, true);
 
     // `{ Map, Set }.prototype[@@species]` accessors
@@ -34321,17 +30251,18 @@ module.exports = {
   }
 };
 
-},{"../internals/an-instance":84,"../internals/define-iterator":110,"../internals/descriptors":112,"../internals/function-bind-context":130,"../internals/internal-metadata":149,"../internals/internal-state":150,"../internals/iterate":160,"../internals/object-create":172,"../internals/object-define-property":174,"../internals/redefine-all":193,"../internals/set-species":197}],102:[function(require,module,exports){
+},{"../internals/an-instance":83,"../internals/create-iter-result-object":104,"../internals/define-built-in-accessor":108,"../internals/define-built-ins":110,"../internals/descriptors":112,"../internals/function-bind-context":135,"../internals/internal-metadata":157,"../internals/internal-state":158,"../internals/is-null-or-undefined":164,"../internals/iterate":169,"../internals/iterator-define":172,"../internals/object-create":182,"../internals/set-species":207}],100:[function(require,module,exports){
 'use strict';
 var $ = require('../internals/export');
 var global = require('../internals/global');
 var uncurryThis = require('../internals/function-uncurry-this');
 var isForced = require('../internals/is-forced');
-var redefine = require('../internals/redefine');
+var defineBuiltIn = require('../internals/define-built-in');
 var InternalMetadataModule = require('../internals/internal-metadata');
 var iterate = require('../internals/iterate');
 var anInstance = require('../internals/an-instance');
 var isCallable = require('../internals/is-callable');
+var isNullOrUndefined = require('../internals/is-null-or-undefined');
 var isObject = require('../internals/is-object');
 var fails = require('../internals/fails');
 var checkCorrectnessOfIteration = require('../internals/check-correctness-of-iteration');
@@ -34349,15 +30280,15 @@ module.exports = function (CONSTRUCTOR_NAME, wrapper, common) {
 
   var fixMethod = function (KEY) {
     var uncurriedNativeMethod = uncurryThis(NativePrototype[KEY]);
-    redefine(NativePrototype, KEY,
-      KEY == 'add' ? function add(value) {
+    defineBuiltIn(NativePrototype, KEY,
+      KEY === 'add' ? function add(value) {
         uncurriedNativeMethod(this, value === 0 ? 0 : value);
         return this;
-      } : KEY == 'delete' ? function (key) {
+      } : KEY === 'delete' ? function (key) {
         return IS_WEAK && !isObject(key) ? false : uncurriedNativeMethod(this, key === 0 ? 0 : key);
-      } : KEY == 'get' ? function get(key) {
+      } : KEY === 'get' ? function get(key) {
         return IS_WEAK && !isObject(key) ? undefined : uncurriedNativeMethod(this, key === 0 ? 0 : key);
-      } : KEY == 'has' ? function has(key) {
+      } : KEY === 'has' ? function has(key) {
         return IS_WEAK && !isObject(key) ? false : uncurriedNativeMethod(this, key === 0 ? 0 : key);
       } : function set(key, value) {
         uncurriedNativeMethod(this, key === 0 ? 0 : key, value);
@@ -34380,7 +30311,7 @@ module.exports = function (CONSTRUCTOR_NAME, wrapper, common) {
   } else if (isForced(CONSTRUCTOR_NAME, true)) {
     var instance = new Constructor();
     // early implementations not supports chaining
-    var HASNT_CHAINING = instance[ADDER](IS_WEAK ? {} : -0, 1) != instance;
+    var HASNT_CHAINING = instance[ADDER](IS_WEAK ? {} : -0, 1) !== instance;
     // V8 ~ Chromium 40- weak-collections throws on primitives, but should return false
     var THROWS_ON_PRIMITIVES = fails(function () { instance.has(1); });
     // most early implementations doesn't supports iterables, most modern - not close it correctly
@@ -34399,7 +30330,7 @@ module.exports = function (CONSTRUCTOR_NAME, wrapper, common) {
       Constructor = wrapper(function (dummy, iterable) {
         anInstance(dummy, NativePrototype);
         var that = inheritIfRequired(new NativeConstructor(), dummy, Constructor);
-        if (iterable != undefined) iterate(iterable, that[ADDER], { that: that, AS_ENTRIES: IS_MAP });
+        if (!isNullOrUndefined(iterable)) iterate(iterable, that[ADDER], { that: that, AS_ENTRIES: IS_MAP });
         return that;
       });
       Constructor.prototype = NativePrototype;
@@ -34419,7 +30350,7 @@ module.exports = function (CONSTRUCTOR_NAME, wrapper, common) {
   }
 
   exported[CONSTRUCTOR_NAME] = Constructor;
-  $({ global: true, forced: Constructor != NativeConstructor }, exported);
+  $({ global: true, constructor: true, forced: Constructor !== NativeConstructor }, exported);
 
   setToStringTag(Constructor, CONSTRUCTOR_NAME);
 
@@ -34428,7 +30359,8 @@ module.exports = function (CONSTRUCTOR_NAME, wrapper, common) {
   return Constructor;
 };
 
-},{"../internals/an-instance":84,"../internals/check-correctness-of-iteration":97,"../internals/export":126,"../internals/fails":127,"../internals/function-uncurry-this":134,"../internals/global":139,"../internals/inherit-if-required":146,"../internals/internal-metadata":149,"../internals/is-callable":153,"../internals/is-forced":155,"../internals/is-object":156,"../internals/iterate":160,"../internals/redefine":194,"../internals/set-to-string-tag":198}],103:[function(require,module,exports){
+},{"../internals/an-instance":83,"../internals/check-correctness-of-iteration":96,"../internals/define-built-in":109,"../internals/export":131,"../internals/fails":132,"../internals/function-uncurry-this":141,"../internals/global":147,"../internals/inherit-if-required":154,"../internals/internal-metadata":157,"../internals/is-callable":161,"../internals/is-forced":163,"../internals/is-null-or-undefined":164,"../internals/is-object":165,"../internals/iterate":169,"../internals/set-to-string-tag":208}],101:[function(require,module,exports){
+'use strict';
 var hasOwn = require('../internals/has-own-property');
 var ownKeys = require('../internals/own-keys');
 var getOwnPropertyDescriptorModule = require('../internals/object-get-own-property-descriptor');
@@ -34446,7 +30378,8 @@ module.exports = function (target, source, exceptions) {
   }
 };
 
-},{"../internals/has-own-property":140,"../internals/object-define-property":174,"../internals/object-get-own-property-descriptor":175,"../internals/own-keys":188}],104:[function(require,module,exports){
+},{"../internals/has-own-property":148,"../internals/object-define-property":184,"../internals/object-get-own-property-descriptor":185,"../internals/own-keys":198}],102:[function(require,module,exports){
+'use strict';
 var wellKnownSymbol = require('../internals/well-known-symbol');
 
 var MATCH = wellKnownSymbol('match');
@@ -34463,7 +30396,8 @@ module.exports = function (METHOD_NAME) {
   } return false;
 };
 
-},{"../internals/well-known-symbol":220}],105:[function(require,module,exports){
+},{"../internals/well-known-symbol":237}],103:[function(require,module,exports){
+'use strict';
 var fails = require('../internals/fails');
 
 module.exports = !fails(function () {
@@ -34473,25 +30407,16 @@ module.exports = !fails(function () {
   return Object.getPrototypeOf(new F()) !== F.prototype;
 });
 
-},{"../internals/fails":127}],106:[function(require,module,exports){
+},{"../internals/fails":132}],104:[function(require,module,exports){
 'use strict';
-var IteratorPrototype = require('../internals/iterators-core').IteratorPrototype;
-var create = require('../internals/object-create');
-var createPropertyDescriptor = require('../internals/create-property-descriptor');
-var setToStringTag = require('../internals/set-to-string-tag');
-var Iterators = require('../internals/iterators');
-
-var returnThis = function () { return this; };
-
-module.exports = function (IteratorConstructor, NAME, next, ENUMERABLE_NEXT) {
-  var TO_STRING_TAG = NAME + ' Iterator';
-  IteratorConstructor.prototype = create(IteratorPrototype, { next: createPropertyDescriptor(+!ENUMERABLE_NEXT, next) });
-  setToStringTag(IteratorConstructor, TO_STRING_TAG, false, true);
-  Iterators[TO_STRING_TAG] = returnThis;
-  return IteratorConstructor;
+// `CreateIterResultObject` abstract operation
+// https://tc39.es/ecma262/#sec-createiterresultobject
+module.exports = function (value, done) {
+  return { value: value, done: done };
 };
 
-},{"../internals/create-property-descriptor":108,"../internals/iterators":163,"../internals/iterators-core":162,"../internals/object-create":172,"../internals/set-to-string-tag":198}],107:[function(require,module,exports){
+},{}],105:[function(require,module,exports){
+'use strict';
 var DESCRIPTORS = require('../internals/descriptors');
 var definePropertyModule = require('../internals/object-define-property');
 var createPropertyDescriptor = require('../internals/create-property-descriptor');
@@ -34503,7 +30428,8 @@ module.exports = DESCRIPTORS ? function (object, key, value) {
   return object;
 };
 
-},{"../internals/create-property-descriptor":108,"../internals/descriptors":112,"../internals/object-define-property":174}],108:[function(require,module,exports){
+},{"../internals/create-property-descriptor":106,"../internals/descriptors":112,"../internals/object-define-property":184}],106:[function(require,module,exports){
+'use strict';
 module.exports = function (bitmap, value) {
   return {
     enumerable: !(bitmap & 1),
@@ -34513,7 +30439,7 @@ module.exports = function (bitmap, value) {
   };
 };
 
-},{}],109:[function(require,module,exports){
+},{}],107:[function(require,module,exports){
 'use strict';
 var toPropertyKey = require('../internals/to-property-key');
 var definePropertyModule = require('../internals/object-define-property');
@@ -34525,130 +30451,96 @@ module.exports = function (object, key, value) {
   else object[propertyKey] = value;
 };
 
-},{"../internals/create-property-descriptor":108,"../internals/object-define-property":174,"../internals/to-property-key":211}],110:[function(require,module,exports){
+},{"../internals/create-property-descriptor":106,"../internals/object-define-property":184,"../internals/to-property-key":225}],108:[function(require,module,exports){
 'use strict';
-var $ = require('../internals/export');
-var call = require('../internals/function-call');
-var IS_PURE = require('../internals/is-pure');
-var FunctionName = require('../internals/function-name');
+var makeBuiltIn = require('../internals/make-built-in');
+var defineProperty = require('../internals/object-define-property');
+
+module.exports = function (target, name, descriptor) {
+  if (descriptor.get) makeBuiltIn(descriptor.get, name, { getter: true });
+  if (descriptor.set) makeBuiltIn(descriptor.set, name, { setter: true });
+  return defineProperty.f(target, name, descriptor);
+};
+
+},{"../internals/make-built-in":176,"../internals/object-define-property":184}],109:[function(require,module,exports){
+'use strict';
 var isCallable = require('../internals/is-callable');
-var createIteratorConstructor = require('../internals/create-iterator-constructor');
-var getPrototypeOf = require('../internals/object-get-prototype-of');
-var setPrototypeOf = require('../internals/object-set-prototype-of');
-var setToStringTag = require('../internals/set-to-string-tag');
-var createNonEnumerableProperty = require('../internals/create-non-enumerable-property');
-var redefine = require('../internals/redefine');
-var wellKnownSymbol = require('../internals/well-known-symbol');
-var Iterators = require('../internals/iterators');
-var IteratorsCore = require('../internals/iterators-core');
+var definePropertyModule = require('../internals/object-define-property');
+var makeBuiltIn = require('../internals/make-built-in');
+var defineGlobalProperty = require('../internals/define-global-property');
 
-var PROPER_FUNCTION_NAME = FunctionName.PROPER;
-var CONFIGURABLE_FUNCTION_NAME = FunctionName.CONFIGURABLE;
-var IteratorPrototype = IteratorsCore.IteratorPrototype;
-var BUGGY_SAFARI_ITERATORS = IteratorsCore.BUGGY_SAFARI_ITERATORS;
-var ITERATOR = wellKnownSymbol('iterator');
-var KEYS = 'keys';
-var VALUES = 'values';
-var ENTRIES = 'entries';
-
-var returnThis = function () { return this; };
-
-module.exports = function (Iterable, NAME, IteratorConstructor, next, DEFAULT, IS_SET, FORCED) {
-  createIteratorConstructor(IteratorConstructor, NAME, next);
-
-  var getIterationMethod = function (KIND) {
-    if (KIND === DEFAULT && defaultIterator) return defaultIterator;
-    if (!BUGGY_SAFARI_ITERATORS && KIND in IterablePrototype) return IterablePrototype[KIND];
-    switch (KIND) {
-      case KEYS: return function keys() { return new IteratorConstructor(this, KIND); };
-      case VALUES: return function values() { return new IteratorConstructor(this, KIND); };
-      case ENTRIES: return function entries() { return new IteratorConstructor(this, KIND); };
-    } return function () { return new IteratorConstructor(this); };
-  };
-
-  var TO_STRING_TAG = NAME + ' Iterator';
-  var INCORRECT_VALUES_NAME = false;
-  var IterablePrototype = Iterable.prototype;
-  var nativeIterator = IterablePrototype[ITERATOR]
-    || IterablePrototype['@@iterator']
-    || DEFAULT && IterablePrototype[DEFAULT];
-  var defaultIterator = !BUGGY_SAFARI_ITERATORS && nativeIterator || getIterationMethod(DEFAULT);
-  var anyNativeIterator = NAME == 'Array' ? IterablePrototype.entries || nativeIterator : nativeIterator;
-  var CurrentIteratorPrototype, methods, KEY;
-
-  // fix native
-  if (anyNativeIterator) {
-    CurrentIteratorPrototype = getPrototypeOf(anyNativeIterator.call(new Iterable()));
-    if (CurrentIteratorPrototype !== Object.prototype && CurrentIteratorPrototype.next) {
-      if (!IS_PURE && getPrototypeOf(CurrentIteratorPrototype) !== IteratorPrototype) {
-        if (setPrototypeOf) {
-          setPrototypeOf(CurrentIteratorPrototype, IteratorPrototype);
-        } else if (!isCallable(CurrentIteratorPrototype[ITERATOR])) {
-          redefine(CurrentIteratorPrototype, ITERATOR, returnThis);
-        }
-      }
-      // Set @@toStringTag to native iterators
-      setToStringTag(CurrentIteratorPrototype, TO_STRING_TAG, true, true);
-      if (IS_PURE) Iterators[TO_STRING_TAG] = returnThis;
-    }
-  }
-
-  // fix Array.prototype.{ values, @@iterator }.name in V8 / FF
-  if (PROPER_FUNCTION_NAME && DEFAULT == VALUES && nativeIterator && nativeIterator.name !== VALUES) {
-    if (!IS_PURE && CONFIGURABLE_FUNCTION_NAME) {
-      createNonEnumerableProperty(IterablePrototype, 'name', VALUES);
-    } else {
-      INCORRECT_VALUES_NAME = true;
-      defaultIterator = function values() { return call(nativeIterator, this); };
-    }
-  }
-
-  // export additional methods
-  if (DEFAULT) {
-    methods = {
-      values: getIterationMethod(VALUES),
-      keys: IS_SET ? defaultIterator : getIterationMethod(KEYS),
-      entries: getIterationMethod(ENTRIES)
-    };
-    if (FORCED) for (KEY in methods) {
-      if (BUGGY_SAFARI_ITERATORS || INCORRECT_VALUES_NAME || !(KEY in IterablePrototype)) {
-        redefine(IterablePrototype, KEY, methods[KEY]);
-      }
-    } else $({ target: NAME, proto: true, forced: BUGGY_SAFARI_ITERATORS || INCORRECT_VALUES_NAME }, methods);
-  }
-
-  // define iterator
-  if ((!IS_PURE || FORCED) && IterablePrototype[ITERATOR] !== defaultIterator) {
-    redefine(IterablePrototype, ITERATOR, defaultIterator, { name: DEFAULT });
-  }
-  Iterators[NAME] = defaultIterator;
-
-  return methods;
+module.exports = function (O, key, value, options) {
+  if (!options) options = {};
+  var simple = options.enumerable;
+  var name = options.name !== undefined ? options.name : key;
+  if (isCallable(value)) makeBuiltIn(value, name, options);
+  if (options.global) {
+    if (simple) O[key] = value;
+    else defineGlobalProperty(key, value);
+  } else {
+    try {
+      if (!options.unsafe) delete O[key];
+      else if (O[key]) simple = true;
+    } catch (error) { /* empty */ }
+    if (simple) O[key] = value;
+    else definePropertyModule.f(O, key, {
+      value: value,
+      enumerable: false,
+      configurable: !options.nonConfigurable,
+      writable: !options.nonWritable
+    });
+  } return O;
 };
 
-},{"../internals/create-iterator-constructor":106,"../internals/create-non-enumerable-property":107,"../internals/export":126,"../internals/function-call":132,"../internals/function-name":133,"../internals/is-callable":153,"../internals/is-pure":157,"../internals/iterators":163,"../internals/iterators-core":162,"../internals/object-get-prototype-of":179,"../internals/object-set-prototype-of":185,"../internals/redefine":194,"../internals/set-to-string-tag":198,"../internals/well-known-symbol":220}],111:[function(require,module,exports){
-var path = require('../internals/path');
-var hasOwn = require('../internals/has-own-property');
-var wrappedWellKnownSymbolModule = require('../internals/well-known-symbol-wrapped');
-var defineProperty = require('../internals/object-define-property').f;
+},{"../internals/define-global-property":111,"../internals/is-callable":161,"../internals/make-built-in":176,"../internals/object-define-property":184}],110:[function(require,module,exports){
+'use strict';
+var defineBuiltIn = require('../internals/define-built-in');
 
-module.exports = function (NAME) {
-  var Symbol = path.Symbol || (path.Symbol = {});
-  if (!hasOwn(Symbol, NAME)) defineProperty(Symbol, NAME, {
-    value: wrappedWellKnownSymbolModule.f(NAME)
-  });
+module.exports = function (target, src, options) {
+  for (var key in src) defineBuiltIn(target, key, src[key], options);
+  return target;
 };
 
-},{"../internals/has-own-property":140,"../internals/object-define-property":174,"../internals/path":189,"../internals/well-known-symbol-wrapped":219}],112:[function(require,module,exports){
+},{"../internals/define-built-in":109}],111:[function(require,module,exports){
+'use strict';
+var global = require('../internals/global');
+
+// eslint-disable-next-line es/no-object-defineproperty -- safe
+var defineProperty = Object.defineProperty;
+
+module.exports = function (key, value) {
+  try {
+    defineProperty(global, key, { value: value, configurable: true, writable: true });
+  } catch (error) {
+    global[key] = value;
+  } return value;
+};
+
+},{"../internals/global":147}],112:[function(require,module,exports){
+'use strict';
 var fails = require('../internals/fails');
 
 // Detect IE8's incomplete defineProperty implementation
 module.exports = !fails(function () {
   // eslint-disable-next-line es/no-object-defineproperty -- required for testing
-  return Object.defineProperty({}, 1, { get: function () { return 7; } })[1] != 7;
+  return Object.defineProperty({}, 1, { get: function () { return 7; } })[1] !== 7;
 });
 
-},{"../internals/fails":127}],113:[function(require,module,exports){
+},{"../internals/fails":132}],113:[function(require,module,exports){
+'use strict';
+var documentAll = typeof document == 'object' && document.all;
+
+// https://tc39.es/ecma262/#sec-IsHTMLDDA-internal-slot
+// eslint-disable-next-line unicorn/no-typeof-undefined -- required for testing
+var IS_HTMLDDA = typeof documentAll == 'undefined' && documentAll !== undefined;
+
+module.exports = {
+  all: documentAll,
+  IS_HTMLDDA: IS_HTMLDDA
+};
+
+},{}],114:[function(require,module,exports){
+'use strict';
 var global = require('../internals/global');
 var isObject = require('../internals/is-object');
 
@@ -34660,7 +30552,18 @@ module.exports = function (it) {
   return EXISTS ? document.createElement(it) : {};
 };
 
-},{"../internals/global":139,"../internals/is-object":156}],114:[function(require,module,exports){
+},{"../internals/global":147,"../internals/is-object":165}],115:[function(require,module,exports){
+'use strict';
+var $TypeError = TypeError;
+var MAX_SAFE_INTEGER = 0x1FFFFFFFFFFFFF; // 2 ** 53 - 1 == 9007199254740991
+
+module.exports = function (it) {
+  if (it > MAX_SAFE_INTEGER) throw $TypeError('Maximum allowed index exceeded');
+  return it;
+};
+
+},{}],116:[function(require,module,exports){
+'use strict';
 // iterable DOM collections
 // flag - `iterable` interface - 'entries', 'keys', 'values', 'forEach' methods
 module.exports = {
@@ -34697,7 +30600,8 @@ module.exports = {
   TouchList: 0
 };
 
-},{}],115:[function(require,module,exports){
+},{}],117:[function(require,module,exports){
+'use strict';
 // in old WebKit versions, `element.classList` is not an instance of global `DOMTokenList`
 var documentCreateElement = require('../internals/document-create-element');
 
@@ -34706,37 +30610,52 @@ var DOMTokenListPrototype = classList && classList.constructor && classList.cons
 
 module.exports = DOMTokenListPrototype === Object.prototype ? undefined : DOMTokenListPrototype;
 
-},{"../internals/document-create-element":113}],116:[function(require,module,exports){
-module.exports = typeof window == 'object';
+},{"../internals/document-create-element":114}],118:[function(require,module,exports){
+'use strict';
+var IS_DENO = require('../internals/engine-is-deno');
+var IS_NODE = require('../internals/engine-is-node');
 
-},{}],117:[function(require,module,exports){
+module.exports = !IS_DENO && !IS_NODE
+  && typeof window == 'object'
+  && typeof document == 'object';
+
+},{"../internals/engine-is-deno":119,"../internals/engine-is-node":122}],119:[function(require,module,exports){
+'use strict';
+/* global Deno -- Deno case */
+module.exports = typeof Deno == 'object' && Deno && typeof Deno.version == 'object';
+
+},{}],120:[function(require,module,exports){
+'use strict';
 var userAgent = require('../internals/engine-user-agent');
-var global = require('../internals/global');
 
-module.exports = /ipad|iphone|ipod/i.test(userAgent) && global.Pebble !== undefined;
+module.exports = /ipad|iphone|ipod/i.test(userAgent) && typeof Pebble != 'undefined';
 
-},{"../internals/engine-user-agent":121,"../internals/global":139}],118:[function(require,module,exports){
+},{"../internals/engine-user-agent":124}],121:[function(require,module,exports){
+'use strict';
 var userAgent = require('../internals/engine-user-agent');
 
+// eslint-disable-next-line redos/no-vulnerable -- safe
 module.exports = /(?:ipad|iphone|ipod).*applewebkit/i.test(userAgent);
 
-},{"../internals/engine-user-agent":121}],119:[function(require,module,exports){
-var classof = require('../internals/classof-raw');
+},{"../internals/engine-user-agent":124}],122:[function(require,module,exports){
+'use strict';
 var global = require('../internals/global');
+var classof = require('../internals/classof-raw');
 
-module.exports = classof(global.process) == 'process';
+module.exports = classof(global.process) === 'process';
 
-},{"../internals/classof-raw":98,"../internals/global":139}],120:[function(require,module,exports){
+},{"../internals/classof-raw":97,"../internals/global":147}],123:[function(require,module,exports){
+'use strict';
 var userAgent = require('../internals/engine-user-agent');
 
 module.exports = /web0s(?!.*chrome)/i.test(userAgent);
 
-},{"../internals/engine-user-agent":121}],121:[function(require,module,exports){
-var getBuiltIn = require('../internals/get-built-in');
+},{"../internals/engine-user-agent":124}],124:[function(require,module,exports){
+'use strict';
+module.exports = typeof navigator != 'undefined' && String(navigator.userAgent) || '';
 
-module.exports = getBuiltIn('navigator', 'userAgent') || '';
-
-},{"../internals/get-built-in":135}],122:[function(require,module,exports){
+},{}],125:[function(require,module,exports){
+'use strict';
 var global = require('../internals/global');
 var userAgent = require('../internals/engine-user-agent');
 
@@ -34765,7 +30684,8 @@ if (!version && userAgent) {
 
 module.exports = version;
 
-},{"../internals/engine-user-agent":121,"../internals/global":139}],123:[function(require,module,exports){
+},{"../internals/engine-user-agent":124,"../internals/global":147}],126:[function(require,module,exports){
+'use strict';
 var global = require('../internals/global');
 var uncurryThis = require('../internals/function-uncurry-this');
 
@@ -34773,7 +30693,8 @@ module.exports = function (CONSTRUCTOR, METHOD) {
   return uncurryThis(global[CONSTRUCTOR].prototype[METHOD]);
 };
 
-},{"../internals/function-uncurry-this":134,"../internals/global":139}],124:[function(require,module,exports){
+},{"../internals/function-uncurry-this":141,"../internals/global":147}],127:[function(require,module,exports){
+'use strict';
 // IE8- don't enum bug keys
 module.exports = [
   'constructor',
@@ -34785,41 +30706,77 @@ module.exports = [
   'valueOf'
 ];
 
-},{}],125:[function(require,module,exports){
+},{}],128:[function(require,module,exports){
+'use strict';
+var uncurryThis = require('../internals/function-uncurry-this');
+
+var $Error = Error;
+var replace = uncurryThis(''.replace);
+
+var TEST = (function (arg) { return String(new $Error(arg).stack); })('zxcasd');
+// eslint-disable-next-line redos/no-vulnerable -- safe
+var V8_OR_CHAKRA_STACK_ENTRY = /\n\s*at [^:]*:[^\n]*/;
+var IS_V8_OR_CHAKRA_STACK = V8_OR_CHAKRA_STACK_ENTRY.test(TEST);
+
+module.exports = function (stack, dropEntries) {
+  if (IS_V8_OR_CHAKRA_STACK && typeof stack == 'string' && !$Error.prepareStackTrace) {
+    while (dropEntries--) stack = replace(stack, V8_OR_CHAKRA_STACK_ENTRY, '');
+  } return stack;
+};
+
+},{"../internals/function-uncurry-this":141}],129:[function(require,module,exports){
+'use strict';
+var createNonEnumerableProperty = require('../internals/create-non-enumerable-property');
+var clearErrorStack = require('../internals/error-stack-clear');
+var ERROR_STACK_INSTALLABLE = require('../internals/error-stack-installable');
+
+// non-standard V8
+var captureStackTrace = Error.captureStackTrace;
+
+module.exports = function (error, C, stack, dropEntries) {
+  if (ERROR_STACK_INSTALLABLE) {
+    if (captureStackTrace) captureStackTrace(error, C);
+    else createNonEnumerableProperty(error, 'stack', clearErrorStack(stack, dropEntries));
+  }
+};
+
+},{"../internals/create-non-enumerable-property":105,"../internals/error-stack-clear":128,"../internals/error-stack-installable":130}],130:[function(require,module,exports){
+'use strict';
 var fails = require('../internals/fails');
 var createPropertyDescriptor = require('../internals/create-property-descriptor');
 
 module.exports = !fails(function () {
-  var error = Error('a');
+  var error = new Error('a');
   if (!('stack' in error)) return true;
   // eslint-disable-next-line es/no-object-defineproperty -- safe
   Object.defineProperty(error, 'stack', createPropertyDescriptor(1, 7));
   return error.stack !== 7;
 });
 
-},{"../internals/create-property-descriptor":108,"../internals/fails":127}],126:[function(require,module,exports){
+},{"../internals/create-property-descriptor":106,"../internals/fails":132}],131:[function(require,module,exports){
+'use strict';
 var global = require('../internals/global');
 var getOwnPropertyDescriptor = require('../internals/object-get-own-property-descriptor').f;
 var createNonEnumerableProperty = require('../internals/create-non-enumerable-property');
-var redefine = require('../internals/redefine');
-var setGlobal = require('../internals/set-global');
+var defineBuiltIn = require('../internals/define-built-in');
+var defineGlobalProperty = require('../internals/define-global-property');
 var copyConstructorProperties = require('../internals/copy-constructor-properties');
 var isForced = require('../internals/is-forced');
 
 /*
-  options.target      - name of the target object
-  options.global      - target is the global object
-  options.stat        - export as static methods of target
-  options.proto       - export as prototype methods of target
-  options.real        - real prototype method for the `pure` version
-  options.forced      - export even if the native feature is available
-  options.bind        - bind methods to the target, required for the `pure` version
-  options.wrap        - wrap constructors to preventing global pollution, required for the `pure` version
-  options.unsafe      - use the simple assignment of property instead of delete + defineProperty
-  options.sham        - add a flag to not completely full polyfills
-  options.enumerable  - export as enumerable property
-  options.noTargetGet - prevent calling a getter on target
-  options.name        - the .name of the function if it does not match the key
+  options.target         - name of the target object
+  options.global         - target is the global object
+  options.stat           - export as static methods of target
+  options.proto          - export as prototype methods of target
+  options.real           - real prototype method for the `pure` version
+  options.forced         - export even if the native feature is available
+  options.bind           - bind methods to the target, required for the `pure` version
+  options.wrap           - wrap constructors to preventing global pollution, required for the `pure` version
+  options.unsafe         - use the simple assignment of property instead of delete + defineProperty
+  options.sham           - add a flag to not completely full polyfills
+  options.enumerable     - export as enumerable property
+  options.dontCallGetSet - prevent calling a getter on target
+  options.name           - the .name of the function if it does not match the key
 */
 module.exports = function (options, source) {
   var TARGET = options.target;
@@ -34829,13 +30786,13 @@ module.exports = function (options, source) {
   if (GLOBAL) {
     target = global;
   } else if (STATIC) {
-    target = global[TARGET] || setGlobal(TARGET, {});
+    target = global[TARGET] || defineGlobalProperty(TARGET, {});
   } else {
     target = (global[TARGET] || {}).prototype;
   }
   if (target) for (key in source) {
     sourceProperty = source[key];
-    if (options.noTargetGet) {
+    if (options.dontCallGetSet) {
       descriptor = getOwnPropertyDescriptor(target, key);
       targetProperty = descriptor && descriptor.value;
     } else targetProperty = target[key];
@@ -34849,12 +30806,12 @@ module.exports = function (options, source) {
     if (options.sham || (targetProperty && targetProperty.sham)) {
       createNonEnumerableProperty(sourceProperty, 'sham', true);
     }
-    // extend global
-    redefine(target, key, sourceProperty, options);
+    defineBuiltIn(target, key, sourceProperty, options);
   }
 };
 
-},{"../internals/copy-constructor-properties":103,"../internals/create-non-enumerable-property":107,"../internals/global":139,"../internals/is-forced":155,"../internals/object-get-own-property-descriptor":175,"../internals/redefine":194,"../internals/set-global":196}],127:[function(require,module,exports){
+},{"../internals/copy-constructor-properties":101,"../internals/create-non-enumerable-property":105,"../internals/define-built-in":109,"../internals/define-global-property":111,"../internals/global":147,"../internals/is-forced":163,"../internals/object-get-own-property-descriptor":185}],132:[function(require,module,exports){
+'use strict';
 module.exports = function (exec) {
   try {
     return !!exec();
@@ -34863,7 +30820,8 @@ module.exports = function (exec) {
   }
 };
 
-},{}],128:[function(require,module,exports){
+},{}],133:[function(require,module,exports){
+'use strict';
 var fails = require('../internals/fails');
 
 module.exports = !fails(function () {
@@ -34871,7 +30829,8 @@ module.exports = !fails(function () {
   return Object.isExtensible(Object.preventExtensions({}));
 });
 
-},{"../internals/fails":127}],129:[function(require,module,exports){
+},{"../internals/fails":132}],134:[function(require,module,exports){
+'use strict';
 var NATIVE_BIND = require('../internals/function-bind-native');
 
 var FunctionPrototype = Function.prototype;
@@ -34883,8 +30842,9 @@ module.exports = typeof Reflect == 'object' && Reflect.apply || (NATIVE_BIND ? c
   return call.apply(apply, arguments);
 });
 
-},{"../internals/function-bind-native":131}],130:[function(require,module,exports){
-var uncurryThis = require('../internals/function-uncurry-this');
+},{"../internals/function-bind-native":136}],135:[function(require,module,exports){
+'use strict';
+var uncurryThis = require('../internals/function-uncurry-this-clause');
 var aCallable = require('../internals/a-callable');
 var NATIVE_BIND = require('../internals/function-bind-native');
 
@@ -34898,16 +30858,19 @@ module.exports = function (fn, that) {
   };
 };
 
-},{"../internals/a-callable":80,"../internals/function-bind-native":131,"../internals/function-uncurry-this":134}],131:[function(require,module,exports){
+},{"../internals/a-callable":79,"../internals/function-bind-native":136,"../internals/function-uncurry-this-clause":140}],136:[function(require,module,exports){
+'use strict';
 var fails = require('../internals/fails');
 
 module.exports = !fails(function () {
+  // eslint-disable-next-line es/no-function-prototype-bind -- safe
   var test = (function () { /* empty */ }).bind();
   // eslint-disable-next-line no-prototype-builtins -- safe
   return typeof test != 'function' || test.hasOwnProperty('prototype');
 });
 
-},{"../internals/fails":127}],132:[function(require,module,exports){
+},{"../internals/fails":132}],137:[function(require,module,exports){
+'use strict';
 var NATIVE_BIND = require('../internals/function-bind-native');
 
 var call = Function.prototype.call;
@@ -34916,7 +30879,8 @@ module.exports = NATIVE_BIND ? call.bind(call) : function () {
   return call.apply(call, arguments);
 };
 
-},{"../internals/function-bind-native":131}],133:[function(require,module,exports){
+},{"../internals/function-bind-native":136}],138:[function(require,module,exports){
+'use strict';
 var DESCRIPTORS = require('../internals/descriptors');
 var hasOwn = require('../internals/has-own-property');
 
@@ -34935,23 +30899,46 @@ module.exports = {
   CONFIGURABLE: CONFIGURABLE
 };
 
-},{"../internals/descriptors":112,"../internals/has-own-property":140}],134:[function(require,module,exports){
+},{"../internals/descriptors":112,"../internals/has-own-property":148}],139:[function(require,module,exports){
+'use strict';
+var uncurryThis = require('../internals/function-uncurry-this');
+var aCallable = require('../internals/a-callable');
+
+module.exports = function (object, key, method) {
+  try {
+    // eslint-disable-next-line es/no-object-getownpropertydescriptor -- safe
+    return uncurryThis(aCallable(Object.getOwnPropertyDescriptor(object, key)[method]));
+  } catch (error) { /* empty */ }
+};
+
+},{"../internals/a-callable":79,"../internals/function-uncurry-this":141}],140:[function(require,module,exports){
+'use strict';
+var classofRaw = require('../internals/classof-raw');
+var uncurryThis = require('../internals/function-uncurry-this');
+
+module.exports = function (fn) {
+  // Nashorn bug:
+  //   https://github.com/zloirock/core-js/issues/1128
+  //   https://github.com/zloirock/core-js/issues/1130
+  if (classofRaw(fn) === 'Function') return uncurryThis(fn);
+};
+
+},{"../internals/classof-raw":97,"../internals/function-uncurry-this":141}],141:[function(require,module,exports){
+'use strict';
 var NATIVE_BIND = require('../internals/function-bind-native');
 
 var FunctionPrototype = Function.prototype;
-var bind = FunctionPrototype.bind;
 var call = FunctionPrototype.call;
-var uncurryThis = NATIVE_BIND && bind.bind(call, call);
+var uncurryThisWithBind = NATIVE_BIND && FunctionPrototype.bind.bind(call, call);
 
-module.exports = NATIVE_BIND ? function (fn) {
-  return fn && uncurryThis(fn);
-} : function (fn) {
-  return fn && function () {
+module.exports = NATIVE_BIND ? uncurryThisWithBind : function (fn) {
+  return function () {
     return call.apply(fn, arguments);
   };
 };
 
-},{"../internals/function-bind-native":131}],135:[function(require,module,exports){
+},{"../internals/function-bind-native":136}],142:[function(require,module,exports){
+'use strict';
 var global = require('../internals/global');
 var isCallable = require('../internals/is-callable');
 
@@ -34963,50 +30950,87 @@ module.exports = function (namespace, method) {
   return arguments.length < 2 ? aFunction(global[namespace]) : global[namespace] && global[namespace][method];
 };
 
-},{"../internals/global":139,"../internals/is-callable":153}],136:[function(require,module,exports){
+},{"../internals/global":147,"../internals/is-callable":161}],143:[function(require,module,exports){
+'use strict';
 var classof = require('../internals/classof');
 var getMethod = require('../internals/get-method');
+var isNullOrUndefined = require('../internals/is-null-or-undefined');
 var Iterators = require('../internals/iterators');
 var wellKnownSymbol = require('../internals/well-known-symbol');
 
 var ITERATOR = wellKnownSymbol('iterator');
 
 module.exports = function (it) {
-  if (it != undefined) return getMethod(it, ITERATOR)
+  if (!isNullOrUndefined(it)) return getMethod(it, ITERATOR)
     || getMethod(it, '@@iterator')
     || Iterators[classof(it)];
 };
 
-},{"../internals/classof":99,"../internals/get-method":138,"../internals/iterators":163,"../internals/well-known-symbol":220}],137:[function(require,module,exports){
-var global = require('../internals/global');
+},{"../internals/classof":98,"../internals/get-method":146,"../internals/is-null-or-undefined":164,"../internals/iterators":174,"../internals/well-known-symbol":237}],144:[function(require,module,exports){
+'use strict';
 var call = require('../internals/function-call');
 var aCallable = require('../internals/a-callable');
 var anObject = require('../internals/an-object');
 var tryToString = require('../internals/try-to-string');
 var getIteratorMethod = require('../internals/get-iterator-method');
 
-var TypeError = global.TypeError;
+var $TypeError = TypeError;
 
 module.exports = function (argument, usingIterator) {
   var iteratorMethod = arguments.length < 2 ? getIteratorMethod(argument) : usingIterator;
   if (aCallable(iteratorMethod)) return anObject(call(iteratorMethod, argument));
-  throw TypeError(tryToString(argument) + ' is not iterable');
+  throw new $TypeError(tryToString(argument) + ' is not iterable');
 };
 
-},{"../internals/a-callable":80,"../internals/an-object":85,"../internals/function-call":132,"../internals/get-iterator-method":136,"../internals/global":139,"../internals/try-to-string":214}],138:[function(require,module,exports){
+},{"../internals/a-callable":79,"../internals/an-object":84,"../internals/function-call":137,"../internals/get-iterator-method":143,"../internals/try-to-string":228}],145:[function(require,module,exports){
+'use strict';
+var uncurryThis = require('../internals/function-uncurry-this');
+var isArray = require('../internals/is-array');
+var isCallable = require('../internals/is-callable');
+var classof = require('../internals/classof-raw');
+var toString = require('../internals/to-string');
+
+var push = uncurryThis([].push);
+
+module.exports = function (replacer) {
+  if (isCallable(replacer)) return replacer;
+  if (!isArray(replacer)) return;
+  var rawLength = replacer.length;
+  var keys = [];
+  for (var i = 0; i < rawLength; i++) {
+    var element = replacer[i];
+    if (typeof element == 'string') push(keys, element);
+    else if (typeof element == 'number' || classof(element) === 'Number' || classof(element) === 'String') push(keys, toString(element));
+  }
+  var keysLength = keys.length;
+  var root = true;
+  return function (key, value) {
+    if (root) {
+      root = false;
+      return value;
+    }
+    if (isArray(this)) return value;
+    for (var j = 0; j < keysLength; j++) if (keys[j] === key) return value;
+  };
+};
+
+},{"../internals/classof-raw":97,"../internals/function-uncurry-this":141,"../internals/is-array":160,"../internals/is-callable":161,"../internals/to-string":227}],146:[function(require,module,exports){
+'use strict';
 var aCallable = require('../internals/a-callable');
+var isNullOrUndefined = require('../internals/is-null-or-undefined');
 
 // `GetMethod` abstract operation
 // https://tc39.es/ecma262/#sec-getmethod
 module.exports = function (V, P) {
   var func = V[P];
-  return func == null ? undefined : aCallable(func);
+  return isNullOrUndefined(func) ? undefined : aCallable(func);
 };
 
-},{"../internals/a-callable":80}],139:[function(require,module,exports){
+},{"../internals/a-callable":79,"../internals/is-null-or-undefined":164}],147:[function(require,module,exports){
 (function (global){(function (){
+'use strict';
 var check = function (it) {
-  return it && it.Math == Math && it;
+  return it && it.Math === Math && it;
 };
 
 // https://github.com/zloirock/core-js/issues/86#issuecomment-115759028
@@ -35018,11 +31042,12 @@ module.exports =
   check(typeof self == 'object' && self) ||
   check(typeof global == 'object' && global) ||
   // eslint-disable-next-line no-new-func -- fallback
-  (function () { return this; })() || Function('return this')();
+  (function () { return this; })() || this || Function('return this')();
 
 }).call(this)}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{}],140:[function(require,module,exports){
+},{}],148:[function(require,module,exports){
+'use strict';
 var uncurryThis = require('../internals/function-uncurry-this');
 var toObject = require('../internals/to-object');
 
@@ -35030,29 +31055,32 @@ var hasOwnProperty = uncurryThis({}.hasOwnProperty);
 
 // `HasOwnProperty` abstract operation
 // https://tc39.es/ecma262/#sec-hasownproperty
+// eslint-disable-next-line es/no-object-hasown -- safe
 module.exports = Object.hasOwn || function hasOwn(it, key) {
   return hasOwnProperty(toObject(it), key);
 };
 
-},{"../internals/function-uncurry-this":134,"../internals/to-object":209}],141:[function(require,module,exports){
+},{"../internals/function-uncurry-this":141,"../internals/to-object":223}],149:[function(require,module,exports){
+'use strict';
 module.exports = {};
 
-},{}],142:[function(require,module,exports){
-var global = require('../internals/global');
-
+},{}],150:[function(require,module,exports){
+'use strict';
 module.exports = function (a, b) {
-  var console = global.console;
-  if (console && console.error) {
-    arguments.length == 1 ? console.error(a) : console.error(a, b);
-  }
+  try {
+    // eslint-disable-next-line no-console -- safe
+    arguments.length === 1 ? console.error(a) : console.error(a, b);
+  } catch (error) { /* empty */ }
 };
 
-},{"../internals/global":139}],143:[function(require,module,exports){
+},{}],151:[function(require,module,exports){
+'use strict';
 var getBuiltIn = require('../internals/get-built-in');
 
 module.exports = getBuiltIn('document', 'documentElement');
 
-},{"../internals/get-built-in":135}],144:[function(require,module,exports){
+},{"../internals/get-built-in":142}],152:[function(require,module,exports){
+'use strict';
 var DESCRIPTORS = require('../internals/descriptors');
 var fails = require('../internals/fails');
 var createElement = require('../internals/document-create-element');
@@ -35062,28 +31090,29 @@ module.exports = !DESCRIPTORS && !fails(function () {
   // eslint-disable-next-line es/no-object-defineproperty -- required for testing
   return Object.defineProperty(createElement('div'), 'a', {
     get: function () { return 7; }
-  }).a != 7;
+  }).a !== 7;
 });
 
-},{"../internals/descriptors":112,"../internals/document-create-element":113,"../internals/fails":127}],145:[function(require,module,exports){
-var global = require('../internals/global');
+},{"../internals/descriptors":112,"../internals/document-create-element":114,"../internals/fails":132}],153:[function(require,module,exports){
+'use strict';
 var uncurryThis = require('../internals/function-uncurry-this');
 var fails = require('../internals/fails');
 var classof = require('../internals/classof-raw');
 
-var Object = global.Object;
+var $Object = Object;
 var split = uncurryThis(''.split);
 
 // fallback for non-array-like ES3 and non-enumerable old V8 strings
 module.exports = fails(function () {
   // throws an error in rhino, see https://github.com/mozilla/rhino/issues/346
   // eslint-disable-next-line no-prototype-builtins -- safe
-  return !Object('z').propertyIsEnumerable(0);
+  return !$Object('z').propertyIsEnumerable(0);
 }) ? function (it) {
-  return classof(it) == 'String' ? split(it, '') : Object(it);
-} : Object;
+  return classof(it) === 'String' ? split(it, '') : $Object(it);
+} : $Object;
 
-},{"../internals/classof-raw":98,"../internals/fails":127,"../internals/function-uncurry-this":134,"../internals/global":139}],146:[function(require,module,exports){
+},{"../internals/classof-raw":97,"../internals/fails":132,"../internals/function-uncurry-this":141}],154:[function(require,module,exports){
+'use strict';
 var isCallable = require('../internals/is-callable');
 var isObject = require('../internals/is-object');
 var setPrototypeOf = require('../internals/object-set-prototype-of');
@@ -35103,7 +31132,8 @@ module.exports = function ($this, dummy, Wrapper) {
   return $this;
 };
 
-},{"../internals/is-callable":153,"../internals/is-object":156,"../internals/object-set-prototype-of":185}],147:[function(require,module,exports){
+},{"../internals/is-callable":161,"../internals/is-object":165,"../internals/object-set-prototype-of":195}],155:[function(require,module,exports){
+'use strict';
 var uncurryThis = require('../internals/function-uncurry-this');
 var isCallable = require('../internals/is-callable');
 var store = require('../internals/shared-store');
@@ -35119,7 +31149,8 @@ if (!isCallable(store.inspectSource)) {
 
 module.exports = store.inspectSource;
 
-},{"../internals/function-uncurry-this":134,"../internals/is-callable":153,"../internals/shared-store":200}],148:[function(require,module,exports){
+},{"../internals/function-uncurry-this":141,"../internals/is-callable":161,"../internals/shared-store":210}],156:[function(require,module,exports){
+'use strict';
 var isObject = require('../internals/is-object');
 var createNonEnumerableProperty = require('../internals/create-non-enumerable-property');
 
@@ -35131,7 +31162,8 @@ module.exports = function (O, options) {
   }
 };
 
-},{"../internals/create-non-enumerable-property":107,"../internals/is-object":156}],149:[function(require,module,exports){
+},{"../internals/create-non-enumerable-property":105,"../internals/is-object":165}],157:[function(require,module,exports){
+'use strict';
 var $ = require('../internals/export');
 var uncurryThis = require('../internals/function-uncurry-this');
 var hiddenKeys = require('../internals/hidden-keys');
@@ -35222,10 +31254,10 @@ var meta = module.exports = {
 
 hiddenKeys[METADATA] = true;
 
-},{"../internals/export":126,"../internals/freezing":128,"../internals/function-uncurry-this":134,"../internals/has-own-property":140,"../internals/hidden-keys":141,"../internals/is-object":156,"../internals/object-define-property":174,"../internals/object-get-own-property-names":177,"../internals/object-get-own-property-names-external":176,"../internals/object-is-extensible":180,"../internals/uid":216}],150:[function(require,module,exports){
-var NATIVE_WEAK_MAP = require('../internals/native-weak-map');
+},{"../internals/export":131,"../internals/freezing":133,"../internals/function-uncurry-this":141,"../internals/has-own-property":148,"../internals/hidden-keys":149,"../internals/is-object":165,"../internals/object-define-property":184,"../internals/object-get-own-property-names":187,"../internals/object-get-own-property-names-external":186,"../internals/object-is-extensible":190,"../internals/uid":230}],158:[function(require,module,exports){
+'use strict';
+var NATIVE_WEAK_MAP = require('../internals/weak-map-basic-detection');
 var global = require('../internals/global');
-var uncurryThis = require('../internals/function-uncurry-this');
 var isObject = require('../internals/is-object');
 var createNonEnumerableProperty = require('../internals/create-non-enumerable-property');
 var hasOwn = require('../internals/has-own-property');
@@ -35246,27 +31278,29 @@ var getterFor = function (TYPE) {
   return function (it) {
     var state;
     if (!isObject(it) || (state = get(it)).type !== TYPE) {
-      throw TypeError('Incompatible receiver, ' + TYPE + ' required');
+      throw new TypeError('Incompatible receiver, ' + TYPE + ' required');
     } return state;
   };
 };
 
 if (NATIVE_WEAK_MAP || shared.state) {
   var store = shared.state || (shared.state = new WeakMap());
-  var wmget = uncurryThis(store.get);
-  var wmhas = uncurryThis(store.has);
-  var wmset = uncurryThis(store.set);
+  /* eslint-disable no-self-assign -- prototype methods protection */
+  store.get = store.get;
+  store.has = store.has;
+  store.set = store.set;
+  /* eslint-enable no-self-assign -- prototype methods protection */
   set = function (it, metadata) {
-    if (wmhas(store, it)) throw new TypeError(OBJECT_ALREADY_INITIALIZED);
+    if (store.has(it)) throw new TypeError(OBJECT_ALREADY_INITIALIZED);
     metadata.facade = it;
-    wmset(store, it, metadata);
+    store.set(it, metadata);
     return metadata;
   };
   get = function (it) {
-    return wmget(store, it) || {};
+    return store.get(it) || {};
   };
   has = function (it) {
-    return wmhas(store, it);
+    return store.has(it);
   };
 } else {
   var STATE = sharedKey('state');
@@ -35293,7 +31327,8 @@ module.exports = {
   getterFor: getterFor
 };
 
-},{"../internals/create-non-enumerable-property":107,"../internals/function-uncurry-this":134,"../internals/global":139,"../internals/has-own-property":140,"../internals/hidden-keys":141,"../internals/is-object":156,"../internals/native-weak-map":168,"../internals/shared-key":199,"../internals/shared-store":200}],151:[function(require,module,exports){
+},{"../internals/create-non-enumerable-property":105,"../internals/global":147,"../internals/has-own-property":148,"../internals/hidden-keys":149,"../internals/is-object":165,"../internals/shared-key":209,"../internals/shared-store":210,"../internals/weak-map-basic-detection":234}],159:[function(require,module,exports){
+'use strict';
 var wellKnownSymbol = require('../internals/well-known-symbol');
 var Iterators = require('../internals/iterators');
 
@@ -35305,24 +31340,33 @@ module.exports = function (it) {
   return it !== undefined && (Iterators.Array === it || ArrayPrototype[ITERATOR] === it);
 };
 
-},{"../internals/iterators":163,"../internals/well-known-symbol":220}],152:[function(require,module,exports){
+},{"../internals/iterators":174,"../internals/well-known-symbol":237}],160:[function(require,module,exports){
+'use strict';
 var classof = require('../internals/classof-raw');
 
 // `IsArray` abstract operation
 // https://tc39.es/ecma262/#sec-isarray
 // eslint-disable-next-line es/no-array-isarray -- safe
 module.exports = Array.isArray || function isArray(argument) {
-  return classof(argument) == 'Array';
+  return classof(argument) === 'Array';
 };
 
-},{"../internals/classof-raw":98}],153:[function(require,module,exports){
+},{"../internals/classof-raw":97}],161:[function(require,module,exports){
+'use strict';
+var $documentAll = require('../internals/document-all');
+
+var documentAll = $documentAll.all;
+
 // `IsCallable` abstract operation
 // https://tc39.es/ecma262/#sec-iscallable
-module.exports = function (argument) {
+module.exports = $documentAll.IS_HTMLDDA ? function (argument) {
+  return typeof argument == 'function' || argument === documentAll;
+} : function (argument) {
   return typeof argument == 'function';
 };
 
-},{}],154:[function(require,module,exports){
+},{"../internals/document-all":113}],162:[function(require,module,exports){
+'use strict';
 var uncurryThis = require('../internals/function-uncurry-this');
 var fails = require('../internals/fails');
 var isCallable = require('../internals/is-callable');
@@ -35335,7 +31379,7 @@ var empty = [];
 var construct = getBuiltIn('Reflect', 'construct');
 var constructorRegExp = /^\s*(?:class|function)\b/;
 var exec = uncurryThis(constructorRegExp.exec);
-var INCORRECT_TO_STRING = !constructorRegExp.exec(noop);
+var INCORRECT_TO_STRING = !constructorRegExp.test(noop);
 
 var isConstructorModern = function isConstructor(argument) {
   if (!isCallable(argument)) return false;
@@ -35376,7 +31420,8 @@ module.exports = !construct || fails(function () {
     || called;
 }) ? isConstructorLegacy : isConstructorModern;
 
-},{"../internals/classof":99,"../internals/fails":127,"../internals/function-uncurry-this":134,"../internals/get-built-in":135,"../internals/inspect-source":147,"../internals/is-callable":153}],155:[function(require,module,exports){
+},{"../internals/classof":98,"../internals/fails":132,"../internals/function-uncurry-this":141,"../internals/get-built-in":142,"../internals/inspect-source":155,"../internals/is-callable":161}],163:[function(require,module,exports){
+'use strict';
 var fails = require('../internals/fails');
 var isCallable = require('../internals/is-callable');
 
@@ -35384,8 +31429,8 @@ var replacement = /#|\.prototype\./;
 
 var isForced = function (feature, detection) {
   var value = data[normalize(feature)];
-  return value == POLYFILL ? true
-    : value == NATIVE ? false
+  return value === POLYFILL ? true
+    : value === NATIVE ? false
     : isCallable(detection) ? fails(detection)
     : !!detection;
 };
@@ -35400,17 +31445,33 @@ var POLYFILL = isForced.POLYFILL = 'P';
 
 module.exports = isForced;
 
-},{"../internals/fails":127,"../internals/is-callable":153}],156:[function(require,module,exports){
-var isCallable = require('../internals/is-callable');
-
+},{"../internals/fails":132,"../internals/is-callable":161}],164:[function(require,module,exports){
+'use strict';
+// we can't use just `it == null` since of `document.all` special case
+// https://tc39.es/ecma262/#sec-IsHTMLDDA-internal-slot-aec
 module.exports = function (it) {
+  return it === null || it === undefined;
+};
+
+},{}],165:[function(require,module,exports){
+'use strict';
+var isCallable = require('../internals/is-callable');
+var $documentAll = require('../internals/document-all');
+
+var documentAll = $documentAll.all;
+
+module.exports = $documentAll.IS_HTMLDDA ? function (it) {
+  return typeof it == 'object' ? it !== null : isCallable(it) || it === documentAll;
+} : function (it) {
   return typeof it == 'object' ? it !== null : isCallable(it);
 };
 
-},{"../internals/is-callable":153}],157:[function(require,module,exports){
+},{"../internals/document-all":113,"../internals/is-callable":161}],166:[function(require,module,exports){
+'use strict';
 module.exports = false;
 
-},{}],158:[function(require,module,exports){
+},{}],167:[function(require,module,exports){
+'use strict';
 var isObject = require('../internals/is-object');
 var classof = require('../internals/classof-raw');
 var wellKnownSymbol = require('../internals/well-known-symbol');
@@ -35421,27 +31482,27 @@ var MATCH = wellKnownSymbol('match');
 // https://tc39.es/ecma262/#sec-isregexp
 module.exports = function (it) {
   var isRegExp;
-  return isObject(it) && ((isRegExp = it[MATCH]) !== undefined ? !!isRegExp : classof(it) == 'RegExp');
+  return isObject(it) && ((isRegExp = it[MATCH]) !== undefined ? !!isRegExp : classof(it) === 'RegExp');
 };
 
-},{"../internals/classof-raw":98,"../internals/is-object":156,"../internals/well-known-symbol":220}],159:[function(require,module,exports){
-var global = require('../internals/global');
+},{"../internals/classof-raw":97,"../internals/is-object":165,"../internals/well-known-symbol":237}],168:[function(require,module,exports){
+'use strict';
 var getBuiltIn = require('../internals/get-built-in');
 var isCallable = require('../internals/is-callable');
 var isPrototypeOf = require('../internals/object-is-prototype-of');
 var USE_SYMBOL_AS_UID = require('../internals/use-symbol-as-uid');
 
-var Object = global.Object;
+var $Object = Object;
 
 module.exports = USE_SYMBOL_AS_UID ? function (it) {
   return typeof it == 'symbol';
 } : function (it) {
   var $Symbol = getBuiltIn('Symbol');
-  return isCallable($Symbol) && isPrototypeOf($Symbol.prototype, Object(it));
+  return isCallable($Symbol) && isPrototypeOf($Symbol.prototype, $Object(it));
 };
 
-},{"../internals/get-built-in":135,"../internals/global":139,"../internals/is-callable":153,"../internals/object-is-prototype-of":181,"../internals/use-symbol-as-uid":217}],160:[function(require,module,exports){
-var global = require('../internals/global');
+},{"../internals/get-built-in":142,"../internals/is-callable":161,"../internals/object-is-prototype-of":191,"../internals/use-symbol-as-uid":231}],169:[function(require,module,exports){
+'use strict';
 var bind = require('../internals/function-bind-context');
 var call = require('../internals/function-call');
 var anObject = require('../internals/an-object');
@@ -35453,7 +31514,7 @@ var getIterator = require('../internals/get-iterator');
 var getIteratorMethod = require('../internals/get-iterator-method');
 var iteratorClose = require('../internals/iterator-close');
 
-var TypeError = global.TypeError;
+var $TypeError = TypeError;
 
 var Result = function (stopped, result) {
   this.stopped = stopped;
@@ -35465,6 +31526,7 @@ var ResultPrototype = Result.prototype;
 module.exports = function (iterable, unboundFunction, options) {
   var that = options && options.that;
   var AS_ENTRIES = !!(options && options.AS_ENTRIES);
+  var IS_RECORD = !!(options && options.IS_RECORD);
   var IS_ITERATOR = !!(options && options.IS_ITERATOR);
   var INTERRUPTED = !!(options && options.INTERRUPTED);
   var fn = bind(unboundFunction, that);
@@ -35482,11 +31544,13 @@ module.exports = function (iterable, unboundFunction, options) {
     } return INTERRUPTED ? fn(value, stop) : fn(value);
   };
 
-  if (IS_ITERATOR) {
+  if (IS_RECORD) {
+    iterator = iterable.iterator;
+  } else if (IS_ITERATOR) {
     iterator = iterable;
   } else {
     iterFn = getIteratorMethod(iterable);
-    if (!iterFn) throw TypeError(tryToString(iterable) + ' is not iterable');
+    if (!iterFn) throw new $TypeError(tryToString(iterable) + ' is not iterable');
     // optimisation for array iterators
     if (isArrayIteratorMethod(iterFn)) {
       for (index = 0, length = lengthOfArrayLike(iterable); length > index; index++) {
@@ -35497,7 +31561,7 @@ module.exports = function (iterable, unboundFunction, options) {
     iterator = getIterator(iterable, iterFn);
   }
 
-  next = iterator.next;
+  next = IS_RECORD ? iterable.next : iterator.next;
   while (!(step = call(next, iterator)).done) {
     try {
       result = callFn(step.value);
@@ -35508,7 +31572,8 @@ module.exports = function (iterable, unboundFunction, options) {
   } return new Result(false);
 };
 
-},{"../internals/an-object":85,"../internals/function-bind-context":130,"../internals/function-call":132,"../internals/get-iterator":137,"../internals/get-iterator-method":136,"../internals/global":139,"../internals/is-array-iterator-method":151,"../internals/iterator-close":161,"../internals/length-of-array-like":164,"../internals/object-is-prototype-of":181,"../internals/try-to-string":214}],161:[function(require,module,exports){
+},{"../internals/an-object":84,"../internals/function-bind-context":135,"../internals/function-call":137,"../internals/get-iterator":144,"../internals/get-iterator-method":143,"../internals/is-array-iterator-method":159,"../internals/iterator-close":170,"../internals/length-of-array-like":175,"../internals/object-is-prototype-of":191,"../internals/try-to-string":228}],170:[function(require,module,exports){
+'use strict';
 var call = require('../internals/function-call');
 var anObject = require('../internals/an-object');
 var getMethod = require('../internals/get-method');
@@ -35533,13 +31598,136 @@ module.exports = function (iterator, kind, value) {
   return value;
 };
 
-},{"../internals/an-object":85,"../internals/function-call":132,"../internals/get-method":138}],162:[function(require,module,exports){
+},{"../internals/an-object":84,"../internals/function-call":137,"../internals/get-method":146}],171:[function(require,module,exports){
+'use strict';
+var IteratorPrototype = require('../internals/iterators-core').IteratorPrototype;
+var create = require('../internals/object-create');
+var createPropertyDescriptor = require('../internals/create-property-descriptor');
+var setToStringTag = require('../internals/set-to-string-tag');
+var Iterators = require('../internals/iterators');
+
+var returnThis = function () { return this; };
+
+module.exports = function (IteratorConstructor, NAME, next, ENUMERABLE_NEXT) {
+  var TO_STRING_TAG = NAME + ' Iterator';
+  IteratorConstructor.prototype = create(IteratorPrototype, { next: createPropertyDescriptor(+!ENUMERABLE_NEXT, next) });
+  setToStringTag(IteratorConstructor, TO_STRING_TAG, false, true);
+  Iterators[TO_STRING_TAG] = returnThis;
+  return IteratorConstructor;
+};
+
+},{"../internals/create-property-descriptor":106,"../internals/iterators":174,"../internals/iterators-core":173,"../internals/object-create":182,"../internals/set-to-string-tag":208}],172:[function(require,module,exports){
+'use strict';
+var $ = require('../internals/export');
+var call = require('../internals/function-call');
+var IS_PURE = require('../internals/is-pure');
+var FunctionName = require('../internals/function-name');
+var isCallable = require('../internals/is-callable');
+var createIteratorConstructor = require('../internals/iterator-create-constructor');
+var getPrototypeOf = require('../internals/object-get-prototype-of');
+var setPrototypeOf = require('../internals/object-set-prototype-of');
+var setToStringTag = require('../internals/set-to-string-tag');
+var createNonEnumerableProperty = require('../internals/create-non-enumerable-property');
+var defineBuiltIn = require('../internals/define-built-in');
+var wellKnownSymbol = require('../internals/well-known-symbol');
+var Iterators = require('../internals/iterators');
+var IteratorsCore = require('../internals/iterators-core');
+
+var PROPER_FUNCTION_NAME = FunctionName.PROPER;
+var CONFIGURABLE_FUNCTION_NAME = FunctionName.CONFIGURABLE;
+var IteratorPrototype = IteratorsCore.IteratorPrototype;
+var BUGGY_SAFARI_ITERATORS = IteratorsCore.BUGGY_SAFARI_ITERATORS;
+var ITERATOR = wellKnownSymbol('iterator');
+var KEYS = 'keys';
+var VALUES = 'values';
+var ENTRIES = 'entries';
+
+var returnThis = function () { return this; };
+
+module.exports = function (Iterable, NAME, IteratorConstructor, next, DEFAULT, IS_SET, FORCED) {
+  createIteratorConstructor(IteratorConstructor, NAME, next);
+
+  var getIterationMethod = function (KIND) {
+    if (KIND === DEFAULT && defaultIterator) return defaultIterator;
+    if (!BUGGY_SAFARI_ITERATORS && KIND && KIND in IterablePrototype) return IterablePrototype[KIND];
+
+    switch (KIND) {
+      case KEYS: return function keys() { return new IteratorConstructor(this, KIND); };
+      case VALUES: return function values() { return new IteratorConstructor(this, KIND); };
+      case ENTRIES: return function entries() { return new IteratorConstructor(this, KIND); };
+    }
+
+    return function () { return new IteratorConstructor(this); };
+  };
+
+  var TO_STRING_TAG = NAME + ' Iterator';
+  var INCORRECT_VALUES_NAME = false;
+  var IterablePrototype = Iterable.prototype;
+  var nativeIterator = IterablePrototype[ITERATOR]
+    || IterablePrototype['@@iterator']
+    || DEFAULT && IterablePrototype[DEFAULT];
+  var defaultIterator = !BUGGY_SAFARI_ITERATORS && nativeIterator || getIterationMethod(DEFAULT);
+  var anyNativeIterator = NAME === 'Array' ? IterablePrototype.entries || nativeIterator : nativeIterator;
+  var CurrentIteratorPrototype, methods, KEY;
+
+  // fix native
+  if (anyNativeIterator) {
+    CurrentIteratorPrototype = getPrototypeOf(anyNativeIterator.call(new Iterable()));
+    if (CurrentIteratorPrototype !== Object.prototype && CurrentIteratorPrototype.next) {
+      if (!IS_PURE && getPrototypeOf(CurrentIteratorPrototype) !== IteratorPrototype) {
+        if (setPrototypeOf) {
+          setPrototypeOf(CurrentIteratorPrototype, IteratorPrototype);
+        } else if (!isCallable(CurrentIteratorPrototype[ITERATOR])) {
+          defineBuiltIn(CurrentIteratorPrototype, ITERATOR, returnThis);
+        }
+      }
+      // Set @@toStringTag to native iterators
+      setToStringTag(CurrentIteratorPrototype, TO_STRING_TAG, true, true);
+      if (IS_PURE) Iterators[TO_STRING_TAG] = returnThis;
+    }
+  }
+
+  // fix Array.prototype.{ values, @@iterator }.name in V8 / FF
+  if (PROPER_FUNCTION_NAME && DEFAULT === VALUES && nativeIterator && nativeIterator.name !== VALUES) {
+    if (!IS_PURE && CONFIGURABLE_FUNCTION_NAME) {
+      createNonEnumerableProperty(IterablePrototype, 'name', VALUES);
+    } else {
+      INCORRECT_VALUES_NAME = true;
+      defaultIterator = function values() { return call(nativeIterator, this); };
+    }
+  }
+
+  // export additional methods
+  if (DEFAULT) {
+    methods = {
+      values: getIterationMethod(VALUES),
+      keys: IS_SET ? defaultIterator : getIterationMethod(KEYS),
+      entries: getIterationMethod(ENTRIES)
+    };
+    if (FORCED) for (KEY in methods) {
+      if (BUGGY_SAFARI_ITERATORS || INCORRECT_VALUES_NAME || !(KEY in IterablePrototype)) {
+        defineBuiltIn(IterablePrototype, KEY, methods[KEY]);
+      }
+    } else $({ target: NAME, proto: true, forced: BUGGY_SAFARI_ITERATORS || INCORRECT_VALUES_NAME }, methods);
+  }
+
+  // define iterator
+  if ((!IS_PURE || FORCED) && IterablePrototype[ITERATOR] !== defaultIterator) {
+    defineBuiltIn(IterablePrototype, ITERATOR, defaultIterator, { name: DEFAULT });
+  }
+  Iterators[NAME] = defaultIterator;
+
+  return methods;
+};
+
+},{"../internals/create-non-enumerable-property":105,"../internals/define-built-in":109,"../internals/export":131,"../internals/function-call":137,"../internals/function-name":138,"../internals/is-callable":161,"../internals/is-pure":166,"../internals/iterator-create-constructor":171,"../internals/iterators":174,"../internals/iterators-core":173,"../internals/object-get-prototype-of":189,"../internals/object-set-prototype-of":195,"../internals/set-to-string-tag":208,"../internals/well-known-symbol":237}],173:[function(require,module,exports){
 'use strict';
 var fails = require('../internals/fails');
 var isCallable = require('../internals/is-callable');
+var isObject = require('../internals/is-object');
 var create = require('../internals/object-create');
 var getPrototypeOf = require('../internals/object-get-prototype-of');
-var redefine = require('../internals/redefine');
+var defineBuiltIn = require('../internals/define-built-in');
 var wellKnownSymbol = require('../internals/well-known-symbol');
 var IS_PURE = require('../internals/is-pure');
 
@@ -35561,7 +31749,7 @@ if ([].keys) {
   }
 }
 
-var NEW_ITERATOR_PROTOTYPE = IteratorPrototype == undefined || fails(function () {
+var NEW_ITERATOR_PROTOTYPE = !isObject(IteratorPrototype) || fails(function () {
   var test = {};
   // FF44- legacy iterators case
   return IteratorPrototype[ITERATOR].call(test) !== test;
@@ -35573,7 +31761,7 @@ else if (IS_PURE) IteratorPrototype = create(IteratorPrototype);
 // `%IteratorPrototype%[@@iterator]()` method
 // https://tc39.es/ecma262/#sec-%iteratorprototype%-@@iterator
 if (!isCallable(IteratorPrototype[ITERATOR])) {
-  redefine(IteratorPrototype, ITERATOR, function () {
+  defineBuiltIn(IteratorPrototype, ITERATOR, function () {
     return this;
   });
 }
@@ -35583,9 +31771,10 @@ module.exports = {
   BUGGY_SAFARI_ITERATORS: BUGGY_SAFARI_ITERATORS
 };
 
-},{"../internals/fails":127,"../internals/is-callable":153,"../internals/is-pure":157,"../internals/object-create":172,"../internals/object-get-prototype-of":179,"../internals/redefine":194,"../internals/well-known-symbol":220}],163:[function(require,module,exports){
-arguments[4][141][0].apply(exports,arguments)
-},{"dup":141}],164:[function(require,module,exports){
+},{"../internals/define-built-in":109,"../internals/fails":132,"../internals/is-callable":161,"../internals/is-object":165,"../internals/is-pure":166,"../internals/object-create":182,"../internals/object-get-prototype-of":189,"../internals/well-known-symbol":237}],174:[function(require,module,exports){
+arguments[4][149][0].apply(exports,arguments)
+},{"dup":149}],175:[function(require,module,exports){
+'use strict';
 var toLength = require('../internals/to-length');
 
 // `LengthOfArrayLike` abstract operation
@@ -35594,11 +31783,83 @@ module.exports = function (obj) {
   return toLength(obj.length);
 };
 
-},{"../internals/to-length":208}],165:[function(require,module,exports){
+},{"../internals/to-length":222}],176:[function(require,module,exports){
+'use strict';
+var uncurryThis = require('../internals/function-uncurry-this');
+var fails = require('../internals/fails');
+var isCallable = require('../internals/is-callable');
+var hasOwn = require('../internals/has-own-property');
+var DESCRIPTORS = require('../internals/descriptors');
+var CONFIGURABLE_FUNCTION_NAME = require('../internals/function-name').CONFIGURABLE;
+var inspectSource = require('../internals/inspect-source');
+var InternalStateModule = require('../internals/internal-state');
+
+var enforceInternalState = InternalStateModule.enforce;
+var getInternalState = InternalStateModule.get;
+var $String = String;
+// eslint-disable-next-line es/no-object-defineproperty -- safe
+var defineProperty = Object.defineProperty;
+var stringSlice = uncurryThis(''.slice);
+var replace = uncurryThis(''.replace);
+var join = uncurryThis([].join);
+
+var CONFIGURABLE_LENGTH = DESCRIPTORS && !fails(function () {
+  return defineProperty(function () { /* empty */ }, 'length', { value: 8 }).length !== 8;
+});
+
+var TEMPLATE = String(String).split('String');
+
+var makeBuiltIn = module.exports = function (value, name, options) {
+  if (stringSlice($String(name), 0, 7) === 'Symbol(') {
+    name = '[' + replace($String(name), /^Symbol\(([^)]*)\)/, '$1') + ']';
+  }
+  if (options && options.getter) name = 'get ' + name;
+  if (options && options.setter) name = 'set ' + name;
+  if (!hasOwn(value, 'name') || (CONFIGURABLE_FUNCTION_NAME && value.name !== name)) {
+    if (DESCRIPTORS) defineProperty(value, 'name', { value: name, configurable: true });
+    else value.name = name;
+  }
+  if (CONFIGURABLE_LENGTH && options && hasOwn(options, 'arity') && value.length !== options.arity) {
+    defineProperty(value, 'length', { value: options.arity });
+  }
+  try {
+    if (options && hasOwn(options, 'constructor') && options.constructor) {
+      if (DESCRIPTORS) defineProperty(value, 'prototype', { writable: false });
+    // in V8 ~ Chrome 53, prototypes of some methods, like `Array.prototype.values`, are non-writable
+    } else if (value.prototype) value.prototype = undefined;
+  } catch (error) { /* empty */ }
+  var state = enforceInternalState(value);
+  if (!hasOwn(state, 'source')) {
+    state.source = join(TEMPLATE, typeof name == 'string' ? name : '');
+  } return value;
+};
+
+// add fake Function#toString for correct work wrapped methods / constructors with methods like LoDash isNative
+// eslint-disable-next-line no-extend-native -- required
+Function.prototype.toString = makeBuiltIn(function toString() {
+  return isCallable(this) && getInternalState(this).source || inspectSource(this);
+}, 'toString');
+
+},{"../internals/descriptors":112,"../internals/fails":132,"../internals/function-name":138,"../internals/function-uncurry-this":141,"../internals/has-own-property":148,"../internals/inspect-source":155,"../internals/internal-state":158,"../internals/is-callable":161}],177:[function(require,module,exports){
+'use strict';
+var ceil = Math.ceil;
+var floor = Math.floor;
+
+// `Math.trunc` method
+// https://tc39.es/ecma262/#sec-math.trunc
+// eslint-disable-next-line es/no-math-trunc -- safe
+module.exports = Math.trunc || function trunc(x) {
+  var n = +x;
+  return (n > 0 ? floor : ceil)(n);
+};
+
+},{}],178:[function(require,module,exports){
+'use strict';
 var global = require('../internals/global');
 var bind = require('../internals/function-bind-context');
 var getOwnPropertyDescriptor = require('../internals/object-get-own-property-descriptor').f;
 var macrotask = require('../internals/task').set;
+var Queue = require('../internals/queue');
 var IS_IOS = require('../internals/engine-is-ios');
 var IS_IOS_PEBBLE = require('../internals/engine-is-ios-pebble');
 var IS_WEBOS_WEBKIT = require('../internals/engine-is-webos-webkit');
@@ -35610,26 +31871,22 @@ var process = global.process;
 var Promise = global.Promise;
 // Node.js 11 shows ExperimentalWarning on getting `queueMicrotask`
 var queueMicrotaskDescriptor = getOwnPropertyDescriptor(global, 'queueMicrotask');
-var queueMicrotask = queueMicrotaskDescriptor && queueMicrotaskDescriptor.value;
-
-var flush, head, last, notify, toggle, node, promise, then;
+var microtask = queueMicrotaskDescriptor && queueMicrotaskDescriptor.value;
+var notify, toggle, node, promise, then;
 
 // modern engines have queueMicrotask method
-if (!queueMicrotask) {
-  flush = function () {
+if (!microtask) {
+  var queue = new Queue();
+
+  var flush = function () {
     var parent, fn;
     if (IS_NODE && (parent = process.domain)) parent.exit();
-    while (head) {
-      fn = head.fn;
-      head = head.next;
-      try {
-        fn();
-      } catch (error) {
-        if (head) notify();
-        else last = undefined;
-        throw error;
-      }
-    } last = undefined;
+    while (fn = queue.get()) try {
+      fn();
+    } catch (error) {
+      if (queue.head) notify();
+      throw error;
+    }
     if (parent) parent.enter();
   };
 
@@ -35660,64 +31917,35 @@ if (!queueMicrotask) {
   // for other environments - macrotask based on:
   // - setImmediate
   // - MessageChannel
-  // - window.postMessag
+  // - window.postMessage
   // - onreadystatechange
   // - setTimeout
   } else {
-    // strange IE + webpack dev server bug - use .bind(global)
+    // `webpack` dev server bug on IE global methods - use bind(fn, global)
     macrotask = bind(macrotask, global);
     notify = function () {
       macrotask(flush);
     };
   }
+
+  microtask = function (fn) {
+    if (!queue.head) notify();
+    queue.add(fn);
+  };
 }
 
-module.exports = queueMicrotask || function (fn) {
-  var task = { fn: fn, next: undefined };
-  if (last) last.next = task;
-  if (!head) {
-    head = task;
-    notify();
-  } last = task;
-};
+module.exports = microtask;
 
-},{"../internals/engine-is-ios":118,"../internals/engine-is-ios-pebble":117,"../internals/engine-is-node":119,"../internals/engine-is-webos-webkit":120,"../internals/function-bind-context":130,"../internals/global":139,"../internals/object-get-own-property-descriptor":175,"../internals/task":204}],166:[function(require,module,exports){
-var global = require('../internals/global');
-
-module.exports = global.Promise;
-
-},{"../internals/global":139}],167:[function(require,module,exports){
-/* eslint-disable es/no-symbol -- required for testing */
-var V8_VERSION = require('../internals/engine-v8-version');
-var fails = require('../internals/fails');
-
-// eslint-disable-next-line es/no-object-getownpropertysymbols -- required for testing
-module.exports = !!Object.getOwnPropertySymbols && !fails(function () {
-  var symbol = Symbol();
-  // Chrome 38 Symbol has incorrect toString conversion
-  // `get-own-property-symbols` polyfill symbols converted to object are not Symbol instances
-  return !String(symbol) || !(Object(symbol) instanceof Symbol) ||
-    // Chrome 38-40 symbols are not inherited from DOM collections prototypes to instances
-    !Symbol.sham && V8_VERSION && V8_VERSION < 41;
-});
-
-},{"../internals/engine-v8-version":122,"../internals/fails":127}],168:[function(require,module,exports){
-var global = require('../internals/global');
-var isCallable = require('../internals/is-callable');
-var inspectSource = require('../internals/inspect-source');
-
-var WeakMap = global.WeakMap;
-
-module.exports = isCallable(WeakMap) && /native code/.test(inspectSource(WeakMap));
-
-},{"../internals/global":139,"../internals/inspect-source":147,"../internals/is-callable":153}],169:[function(require,module,exports){
+},{"../internals/engine-is-ios":121,"../internals/engine-is-ios-pebble":120,"../internals/engine-is-node":122,"../internals/engine-is-webos-webkit":123,"../internals/function-bind-context":135,"../internals/global":147,"../internals/object-get-own-property-descriptor":185,"../internals/queue":205,"../internals/task":217}],179:[function(require,module,exports){
 'use strict';
 var aCallable = require('../internals/a-callable');
+
+var $TypeError = TypeError;
 
 var PromiseCapability = function (C) {
   var resolve, reject;
   this.promise = new C(function ($$resolve, $$reject) {
-    if (resolve !== undefined || reject !== undefined) throw TypeError('Bad Promise constructor');
+    if (resolve !== undefined || reject !== undefined) throw new $TypeError('Bad Promise constructor');
     resolve = $$resolve;
     reject = $$reject;
   });
@@ -35731,26 +31959,28 @@ module.exports.f = function (C) {
   return new PromiseCapability(C);
 };
 
-},{"../internals/a-callable":80}],170:[function(require,module,exports){
+},{"../internals/a-callable":79}],180:[function(require,module,exports){
+'use strict';
 var toString = require('../internals/to-string');
 
 module.exports = function (argument, $default) {
   return argument === undefined ? arguments.length < 2 ? '' : $default : toString(argument);
 };
 
-},{"../internals/to-string":213}],171:[function(require,module,exports){
-var global = require('../internals/global');
+},{"../internals/to-string":227}],181:[function(require,module,exports){
+'use strict';
 var isRegExp = require('../internals/is-regexp');
 
-var TypeError = global.TypeError;
+var $TypeError = TypeError;
 
 module.exports = function (it) {
   if (isRegExp(it)) {
-    throw TypeError("The method doesn't accept regular expressions");
+    throw new $TypeError("The method doesn't accept regular expressions");
   } return it;
 };
 
-},{"../internals/global":139,"../internals/is-regexp":158}],172:[function(require,module,exports){
+},{"../internals/is-regexp":167}],182:[function(require,module,exports){
+'use strict';
 /* global ActiveXObject -- old IE, WSH */
 var anObject = require('../internals/an-object');
 var definePropertiesModule = require('../internals/object-define-properties');
@@ -35822,6 +32052,7 @@ hiddenKeys[IE_PROTO] = true;
 
 // `Object.create` method
 // https://tc39.es/ecma262/#sec-object.create
+// eslint-disable-next-line es/no-object-create -- safe
 module.exports = Object.create || function create(O, Properties) {
   var result;
   if (O !== null) {
@@ -35834,7 +32065,8 @@ module.exports = Object.create || function create(O, Properties) {
   return Properties === undefined ? result : definePropertiesModule.f(result, Properties);
 };
 
-},{"../internals/an-object":85,"../internals/document-create-element":113,"../internals/enum-bug-keys":124,"../internals/hidden-keys":141,"../internals/html":143,"../internals/object-define-properties":173,"../internals/shared-key":199}],173:[function(require,module,exports){
+},{"../internals/an-object":84,"../internals/document-create-element":114,"../internals/enum-bug-keys":127,"../internals/hidden-keys":149,"../internals/html":151,"../internals/object-define-properties":183,"../internals/shared-key":209}],183:[function(require,module,exports){
+'use strict';
 var DESCRIPTORS = require('../internals/descriptors');
 var V8_PROTOTYPE_DEFINE_BUG = require('../internals/v8-prototype-define-bug');
 var definePropertyModule = require('../internals/object-define-property');
@@ -35856,15 +32088,15 @@ exports.f = DESCRIPTORS && !V8_PROTOTYPE_DEFINE_BUG ? Object.defineProperties : 
   return O;
 };
 
-},{"../internals/an-object":85,"../internals/descriptors":112,"../internals/object-define-property":174,"../internals/object-keys":183,"../internals/to-indexed-object":206,"../internals/v8-prototype-define-bug":218}],174:[function(require,module,exports){
-var global = require('../internals/global');
+},{"../internals/an-object":84,"../internals/descriptors":112,"../internals/object-define-property":184,"../internals/object-keys":193,"../internals/to-indexed-object":220,"../internals/v8-prototype-define-bug":232}],184:[function(require,module,exports){
+'use strict';
 var DESCRIPTORS = require('../internals/descriptors');
 var IE8_DOM_DEFINE = require('../internals/ie8-dom-define');
 var V8_PROTOTYPE_DEFINE_BUG = require('../internals/v8-prototype-define-bug');
 var anObject = require('../internals/an-object');
 var toPropertyKey = require('../internals/to-property-key');
 
-var TypeError = global.TypeError;
+var $TypeError = TypeError;
 // eslint-disable-next-line es/no-object-defineproperty -- safe
 var $defineProperty = Object.defineProperty;
 // eslint-disable-next-line es/no-object-getownpropertydescriptor -- safe
@@ -35897,12 +32129,13 @@ exports.f = DESCRIPTORS ? V8_PROTOTYPE_DEFINE_BUG ? function defineProperty(O, P
   if (IE8_DOM_DEFINE) try {
     return $defineProperty(O, P, Attributes);
   } catch (error) { /* empty */ }
-  if ('get' in Attributes || 'set' in Attributes) throw TypeError('Accessors not supported');
+  if ('get' in Attributes || 'set' in Attributes) throw new $TypeError('Accessors not supported');
   if ('value' in Attributes) O[P] = Attributes.value;
   return O;
 };
 
-},{"../internals/an-object":85,"../internals/descriptors":112,"../internals/global":139,"../internals/ie8-dom-define":144,"../internals/to-property-key":211,"../internals/v8-prototype-define-bug":218}],175:[function(require,module,exports){
+},{"../internals/an-object":84,"../internals/descriptors":112,"../internals/ie8-dom-define":152,"../internals/to-property-key":225,"../internals/v8-prototype-define-bug":232}],185:[function(require,module,exports){
+'use strict';
 var DESCRIPTORS = require('../internals/descriptors');
 var call = require('../internals/function-call');
 var propertyIsEnumerableModule = require('../internals/object-property-is-enumerable');
@@ -35926,7 +32159,8 @@ exports.f = DESCRIPTORS ? $getOwnPropertyDescriptor : function getOwnPropertyDes
   if (hasOwn(O, P)) return createPropertyDescriptor(!call(propertyIsEnumerableModule.f, O, P), O[P]);
 };
 
-},{"../internals/create-property-descriptor":108,"../internals/descriptors":112,"../internals/function-call":132,"../internals/has-own-property":140,"../internals/ie8-dom-define":144,"../internals/object-property-is-enumerable":184,"../internals/to-indexed-object":206,"../internals/to-property-key":211}],176:[function(require,module,exports){
+},{"../internals/create-property-descriptor":106,"../internals/descriptors":112,"../internals/function-call":137,"../internals/has-own-property":148,"../internals/ie8-dom-define":152,"../internals/object-property-is-enumerable":194,"../internals/to-indexed-object":220,"../internals/to-property-key":225}],186:[function(require,module,exports){
+'use strict';
 /* eslint-disable es/no-object-getownpropertynames -- safe */
 var classof = require('../internals/classof-raw');
 var toIndexedObject = require('../internals/to-indexed-object');
@@ -35946,12 +32180,13 @@ var getWindowNames = function (it) {
 
 // fallback for IE11 buggy Object.getOwnPropertyNames with iframe and window
 module.exports.f = function getOwnPropertyNames(it) {
-  return windowNames && classof(it) == 'Window'
+  return windowNames && classof(it) === 'Window'
     ? getWindowNames(it)
     : $getOwnPropertyNames(toIndexedObject(it));
 };
 
-},{"../internals/array-slice-simple":93,"../internals/classof-raw":98,"../internals/object-get-own-property-names":177,"../internals/to-indexed-object":206}],177:[function(require,module,exports){
+},{"../internals/array-slice-simple":92,"../internals/classof-raw":97,"../internals/object-get-own-property-names":187,"../internals/to-indexed-object":220}],187:[function(require,module,exports){
+'use strict';
 var internalObjectKeys = require('../internals/object-keys-internal');
 var enumBugKeys = require('../internals/enum-bug-keys');
 
@@ -35964,12 +32199,13 @@ exports.f = Object.getOwnPropertyNames || function getOwnPropertyNames(O) {
   return internalObjectKeys(O, hiddenKeys);
 };
 
-},{"../internals/enum-bug-keys":124,"../internals/object-keys-internal":182}],178:[function(require,module,exports){
+},{"../internals/enum-bug-keys":127,"../internals/object-keys-internal":192}],188:[function(require,module,exports){
+'use strict';
 // eslint-disable-next-line es/no-object-getownpropertysymbols -- safe
 exports.f = Object.getOwnPropertySymbols;
 
-},{}],179:[function(require,module,exports){
-var global = require('../internals/global');
+},{}],189:[function(require,module,exports){
+'use strict';
 var hasOwn = require('../internals/has-own-property');
 var isCallable = require('../internals/is-callable');
 var toObject = require('../internals/to-object');
@@ -35977,21 +32213,23 @@ var sharedKey = require('../internals/shared-key');
 var CORRECT_PROTOTYPE_GETTER = require('../internals/correct-prototype-getter');
 
 var IE_PROTO = sharedKey('IE_PROTO');
-var Object = global.Object;
-var ObjectPrototype = Object.prototype;
+var $Object = Object;
+var ObjectPrototype = $Object.prototype;
 
 // `Object.getPrototypeOf` method
 // https://tc39.es/ecma262/#sec-object.getprototypeof
-module.exports = CORRECT_PROTOTYPE_GETTER ? Object.getPrototypeOf : function (O) {
+// eslint-disable-next-line es/no-object-getprototypeof -- safe
+module.exports = CORRECT_PROTOTYPE_GETTER ? $Object.getPrototypeOf : function (O) {
   var object = toObject(O);
   if (hasOwn(object, IE_PROTO)) return object[IE_PROTO];
   var constructor = object.constructor;
   if (isCallable(constructor) && object instanceof constructor) {
     return constructor.prototype;
-  } return object instanceof Object ? ObjectPrototype : null;
+  } return object instanceof $Object ? ObjectPrototype : null;
 };
 
-},{"../internals/correct-prototype-getter":105,"../internals/global":139,"../internals/has-own-property":140,"../internals/is-callable":153,"../internals/shared-key":199,"../internals/to-object":209}],180:[function(require,module,exports){
+},{"../internals/correct-prototype-getter":103,"../internals/has-own-property":148,"../internals/is-callable":161,"../internals/shared-key":209,"../internals/to-object":223}],190:[function(require,module,exports){
+'use strict';
 var fails = require('../internals/fails');
 var isObject = require('../internals/is-object');
 var classof = require('../internals/classof-raw');
@@ -36005,16 +32243,18 @@ var FAILS_ON_PRIMITIVES = fails(function () { $isExtensible(1); });
 // https://tc39.es/ecma262/#sec-object.isextensible
 module.exports = (FAILS_ON_PRIMITIVES || ARRAY_BUFFER_NON_EXTENSIBLE) ? function isExtensible(it) {
   if (!isObject(it)) return false;
-  if (ARRAY_BUFFER_NON_EXTENSIBLE && classof(it) == 'ArrayBuffer') return false;
+  if (ARRAY_BUFFER_NON_EXTENSIBLE && classof(it) === 'ArrayBuffer') return false;
   return $isExtensible ? $isExtensible(it) : true;
 } : $isExtensible;
 
-},{"../internals/array-buffer-non-extensible":87,"../internals/classof-raw":98,"../internals/fails":127,"../internals/is-object":156}],181:[function(require,module,exports){
+},{"../internals/array-buffer-non-extensible":86,"../internals/classof-raw":97,"../internals/fails":132,"../internals/is-object":165}],191:[function(require,module,exports){
+'use strict';
 var uncurryThis = require('../internals/function-uncurry-this');
 
 module.exports = uncurryThis({}.isPrototypeOf);
 
-},{"../internals/function-uncurry-this":134}],182:[function(require,module,exports){
+},{"../internals/function-uncurry-this":141}],192:[function(require,module,exports){
+'use strict';
 var uncurryThis = require('../internals/function-uncurry-this');
 var hasOwn = require('../internals/has-own-property');
 var toIndexedObject = require('../internals/to-indexed-object');
@@ -36036,7 +32276,8 @@ module.exports = function (object, names) {
   return result;
 };
 
-},{"../internals/array-includes":90,"../internals/function-uncurry-this":134,"../internals/has-own-property":140,"../internals/hidden-keys":141,"../internals/to-indexed-object":206}],183:[function(require,module,exports){
+},{"../internals/array-includes":89,"../internals/function-uncurry-this":141,"../internals/has-own-property":148,"../internals/hidden-keys":149,"../internals/to-indexed-object":220}],193:[function(require,module,exports){
+'use strict';
 var internalObjectKeys = require('../internals/object-keys-internal');
 var enumBugKeys = require('../internals/enum-bug-keys');
 
@@ -36047,7 +32288,7 @@ module.exports = Object.keys || function keys(O) {
   return internalObjectKeys(O, enumBugKeys);
 };
 
-},{"../internals/enum-bug-keys":124,"../internals/object-keys-internal":182}],184:[function(require,module,exports){
+},{"../internals/enum-bug-keys":127,"../internals/object-keys-internal":192}],194:[function(require,module,exports){
 'use strict';
 var $propertyIsEnumerable = {}.propertyIsEnumerable;
 // eslint-disable-next-line es/no-object-getownpropertydescriptor -- safe
@@ -36063,9 +32304,10 @@ exports.f = NASHORN_BUG ? function propertyIsEnumerable(V) {
   return !!descriptor && descriptor.enumerable;
 } : $propertyIsEnumerable;
 
-},{}],185:[function(require,module,exports){
+},{}],195:[function(require,module,exports){
+'use strict';
 /* eslint-disable no-proto -- safe */
-var uncurryThis = require('../internals/function-uncurry-this');
+var uncurryThisAccessor = require('../internals/function-uncurry-this-accessor');
 var anObject = require('../internals/an-object');
 var aPossiblePrototype = require('../internals/a-possible-prototype');
 
@@ -36078,8 +32320,7 @@ module.exports = Object.setPrototypeOf || ('__proto__' in {} ? function () {
   var test = {};
   var setter;
   try {
-    // eslint-disable-next-line es/no-object-getownpropertydescriptor -- safe
-    setter = uncurryThis(Object.getOwnPropertyDescriptor(Object.prototype, '__proto__').set);
+    setter = uncurryThisAccessor(Object.prototype, '__proto__', 'set');
     setter(test, []);
     CORRECT_SETTER = test instanceof Array;
   } catch (error) { /* empty */ }
@@ -36092,7 +32333,7 @@ module.exports = Object.setPrototypeOf || ('__proto__' in {} ? function () {
   };
 }() : undefined);
 
-},{"../internals/a-possible-prototype":82,"../internals/an-object":85,"../internals/function-uncurry-this":134}],186:[function(require,module,exports){
+},{"../internals/a-possible-prototype":81,"../internals/an-object":84,"../internals/function-uncurry-this-accessor":139}],196:[function(require,module,exports){
 'use strict';
 var TO_STRING_TAG_SUPPORT = require('../internals/to-string-tag-support');
 var classof = require('../internals/classof');
@@ -36103,13 +32344,13 @@ module.exports = TO_STRING_TAG_SUPPORT ? {}.toString : function toString() {
   return '[object ' + classof(this) + ']';
 };
 
-},{"../internals/classof":99,"../internals/to-string-tag-support":212}],187:[function(require,module,exports){
-var global = require('../internals/global');
+},{"../internals/classof":98,"../internals/to-string-tag-support":226}],197:[function(require,module,exports){
+'use strict';
 var call = require('../internals/function-call');
 var isCallable = require('../internals/is-callable');
 var isObject = require('../internals/is-object');
 
-var TypeError = global.TypeError;
+var $TypeError = TypeError;
 
 // `OrdinaryToPrimitive` abstract operation
 // https://tc39.es/ecma262/#sec-ordinarytoprimitive
@@ -36118,10 +32359,11 @@ module.exports = function (input, pref) {
   if (pref === 'string' && isCallable(fn = input.toString) && !isObject(val = call(fn, input))) return val;
   if (isCallable(fn = input.valueOf) && !isObject(val = call(fn, input))) return val;
   if (pref !== 'string' && isCallable(fn = input.toString) && !isObject(val = call(fn, input))) return val;
-  throw TypeError("Can't convert object to primitive value");
+  throw new $TypeError("Can't convert object to primitive value");
 };
 
-},{"../internals/function-call":132,"../internals/global":139,"../internals/is-callable":153,"../internals/is-object":156}],188:[function(require,module,exports){
+},{"../internals/function-call":137,"../internals/is-callable":161,"../internals/is-object":165}],198:[function(require,module,exports){
+'use strict';
 var getBuiltIn = require('../internals/get-built-in');
 var uncurryThis = require('../internals/function-uncurry-this');
 var getOwnPropertyNamesModule = require('../internals/object-get-own-property-names');
@@ -36137,12 +32379,14 @@ module.exports = getBuiltIn('Reflect', 'ownKeys') || function ownKeys(it) {
   return getOwnPropertySymbols ? concat(keys, getOwnPropertySymbols(it)) : keys;
 };
 
-},{"../internals/an-object":85,"../internals/function-uncurry-this":134,"../internals/get-built-in":135,"../internals/object-get-own-property-names":177,"../internals/object-get-own-property-symbols":178}],189:[function(require,module,exports){
+},{"../internals/an-object":84,"../internals/function-uncurry-this":141,"../internals/get-built-in":142,"../internals/object-get-own-property-names":187,"../internals/object-get-own-property-symbols":188}],199:[function(require,module,exports){
+'use strict';
 var global = require('../internals/global');
 
 module.exports = global;
 
-},{"../internals/global":139}],190:[function(require,module,exports){
+},{"../internals/global":147}],200:[function(require,module,exports){
+'use strict';
 module.exports = function (exec) {
   try {
     return { error: false, value: exec() };
@@ -36151,7 +32395,64 @@ module.exports = function (exec) {
   }
 };
 
-},{}],191:[function(require,module,exports){
+},{}],201:[function(require,module,exports){
+'use strict';
+var global = require('../internals/global');
+var NativePromiseConstructor = require('../internals/promise-native-constructor');
+var isCallable = require('../internals/is-callable');
+var isForced = require('../internals/is-forced');
+var inspectSource = require('../internals/inspect-source');
+var wellKnownSymbol = require('../internals/well-known-symbol');
+var IS_BROWSER = require('../internals/engine-is-browser');
+var IS_DENO = require('../internals/engine-is-deno');
+var IS_PURE = require('../internals/is-pure');
+var V8_VERSION = require('../internals/engine-v8-version');
+
+var NativePromisePrototype = NativePromiseConstructor && NativePromiseConstructor.prototype;
+var SPECIES = wellKnownSymbol('species');
+var SUBCLASSING = false;
+var NATIVE_PROMISE_REJECTION_EVENT = isCallable(global.PromiseRejectionEvent);
+
+var FORCED_PROMISE_CONSTRUCTOR = isForced('Promise', function () {
+  var PROMISE_CONSTRUCTOR_SOURCE = inspectSource(NativePromiseConstructor);
+  var GLOBAL_CORE_JS_PROMISE = PROMISE_CONSTRUCTOR_SOURCE !== String(NativePromiseConstructor);
+  // V8 6.6 (Node 10 and Chrome 66) have a bug with resolving custom thenables
+  // https://bugs.chromium.org/p/chromium/issues/detail?id=830565
+  // We can't detect it synchronously, so just check versions
+  if (!GLOBAL_CORE_JS_PROMISE && V8_VERSION === 66) return true;
+  // We need Promise#{ catch, finally } in the pure version for preventing prototype pollution
+  if (IS_PURE && !(NativePromisePrototype['catch'] && NativePromisePrototype['finally'])) return true;
+  // We can't use @@species feature detection in V8 since it causes
+  // deoptimization and performance degradation
+  // https://github.com/zloirock/core-js/issues/679
+  if (!V8_VERSION || V8_VERSION < 51 || !/native code/.test(PROMISE_CONSTRUCTOR_SOURCE)) {
+    // Detect correctness of subclassing with @@species support
+    var promise = new NativePromiseConstructor(function (resolve) { resolve(1); });
+    var FakePromise = function (exec) {
+      exec(function () { /* empty */ }, function () { /* empty */ });
+    };
+    var constructor = promise.constructor = {};
+    constructor[SPECIES] = FakePromise;
+    SUBCLASSING = promise.then(function () { /* empty */ }) instanceof FakePromise;
+    if (!SUBCLASSING) return true;
+  // Unhandled rejections tracking support, NodeJS Promise without it fails @@species test
+  } return !GLOBAL_CORE_JS_PROMISE && (IS_BROWSER || IS_DENO) && !NATIVE_PROMISE_REJECTION_EVENT;
+});
+
+module.exports = {
+  CONSTRUCTOR: FORCED_PROMISE_CONSTRUCTOR,
+  REJECTION_EVENT: NATIVE_PROMISE_REJECTION_EVENT,
+  SUBCLASSING: SUBCLASSING
+};
+
+},{"../internals/engine-is-browser":118,"../internals/engine-is-deno":119,"../internals/engine-v8-version":125,"../internals/global":147,"../internals/inspect-source":155,"../internals/is-callable":161,"../internals/is-forced":163,"../internals/is-pure":166,"../internals/promise-native-constructor":202,"../internals/well-known-symbol":237}],202:[function(require,module,exports){
+'use strict';
+var global = require('../internals/global');
+
+module.exports = global.Promise;
+
+},{"../internals/global":147}],203:[function(require,module,exports){
+'use strict';
 var anObject = require('../internals/an-object');
 var isObject = require('../internals/is-object');
 var newPromiseCapability = require('../internals/new-promise-capability');
@@ -36165,7 +32466,18 @@ module.exports = function (C, x) {
   return promiseCapability.promise;
 };
 
-},{"../internals/an-object":85,"../internals/is-object":156,"../internals/new-promise-capability":169}],192:[function(require,module,exports){
+},{"../internals/an-object":84,"../internals/is-object":165,"../internals/new-promise-capability":179}],204:[function(require,module,exports){
+'use strict';
+var NativePromiseConstructor = require('../internals/promise-native-constructor');
+var checkCorrectnessOfIteration = require('../internals/check-correctness-of-iteration');
+var FORCED_PROMISE_CONSTRUCTOR = require('../internals/promise-constructor-detection').CONSTRUCTOR;
+
+module.exports = FORCED_PROMISE_CONSTRUCTOR || !checkCorrectnessOfIteration(function (iterable) {
+  NativePromiseConstructor.all(iterable).then(undefined, function () { /* empty */ });
+});
+
+},{"../internals/check-correctness-of-iteration":96,"../internals/promise-constructor-detection":201,"../internals/promise-native-constructor":202}],205:[function(require,module,exports){
+'use strict';
 var Queue = function () {
   this.head = null;
   this.tail = null;
@@ -36174,15 +32486,16 @@ var Queue = function () {
 Queue.prototype = {
   add: function (item) {
     var entry = { item: item, next: null };
-    if (this.head) this.tail.next = entry;
+    var tail = this.tail;
+    if (tail) tail.next = entry;
     else this.head = entry;
     this.tail = entry;
   },
   get: function () {
     var entry = this.head;
     if (entry) {
-      this.head = entry.next;
-      if (this.tail === entry) this.tail = null;
+      var next = this.head = entry.next;
+      if (next === null) this.tail = null;
       return entry.item;
     }
   }
@@ -36190,92 +32503,23 @@ Queue.prototype = {
 
 module.exports = Queue;
 
-},{}],193:[function(require,module,exports){
-var redefine = require('../internals/redefine');
+},{}],206:[function(require,module,exports){
+'use strict';
+var isNullOrUndefined = require('../internals/is-null-or-undefined');
 
-module.exports = function (target, src, options) {
-  for (var key in src) redefine(target, key, src[key], options);
-  return target;
-};
-
-},{"../internals/redefine":194}],194:[function(require,module,exports){
-var global = require('../internals/global');
-var isCallable = require('../internals/is-callable');
-var hasOwn = require('../internals/has-own-property');
-var createNonEnumerableProperty = require('../internals/create-non-enumerable-property');
-var setGlobal = require('../internals/set-global');
-var inspectSource = require('../internals/inspect-source');
-var InternalStateModule = require('../internals/internal-state');
-var CONFIGURABLE_FUNCTION_NAME = require('../internals/function-name').CONFIGURABLE;
-
-var getInternalState = InternalStateModule.get;
-var enforceInternalState = InternalStateModule.enforce;
-var TEMPLATE = String(String).split('String');
-
-(module.exports = function (O, key, value, options) {
-  var unsafe = options ? !!options.unsafe : false;
-  var simple = options ? !!options.enumerable : false;
-  var noTargetGet = options ? !!options.noTargetGet : false;
-  var name = options && options.name !== undefined ? options.name : key;
-  var state;
-  if (isCallable(value)) {
-    if (String(name).slice(0, 7) === 'Symbol(') {
-      name = '[' + String(name).replace(/^Symbol\(([^)]*)\)/, '$1') + ']';
-    }
-    if (!hasOwn(value, 'name') || (CONFIGURABLE_FUNCTION_NAME && value.name !== name)) {
-      createNonEnumerableProperty(value, 'name', name);
-    }
-    state = enforceInternalState(value);
-    if (!state.source) {
-      state.source = TEMPLATE.join(typeof name == 'string' ? name : '');
-    }
-  }
-  if (O === global) {
-    if (simple) O[key] = value;
-    else setGlobal(key, value);
-    return;
-  } else if (!unsafe) {
-    delete O[key];
-  } else if (!noTargetGet && O[key]) {
-    simple = true;
-  }
-  if (simple) O[key] = value;
-  else createNonEnumerableProperty(O, key, value);
-// add fake Function#toString for correct work wrapped methods / constructors with methods like LoDash isNative
-})(Function.prototype, 'toString', function toString() {
-  return isCallable(this) && getInternalState(this).source || inspectSource(this);
-});
-
-},{"../internals/create-non-enumerable-property":107,"../internals/function-name":133,"../internals/global":139,"../internals/has-own-property":140,"../internals/inspect-source":147,"../internals/internal-state":150,"../internals/is-callable":153,"../internals/set-global":196}],195:[function(require,module,exports){
-var global = require('../internals/global');
-
-var TypeError = global.TypeError;
+var $TypeError = TypeError;
 
 // `RequireObjectCoercible` abstract operation
 // https://tc39.es/ecma262/#sec-requireobjectcoercible
 module.exports = function (it) {
-  if (it == undefined) throw TypeError("Can't call method on " + it);
+  if (isNullOrUndefined(it)) throw new $TypeError("Can't call method on " + it);
   return it;
 };
 
-},{"../internals/global":139}],196:[function(require,module,exports){
-var global = require('../internals/global');
-
-// eslint-disable-next-line es/no-object-defineproperty -- safe
-var defineProperty = Object.defineProperty;
-
-module.exports = function (key, value) {
-  try {
-    defineProperty(global, key, { value: value, configurable: true, writable: true });
-  } catch (error) {
-    global[key] = value;
-  } return value;
-};
-
-},{"../internals/global":139}],197:[function(require,module,exports){
+},{"../internals/is-null-or-undefined":164}],207:[function(require,module,exports){
 'use strict';
 var getBuiltIn = require('../internals/get-built-in');
-var definePropertyModule = require('../internals/object-define-property');
+var defineBuiltInAccessor = require('../internals/define-built-in-accessor');
 var wellKnownSymbol = require('../internals/well-known-symbol');
 var DESCRIPTORS = require('../internals/descriptors');
 
@@ -36283,17 +32527,17 @@ var SPECIES = wellKnownSymbol('species');
 
 module.exports = function (CONSTRUCTOR_NAME) {
   var Constructor = getBuiltIn(CONSTRUCTOR_NAME);
-  var defineProperty = definePropertyModule.f;
 
   if (DESCRIPTORS && Constructor && !Constructor[SPECIES]) {
-    defineProperty(Constructor, SPECIES, {
+    defineBuiltInAccessor(Constructor, SPECIES, {
       configurable: true,
       get: function () { return this; }
     });
   }
 };
 
-},{"../internals/descriptors":112,"../internals/get-built-in":135,"../internals/object-define-property":174,"../internals/well-known-symbol":220}],198:[function(require,module,exports){
+},{"../internals/define-built-in-accessor":108,"../internals/descriptors":112,"../internals/get-built-in":142,"../internals/well-known-symbol":237}],208:[function(require,module,exports){
+'use strict';
 var defineProperty = require('../internals/object-define-property').f;
 var hasOwn = require('../internals/has-own-property');
 var wellKnownSymbol = require('../internals/well-known-symbol');
@@ -36307,7 +32551,8 @@ module.exports = function (target, TAG, STATIC) {
   }
 };
 
-},{"../internals/has-own-property":140,"../internals/object-define-property":174,"../internals/well-known-symbol":220}],199:[function(require,module,exports){
+},{"../internals/has-own-property":148,"../internals/object-define-property":184,"../internals/well-known-symbol":237}],209:[function(require,module,exports){
+'use strict';
 var shared = require('../internals/shared');
 var uid = require('../internals/uid');
 
@@ -36317,32 +32562,36 @@ module.exports = function (key) {
   return keys[key] || (keys[key] = uid(key));
 };
 
-},{"../internals/shared":201,"../internals/uid":216}],200:[function(require,module,exports){
+},{"../internals/shared":211,"../internals/uid":230}],210:[function(require,module,exports){
+'use strict';
 var global = require('../internals/global');
-var setGlobal = require('../internals/set-global');
+var defineGlobalProperty = require('../internals/define-global-property');
 
 var SHARED = '__core-js_shared__';
-var store = global[SHARED] || setGlobal(SHARED, {});
+var store = global[SHARED] || defineGlobalProperty(SHARED, {});
 
 module.exports = store;
 
-},{"../internals/global":139,"../internals/set-global":196}],201:[function(require,module,exports){
+},{"../internals/define-global-property":111,"../internals/global":147}],211:[function(require,module,exports){
+'use strict';
 var IS_PURE = require('../internals/is-pure');
 var store = require('../internals/shared-store');
 
 (module.exports = function (key, value) {
   return store[key] || (store[key] = value !== undefined ? value : {});
 })('versions', []).push({
-  version: '3.20.3',
+  version: '3.33.2',
   mode: IS_PURE ? 'pure' : 'global',
-  copyright: '© 2014-2022 Denis Pushkarev (zloirock.ru)',
-  license: 'https://github.com/zloirock/core-js/blob/v3.20.3/LICENSE',
+  copyright: '© 2014-2023 Denis Pushkarev (zloirock.ru)',
+  license: 'https://github.com/zloirock/core-js/blob/v3.33.2/LICENSE',
   source: 'https://github.com/zloirock/core-js'
 });
 
-},{"../internals/is-pure":157,"../internals/shared-store":200}],202:[function(require,module,exports){
+},{"../internals/is-pure":166,"../internals/shared-store":210}],212:[function(require,module,exports){
+'use strict';
 var anObject = require('../internals/an-object');
 var aConstructor = require('../internals/a-constructor');
+var isNullOrUndefined = require('../internals/is-null-or-undefined');
 var wellKnownSymbol = require('../internals/well-known-symbol');
 
 var SPECIES = wellKnownSymbol('species');
@@ -36352,10 +32601,11 @@ var SPECIES = wellKnownSymbol('species');
 module.exports = function (O, defaultConstructor) {
   var C = anObject(O).constructor;
   var S;
-  return C === undefined || (S = anObject(C)[SPECIES]) == undefined ? defaultConstructor : aConstructor(S);
+  return C === undefined || isNullOrUndefined(S = anObject(C)[SPECIES]) ? defaultConstructor : aConstructor(S);
 };
 
-},{"../internals/a-constructor":81,"../internals/an-object":85,"../internals/well-known-symbol":220}],203:[function(require,module,exports){
+},{"../internals/a-constructor":80,"../internals/an-object":84,"../internals/is-null-or-undefined":164,"../internals/well-known-symbol":237}],213:[function(require,module,exports){
+'use strict';
 var uncurryThis = require('../internals/function-uncurry-this');
 var toIntegerOrInfinity = require('../internals/to-integer-or-infinity');
 var toString = require('../internals/to-string');
@@ -36393,7 +32643,59 @@ module.exports = {
   charAt: createMethod(true)
 };
 
-},{"../internals/function-uncurry-this":134,"../internals/require-object-coercible":195,"../internals/to-integer-or-infinity":207,"../internals/to-string":213}],204:[function(require,module,exports){
+},{"../internals/function-uncurry-this":141,"../internals/require-object-coercible":206,"../internals/to-integer-or-infinity":221,"../internals/to-string":227}],214:[function(require,module,exports){
+'use strict';
+/* eslint-disable es/no-symbol -- required for testing */
+var V8_VERSION = require('../internals/engine-v8-version');
+var fails = require('../internals/fails');
+var global = require('../internals/global');
+
+var $String = global.String;
+
+// eslint-disable-next-line es/no-object-getownpropertysymbols -- required for testing
+module.exports = !!Object.getOwnPropertySymbols && !fails(function () {
+  var symbol = Symbol('symbol detection');
+  // Chrome 38 Symbol has incorrect toString conversion
+  // `get-own-property-symbols` polyfill symbols converted to object are not Symbol instances
+  // nb: Do not call `String` directly to avoid this being optimized out to `symbol+''` which will,
+  // of course, fail.
+  return !$String(symbol) || !(Object(symbol) instanceof Symbol) ||
+    // Chrome 38-40 symbols are not inherited from DOM collections prototypes to instances
+    !Symbol.sham && V8_VERSION && V8_VERSION < 41;
+});
+
+},{"../internals/engine-v8-version":125,"../internals/fails":132,"../internals/global":147}],215:[function(require,module,exports){
+'use strict';
+var call = require('../internals/function-call');
+var getBuiltIn = require('../internals/get-built-in');
+var wellKnownSymbol = require('../internals/well-known-symbol');
+var defineBuiltIn = require('../internals/define-built-in');
+
+module.exports = function () {
+  var Symbol = getBuiltIn('Symbol');
+  var SymbolPrototype = Symbol && Symbol.prototype;
+  var valueOf = SymbolPrototype && SymbolPrototype.valueOf;
+  var TO_PRIMITIVE = wellKnownSymbol('toPrimitive');
+
+  if (SymbolPrototype && !SymbolPrototype[TO_PRIMITIVE]) {
+    // `Symbol.prototype[@@toPrimitive]` method
+    // https://tc39.es/ecma262/#sec-symbol.prototype-@@toprimitive
+    // eslint-disable-next-line no-unused-vars -- required for .length
+    defineBuiltIn(SymbolPrototype, TO_PRIMITIVE, function (hint) {
+      return call(valueOf, this);
+    }, { arity: 1 });
+  }
+};
+
+},{"../internals/define-built-in":109,"../internals/function-call":137,"../internals/get-built-in":142,"../internals/well-known-symbol":237}],216:[function(require,module,exports){
+'use strict';
+var NATIVE_SYMBOL = require('../internals/symbol-constructor-detection');
+
+/* eslint-disable es/no-symbol -- safe */
+module.exports = NATIVE_SYMBOL && !!Symbol['for'] && !!Symbol.keyFor;
+
+},{"../internals/symbol-constructor-detection":214}],217:[function(require,module,exports){
+'use strict';
 var global = require('../internals/global');
 var apply = require('../internals/function-apply');
 var bind = require('../internals/function-bind-context');
@@ -36403,6 +32705,7 @@ var fails = require('../internals/fails');
 var html = require('../internals/html');
 var arraySlice = require('../internals/array-slice');
 var createElement = require('../internals/document-create-element');
+var validateArgumentsLength = require('../internals/validate-arguments-length');
 var IS_IOS = require('../internals/engine-is-ios');
 var IS_NODE = require('../internals/engine-is-node');
 
@@ -36416,12 +32719,12 @@ var String = global.String;
 var counter = 0;
 var queue = {};
 var ONREADYSTATECHANGE = 'onreadystatechange';
-var location, defer, channel, port;
+var $location, defer, channel, port;
 
-try {
+fails(function () {
   // Deno throws a ReferenceError on `location` access without `--location` flag
-  location = global.location;
-} catch (error) { /* empty */ }
+  $location = global.location;
+});
 
 var run = function (id) {
   if (hasOwn(queue, id)) {
@@ -36437,21 +32740,23 @@ var runner = function (id) {
   };
 };
 
-var listener = function (event) {
+var eventListener = function (event) {
   run(event.data);
 };
 
-var post = function (id) {
+var globalPostMessageDefer = function (id) {
   // old engines have not location.origin
-  global.postMessage(String(id), location.protocol + '//' + location.host);
+  global.postMessage(String(id), $location.protocol + '//' + $location.host);
 };
 
 // Node.js 0.9+ & IE10+ has setImmediate, otherwise:
 if (!set || !clear) {
-  set = function setImmediate(fn) {
+  set = function setImmediate(handler) {
+    validateArgumentsLength(arguments.length, 1);
+    var fn = isCallable(handler) ? handler : Function(handler);
     var args = arraySlice(arguments, 1);
     queue[++counter] = function () {
-      apply(isCallable(fn) ? fn : Function(fn), undefined, args);
+      apply(fn, undefined, args);
     };
     defer(counter);
     return counter;
@@ -36474,7 +32779,7 @@ if (!set || !clear) {
   } else if (MessageChannel && !IS_IOS) {
     channel = new MessageChannel();
     port = channel.port2;
-    channel.port1.onmessage = listener;
+    channel.port1.onmessage = eventListener;
     defer = bind(port.postMessage, port);
   // Browsers with postMessage, skip WebWorkers
   // IE8 has postMessage, but it's sync & typeof its postMessage is 'object'
@@ -36482,11 +32787,11 @@ if (!set || !clear) {
     global.addEventListener &&
     isCallable(global.postMessage) &&
     !global.importScripts &&
-    location && location.protocol !== 'file:' &&
-    !fails(post)
+    $location && $location.protocol !== 'file:' &&
+    !fails(globalPostMessageDefer)
   ) {
-    defer = post;
-    global.addEventListener('message', listener, false);
+    defer = globalPostMessageDefer;
+    global.addEventListener('message', eventListener, false);
   // IE8-
   } else if (ONREADYSTATECHANGE in createElement('script')) {
     defer = function (id) {
@@ -36508,7 +32813,8 @@ module.exports = {
   clear: clear
 };
 
-},{"../internals/array-slice":94,"../internals/document-create-element":113,"../internals/engine-is-ios":118,"../internals/engine-is-node":119,"../internals/fails":127,"../internals/function-apply":129,"../internals/function-bind-context":130,"../internals/global":139,"../internals/has-own-property":140,"../internals/html":143,"../internals/is-callable":153}],205:[function(require,module,exports){
+},{"../internals/array-slice":93,"../internals/document-create-element":114,"../internals/engine-is-ios":121,"../internals/engine-is-node":122,"../internals/fails":132,"../internals/function-apply":134,"../internals/function-bind-context":135,"../internals/global":147,"../internals/has-own-property":148,"../internals/html":151,"../internals/is-callable":161,"../internals/validate-arguments-length":233}],218:[function(require,module,exports){
+'use strict';
 var toIntegerOrInfinity = require('../internals/to-integer-or-infinity');
 
 var max = Math.max;
@@ -36522,7 +32828,23 @@ module.exports = function (index, length) {
   return integer < 0 ? max(integer + length, 0) : min(integer, length);
 };
 
-},{"../internals/to-integer-or-infinity":207}],206:[function(require,module,exports){
+},{"../internals/to-integer-or-infinity":221}],219:[function(require,module,exports){
+'use strict';
+var toPrimitive = require('../internals/to-primitive');
+
+var $TypeError = TypeError;
+
+// `ToBigInt` abstract operation
+// https://tc39.es/ecma262/#sec-tobigint
+module.exports = function (argument) {
+  var prim = toPrimitive(argument, 'number');
+  if (typeof prim == 'number') throw new $TypeError("Can't convert number to bigint");
+  // eslint-disable-next-line es/no-bigint -- safe
+  return BigInt(prim);
+};
+
+},{"../internals/to-primitive":224}],220:[function(require,module,exports){
+'use strict';
 // toObject with fallback for non-array-like ES3 strings
 var IndexedObject = require('../internals/indexed-object');
 var requireObjectCoercible = require('../internals/require-object-coercible');
@@ -36531,19 +32853,20 @@ module.exports = function (it) {
   return IndexedObject(requireObjectCoercible(it));
 };
 
-},{"../internals/indexed-object":145,"../internals/require-object-coercible":195}],207:[function(require,module,exports){
-var ceil = Math.ceil;
-var floor = Math.floor;
+},{"../internals/indexed-object":153,"../internals/require-object-coercible":206}],221:[function(require,module,exports){
+'use strict';
+var trunc = require('../internals/math-trunc');
 
 // `ToIntegerOrInfinity` abstract operation
 // https://tc39.es/ecma262/#sec-tointegerorinfinity
 module.exports = function (argument) {
   var number = +argument;
-  // eslint-disable-next-line no-self-compare -- safe
-  return number !== number || number === 0 ? 0 : (number > 0 ? floor : ceil)(number);
+  // eslint-disable-next-line no-self-compare -- NaN check
+  return number !== number || number === 0 ? 0 : trunc(number);
 };
 
-},{}],208:[function(require,module,exports){
+},{"../internals/math-trunc":177}],222:[function(require,module,exports){
+'use strict';
 var toIntegerOrInfinity = require('../internals/to-integer-or-infinity');
 
 var min = Math.min;
@@ -36554,20 +32877,20 @@ module.exports = function (argument) {
   return argument > 0 ? min(toIntegerOrInfinity(argument), 0x1FFFFFFFFFFFFF) : 0; // 2 ** 53 - 1 == 9007199254740991
 };
 
-},{"../internals/to-integer-or-infinity":207}],209:[function(require,module,exports){
-var global = require('../internals/global');
+},{"../internals/to-integer-or-infinity":221}],223:[function(require,module,exports){
+'use strict';
 var requireObjectCoercible = require('../internals/require-object-coercible');
 
-var Object = global.Object;
+var $Object = Object;
 
 // `ToObject` abstract operation
 // https://tc39.es/ecma262/#sec-toobject
 module.exports = function (argument) {
-  return Object(requireObjectCoercible(argument));
+  return $Object(requireObjectCoercible(argument));
 };
 
-},{"../internals/global":139,"../internals/require-object-coercible":195}],210:[function(require,module,exports){
-var global = require('../internals/global');
+},{"../internals/require-object-coercible":206}],224:[function(require,module,exports){
+'use strict';
 var call = require('../internals/function-call');
 var isObject = require('../internals/is-object');
 var isSymbol = require('../internals/is-symbol');
@@ -36575,7 +32898,7 @@ var getMethod = require('../internals/get-method');
 var ordinaryToPrimitive = require('../internals/ordinary-to-primitive');
 var wellKnownSymbol = require('../internals/well-known-symbol');
 
-var TypeError = global.TypeError;
+var $TypeError = TypeError;
 var TO_PRIMITIVE = wellKnownSymbol('toPrimitive');
 
 // `ToPrimitive` abstract operation
@@ -36588,13 +32911,14 @@ module.exports = function (input, pref) {
     if (pref === undefined) pref = 'default';
     result = call(exoticToPrim, input, pref);
     if (!isObject(result) || isSymbol(result)) return result;
-    throw TypeError("Can't convert object to primitive value");
+    throw new $TypeError("Can't convert object to primitive value");
   }
   if (pref === undefined) pref = 'number';
   return ordinaryToPrimitive(input, pref);
 };
 
-},{"../internals/function-call":132,"../internals/get-method":138,"../internals/global":139,"../internals/is-object":156,"../internals/is-symbol":159,"../internals/ordinary-to-primitive":187,"../internals/well-known-symbol":220}],211:[function(require,module,exports){
+},{"../internals/function-call":137,"../internals/get-method":146,"../internals/is-object":165,"../internals/is-symbol":168,"../internals/ordinary-to-primitive":197,"../internals/well-known-symbol":237}],225:[function(require,module,exports){
+'use strict';
 var toPrimitive = require('../internals/to-primitive');
 var isSymbol = require('../internals/is-symbol');
 
@@ -36605,7 +32929,8 @@ module.exports = function (argument) {
   return isSymbol(key) ? key : key + '';
 };
 
-},{"../internals/is-symbol":159,"../internals/to-primitive":210}],212:[function(require,module,exports){
+},{"../internals/is-symbol":168,"../internals/to-primitive":224}],226:[function(require,module,exports){
+'use strict';
 var wellKnownSymbol = require('../internals/well-known-symbol');
 
 var TO_STRING_TAG = wellKnownSymbol('toStringTag');
@@ -36615,44 +32940,45 @@ test[TO_STRING_TAG] = 'z';
 
 module.exports = String(test) === '[object z]';
 
-},{"../internals/well-known-symbol":220}],213:[function(require,module,exports){
-var global = require('../internals/global');
+},{"../internals/well-known-symbol":237}],227:[function(require,module,exports){
+'use strict';
 var classof = require('../internals/classof');
 
-var String = global.String;
+var $String = String;
 
 module.exports = function (argument) {
-  if (classof(argument) === 'Symbol') throw TypeError('Cannot convert a Symbol value to a string');
-  return String(argument);
+  if (classof(argument) === 'Symbol') throw new TypeError('Cannot convert a Symbol value to a string');
+  return $String(argument);
 };
 
-},{"../internals/classof":99,"../internals/global":139}],214:[function(require,module,exports){
-var global = require('../internals/global');
-
-var String = global.String;
+},{"../internals/classof":98}],228:[function(require,module,exports){
+'use strict';
+var $String = String;
 
 module.exports = function (argument) {
   try {
-    return String(argument);
+    return $String(argument);
   } catch (error) {
     return 'Object';
   }
 };
 
-},{"../internals/global":139}],215:[function(require,module,exports){
+},{}],229:[function(require,module,exports){
+'use strict';
 var ArrayBufferViewCore = require('../internals/array-buffer-view-core');
 var speciesConstructor = require('../internals/species-constructor');
 
-var TYPED_ARRAY_CONSTRUCTOR = ArrayBufferViewCore.TYPED_ARRAY_CONSTRUCTOR;
 var aTypedArrayConstructor = ArrayBufferViewCore.aTypedArrayConstructor;
+var getTypedArrayConstructor = ArrayBufferViewCore.getTypedArrayConstructor;
 
 // a part of `TypedArraySpeciesCreate` abstract operation
 // https://tc39.es/ecma262/#typedarray-species-create
 module.exports = function (originalArray) {
-  return aTypedArrayConstructor(speciesConstructor(originalArray, originalArray[TYPED_ARRAY_CONSTRUCTOR]));
+  return aTypedArrayConstructor(speciesConstructor(originalArray, getTypedArrayConstructor(originalArray)));
 };
 
-},{"../internals/array-buffer-view-core":88,"../internals/species-constructor":202}],216:[function(require,module,exports){
+},{"../internals/array-buffer-view-core":87,"../internals/species-constructor":212}],230:[function(require,module,exports){
+'use strict';
 var uncurryThis = require('../internals/function-uncurry-this');
 
 var id = 0;
@@ -36663,15 +32989,17 @@ module.exports = function (key) {
   return 'Symbol(' + (key === undefined ? '' : key) + ')_' + toString(++id + postfix, 36);
 };
 
-},{"../internals/function-uncurry-this":134}],217:[function(require,module,exports){
+},{"../internals/function-uncurry-this":141}],231:[function(require,module,exports){
+'use strict';
 /* eslint-disable es/no-symbol -- required for testing */
-var NATIVE_SYMBOL = require('../internals/native-symbol');
+var NATIVE_SYMBOL = require('../internals/symbol-constructor-detection');
 
 module.exports = NATIVE_SYMBOL
   && !Symbol.sham
   && typeof Symbol.iterator == 'symbol';
 
-},{"../internals/native-symbol":167}],218:[function(require,module,exports){
+},{"../internals/symbol-constructor-detection":214}],232:[function(require,module,exports){
+'use strict';
 var DESCRIPTORS = require('../internals/descriptors');
 var fails = require('../internals/fails');
 
@@ -36682,44 +33010,71 @@ module.exports = DESCRIPTORS && fails(function () {
   return Object.defineProperty(function () { /* empty */ }, 'prototype', {
     value: 42,
     writable: false
-  }).prototype != 42;
+  }).prototype !== 42;
 });
 
-},{"../internals/descriptors":112,"../internals/fails":127}],219:[function(require,module,exports){
+},{"../internals/descriptors":112,"../internals/fails":132}],233:[function(require,module,exports){
+'use strict';
+var $TypeError = TypeError;
+
+module.exports = function (passed, required) {
+  if (passed < required) throw new $TypeError('Not enough arguments');
+  return passed;
+};
+
+},{}],234:[function(require,module,exports){
+'use strict';
+var global = require('../internals/global');
+var isCallable = require('../internals/is-callable');
+
+var WeakMap = global.WeakMap;
+
+module.exports = isCallable(WeakMap) && /native code/.test(String(WeakMap));
+
+},{"../internals/global":147,"../internals/is-callable":161}],235:[function(require,module,exports){
+'use strict';
+var path = require('../internals/path');
+var hasOwn = require('../internals/has-own-property');
+var wrappedWellKnownSymbolModule = require('../internals/well-known-symbol-wrapped');
+var defineProperty = require('../internals/object-define-property').f;
+
+module.exports = function (NAME) {
+  var Symbol = path.Symbol || (path.Symbol = {});
+  if (!hasOwn(Symbol, NAME)) defineProperty(Symbol, NAME, {
+    value: wrappedWellKnownSymbolModule.f(NAME)
+  });
+};
+
+},{"../internals/has-own-property":148,"../internals/object-define-property":184,"../internals/path":199,"../internals/well-known-symbol-wrapped":236}],236:[function(require,module,exports){
+'use strict';
 var wellKnownSymbol = require('../internals/well-known-symbol');
 
 exports.f = wellKnownSymbol;
 
-},{"../internals/well-known-symbol":220}],220:[function(require,module,exports){
+},{"../internals/well-known-symbol":237}],237:[function(require,module,exports){
+'use strict';
 var global = require('../internals/global');
 var shared = require('../internals/shared');
 var hasOwn = require('../internals/has-own-property');
 var uid = require('../internals/uid');
-var NATIVE_SYMBOL = require('../internals/native-symbol');
+var NATIVE_SYMBOL = require('../internals/symbol-constructor-detection');
 var USE_SYMBOL_AS_UID = require('../internals/use-symbol-as-uid');
 
-var WellKnownSymbolsStore = shared('wks');
 var Symbol = global.Symbol;
-var symbolFor = Symbol && Symbol['for'];
-var createWellKnownSymbol = USE_SYMBOL_AS_UID ? Symbol : Symbol && Symbol.withoutSetter || uid;
+var WellKnownSymbolsStore = shared('wks');
+var createWellKnownSymbol = USE_SYMBOL_AS_UID ? Symbol['for'] || Symbol : Symbol && Symbol.withoutSetter || uid;
 
 module.exports = function (name) {
-  if (!hasOwn(WellKnownSymbolsStore, name) || !(NATIVE_SYMBOL || typeof WellKnownSymbolsStore[name] == 'string')) {
-    var description = 'Symbol.' + name;
-    if (NATIVE_SYMBOL && hasOwn(Symbol, name)) {
-      WellKnownSymbolsStore[name] = Symbol[name];
-    } else if (USE_SYMBOL_AS_UID && symbolFor) {
-      WellKnownSymbolsStore[name] = symbolFor(description);
-    } else {
-      WellKnownSymbolsStore[name] = createWellKnownSymbol(description);
-    }
+  if (!hasOwn(WellKnownSymbolsStore, name)) {
+    WellKnownSymbolsStore[name] = NATIVE_SYMBOL && hasOwn(Symbol, name)
+      ? Symbol[name]
+      : createWellKnownSymbol('Symbol.' + name);
   } return WellKnownSymbolsStore[name];
 };
 
-},{"../internals/global":139,"../internals/has-own-property":140,"../internals/native-symbol":167,"../internals/shared":201,"../internals/uid":216,"../internals/use-symbol-as-uid":217}],221:[function(require,module,exports){
+},{"../internals/global":147,"../internals/has-own-property":148,"../internals/shared":211,"../internals/symbol-constructor-detection":214,"../internals/uid":230,"../internals/use-symbol-as-uid":231}],238:[function(require,module,exports){
 'use strict';
 var $ = require('../internals/export');
-var global = require('../internals/global');
 var isPrototypeOf = require('../internals/object-is-prototype-of');
 var getPrototypeOf = require('../internals/object-get-prototype-of');
 var setPrototypeOf = require('../internals/object-set-prototype-of');
@@ -36727,40 +33082,38 @@ var copyConstructorProperties = require('../internals/copy-constructor-propertie
 var create = require('../internals/object-create');
 var createNonEnumerableProperty = require('../internals/create-non-enumerable-property');
 var createPropertyDescriptor = require('../internals/create-property-descriptor');
-var clearErrorStack = require('../internals/clear-error-stack');
 var installErrorCause = require('../internals/install-error-cause');
+var installErrorStack = require('../internals/error-stack-install');
 var iterate = require('../internals/iterate');
 var normalizeStringArgument = require('../internals/normalize-string-argument');
 var wellKnownSymbol = require('../internals/well-known-symbol');
-var ERROR_STACK_INSTALLABLE = require('../internals/error-stack-installable');
 
 var TO_STRING_TAG = wellKnownSymbol('toStringTag');
-var Error = global.Error;
+var $Error = Error;
 var push = [].push;
 
 var $AggregateError = function AggregateError(errors, message /* , options */) {
-  var options = arguments.length > 2 ? arguments[2] : undefined;
   var isInstance = isPrototypeOf(AggregateErrorPrototype, this);
   var that;
   if (setPrototypeOf) {
-    that = setPrototypeOf(new Error(), isInstance ? getPrototypeOf(this) : AggregateErrorPrototype);
+    that = setPrototypeOf(new $Error(), isInstance ? getPrototypeOf(this) : AggregateErrorPrototype);
   } else {
     that = isInstance ? this : create(AggregateErrorPrototype);
     createNonEnumerableProperty(that, TO_STRING_TAG, 'Error');
   }
   if (message !== undefined) createNonEnumerableProperty(that, 'message', normalizeStringArgument(message));
-  if (ERROR_STACK_INSTALLABLE) createNonEnumerableProperty(that, 'stack', clearErrorStack(that.stack, 1));
-  installErrorCause(that, options);
+  installErrorStack(that, $AggregateError, that.stack, 1);
+  if (arguments.length > 2) installErrorCause(that, arguments[2]);
   var errorsArray = [];
   iterate(errors, push, { that: errorsArray });
   createNonEnumerableProperty(that, 'errors', errorsArray);
   return that;
 };
 
-if (setPrototypeOf) setPrototypeOf($AggregateError, Error);
-else copyConstructorProperties($AggregateError, Error, { name: true });
+if (setPrototypeOf) setPrototypeOf($AggregateError, $Error);
+else copyConstructorProperties($AggregateError, $Error, { name: true });
 
-var AggregateErrorPrototype = $AggregateError.prototype = create(Error.prototype, {
+var AggregateErrorPrototype = $AggregateError.prototype = create($Error.prototype, {
   constructor: createPropertyDescriptor(1, $AggregateError),
   message: createPropertyDescriptor(1, ''),
   name: createPropertyDescriptor(1, 'AggregateError')
@@ -36768,19 +33121,24 @@ var AggregateErrorPrototype = $AggregateError.prototype = create(Error.prototype
 
 // `AggregateError` constructor
 // https://tc39.es/ecma262/#sec-aggregate-error-constructor
-$({ global: true }, {
+$({ global: true, constructor: true, arity: 2 }, {
   AggregateError: $AggregateError
 });
 
-},{"../internals/clear-error-stack":100,"../internals/copy-constructor-properties":103,"../internals/create-non-enumerable-property":107,"../internals/create-property-descriptor":108,"../internals/error-stack-installable":125,"../internals/export":126,"../internals/global":139,"../internals/install-error-cause":148,"../internals/iterate":160,"../internals/normalize-string-argument":170,"../internals/object-create":172,"../internals/object-get-prototype-of":179,"../internals/object-is-prototype-of":181,"../internals/object-set-prototype-of":185,"../internals/well-known-symbol":220}],222:[function(require,module,exports){
+},{"../internals/copy-constructor-properties":101,"../internals/create-non-enumerable-property":105,"../internals/create-property-descriptor":106,"../internals/error-stack-install":129,"../internals/export":131,"../internals/install-error-cause":156,"../internals/iterate":169,"../internals/normalize-string-argument":180,"../internals/object-create":182,"../internals/object-get-prototype-of":189,"../internals/object-is-prototype-of":191,"../internals/object-set-prototype-of":195,"../internals/well-known-symbol":237}],239:[function(require,module,exports){
+'use strict';
+// TODO: Remove this module from `core-js@4` since it's replaced to module below
+require('../modules/es.aggregate-error.constructor');
+
+},{"../modules/es.aggregate-error.constructor":238}],240:[function(require,module,exports){
 'use strict';
 var $ = require('../internals/export');
-var global = require('../internals/global');
 var fails = require('../internals/fails');
 var isArray = require('../internals/is-array');
 var isObject = require('../internals/is-object');
 var toObject = require('../internals/to-object');
 var lengthOfArrayLike = require('../internals/length-of-array-like');
+var doesNotExceedSafeInteger = require('../internals/does-not-exceed-safe-integer');
 var createProperty = require('../internals/create-property');
 var arraySpeciesCreate = require('../internals/array-species-create');
 var arrayMethodHasSpeciesSupport = require('../internals/array-method-has-species-support');
@@ -36788,9 +33146,6 @@ var wellKnownSymbol = require('../internals/well-known-symbol');
 var V8_VERSION = require('../internals/engine-v8-version');
 
 var IS_CONCAT_SPREADABLE = wellKnownSymbol('isConcatSpreadable');
-var MAX_SAFE_INTEGER = 0x1FFFFFFFFFFFFF;
-var MAXIMUM_ALLOWED_INDEX_EXCEEDED = 'Maximum allowed index exceeded';
-var TypeError = global.TypeError;
 
 // We can't use this feature detection in V8 since it causes
 // deoptimization and serious performance degradation
@@ -36801,20 +33156,18 @@ var IS_CONCAT_SPREADABLE_SUPPORT = V8_VERSION >= 51 || !fails(function () {
   return array.concat()[0] !== array;
 });
 
-var SPECIES_SUPPORT = arrayMethodHasSpeciesSupport('concat');
-
 var isConcatSpreadable = function (O) {
   if (!isObject(O)) return false;
   var spreadable = O[IS_CONCAT_SPREADABLE];
   return spreadable !== undefined ? !!spreadable : isArray(O);
 };
 
-var FORCED = !IS_CONCAT_SPREADABLE_SUPPORT || !SPECIES_SUPPORT;
+var FORCED = !IS_CONCAT_SPREADABLE_SUPPORT || !arrayMethodHasSpeciesSupport('concat');
 
 // `Array.prototype.concat` method
 // https://tc39.es/ecma262/#sec-array.prototype.concat
 // with adding support of @@isConcatSpreadable and @@species
-$({ target: 'Array', proto: true, forced: FORCED }, {
+$({ target: 'Array', proto: true, arity: 1, forced: FORCED }, {
   // eslint-disable-next-line no-unused-vars -- required for `.length`
   concat: function concat(arg) {
     var O = toObject(this);
@@ -36825,10 +33178,10 @@ $({ target: 'Array', proto: true, forced: FORCED }, {
       E = i === -1 ? O : arguments[i];
       if (isConcatSpreadable(E)) {
         len = lengthOfArrayLike(E);
-        if (n + len > MAX_SAFE_INTEGER) throw TypeError(MAXIMUM_ALLOWED_INDEX_EXCEEDED);
+        doesNotExceedSafeInteger(n + len);
         for (k = 0; k < len; k++, n++) if (k in E) createProperty(A, n, E[k]);
       } else {
-        if (n >= MAX_SAFE_INTEGER) throw TypeError(MAXIMUM_ALLOWED_INDEX_EXCEEDED);
+        doesNotExceedSafeInteger(n + 1);
         createProperty(A, n++, E);
       }
     }
@@ -36837,7 +33190,8 @@ $({ target: 'Array', proto: true, forced: FORCED }, {
   }
 });
 
-},{"../internals/array-method-has-species-support":92,"../internals/array-species-create":96,"../internals/create-property":109,"../internals/engine-v8-version":122,"../internals/export":126,"../internals/fails":127,"../internals/global":139,"../internals/is-array":152,"../internals/is-object":156,"../internals/length-of-array-like":164,"../internals/to-object":209,"../internals/well-known-symbol":220}],223:[function(require,module,exports){
+},{"../internals/array-method-has-species-support":91,"../internals/array-species-create":95,"../internals/create-property":107,"../internals/does-not-exceed-safe-integer":115,"../internals/engine-v8-version":125,"../internals/export":131,"../internals/fails":132,"../internals/is-array":160,"../internals/is-object":165,"../internals/length-of-array-like":175,"../internals/to-object":223,"../internals/well-known-symbol":237}],241:[function(require,module,exports){
+'use strict';
 var $ = require('../internals/export');
 var fill = require('../internals/array-fill');
 var addToUnscopables = require('../internals/add-to-unscopables');
@@ -36851,14 +33205,15 @@ $({ target: 'Array', proto: true }, {
 // https://tc39.es/ecma262/#sec-array.prototype-@@unscopables
 addToUnscopables('fill');
 
-},{"../internals/add-to-unscopables":83,"../internals/array-fill":89,"../internals/export":126}],224:[function(require,module,exports){
+},{"../internals/add-to-unscopables":82,"../internals/array-fill":88,"../internals/export":131}],242:[function(require,module,exports){
 'use strict';
 var toIndexedObject = require('../internals/to-indexed-object');
 var addToUnscopables = require('../internals/add-to-unscopables');
 var Iterators = require('../internals/iterators');
 var InternalStateModule = require('../internals/internal-state');
 var defineProperty = require('../internals/object-define-property').f;
-var defineIterator = require('../internals/define-iterator');
+var defineIterator = require('../internals/iterator-define');
+var createIterResultObject = require('../internals/create-iter-result-object');
 var IS_PURE = require('../internals/is-pure');
 var DESCRIPTORS = require('../internals/descriptors');
 
@@ -36888,15 +33243,15 @@ module.exports = defineIterator(Array, 'Array', function (iterated, kind) {
 }, function () {
   var state = getInternalState(this);
   var target = state.target;
-  var kind = state.kind;
   var index = state.index++;
   if (!target || index >= target.length) {
     state.target = undefined;
-    return { value: undefined, done: true };
+    return createIterResultObject(undefined, true);
   }
-  if (kind == 'keys') return { value: index, done: false };
-  if (kind == 'values') return { value: target[index], done: false };
-  return { value: [index, target[index]], done: false };
+  switch (state.kind) {
+    case 'keys': return createIterResultObject(index, false);
+    case 'values': return createIterResultObject(target[index], false);
+  } return createIterResultObject([index, target[index]], false);
 }, 'values');
 
 // argumentsList[@@iterator] is %ArrayProto_values%
@@ -36914,7 +33269,83 @@ if (!IS_PURE && DESCRIPTORS && values.name !== 'values') try {
   defineProperty(values, 'name', { value: 'values' });
 } catch (error) { /* empty */ }
 
-},{"../internals/add-to-unscopables":83,"../internals/define-iterator":110,"../internals/descriptors":112,"../internals/internal-state":150,"../internals/is-pure":157,"../internals/iterators":163,"../internals/object-define-property":174,"../internals/to-indexed-object":206}],225:[function(require,module,exports){
+},{"../internals/add-to-unscopables":82,"../internals/create-iter-result-object":104,"../internals/descriptors":112,"../internals/internal-state":158,"../internals/is-pure":166,"../internals/iterator-define":172,"../internals/iterators":174,"../internals/object-define-property":184,"../internals/to-indexed-object":220}],243:[function(require,module,exports){
+'use strict';
+var $ = require('../internals/export');
+var getBuiltIn = require('../internals/get-built-in');
+var apply = require('../internals/function-apply');
+var call = require('../internals/function-call');
+var uncurryThis = require('../internals/function-uncurry-this');
+var fails = require('../internals/fails');
+var isCallable = require('../internals/is-callable');
+var isSymbol = require('../internals/is-symbol');
+var arraySlice = require('../internals/array-slice');
+var getReplacerFunction = require('../internals/get-json-replacer-function');
+var NATIVE_SYMBOL = require('../internals/symbol-constructor-detection');
+
+var $String = String;
+var $stringify = getBuiltIn('JSON', 'stringify');
+var exec = uncurryThis(/./.exec);
+var charAt = uncurryThis(''.charAt);
+var charCodeAt = uncurryThis(''.charCodeAt);
+var replace = uncurryThis(''.replace);
+var numberToString = uncurryThis(1.0.toString);
+
+var tester = /[\uD800-\uDFFF]/g;
+var low = /^[\uD800-\uDBFF]$/;
+var hi = /^[\uDC00-\uDFFF]$/;
+
+var WRONG_SYMBOLS_CONVERSION = !NATIVE_SYMBOL || fails(function () {
+  var symbol = getBuiltIn('Symbol')('stringify detection');
+  // MS Edge converts symbol values to JSON as {}
+  return $stringify([symbol]) !== '[null]'
+    // WebKit converts symbol values to JSON as null
+    || $stringify({ a: symbol }) !== '{}'
+    // V8 throws on boxed symbols
+    || $stringify(Object(symbol)) !== '{}';
+});
+
+// https://github.com/tc39/proposal-well-formed-stringify
+var ILL_FORMED_UNICODE = fails(function () {
+  return $stringify('\uDF06\uD834') !== '"\\udf06\\ud834"'
+    || $stringify('\uDEAD') !== '"\\udead"';
+});
+
+var stringifyWithSymbolsFix = function (it, replacer) {
+  var args = arraySlice(arguments);
+  var $replacer = getReplacerFunction(replacer);
+  if (!isCallable($replacer) && (it === undefined || isSymbol(it))) return; // IE8 returns string on undefined
+  args[1] = function (key, value) {
+    // some old implementations (like WebKit) could pass numbers as keys
+    if (isCallable($replacer)) value = call($replacer, this, $String(key), value);
+    if (!isSymbol(value)) return value;
+  };
+  return apply($stringify, null, args);
+};
+
+var fixIllFormed = function (match, offset, string) {
+  var prev = charAt(string, offset - 1);
+  var next = charAt(string, offset + 1);
+  if ((exec(low, match) && !exec(hi, next)) || (exec(hi, match) && !exec(low, prev))) {
+    return '\\u' + numberToString(charCodeAt(match, 0), 16);
+  } return match;
+};
+
+if ($stringify) {
+  // `JSON.stringify` method
+  // https://tc39.es/ecma262/#sec-json.stringify
+  $({ target: 'JSON', stat: true, arity: 3, forced: WRONG_SYMBOLS_CONVERSION || ILL_FORMED_UNICODE }, {
+    // eslint-disable-next-line no-unused-vars -- required for `.length`
+    stringify: function stringify(it, replacer, space) {
+      var args = arraySlice(arguments);
+      var result = apply(WRONG_SYMBOLS_CONVERSION ? stringifyWithSymbolsFix : $stringify, null, args);
+      return ILL_FORMED_UNICODE && typeof result == 'string' ? replace(result, tester, fixIllFormed) : result;
+    }
+  });
+}
+
+},{"../internals/array-slice":93,"../internals/export":131,"../internals/fails":132,"../internals/function-apply":134,"../internals/function-call":137,"../internals/function-uncurry-this":141,"../internals/get-built-in":142,"../internals/get-json-replacer-function":145,"../internals/is-callable":161,"../internals/is-symbol":168,"../internals/symbol-constructor-detection":214}],244:[function(require,module,exports){
+'use strict';
 var global = require('../internals/global');
 var setToStringTag = require('../internals/set-to-string-tag');
 
@@ -36922,7 +33353,7 @@ var setToStringTag = require('../internals/set-to-string-tag');
 // https://tc39.es/ecma262/#sec-json-@@tostringtag
 setToStringTag(global.JSON, 'JSON', true);
 
-},{"../internals/global":139,"../internals/set-to-string-tag":198}],226:[function(require,module,exports){
+},{"../internals/global":147,"../internals/set-to-string-tag":208}],245:[function(require,module,exports){
 'use strict';
 var collection = require('../internals/collection');
 var collectionStrong = require('../internals/collection-strong');
@@ -36933,25 +33364,53 @@ collection('Map', function (init) {
   return function Map() { return init(this, arguments.length ? arguments[0] : undefined); };
 }, collectionStrong);
 
-},{"../internals/collection":102,"../internals/collection-strong":101}],227:[function(require,module,exports){
+},{"../internals/collection":100,"../internals/collection-strong":99}],246:[function(require,module,exports){
+'use strict';
+// TODO: Remove this module from `core-js@4` since it's replaced to module below
+require('../modules/es.map.constructor');
+
+},{"../modules/es.map.constructor":245}],247:[function(require,module,exports){
+'use strict';
 var setToStringTag = require('../internals/set-to-string-tag');
 
 // Math[@@toStringTag] property
 // https://tc39.es/ecma262/#sec-math-@@tostringtag
 setToStringTag(Math, 'Math', true);
 
-},{"../internals/set-to-string-tag":198}],228:[function(require,module,exports){
+},{"../internals/set-to-string-tag":208}],248:[function(require,module,exports){
+'use strict';
+var $ = require('../internals/export');
+var NATIVE_SYMBOL = require('../internals/symbol-constructor-detection');
+var fails = require('../internals/fails');
+var getOwnPropertySymbolsModule = require('../internals/object-get-own-property-symbols');
+var toObject = require('../internals/to-object');
+
+// V8 ~ Chrome 38 and 39 `Object.getOwnPropertySymbols` fails on primitives
+// https://bugs.chromium.org/p/v8/issues/detail?id=3443
+var FORCED = !NATIVE_SYMBOL || fails(function () { getOwnPropertySymbolsModule.f(1); });
+
+// `Object.getOwnPropertySymbols` method
+// https://tc39.es/ecma262/#sec-object.getownpropertysymbols
+$({ target: 'Object', stat: true, forced: FORCED }, {
+  getOwnPropertySymbols: function getOwnPropertySymbols(it) {
+    var $getOwnPropertySymbols = getOwnPropertySymbolsModule.f;
+    return $getOwnPropertySymbols ? $getOwnPropertySymbols(toObject(it)) : [];
+  }
+});
+
+},{"../internals/export":131,"../internals/fails":132,"../internals/object-get-own-property-symbols":188,"../internals/symbol-constructor-detection":214,"../internals/to-object":223}],249:[function(require,module,exports){
+'use strict';
 var TO_STRING_TAG_SUPPORT = require('../internals/to-string-tag-support');
-var redefine = require('../internals/redefine');
+var defineBuiltIn = require('../internals/define-built-in');
 var toString = require('../internals/object-to-string');
 
 // `Object.prototype.toString` method
 // https://tc39.es/ecma262/#sec-object.prototype.tostring
 if (!TO_STRING_TAG_SUPPORT) {
-  redefine(Object.prototype, 'toString', toString, { unsafe: true });
+  defineBuiltIn(Object.prototype, 'toString', toString, { unsafe: true });
 }
 
-},{"../internals/object-to-string":186,"../internals/redefine":194,"../internals/to-string-tag-support":212}],229:[function(require,module,exports){
+},{"../internals/define-built-in":109,"../internals/object-to-string":196,"../internals/to-string-tag-support":226}],250:[function(require,module,exports){
 'use strict';
 var $ = require('../internals/export');
 var call = require('../internals/function-call');
@@ -36959,10 +33418,11 @@ var aCallable = require('../internals/a-callable');
 var newPromiseCapabilityModule = require('../internals/new-promise-capability');
 var perform = require('../internals/perform');
 var iterate = require('../internals/iterate');
+var PROMISE_STATICS_INCORRECT_ITERATION = require('../internals/promise-statics-incorrect-iteration');
 
 // `Promise.allSettled` method
 // https://tc39.es/ecma262/#sec-promise.allsettled
-$({ target: 'Promise', stat: true }, {
+$({ target: 'Promise', stat: true, forced: PROMISE_STATICS_INCORRECT_ITERATION }, {
   allSettled: function allSettled(iterable) {
     var C = this;
     var capability = newPromiseCapabilityModule.f(C);
@@ -36996,21 +33456,63 @@ $({ target: 'Promise', stat: true }, {
   }
 });
 
-},{"../internals/a-callable":80,"../internals/export":126,"../internals/function-call":132,"../internals/iterate":160,"../internals/new-promise-capability":169,"../internals/perform":190}],230:[function(require,module,exports){
+},{"../internals/a-callable":79,"../internals/export":131,"../internals/function-call":137,"../internals/iterate":169,"../internals/new-promise-capability":179,"../internals/perform":200,"../internals/promise-statics-incorrect-iteration":204}],251:[function(require,module,exports){
 'use strict';
 var $ = require('../internals/export');
-var aCallable = require('../internals/a-callable');
-var getBuiltIn = require('../internals/get-built-in');
 var call = require('../internals/function-call');
+var aCallable = require('../internals/a-callable');
 var newPromiseCapabilityModule = require('../internals/new-promise-capability');
 var perform = require('../internals/perform');
 var iterate = require('../internals/iterate');
+var PROMISE_STATICS_INCORRECT_ITERATION = require('../internals/promise-statics-incorrect-iteration');
+
+// `Promise.all` method
+// https://tc39.es/ecma262/#sec-promise.all
+$({ target: 'Promise', stat: true, forced: PROMISE_STATICS_INCORRECT_ITERATION }, {
+  all: function all(iterable) {
+    var C = this;
+    var capability = newPromiseCapabilityModule.f(C);
+    var resolve = capability.resolve;
+    var reject = capability.reject;
+    var result = perform(function () {
+      var $promiseResolve = aCallable(C.resolve);
+      var values = [];
+      var counter = 0;
+      var remaining = 1;
+      iterate(iterable, function (promise) {
+        var index = counter++;
+        var alreadyCalled = false;
+        remaining++;
+        call($promiseResolve, C, promise).then(function (value) {
+          if (alreadyCalled) return;
+          alreadyCalled = true;
+          values[index] = value;
+          --remaining || resolve(values);
+        }, reject);
+      });
+      --remaining || resolve(values);
+    });
+    if (result.error) reject(result.value);
+    return capability.promise;
+  }
+});
+
+},{"../internals/a-callable":79,"../internals/export":131,"../internals/function-call":137,"../internals/iterate":169,"../internals/new-promise-capability":179,"../internals/perform":200,"../internals/promise-statics-incorrect-iteration":204}],252:[function(require,module,exports){
+'use strict';
+var $ = require('../internals/export');
+var call = require('../internals/function-call');
+var aCallable = require('../internals/a-callable');
+var getBuiltIn = require('../internals/get-built-in');
+var newPromiseCapabilityModule = require('../internals/new-promise-capability');
+var perform = require('../internals/perform');
+var iterate = require('../internals/iterate');
+var PROMISE_STATICS_INCORRECT_ITERATION = require('../internals/promise-statics-incorrect-iteration');
 
 var PROMISE_ANY_ERROR = 'No one promise resolved';
 
 // `Promise.any` method
 // https://tc39.es/ecma262/#sec-promise.any
-$({ target: 'Promise', stat: true }, {
+$({ target: 'Promise', stat: true, forced: PROMISE_STATICS_INCORRECT_ITERATION }, {
   any: function any(iterable) {
     var C = this;
     var AggregateError = getBuiltIn('AggregateError');
@@ -37045,59 +33547,42 @@ $({ target: 'Promise', stat: true }, {
   }
 });
 
-},{"../internals/a-callable":80,"../internals/export":126,"../internals/function-call":132,"../internals/get-built-in":135,"../internals/iterate":160,"../internals/new-promise-capability":169,"../internals/perform":190}],231:[function(require,module,exports){
+},{"../internals/a-callable":79,"../internals/export":131,"../internals/function-call":137,"../internals/get-built-in":142,"../internals/iterate":169,"../internals/new-promise-capability":179,"../internals/perform":200,"../internals/promise-statics-incorrect-iteration":204}],253:[function(require,module,exports){
 'use strict';
 var $ = require('../internals/export');
 var IS_PURE = require('../internals/is-pure');
-var NativePromise = require('../internals/native-promise-constructor');
-var fails = require('../internals/fails');
+var FORCED_PROMISE_CONSTRUCTOR = require('../internals/promise-constructor-detection').CONSTRUCTOR;
+var NativePromiseConstructor = require('../internals/promise-native-constructor');
 var getBuiltIn = require('../internals/get-built-in');
 var isCallable = require('../internals/is-callable');
-var speciesConstructor = require('../internals/species-constructor');
-var promiseResolve = require('../internals/promise-resolve');
-var redefine = require('../internals/redefine');
+var defineBuiltIn = require('../internals/define-built-in');
 
-// Safari bug https://bugs.webkit.org/show_bug.cgi?id=200829
-var NON_GENERIC = !!NativePromise && fails(function () {
-  // eslint-disable-next-line unicorn/no-thenable -- required for testing
-  NativePromise.prototype['finally'].call({ then: function () { /* empty */ } }, function () { /* empty */ });
-});
+var NativePromisePrototype = NativePromiseConstructor && NativePromiseConstructor.prototype;
 
-// `Promise.prototype.finally` method
-// https://tc39.es/ecma262/#sec-promise.prototype.finally
-$({ target: 'Promise', proto: true, real: true, forced: NON_GENERIC }, {
-  'finally': function (onFinally) {
-    var C = speciesConstructor(this, getBuiltIn('Promise'));
-    var isFunction = isCallable(onFinally);
-    return this.then(
-      isFunction ? function (x) {
-        return promiseResolve(C, onFinally()).then(function () { return x; });
-      } : onFinally,
-      isFunction ? function (e) {
-        return promiseResolve(C, onFinally()).then(function () { throw e; });
-      } : onFinally
-    );
+// `Promise.prototype.catch` method
+// https://tc39.es/ecma262/#sec-promise.prototype.catch
+$({ target: 'Promise', proto: true, forced: FORCED_PROMISE_CONSTRUCTOR, real: true }, {
+  'catch': function (onRejected) {
+    return this.then(undefined, onRejected);
   }
 });
 
-// makes sure that native promise-based APIs `Promise#finally` properly works with patched `Promise#then`
-if (!IS_PURE && isCallable(NativePromise)) {
-  var method = getBuiltIn('Promise').prototype['finally'];
-  if (NativePromise.prototype['finally'] !== method) {
-    redefine(NativePromise.prototype, 'finally', method, { unsafe: true });
+// makes sure that native promise-based APIs `Promise#catch` properly works with patched `Promise#then`
+if (!IS_PURE && isCallable(NativePromiseConstructor)) {
+  var method = getBuiltIn('Promise').prototype['catch'];
+  if (NativePromisePrototype['catch'] !== method) {
+    defineBuiltIn(NativePromisePrototype, 'catch', method, { unsafe: true });
   }
 }
 
-},{"../internals/export":126,"../internals/fails":127,"../internals/get-built-in":135,"../internals/is-callable":153,"../internals/is-pure":157,"../internals/native-promise-constructor":166,"../internals/promise-resolve":191,"../internals/redefine":194,"../internals/species-constructor":202}],232:[function(require,module,exports){
+},{"../internals/define-built-in":109,"../internals/export":131,"../internals/get-built-in":142,"../internals/is-callable":161,"../internals/is-pure":166,"../internals/promise-constructor-detection":201,"../internals/promise-native-constructor":202}],254:[function(require,module,exports){
 'use strict';
 var $ = require('../internals/export');
 var IS_PURE = require('../internals/is-pure');
+var IS_NODE = require('../internals/engine-is-node');
 var global = require('../internals/global');
-var getBuiltIn = require('../internals/get-built-in');
 var call = require('../internals/function-call');
-var NativePromise = require('../internals/native-promise-constructor');
-var redefine = require('../internals/redefine');
-var redefineAll = require('../internals/redefine-all');
+var defineBuiltIn = require('../internals/define-built-in');
 var setPrototypeOf = require('../internals/object-set-prototype-of');
 var setToStringTag = require('../internals/set-to-string-tag');
 var setSpecies = require('../internals/set-species');
@@ -37105,32 +33590,25 @@ var aCallable = require('../internals/a-callable');
 var isCallable = require('../internals/is-callable');
 var isObject = require('../internals/is-object');
 var anInstance = require('../internals/an-instance');
-var inspectSource = require('../internals/inspect-source');
-var iterate = require('../internals/iterate');
-var checkCorrectnessOfIteration = require('../internals/check-correctness-of-iteration');
 var speciesConstructor = require('../internals/species-constructor');
 var task = require('../internals/task').set;
 var microtask = require('../internals/microtask');
-var promiseResolve = require('../internals/promise-resolve');
 var hostReportErrors = require('../internals/host-report-errors');
-var newPromiseCapabilityModule = require('../internals/new-promise-capability');
 var perform = require('../internals/perform');
 var Queue = require('../internals/queue');
 var InternalStateModule = require('../internals/internal-state');
-var isForced = require('../internals/is-forced');
-var wellKnownSymbol = require('../internals/well-known-symbol');
-var IS_BROWSER = require('../internals/engine-is-browser');
-var IS_NODE = require('../internals/engine-is-node');
-var V8_VERSION = require('../internals/engine-v8-version');
+var NativePromiseConstructor = require('../internals/promise-native-constructor');
+var PromiseConstructorDetection = require('../internals/promise-constructor-detection');
+var newPromiseCapabilityModule = require('../internals/new-promise-capability');
 
-var SPECIES = wellKnownSymbol('species');
 var PROMISE = 'Promise';
-
-var getInternalState = InternalStateModule.getterFor(PROMISE);
-var setInternalState = InternalStateModule.set;
+var FORCED_PROMISE_CONSTRUCTOR = PromiseConstructorDetection.CONSTRUCTOR;
+var NATIVE_PROMISE_REJECTION_EVENT = PromiseConstructorDetection.REJECTION_EVENT;
+var NATIVE_PROMISE_SUBCLASSING = PromiseConstructorDetection.SUBCLASSING;
 var getInternalPromiseState = InternalStateModule.getterFor(PROMISE);
-var NativePromisePrototype = NativePromise && NativePromise.prototype;
-var PromiseConstructor = NativePromise;
+var setInternalState = InternalStateModule.set;
+var NativePromisePrototype = NativePromiseConstructor && NativePromiseConstructor.prototype;
+var PromiseConstructor = NativePromiseConstructor;
 var PromisePrototype = NativePromisePrototype;
 var TypeError = global.TypeError;
 var document = global.document;
@@ -37139,7 +33617,6 @@ var newPromiseCapability = newPromiseCapabilityModule.f;
 var newGenericPromiseCapability = newPromiseCapability;
 
 var DISPATCH_EVENT = !!(document && document.createEvent && global.dispatchEvent);
-var NATIVE_REJECTION_EVENT = isCallable(global.PromiseRejectionEvent);
 var UNHANDLED_REJECTION = 'unhandledrejection';
 var REJECTION_HANDLED = 'rejectionhandled';
 var PENDING = 0;
@@ -37147,39 +33624,8 @@ var FULFILLED = 1;
 var REJECTED = 2;
 var HANDLED = 1;
 var UNHANDLED = 2;
-var SUBCLASSING = false;
 
 var Internal, OwnPromiseCapability, PromiseWrapper, nativeThen;
-
-var FORCED = isForced(PROMISE, function () {
-  var PROMISE_CONSTRUCTOR_SOURCE = inspectSource(PromiseConstructor);
-  var GLOBAL_CORE_JS_PROMISE = PROMISE_CONSTRUCTOR_SOURCE !== String(PromiseConstructor);
-  // V8 6.6 (Node 10 and Chrome 66) have a bug with resolving custom thenables
-  // https://bugs.chromium.org/p/chromium/issues/detail?id=830565
-  // We can't detect it synchronously, so just check versions
-  if (!GLOBAL_CORE_JS_PROMISE && V8_VERSION === 66) return true;
-  // We need Promise#finally in the pure version for preventing prototype pollution
-  if (IS_PURE && !PromisePrototype['finally']) return true;
-  // We can't use @@species feature detection in V8 since it causes
-  // deoptimization and performance degradation
-  // https://github.com/zloirock/core-js/issues/679
-  if (V8_VERSION >= 51 && /native code/.test(PROMISE_CONSTRUCTOR_SOURCE)) return false;
-  // Detect correctness of subclassing with @@species support
-  var promise = new PromiseConstructor(function (resolve) { resolve(1); });
-  var FakePromise = function (exec) {
-    exec(function () { /* empty */ }, function () { /* empty */ });
-  };
-  var constructor = promise.constructor = {};
-  constructor[SPECIES] = FakePromise;
-  SUBCLASSING = promise.then(function () { /* empty */ }) instanceof FakePromise;
-  if (!SUBCLASSING) return true;
-  // Unhandled rejections tracking support, NodeJS Promise without it fails @@species test
-  return !GLOBAL_CORE_JS_PROMISE && IS_BROWSER && !NATIVE_REJECTION_EVENT;
-});
-
-var INCORRECT_ITERATION = FORCED || !checkCorrectnessOfIteration(function (iterable) {
-  PromiseConstructor.all(iterable)['catch'](function () { /* empty */ });
-});
 
 // helpers
 var isThenable = function (it) {
@@ -37189,7 +33635,7 @@ var isThenable = function (it) {
 
 var callReaction = function (reaction, state) {
   var value = state.value;
-  var ok = state.state == FULFILLED;
+  var ok = state.state === FULFILLED;
   var handler = ok ? reaction.ok : reaction.fail;
   var resolve = reaction.resolve;
   var reject = reaction.reject;
@@ -37211,7 +33657,7 @@ var callReaction = function (reaction, state) {
         }
       }
       if (result === reaction.promise) {
-        reject(TypeError('Promise-chain cycle'));
+        reject(new TypeError('Promise-chain cycle'));
       } else if (then = isThenable(result)) {
         call(then, result, resolve, reject);
       } else resolve(result);
@@ -37245,7 +33691,7 @@ var dispatchEvent = function (name, promise, reason) {
     event.initEvent(name, false, true);
     global.dispatchEvent(event);
   } else event = { promise: promise, reason: reason };
-  if (!NATIVE_REJECTION_EVENT && (handler = global['on' + name])) handler(event);
+  if (!NATIVE_PROMISE_REJECTION_EVENT && (handler = global['on' + name])) handler(event);
   else if (name === UNHANDLED_REJECTION) hostReportErrors('Unhandled promise rejection', reason);
 };
 
@@ -37301,7 +33747,7 @@ var internalResolve = function (state, value, unwrap) {
   state.done = true;
   if (unwrap) state = unwrap;
   try {
-    if (state.facade === value) throw TypeError("Promise can't be resolved itself");
+    if (state.facade === value) throw new TypeError("Promise can't be resolved itself");
     var then = isThenable(value);
     if (then) {
       microtask(function () {
@@ -37326,20 +33772,22 @@ var internalResolve = function (state, value, unwrap) {
 };
 
 // constructor polyfill
-if (FORCED) {
+if (FORCED_PROMISE_CONSTRUCTOR) {
   // 25.4.3.1 Promise(executor)
   PromiseConstructor = function Promise(executor) {
     anInstance(this, PromisePrototype);
     aCallable(executor);
     call(Internal, this);
-    var state = getInternalState(this);
+    var state = getInternalPromiseState(this);
     try {
       executor(bind(internalResolve, state), bind(internalReject, state));
     } catch (error) {
       internalReject(state, error);
     }
   };
+
   PromisePrototype = PromiseConstructor.prototype;
+
   // eslint-disable-next-line no-unused-vars -- required for `.length`
   Internal = function Promise(executor) {
     setInternalState(this, {
@@ -37353,57 +33801,49 @@ if (FORCED) {
       value: undefined
     });
   };
-  Internal.prototype = redefineAll(PromisePrototype, {
-    // `Promise.prototype.then` method
-    // https://tc39.es/ecma262/#sec-promise.prototype.then
-    // eslint-disable-next-line unicorn/no-thenable -- safe
-    then: function then(onFulfilled, onRejected) {
-      var state = getInternalPromiseState(this);
-      var reaction = newPromiseCapability(speciesConstructor(this, PromiseConstructor));
-      state.parent = true;
-      reaction.ok = isCallable(onFulfilled) ? onFulfilled : true;
-      reaction.fail = isCallable(onRejected) && onRejected;
-      reaction.domain = IS_NODE ? process.domain : undefined;
-      if (state.state == PENDING) state.reactions.add(reaction);
-      else microtask(function () {
-        callReaction(reaction, state);
-      });
-      return reaction.promise;
-    },
-    // `Promise.prototype.catch` method
-    // https://tc39.es/ecma262/#sec-promise.prototype.catch
-    'catch': function (onRejected) {
-      return this.then(undefined, onRejected);
-    }
+
+  // `Promise.prototype.then` method
+  // https://tc39.es/ecma262/#sec-promise.prototype.then
+  Internal.prototype = defineBuiltIn(PromisePrototype, 'then', function then(onFulfilled, onRejected) {
+    var state = getInternalPromiseState(this);
+    var reaction = newPromiseCapability(speciesConstructor(this, PromiseConstructor));
+    state.parent = true;
+    reaction.ok = isCallable(onFulfilled) ? onFulfilled : true;
+    reaction.fail = isCallable(onRejected) && onRejected;
+    reaction.domain = IS_NODE ? process.domain : undefined;
+    if (state.state === PENDING) state.reactions.add(reaction);
+    else microtask(function () {
+      callReaction(reaction, state);
+    });
+    return reaction.promise;
   });
+
   OwnPromiseCapability = function () {
     var promise = new Internal();
-    var state = getInternalState(promise);
+    var state = getInternalPromiseState(promise);
     this.promise = promise;
     this.resolve = bind(internalResolve, state);
     this.reject = bind(internalReject, state);
   };
+
   newPromiseCapabilityModule.f = newPromiseCapability = function (C) {
     return C === PromiseConstructor || C === PromiseWrapper
       ? new OwnPromiseCapability(C)
       : newGenericPromiseCapability(C);
   };
 
-  if (!IS_PURE && isCallable(NativePromise) && NativePromisePrototype !== Object.prototype) {
+  if (!IS_PURE && isCallable(NativePromiseConstructor) && NativePromisePrototype !== Object.prototype) {
     nativeThen = NativePromisePrototype.then;
 
-    if (!SUBCLASSING) {
+    if (!NATIVE_PROMISE_SUBCLASSING) {
       // make `Promise#then` return a polyfilled `Promise` for native promise-based APIs
-      redefine(NativePromisePrototype, 'then', function then(onFulfilled, onRejected) {
+      defineBuiltIn(NativePromisePrototype, 'then', function then(onFulfilled, onRejected) {
         var that = this;
         return new PromiseConstructor(function (resolve, reject) {
           call(nativeThen, that, resolve, reject);
         }).then(onFulfilled, onRejected);
       // https://github.com/zloirock/core-js/issues/640
       }, { unsafe: true });
-
-      // makes sure that native promise-based APIs `Promise#catch` properly works with patched `Promise#then`
-      redefine(NativePromisePrototype, 'catch', PromisePrototype['catch'], { unsafe: true });
     }
 
     // make `.constructor === Promise` work for native promise-based APIs
@@ -37418,68 +33858,84 @@ if (FORCED) {
   }
 }
 
-$({ global: true, wrap: true, forced: FORCED }, {
+$({ global: true, constructor: true, wrap: true, forced: FORCED_PROMISE_CONSTRUCTOR }, {
   Promise: PromiseConstructor
 });
 
 setToStringTag(PromiseConstructor, PROMISE, false, true);
 setSpecies(PROMISE);
 
-PromiseWrapper = getBuiltIn(PROMISE);
+},{"../internals/a-callable":79,"../internals/an-instance":83,"../internals/define-built-in":109,"../internals/engine-is-node":122,"../internals/export":131,"../internals/function-call":137,"../internals/global":147,"../internals/host-report-errors":150,"../internals/internal-state":158,"../internals/is-callable":161,"../internals/is-object":165,"../internals/is-pure":166,"../internals/microtask":178,"../internals/new-promise-capability":179,"../internals/object-set-prototype-of":195,"../internals/perform":200,"../internals/promise-constructor-detection":201,"../internals/promise-native-constructor":202,"../internals/queue":205,"../internals/set-species":207,"../internals/set-to-string-tag":208,"../internals/species-constructor":212,"../internals/task":217}],255:[function(require,module,exports){
+'use strict';
+var $ = require('../internals/export');
+var IS_PURE = require('../internals/is-pure');
+var NativePromiseConstructor = require('../internals/promise-native-constructor');
+var fails = require('../internals/fails');
+var getBuiltIn = require('../internals/get-built-in');
+var isCallable = require('../internals/is-callable');
+var speciesConstructor = require('../internals/species-constructor');
+var promiseResolve = require('../internals/promise-resolve');
+var defineBuiltIn = require('../internals/define-built-in');
 
-// statics
-$({ target: PROMISE, stat: true, forced: FORCED }, {
-  // `Promise.reject` method
-  // https://tc39.es/ecma262/#sec-promise.reject
-  reject: function reject(r) {
-    var capability = newPromiseCapability(this);
-    call(capability.reject, undefined, r);
-    return capability.promise;
+var NativePromisePrototype = NativePromiseConstructor && NativePromiseConstructor.prototype;
+
+// Safari bug https://bugs.webkit.org/show_bug.cgi?id=200829
+var NON_GENERIC = !!NativePromiseConstructor && fails(function () {
+  // eslint-disable-next-line unicorn/no-thenable -- required for testing
+  NativePromisePrototype['finally'].call({ then: function () { /* empty */ } }, function () { /* empty */ });
+});
+
+// `Promise.prototype.finally` method
+// https://tc39.es/ecma262/#sec-promise.prototype.finally
+$({ target: 'Promise', proto: true, real: true, forced: NON_GENERIC }, {
+  'finally': function (onFinally) {
+    var C = speciesConstructor(this, getBuiltIn('Promise'));
+    var isFunction = isCallable(onFinally);
+    return this.then(
+      isFunction ? function (x) {
+        return promiseResolve(C, onFinally()).then(function () { return x; });
+      } : onFinally,
+      isFunction ? function (e) {
+        return promiseResolve(C, onFinally()).then(function () { throw e; });
+      } : onFinally
+    );
   }
 });
 
-$({ target: PROMISE, stat: true, forced: IS_PURE || FORCED }, {
-  // `Promise.resolve` method
-  // https://tc39.es/ecma262/#sec-promise.resolve
-  resolve: function resolve(x) {
-    return promiseResolve(IS_PURE && this === PromiseWrapper ? PromiseConstructor : this, x);
+// makes sure that native promise-based APIs `Promise#finally` properly works with patched `Promise#then`
+if (!IS_PURE && isCallable(NativePromiseConstructor)) {
+  var method = getBuiltIn('Promise').prototype['finally'];
+  if (NativePromisePrototype['finally'] !== method) {
+    defineBuiltIn(NativePromisePrototype, 'finally', method, { unsafe: true });
   }
-});
+}
 
-$({ target: PROMISE, stat: true, forced: INCORRECT_ITERATION }, {
-  // `Promise.all` method
-  // https://tc39.es/ecma262/#sec-promise.all
-  all: function all(iterable) {
-    var C = this;
-    var capability = newPromiseCapability(C);
-    var resolve = capability.resolve;
-    var reject = capability.reject;
-    var result = perform(function () {
-      var $promiseResolve = aCallable(C.resolve);
-      var values = [];
-      var counter = 0;
-      var remaining = 1;
-      iterate(iterable, function (promise) {
-        var index = counter++;
-        var alreadyCalled = false;
-        remaining++;
-        call($promiseResolve, C, promise).then(function (value) {
-          if (alreadyCalled) return;
-          alreadyCalled = true;
-          values[index] = value;
-          --remaining || resolve(values);
-        }, reject);
-      });
-      --remaining || resolve(values);
-    });
-    if (result.error) reject(result.value);
-    return capability.promise;
-  },
-  // `Promise.race` method
-  // https://tc39.es/ecma262/#sec-promise.race
+},{"../internals/define-built-in":109,"../internals/export":131,"../internals/fails":132,"../internals/get-built-in":142,"../internals/is-callable":161,"../internals/is-pure":166,"../internals/promise-native-constructor":202,"../internals/promise-resolve":203,"../internals/species-constructor":212}],256:[function(require,module,exports){
+'use strict';
+// TODO: Remove this module from `core-js@4` since it's split to modules listed below
+require('../modules/es.promise.constructor');
+require('../modules/es.promise.all');
+require('../modules/es.promise.catch');
+require('../modules/es.promise.race');
+require('../modules/es.promise.reject');
+require('../modules/es.promise.resolve');
+
+},{"../modules/es.promise.all":251,"../modules/es.promise.catch":253,"../modules/es.promise.constructor":254,"../modules/es.promise.race":257,"../modules/es.promise.reject":258,"../modules/es.promise.resolve":259}],257:[function(require,module,exports){
+'use strict';
+var $ = require('../internals/export');
+var call = require('../internals/function-call');
+var aCallable = require('../internals/a-callable');
+var newPromiseCapabilityModule = require('../internals/new-promise-capability');
+var perform = require('../internals/perform');
+var iterate = require('../internals/iterate');
+var PROMISE_STATICS_INCORRECT_ITERATION = require('../internals/promise-statics-incorrect-iteration');
+
+// `Promise.race` method
+// https://tc39.es/ecma262/#sec-promise.race
+$({ target: 'Promise', stat: true, forced: PROMISE_STATICS_INCORRECT_ITERATION }, {
   race: function race(iterable) {
     var C = this;
-    var capability = newPromiseCapability(C);
+    var capability = newPromiseCapabilityModule.f(C);
     var reject = capability.reject;
     var result = perform(function () {
       var $promiseResolve = aCallable(C.resolve);
@@ -37492,7 +33948,45 @@ $({ target: PROMISE, stat: true, forced: INCORRECT_ITERATION }, {
   }
 });
 
-},{"../internals/a-callable":80,"../internals/an-instance":84,"../internals/check-correctness-of-iteration":97,"../internals/engine-is-browser":116,"../internals/engine-is-node":119,"../internals/engine-v8-version":122,"../internals/export":126,"../internals/function-call":132,"../internals/get-built-in":135,"../internals/global":139,"../internals/host-report-errors":142,"../internals/inspect-source":147,"../internals/internal-state":150,"../internals/is-callable":153,"../internals/is-forced":155,"../internals/is-object":156,"../internals/is-pure":157,"../internals/iterate":160,"../internals/microtask":165,"../internals/native-promise-constructor":166,"../internals/new-promise-capability":169,"../internals/object-set-prototype-of":185,"../internals/perform":190,"../internals/promise-resolve":191,"../internals/queue":192,"../internals/redefine":194,"../internals/redefine-all":193,"../internals/set-species":197,"../internals/set-to-string-tag":198,"../internals/species-constructor":202,"../internals/task":204,"../internals/well-known-symbol":220}],233:[function(require,module,exports){
+},{"../internals/a-callable":79,"../internals/export":131,"../internals/function-call":137,"../internals/iterate":169,"../internals/new-promise-capability":179,"../internals/perform":200,"../internals/promise-statics-incorrect-iteration":204}],258:[function(require,module,exports){
+'use strict';
+var $ = require('../internals/export');
+var call = require('../internals/function-call');
+var newPromiseCapabilityModule = require('../internals/new-promise-capability');
+var FORCED_PROMISE_CONSTRUCTOR = require('../internals/promise-constructor-detection').CONSTRUCTOR;
+
+// `Promise.reject` method
+// https://tc39.es/ecma262/#sec-promise.reject
+$({ target: 'Promise', stat: true, forced: FORCED_PROMISE_CONSTRUCTOR }, {
+  reject: function reject(r) {
+    var capability = newPromiseCapabilityModule.f(this);
+    call(capability.reject, undefined, r);
+    return capability.promise;
+  }
+});
+
+},{"../internals/export":131,"../internals/function-call":137,"../internals/new-promise-capability":179,"../internals/promise-constructor-detection":201}],259:[function(require,module,exports){
+'use strict';
+var $ = require('../internals/export');
+var getBuiltIn = require('../internals/get-built-in');
+var IS_PURE = require('../internals/is-pure');
+var NativePromiseConstructor = require('../internals/promise-native-constructor');
+var FORCED_PROMISE_CONSTRUCTOR = require('../internals/promise-constructor-detection').CONSTRUCTOR;
+var promiseResolve = require('../internals/promise-resolve');
+
+var PromiseConstructorWrapper = getBuiltIn('Promise');
+var CHECK_WRAPPER = IS_PURE && !FORCED_PROMISE_CONSTRUCTOR;
+
+// `Promise.resolve` method
+// https://tc39.es/ecma262/#sec-promise.resolve
+$({ target: 'Promise', stat: true, forced: IS_PURE || FORCED_PROMISE_CONSTRUCTOR }, {
+  resolve: function resolve(x) {
+    return promiseResolve(CHECK_WRAPPER && this === PromiseConstructorWrapper ? NativePromiseConstructor : this, x);
+  }
+});
+
+},{"../internals/export":131,"../internals/get-built-in":142,"../internals/is-pure":166,"../internals/promise-constructor-detection":201,"../internals/promise-native-constructor":202,"../internals/promise-resolve":203}],260:[function(require,module,exports){
+'use strict';
 var $ = require('../internals/export');
 var global = require('../internals/global');
 var setToStringTag = require('../internals/set-to-string-tag');
@@ -37503,7 +33997,7 @@ $({ global: true }, { Reflect: {} });
 // https://tc39.es/ecma262/#sec-reflect-@@tostringtag
 setToStringTag(global.Reflect, 'Reflect', true);
 
-},{"../internals/export":126,"../internals/global":139,"../internals/set-to-string-tag":198}],234:[function(require,module,exports){
+},{"../internals/export":131,"../internals/global":147,"../internals/set-to-string-tag":208}],261:[function(require,module,exports){
 'use strict';
 var collection = require('../internals/collection');
 var collectionStrong = require('../internals/collection-strong');
@@ -37514,10 +34008,15 @@ collection('Set', function (init) {
   return function Set() { return init(this, arguments.length ? arguments[0] : undefined); };
 }, collectionStrong);
 
-},{"../internals/collection":102,"../internals/collection-strong":101}],235:[function(require,module,exports){
+},{"../internals/collection":100,"../internals/collection-strong":99}],262:[function(require,module,exports){
+'use strict';
+// TODO: Remove this module from `core-js@4` since it's replaced to module below
+require('../modules/es.set.constructor');
+
+},{"../modules/es.set.constructor":261}],263:[function(require,module,exports){
 'use strict';
 var $ = require('../internals/export');
-var uncurryThis = require('../internals/function-uncurry-this');
+var uncurryThis = require('../internals/function-uncurry-this-clause');
 var getOwnPropertyDescriptor = require('../internals/object-get-own-property-descriptor').f;
 var toLength = require('../internals/to-length');
 var toString = require('../internals/to-string');
@@ -37527,7 +34026,7 @@ var correctIsRegExpLogic = require('../internals/correct-is-regexp-logic');
 var IS_PURE = require('../internals/is-pure');
 
 // eslint-disable-next-line es/no-string-prototype-endswith -- safe
-var un$EndsWith = uncurryThis(''.endsWith);
+var nativeEndsWith = uncurryThis(''.endsWith);
 var slice = uncurryThis(''.slice);
 var min = Math.min;
 
@@ -37548,18 +34047,19 @@ $({ target: 'String', proto: true, forced: !MDN_POLYFILL_BUG && !CORRECT_IS_REGE
     var len = that.length;
     var end = endPosition === undefined ? len : min(toLength(endPosition), len);
     var search = toString(searchString);
-    return un$EndsWith
-      ? un$EndsWith(that, search, end)
+    return nativeEndsWith
+      ? nativeEndsWith(that, search, end)
       : slice(that, end - search.length, end) === search;
   }
 });
 
-},{"../internals/correct-is-regexp-logic":104,"../internals/export":126,"../internals/function-uncurry-this":134,"../internals/is-pure":157,"../internals/not-a-regexp":171,"../internals/object-get-own-property-descriptor":175,"../internals/require-object-coercible":195,"../internals/to-length":208,"../internals/to-string":213}],236:[function(require,module,exports){
+},{"../internals/correct-is-regexp-logic":102,"../internals/export":131,"../internals/function-uncurry-this-clause":140,"../internals/is-pure":166,"../internals/not-a-regexp":181,"../internals/object-get-own-property-descriptor":185,"../internals/require-object-coercible":206,"../internals/to-length":222,"../internals/to-string":227}],264:[function(require,module,exports){
 'use strict';
 var charAt = require('../internals/string-multibyte').charAt;
 var toString = require('../internals/to-string');
 var InternalStateModule = require('../internals/internal-state');
-var defineIterator = require('../internals/define-iterator');
+var defineIterator = require('../internals/iterator-define');
+var createIterResultObject = require('../internals/create-iter-result-object');
 
 var STRING_ITERATOR = 'String Iterator';
 var setInternalState = InternalStateModule.set;
@@ -37580,121 +34080,33 @@ defineIterator(String, 'String', function (iterated) {
   var string = state.string;
   var index = state.index;
   var point;
-  if (index >= string.length) return { value: undefined, done: true };
+  if (index >= string.length) return createIterResultObject(undefined, true);
   point = charAt(string, index);
   state.index += point.length;
-  return { value: point, done: false };
+  return createIterResultObject(point, false);
 });
 
-},{"../internals/define-iterator":110,"../internals/internal-state":150,"../internals/string-multibyte":203,"../internals/to-string":213}],237:[function(require,module,exports){
-var defineWellKnownSymbol = require('../internals/define-well-known-symbol');
+},{"../internals/create-iter-result-object":104,"../internals/internal-state":158,"../internals/iterator-define":172,"../internals/string-multibyte":213,"../internals/to-string":227}],265:[function(require,module,exports){
+'use strict';
+var defineWellKnownSymbol = require('../internals/well-known-symbol-define');
 
 // `Symbol.asyncIterator` well-known symbol
 // https://tc39.es/ecma262/#sec-symbol.asynciterator
 defineWellKnownSymbol('asyncIterator');
 
-},{"../internals/define-well-known-symbol":111}],238:[function(require,module,exports){
-// `Symbol.prototype.description` getter
-// https://tc39.es/ecma262/#sec-symbol.prototype.description
-'use strict';
-var $ = require('../internals/export');
-var DESCRIPTORS = require('../internals/descriptors');
-var global = require('../internals/global');
-var uncurryThis = require('../internals/function-uncurry-this');
-var hasOwn = require('../internals/has-own-property');
-var isCallable = require('../internals/is-callable');
-var isPrototypeOf = require('../internals/object-is-prototype-of');
-var toString = require('../internals/to-string');
-var defineProperty = require('../internals/object-define-property').f;
-var copyConstructorProperties = require('../internals/copy-constructor-properties');
-
-var NativeSymbol = global.Symbol;
-var SymbolPrototype = NativeSymbol && NativeSymbol.prototype;
-
-if (DESCRIPTORS && isCallable(NativeSymbol) && (!('description' in SymbolPrototype) ||
-  // Safari 12 bug
-  NativeSymbol().description !== undefined
-)) {
-  var EmptyStringDescriptionStore = {};
-  // wrap Symbol constructor for correct work with undefined description
-  var SymbolWrapper = function Symbol() {
-    var description = arguments.length < 1 || arguments[0] === undefined ? undefined : toString(arguments[0]);
-    var result = isPrototypeOf(SymbolPrototype, this)
-      ? new NativeSymbol(description)
-      // in Edge 13, String(Symbol(undefined)) === 'Symbol(undefined)'
-      : description === undefined ? NativeSymbol() : NativeSymbol(description);
-    if (description === '') EmptyStringDescriptionStore[result] = true;
-    return result;
-  };
-
-  copyConstructorProperties(SymbolWrapper, NativeSymbol);
-  SymbolWrapper.prototype = SymbolPrototype;
-  SymbolPrototype.constructor = SymbolWrapper;
-
-  var NATIVE_SYMBOL = String(NativeSymbol('test')) == 'Symbol(test)';
-  var symbolToString = uncurryThis(SymbolPrototype.toString);
-  var symbolValueOf = uncurryThis(SymbolPrototype.valueOf);
-  var regexp = /^Symbol\((.*)\)[^)]+$/;
-  var replace = uncurryThis(''.replace);
-  var stringSlice = uncurryThis(''.slice);
-
-  defineProperty(SymbolPrototype, 'description', {
-    configurable: true,
-    get: function description() {
-      var symbol = symbolValueOf(this);
-      var string = symbolToString(symbol);
-      if (hasOwn(EmptyStringDescriptionStore, symbol)) return '';
-      var desc = NATIVE_SYMBOL ? stringSlice(string, 7, -1) : replace(string, regexp, '$1');
-      return desc === '' ? undefined : desc;
-    }
-  });
-
-  $({ global: true, forced: true }, {
-    Symbol: SymbolWrapper
-  });
-}
-
-},{"../internals/copy-constructor-properties":103,"../internals/descriptors":112,"../internals/export":126,"../internals/function-uncurry-this":134,"../internals/global":139,"../internals/has-own-property":140,"../internals/is-callable":153,"../internals/object-define-property":174,"../internals/object-is-prototype-of":181,"../internals/to-string":213}],239:[function(require,module,exports){
-var defineWellKnownSymbol = require('../internals/define-well-known-symbol');
-
-// `Symbol.hasInstance` well-known symbol
-// https://tc39.es/ecma262/#sec-symbol.hasinstance
-defineWellKnownSymbol('hasInstance');
-
-},{"../internals/define-well-known-symbol":111}],240:[function(require,module,exports){
-var defineWellKnownSymbol = require('../internals/define-well-known-symbol');
-
-// `Symbol.isConcatSpreadable` well-known symbol
-// https://tc39.es/ecma262/#sec-symbol.isconcatspreadable
-defineWellKnownSymbol('isConcatSpreadable');
-
-},{"../internals/define-well-known-symbol":111}],241:[function(require,module,exports){
-var defineWellKnownSymbol = require('../internals/define-well-known-symbol');
-
-// `Symbol.iterator` well-known symbol
-// https://tc39.es/ecma262/#sec-symbol.iterator
-defineWellKnownSymbol('iterator');
-
-},{"../internals/define-well-known-symbol":111}],242:[function(require,module,exports){
+},{"../internals/well-known-symbol-define":235}],266:[function(require,module,exports){
 'use strict';
 var $ = require('../internals/export');
 var global = require('../internals/global');
-var getBuiltIn = require('../internals/get-built-in');
-var apply = require('../internals/function-apply');
 var call = require('../internals/function-call');
 var uncurryThis = require('../internals/function-uncurry-this');
 var IS_PURE = require('../internals/is-pure');
 var DESCRIPTORS = require('../internals/descriptors');
-var NATIVE_SYMBOL = require('../internals/native-symbol');
+var NATIVE_SYMBOL = require('../internals/symbol-constructor-detection');
 var fails = require('../internals/fails');
 var hasOwn = require('../internals/has-own-property');
-var isArray = require('../internals/is-array');
-var isCallable = require('../internals/is-callable');
-var isObject = require('../internals/is-object');
 var isPrototypeOf = require('../internals/object-is-prototype-of');
-var isSymbol = require('../internals/is-symbol');
 var anObject = require('../internals/an-object');
-var toObject = require('../internals/to-object');
 var toIndexedObject = require('../internals/to-indexed-object');
 var toPropertyKey = require('../internals/to-property-key');
 var $toString = require('../internals/to-string');
@@ -37708,15 +34120,16 @@ var getOwnPropertyDescriptorModule = require('../internals/object-get-own-proper
 var definePropertyModule = require('../internals/object-define-property');
 var definePropertiesModule = require('../internals/object-define-properties');
 var propertyIsEnumerableModule = require('../internals/object-property-is-enumerable');
-var arraySlice = require('../internals/array-slice');
-var redefine = require('../internals/redefine');
+var defineBuiltIn = require('../internals/define-built-in');
+var defineBuiltInAccessor = require('../internals/define-built-in-accessor');
 var shared = require('../internals/shared');
 var sharedKey = require('../internals/shared-key');
 var hiddenKeys = require('../internals/hidden-keys');
 var uid = require('../internals/uid');
 var wellKnownSymbol = require('../internals/well-known-symbol');
 var wrappedWellKnownSymbolModule = require('../internals/well-known-symbol-wrapped');
-var defineWellKnownSymbol = require('../internals/define-well-known-symbol');
+var defineWellKnownSymbol = require('../internals/well-known-symbol-define');
+var defineSymbolToPrimitive = require('../internals/symbol-define-to-primitive');
 var setToStringTag = require('../internals/set-to-string-tag');
 var InternalStateModule = require('../internals/internal-state');
 var $forEach = require('../internals/array-iteration').forEach;
@@ -37724,7 +34137,6 @@ var $forEach = require('../internals/array-iteration').forEach;
 var HIDDEN = sharedKey('hidden');
 var SYMBOL = 'Symbol';
 var PROTOTYPE = 'prototype';
-var TO_PRIMITIVE = wellKnownSymbol('toPrimitive');
 
 var setInternalState = InternalStateModule.set;
 var getInternalState = InternalStateModule.getterFor(SYMBOL);
@@ -37732,9 +34144,9 @@ var getInternalState = InternalStateModule.getterFor(SYMBOL);
 var ObjectPrototype = Object[PROTOTYPE];
 var $Symbol = global.Symbol;
 var SymbolPrototype = $Symbol && $Symbol[PROTOTYPE];
+var RangeError = global.RangeError;
 var TypeError = global.TypeError;
 var QObject = global.QObject;
-var $stringify = getBuiltIn('JSON', 'stringify');
 var nativeGetOwnPropertyDescriptor = getOwnPropertyDescriptorModule.f;
 var nativeDefineProperty = definePropertyModule.f;
 var nativeGetOwnPropertyNames = getOwnPropertyNamesExternal.f;
@@ -37743,26 +34155,26 @@ var push = uncurryThis([].push);
 
 var AllSymbols = shared('symbols');
 var ObjectPrototypeSymbols = shared('op-symbols');
-var StringToSymbolRegistry = shared('string-to-symbol-registry');
-var SymbolToStringRegistry = shared('symbol-to-string-registry');
 var WellKnownSymbolsStore = shared('wks');
 
 // Don't use setters in Qt Script, https://github.com/zloirock/core-js/issues/173
 var USE_SETTER = !QObject || !QObject[PROTOTYPE] || !QObject[PROTOTYPE].findChild;
 
 // fallback for old Android, https://code.google.com/p/v8/issues/detail?id=687
-var setSymbolDescriptor = DESCRIPTORS && fails(function () {
-  return nativeObjectCreate(nativeDefineProperty({}, 'a', {
-    get: function () { return nativeDefineProperty(this, 'a', { value: 7 }).a; }
-  })).a != 7;
-}) ? function (O, P, Attributes) {
+var fallbackDefineProperty = function (O, P, Attributes) {
   var ObjectPrototypeDescriptor = nativeGetOwnPropertyDescriptor(ObjectPrototype, P);
   if (ObjectPrototypeDescriptor) delete ObjectPrototype[P];
   nativeDefineProperty(O, P, Attributes);
   if (ObjectPrototypeDescriptor && O !== ObjectPrototype) {
     nativeDefineProperty(ObjectPrototype, P, ObjectPrototypeDescriptor);
   }
-} : nativeDefineProperty;
+};
+
+var setSymbolDescriptor = DESCRIPTORS && fails(function () {
+  return nativeObjectCreate(nativeDefineProperty({}, 'a', {
+    get: function () { return nativeDefineProperty(this, 'a', { value: 7 }).a; }
+  })).a !== 7;
+}) ? fallbackDefineProperty : nativeDefineProperty;
 
 var wrap = function (tag, description) {
   var symbol = AllSymbols[tag] = nativeObjectCreate(SymbolPrototype);
@@ -37833,7 +34245,7 @@ var $getOwnPropertyNames = function getOwnPropertyNames(O) {
   return result;
 };
 
-var $getOwnPropertySymbols = function getOwnPropertySymbols(O) {
+var $getOwnPropertySymbols = function (O) {
   var IS_OBJECT_PROTOTYPE = O === ObjectPrototype;
   var names = nativeGetOwnPropertyNames(IS_OBJECT_PROTOTYPE ? ObjectPrototypeSymbols : toIndexedObject(O));
   var result = [];
@@ -37849,13 +34261,20 @@ var $getOwnPropertySymbols = function getOwnPropertySymbols(O) {
 // https://tc39.es/ecma262/#sec-symbol-constructor
 if (!NATIVE_SYMBOL) {
   $Symbol = function Symbol() {
-    if (isPrototypeOf(SymbolPrototype, this)) throw TypeError('Symbol is not a constructor');
+    if (isPrototypeOf(SymbolPrototype, this)) throw new TypeError('Symbol is not a constructor');
     var description = !arguments.length || arguments[0] === undefined ? undefined : $toString(arguments[0]);
     var tag = uid(description);
     var setter = function (value) {
-      if (this === ObjectPrototype) call(setter, ObjectPrototypeSymbols, value);
-      if (hasOwn(this, HIDDEN) && hasOwn(this[HIDDEN], tag)) this[HIDDEN][tag] = false;
-      setSymbolDescriptor(this, tag, createPropertyDescriptor(1, value));
+      var $this = this === undefined ? global : this;
+      if ($this === ObjectPrototype) call(setter, ObjectPrototypeSymbols, value);
+      if (hasOwn($this, HIDDEN) && hasOwn($this[HIDDEN], tag)) $this[HIDDEN][tag] = false;
+      var descriptor = createPropertyDescriptor(1, value);
+      try {
+        setSymbolDescriptor($this, tag, descriptor);
+      } catch (error) {
+        if (!(error instanceof RangeError)) throw error;
+        fallbackDefineProperty($this, tag, descriptor);
+      }
     };
     if (DESCRIPTORS && USE_SETTER) setSymbolDescriptor(ObjectPrototype, tag, { configurable: true, set: setter });
     return wrap(tag, description);
@@ -37863,11 +34282,11 @@ if (!NATIVE_SYMBOL) {
 
   SymbolPrototype = $Symbol[PROTOTYPE];
 
-  redefine(SymbolPrototype, 'toString', function toString() {
+  defineBuiltIn(SymbolPrototype, 'toString', function toString() {
     return getInternalState(this).tag;
   });
 
-  redefine($Symbol, 'withoutSetter', function (description) {
+  defineBuiltIn($Symbol, 'withoutSetter', function (description) {
     return wrap(uid(description), description);
   });
 
@@ -37884,19 +34303,19 @@ if (!NATIVE_SYMBOL) {
 
   if (DESCRIPTORS) {
     // https://github.com/tc39/proposal-Symbol-description
-    nativeDefineProperty(SymbolPrototype, 'description', {
+    defineBuiltInAccessor(SymbolPrototype, 'description', {
       configurable: true,
       get: function description() {
         return getInternalState(this).description;
       }
     });
     if (!IS_PURE) {
-      redefine(ObjectPrototype, 'propertyIsEnumerable', $propertyIsEnumerable, { unsafe: true });
+      defineBuiltIn(ObjectPrototype, 'propertyIsEnumerable', $propertyIsEnumerable, { unsafe: true });
     }
   }
 }
 
-$({ global: true, wrap: true, forced: !NATIVE_SYMBOL, sham: !NATIVE_SYMBOL }, {
+$({ global: true, constructor: true, wrap: true, forced: !NATIVE_SYMBOL, sham: !NATIVE_SYMBOL }, {
   Symbol: $Symbol
 });
 
@@ -37905,22 +34324,6 @@ $forEach(objectKeys(WellKnownSymbolsStore), function (name) {
 });
 
 $({ target: SYMBOL, stat: true, forced: !NATIVE_SYMBOL }, {
-  // `Symbol.for` method
-  // https://tc39.es/ecma262/#sec-symbol.for
-  'for': function (key) {
-    var string = $toString(key);
-    if (hasOwn(StringToSymbolRegistry, string)) return StringToSymbolRegistry[string];
-    var symbol = $Symbol(string);
-    StringToSymbolRegistry[string] = symbol;
-    SymbolToStringRegistry[symbol] = string;
-    return symbol;
-  },
-  // `Symbol.keyFor` method
-  // https://tc39.es/ecma262/#sec-symbol.keyfor
-  keyFor: function keyFor(sym) {
-    if (!isSymbol(sym)) throw TypeError(sym + ' is not a symbol');
-    if (hasOwn(SymbolToStringRegistry, sym)) return SymbolToStringRegistry[sym];
-  },
   useSetter: function () { USE_SETTER = true; },
   useSimple: function () { USE_SETTER = false; }
 });
@@ -37943,151 +34346,273 @@ $({ target: 'Object', stat: true, forced: !NATIVE_SYMBOL, sham: !DESCRIPTORS }, 
 $({ target: 'Object', stat: true, forced: !NATIVE_SYMBOL }, {
   // `Object.getOwnPropertyNames` method
   // https://tc39.es/ecma262/#sec-object.getownpropertynames
-  getOwnPropertyNames: $getOwnPropertyNames,
-  // `Object.getOwnPropertySymbols` method
-  // https://tc39.es/ecma262/#sec-object.getownpropertysymbols
-  getOwnPropertySymbols: $getOwnPropertySymbols
+  getOwnPropertyNames: $getOwnPropertyNames
 });
-
-// Chrome 38 and 39 `Object.getOwnPropertySymbols` fails on primitives
-// https://bugs.chromium.org/p/v8/issues/detail?id=3443
-$({ target: 'Object', stat: true, forced: fails(function () { getOwnPropertySymbolsModule.f(1); }) }, {
-  getOwnPropertySymbols: function getOwnPropertySymbols(it) {
-    return getOwnPropertySymbolsModule.f(toObject(it));
-  }
-});
-
-// `JSON.stringify` method behavior with symbols
-// https://tc39.es/ecma262/#sec-json.stringify
-if ($stringify) {
-  var FORCED_JSON_STRINGIFY = !NATIVE_SYMBOL || fails(function () {
-    var symbol = $Symbol();
-    // MS Edge converts symbol values to JSON as {}
-    return $stringify([symbol]) != '[null]'
-      // WebKit converts symbol values to JSON as null
-      || $stringify({ a: symbol }) != '{}'
-      // V8 throws on boxed symbols
-      || $stringify(Object(symbol)) != '{}';
-  });
-
-  $({ target: 'JSON', stat: true, forced: FORCED_JSON_STRINGIFY }, {
-    // eslint-disable-next-line no-unused-vars -- required for `.length`
-    stringify: function stringify(it, replacer, space) {
-      var args = arraySlice(arguments);
-      var $replacer = replacer;
-      if (!isObject(replacer) && it === undefined || isSymbol(it)) return; // IE8 returns string on undefined
-      if (!isArray(replacer)) replacer = function (key, value) {
-        if (isCallable($replacer)) value = call($replacer, this, key, value);
-        if (!isSymbol(value)) return value;
-      };
-      args[1] = replacer;
-      return apply($stringify, null, args);
-    }
-  });
-}
 
 // `Symbol.prototype[@@toPrimitive]` method
 // https://tc39.es/ecma262/#sec-symbol.prototype-@@toprimitive
-if (!SymbolPrototype[TO_PRIMITIVE]) {
-  var valueOf = SymbolPrototype.valueOf;
-  // eslint-disable-next-line no-unused-vars -- required for .length
-  redefine(SymbolPrototype, TO_PRIMITIVE, function (hint) {
-    // TODO: improve hint logic
-    return call(valueOf, this);
-  });
-}
+defineSymbolToPrimitive();
+
 // `Symbol.prototype[@@toStringTag]` property
 // https://tc39.es/ecma262/#sec-symbol.prototype-@@tostringtag
 setToStringTag($Symbol, SYMBOL);
 
 hiddenKeys[HIDDEN] = true;
 
-},{"../internals/an-object":85,"../internals/array-iteration":91,"../internals/array-slice":94,"../internals/create-property-descriptor":108,"../internals/define-well-known-symbol":111,"../internals/descriptors":112,"../internals/export":126,"../internals/fails":127,"../internals/function-apply":129,"../internals/function-call":132,"../internals/function-uncurry-this":134,"../internals/get-built-in":135,"../internals/global":139,"../internals/has-own-property":140,"../internals/hidden-keys":141,"../internals/internal-state":150,"../internals/is-array":152,"../internals/is-callable":153,"../internals/is-object":156,"../internals/is-pure":157,"../internals/is-symbol":159,"../internals/native-symbol":167,"../internals/object-create":172,"../internals/object-define-properties":173,"../internals/object-define-property":174,"../internals/object-get-own-property-descriptor":175,"../internals/object-get-own-property-names":177,"../internals/object-get-own-property-names-external":176,"../internals/object-get-own-property-symbols":178,"../internals/object-is-prototype-of":181,"../internals/object-keys":183,"../internals/object-property-is-enumerable":184,"../internals/redefine":194,"../internals/set-to-string-tag":198,"../internals/shared":201,"../internals/shared-key":199,"../internals/to-indexed-object":206,"../internals/to-object":209,"../internals/to-property-key":211,"../internals/to-string":213,"../internals/uid":216,"../internals/well-known-symbol":220,"../internals/well-known-symbol-wrapped":219}],243:[function(require,module,exports){
-var defineWellKnownSymbol = require('../internals/define-well-known-symbol');
+},{"../internals/an-object":84,"../internals/array-iteration":90,"../internals/create-property-descriptor":106,"../internals/define-built-in":109,"../internals/define-built-in-accessor":108,"../internals/descriptors":112,"../internals/export":131,"../internals/fails":132,"../internals/function-call":137,"../internals/function-uncurry-this":141,"../internals/global":147,"../internals/has-own-property":148,"../internals/hidden-keys":149,"../internals/internal-state":158,"../internals/is-pure":166,"../internals/object-create":182,"../internals/object-define-properties":183,"../internals/object-define-property":184,"../internals/object-get-own-property-descriptor":185,"../internals/object-get-own-property-names":187,"../internals/object-get-own-property-names-external":186,"../internals/object-get-own-property-symbols":188,"../internals/object-is-prototype-of":191,"../internals/object-keys":193,"../internals/object-property-is-enumerable":194,"../internals/set-to-string-tag":208,"../internals/shared":211,"../internals/shared-key":209,"../internals/symbol-constructor-detection":214,"../internals/symbol-define-to-primitive":215,"../internals/to-indexed-object":220,"../internals/to-property-key":225,"../internals/to-string":227,"../internals/uid":230,"../internals/well-known-symbol":237,"../internals/well-known-symbol-define":235,"../internals/well-known-symbol-wrapped":236}],267:[function(require,module,exports){
+// `Symbol.prototype.description` getter
+// https://tc39.es/ecma262/#sec-symbol.prototype.description
+'use strict';
+var $ = require('../internals/export');
+var DESCRIPTORS = require('../internals/descriptors');
+var global = require('../internals/global');
+var uncurryThis = require('../internals/function-uncurry-this');
+var hasOwn = require('../internals/has-own-property');
+var isCallable = require('../internals/is-callable');
+var isPrototypeOf = require('../internals/object-is-prototype-of');
+var toString = require('../internals/to-string');
+var defineBuiltInAccessor = require('../internals/define-built-in-accessor');
+var copyConstructorProperties = require('../internals/copy-constructor-properties');
+
+var NativeSymbol = global.Symbol;
+var SymbolPrototype = NativeSymbol && NativeSymbol.prototype;
+
+if (DESCRIPTORS && isCallable(NativeSymbol) && (!('description' in SymbolPrototype) ||
+  // Safari 12 bug
+  NativeSymbol().description !== undefined
+)) {
+  var EmptyStringDescriptionStore = {};
+  // wrap Symbol constructor for correct work with undefined description
+  var SymbolWrapper = function Symbol() {
+    var description = arguments.length < 1 || arguments[0] === undefined ? undefined : toString(arguments[0]);
+    var result = isPrototypeOf(SymbolPrototype, this)
+      ? new NativeSymbol(description)
+      // in Edge 13, String(Symbol(undefined)) === 'Symbol(undefined)'
+      : description === undefined ? NativeSymbol() : NativeSymbol(description);
+    if (description === '') EmptyStringDescriptionStore[result] = true;
+    return result;
+  };
+
+  copyConstructorProperties(SymbolWrapper, NativeSymbol);
+  SymbolWrapper.prototype = SymbolPrototype;
+  SymbolPrototype.constructor = SymbolWrapper;
+
+  var NATIVE_SYMBOL = String(NativeSymbol('description detection')) === 'Symbol(description detection)';
+  var thisSymbolValue = uncurryThis(SymbolPrototype.valueOf);
+  var symbolDescriptiveString = uncurryThis(SymbolPrototype.toString);
+  var regexp = /^Symbol\((.*)\)[^)]+$/;
+  var replace = uncurryThis(''.replace);
+  var stringSlice = uncurryThis(''.slice);
+
+  defineBuiltInAccessor(SymbolPrototype, 'description', {
+    configurable: true,
+    get: function description() {
+      var symbol = thisSymbolValue(this);
+      if (hasOwn(EmptyStringDescriptionStore, symbol)) return '';
+      var string = symbolDescriptiveString(symbol);
+      var desc = NATIVE_SYMBOL ? stringSlice(string, 7, -1) : replace(string, regexp, '$1');
+      return desc === '' ? undefined : desc;
+    }
+  });
+
+  $({ global: true, constructor: true, forced: true }, {
+    Symbol: SymbolWrapper
+  });
+}
+
+},{"../internals/copy-constructor-properties":101,"../internals/define-built-in-accessor":108,"../internals/descriptors":112,"../internals/export":131,"../internals/function-uncurry-this":141,"../internals/global":147,"../internals/has-own-property":148,"../internals/is-callable":161,"../internals/object-is-prototype-of":191,"../internals/to-string":227}],268:[function(require,module,exports){
+'use strict';
+var $ = require('../internals/export');
+var getBuiltIn = require('../internals/get-built-in');
+var hasOwn = require('../internals/has-own-property');
+var toString = require('../internals/to-string');
+var shared = require('../internals/shared');
+var NATIVE_SYMBOL_REGISTRY = require('../internals/symbol-registry-detection');
+
+var StringToSymbolRegistry = shared('string-to-symbol-registry');
+var SymbolToStringRegistry = shared('symbol-to-string-registry');
+
+// `Symbol.for` method
+// https://tc39.es/ecma262/#sec-symbol.for
+$({ target: 'Symbol', stat: true, forced: !NATIVE_SYMBOL_REGISTRY }, {
+  'for': function (key) {
+    var string = toString(key);
+    if (hasOwn(StringToSymbolRegistry, string)) return StringToSymbolRegistry[string];
+    var symbol = getBuiltIn('Symbol')(string);
+    StringToSymbolRegistry[string] = symbol;
+    SymbolToStringRegistry[symbol] = string;
+    return symbol;
+  }
+});
+
+},{"../internals/export":131,"../internals/get-built-in":142,"../internals/has-own-property":148,"../internals/shared":211,"../internals/symbol-registry-detection":216,"../internals/to-string":227}],269:[function(require,module,exports){
+'use strict';
+var defineWellKnownSymbol = require('../internals/well-known-symbol-define');
+
+// `Symbol.hasInstance` well-known symbol
+// https://tc39.es/ecma262/#sec-symbol.hasinstance
+defineWellKnownSymbol('hasInstance');
+
+},{"../internals/well-known-symbol-define":235}],270:[function(require,module,exports){
+'use strict';
+var defineWellKnownSymbol = require('../internals/well-known-symbol-define');
+
+// `Symbol.isConcatSpreadable` well-known symbol
+// https://tc39.es/ecma262/#sec-symbol.isconcatspreadable
+defineWellKnownSymbol('isConcatSpreadable');
+
+},{"../internals/well-known-symbol-define":235}],271:[function(require,module,exports){
+'use strict';
+var defineWellKnownSymbol = require('../internals/well-known-symbol-define');
+
+// `Symbol.iterator` well-known symbol
+// https://tc39.es/ecma262/#sec-symbol.iterator
+defineWellKnownSymbol('iterator');
+
+},{"../internals/well-known-symbol-define":235}],272:[function(require,module,exports){
+'use strict';
+// TODO: Remove this module from `core-js@4` since it's split to modules listed below
+require('../modules/es.symbol.constructor');
+require('../modules/es.symbol.for');
+require('../modules/es.symbol.key-for');
+require('../modules/es.json.stringify');
+require('../modules/es.object.get-own-property-symbols');
+
+},{"../modules/es.json.stringify":243,"../modules/es.object.get-own-property-symbols":248,"../modules/es.symbol.constructor":266,"../modules/es.symbol.for":268,"../modules/es.symbol.key-for":273}],273:[function(require,module,exports){
+'use strict';
+var $ = require('../internals/export');
+var hasOwn = require('../internals/has-own-property');
+var isSymbol = require('../internals/is-symbol');
+var tryToString = require('../internals/try-to-string');
+var shared = require('../internals/shared');
+var NATIVE_SYMBOL_REGISTRY = require('../internals/symbol-registry-detection');
+
+var SymbolToStringRegistry = shared('symbol-to-string-registry');
+
+// `Symbol.keyFor` method
+// https://tc39.es/ecma262/#sec-symbol.keyfor
+$({ target: 'Symbol', stat: true, forced: !NATIVE_SYMBOL_REGISTRY }, {
+  keyFor: function keyFor(sym) {
+    if (!isSymbol(sym)) throw new TypeError(tryToString(sym) + ' is not a symbol');
+    if (hasOwn(SymbolToStringRegistry, sym)) return SymbolToStringRegistry[sym];
+  }
+});
+
+},{"../internals/export":131,"../internals/has-own-property":148,"../internals/is-symbol":168,"../internals/shared":211,"../internals/symbol-registry-detection":216,"../internals/try-to-string":228}],274:[function(require,module,exports){
+'use strict';
+var defineWellKnownSymbol = require('../internals/well-known-symbol-define');
 
 // `Symbol.matchAll` well-known symbol
 // https://tc39.es/ecma262/#sec-symbol.matchall
 defineWellKnownSymbol('matchAll');
 
-},{"../internals/define-well-known-symbol":111}],244:[function(require,module,exports){
-var defineWellKnownSymbol = require('../internals/define-well-known-symbol');
+},{"../internals/well-known-symbol-define":235}],275:[function(require,module,exports){
+'use strict';
+var defineWellKnownSymbol = require('../internals/well-known-symbol-define');
 
 // `Symbol.match` well-known symbol
 // https://tc39.es/ecma262/#sec-symbol.match
 defineWellKnownSymbol('match');
 
-},{"../internals/define-well-known-symbol":111}],245:[function(require,module,exports){
-var defineWellKnownSymbol = require('../internals/define-well-known-symbol');
+},{"../internals/well-known-symbol-define":235}],276:[function(require,module,exports){
+'use strict';
+var defineWellKnownSymbol = require('../internals/well-known-symbol-define');
 
 // `Symbol.replace` well-known symbol
 // https://tc39.es/ecma262/#sec-symbol.replace
 defineWellKnownSymbol('replace');
 
-},{"../internals/define-well-known-symbol":111}],246:[function(require,module,exports){
-var defineWellKnownSymbol = require('../internals/define-well-known-symbol');
+},{"../internals/well-known-symbol-define":235}],277:[function(require,module,exports){
+'use strict';
+var defineWellKnownSymbol = require('../internals/well-known-symbol-define');
 
 // `Symbol.search` well-known symbol
 // https://tc39.es/ecma262/#sec-symbol.search
 defineWellKnownSymbol('search');
 
-},{"../internals/define-well-known-symbol":111}],247:[function(require,module,exports){
-var defineWellKnownSymbol = require('../internals/define-well-known-symbol');
+},{"../internals/well-known-symbol-define":235}],278:[function(require,module,exports){
+'use strict';
+var defineWellKnownSymbol = require('../internals/well-known-symbol-define');
 
 // `Symbol.species` well-known symbol
 // https://tc39.es/ecma262/#sec-symbol.species
 defineWellKnownSymbol('species');
 
-},{"../internals/define-well-known-symbol":111}],248:[function(require,module,exports){
-var defineWellKnownSymbol = require('../internals/define-well-known-symbol');
+},{"../internals/well-known-symbol-define":235}],279:[function(require,module,exports){
+'use strict';
+var defineWellKnownSymbol = require('../internals/well-known-symbol-define');
 
 // `Symbol.split` well-known symbol
 // https://tc39.es/ecma262/#sec-symbol.split
 defineWellKnownSymbol('split');
 
-},{"../internals/define-well-known-symbol":111}],249:[function(require,module,exports){
-var defineWellKnownSymbol = require('../internals/define-well-known-symbol');
+},{"../internals/well-known-symbol-define":235}],280:[function(require,module,exports){
+'use strict';
+var defineWellKnownSymbol = require('../internals/well-known-symbol-define');
+var defineSymbolToPrimitive = require('../internals/symbol-define-to-primitive');
 
 // `Symbol.toPrimitive` well-known symbol
 // https://tc39.es/ecma262/#sec-symbol.toprimitive
 defineWellKnownSymbol('toPrimitive');
 
-},{"../internals/define-well-known-symbol":111}],250:[function(require,module,exports){
-var defineWellKnownSymbol = require('../internals/define-well-known-symbol');
+// `Symbol.prototype[@@toPrimitive]` method
+// https://tc39.es/ecma262/#sec-symbol.prototype-@@toprimitive
+defineSymbolToPrimitive();
+
+},{"../internals/symbol-define-to-primitive":215,"../internals/well-known-symbol-define":235}],281:[function(require,module,exports){
+'use strict';
+var getBuiltIn = require('../internals/get-built-in');
+var defineWellKnownSymbol = require('../internals/well-known-symbol-define');
+var setToStringTag = require('../internals/set-to-string-tag');
 
 // `Symbol.toStringTag` well-known symbol
 // https://tc39.es/ecma262/#sec-symbol.tostringtag
 defineWellKnownSymbol('toStringTag');
 
-},{"../internals/define-well-known-symbol":111}],251:[function(require,module,exports){
-var defineWellKnownSymbol = require('../internals/define-well-known-symbol');
+// `Symbol.prototype[@@toStringTag]` property
+// https://tc39.es/ecma262/#sec-symbol.prototype-@@tostringtag
+setToStringTag(getBuiltIn('Symbol'), 'Symbol');
+
+},{"../internals/get-built-in":142,"../internals/set-to-string-tag":208,"../internals/well-known-symbol-define":235}],282:[function(require,module,exports){
+'use strict';
+var defineWellKnownSymbol = require('../internals/well-known-symbol-define');
 
 // `Symbol.unscopables` well-known symbol
 // https://tc39.es/ecma262/#sec-symbol.unscopables
 defineWellKnownSymbol('unscopables');
 
-},{"../internals/define-well-known-symbol":111}],252:[function(require,module,exports){
+},{"../internals/well-known-symbol-define":235}],283:[function(require,module,exports){
 'use strict';
 var ArrayBufferViewCore = require('../internals/array-buffer-view-core');
-var call = require('../internals/function-call');
 var $fill = require('../internals/array-fill');
+var toBigInt = require('../internals/to-big-int');
+var classof = require('../internals/classof');
+var call = require('../internals/function-call');
+var uncurryThis = require('../internals/function-uncurry-this');
+var fails = require('../internals/fails');
 
 var aTypedArray = ArrayBufferViewCore.aTypedArray;
 var exportTypedArrayMethod = ArrayBufferViewCore.exportTypedArrayMethod;
+var slice = uncurryThis(''.slice);
+
+// V8 ~ Chrome < 59, Safari < 14.1, FF < 55, Edge <=18
+var CONVERSION_BUG = fails(function () {
+  var count = 0;
+  // eslint-disable-next-line es/no-typed-arrays -- safe
+  new Int8Array(2).fill({ valueOf: function () { return count++; } });
+  return count !== 1;
+});
 
 // `%TypedArray%.prototype.fill` method
 // https://tc39.es/ecma262/#sec-%typedarray%.prototype.fill
 exportTypedArrayMethod('fill', function fill(value /* , start, end */) {
   var length = arguments.length;
-  return call(
-    $fill,
-    aTypedArray(this),
-    value,
-    length > 1 ? arguments[1] : undefined,
-    length > 2 ? arguments[2] : undefined
-  );
-});
+  aTypedArray(this);
+  var actualValue = slice(classof(this), 0, 3) === 'Big' ? toBigInt(value) : +value;
+  return call($fill, this, actualValue, length > 1 ? arguments[1] : undefined, length > 2 ? arguments[2] : undefined);
+}, CONVERSION_BUG);
 
-},{"../internals/array-buffer-view-core":88,"../internals/array-fill":89,"../internals/function-call":132}],253:[function(require,module,exports){
+},{"../internals/array-buffer-view-core":87,"../internals/array-fill":88,"../internals/classof":98,"../internals/fails":132,"../internals/function-call":137,"../internals/function-uncurry-this":141,"../internals/to-big-int":219}],284:[function(require,module,exports){
 'use strict';
 var ArrayBufferViewCore = require('../internals/array-buffer-view-core');
 var typedArraySpeciesConstructor = require('../internals/typed-array-species-constructor');
@@ -38114,7 +34639,8 @@ exportTypedArrayMethod('slice', function slice(start, end) {
   return result;
 }, FORCED);
 
-},{"../internals/array-buffer-view-core":88,"../internals/array-slice":94,"../internals/fails":127,"../internals/typed-array-species-constructor":215}],254:[function(require,module,exports){
+},{"../internals/array-buffer-view-core":87,"../internals/array-slice":93,"../internals/fails":132,"../internals/typed-array-species-constructor":229}],285:[function(require,module,exports){
+'use strict';
 var global = require('../internals/global');
 var DOMIterables = require('../internals/dom-iterables');
 var DOMTokenListPrototype = require('../internals/dom-token-list-prototype');
@@ -38154,72 +34680,81 @@ for (var COLLECTION_NAME in DOMIterables) {
 
 handlePrototype(DOMTokenListPrototype, 'DOMTokenList');
 
-},{"../internals/create-non-enumerable-property":107,"../internals/dom-iterables":114,"../internals/dom-token-list-prototype":115,"../internals/global":139,"../internals/well-known-symbol":220,"../modules/es.array.iterator":224}],255:[function(require,module,exports){
+},{"../internals/create-non-enumerable-property":105,"../internals/dom-iterables":116,"../internals/dom-token-list-prototype":117,"../internals/global":147,"../internals/well-known-symbol":237,"../modules/es.array.iterator":242}],286:[function(require,module,exports){
+'use strict';
 var parent = require('../../es/array/fill');
 
 module.exports = parent;
 
-},{"../../es/array/fill":71}],256:[function(require,module,exports){
+},{"../../es/array/fill":70}],287:[function(require,module,exports){
+'use strict';
 var parent = require('../../es/array/iterator');
 
 module.exports = parent;
 
-},{"../../es/array/iterator":72}],257:[function(require,module,exports){
+},{"../../es/array/iterator":71}],288:[function(require,module,exports){
+'use strict';
 var parent = require('../../es/map');
 require('../../modules/web.dom-collections.iterator');
 
 module.exports = parent;
 
-},{"../../es/map":73,"../../modules/web.dom-collections.iterator":254}],258:[function(require,module,exports){
+},{"../../es/map":72,"../../modules/web.dom-collections.iterator":285}],289:[function(require,module,exports){
+'use strict';
 var parent = require('../../es/promise');
 require('../../modules/web.dom-collections.iterator');
 
 module.exports = parent;
 
-},{"../../es/promise":74,"../../modules/web.dom-collections.iterator":254}],259:[function(require,module,exports){
+},{"../../es/promise":73,"../../modules/web.dom-collections.iterator":285}],290:[function(require,module,exports){
+'use strict';
 var parent = require('../../es/set');
 require('../../modules/web.dom-collections.iterator');
 
 module.exports = parent;
 
-},{"../../es/set":75,"../../modules/web.dom-collections.iterator":254}],260:[function(require,module,exports){
+},{"../../es/set":74,"../../modules/web.dom-collections.iterator":285}],291:[function(require,module,exports){
+'use strict';
 var parent = require('../../es/string/ends-with');
 
 module.exports = parent;
 
-},{"../../es/string/ends-with":76}],261:[function(require,module,exports){
+},{"../../es/string/ends-with":75}],292:[function(require,module,exports){
+'use strict';
 var parent = require('../../es/symbol');
 require('../../modules/web.dom-collections.iterator');
 
 module.exports = parent;
 
-},{"../../es/symbol":77,"../../modules/web.dom-collections.iterator":254}],262:[function(require,module,exports){
+},{"../../es/symbol":76,"../../modules/web.dom-collections.iterator":285}],293:[function(require,module,exports){
+'use strict';
 var parent = require('../../es/typed-array/fill');
 
 module.exports = parent;
 
-},{"../../es/typed-array/fill":78}],263:[function(require,module,exports){
+},{"../../es/typed-array/fill":77}],294:[function(require,module,exports){
+'use strict';
 var parent = require('../../es/typed-array/slice');
 
 module.exports = parent;
 
-},{"../../es/typed-array/slice":79}],264:[function(require,module,exports){
+},{"../../es/typed-array/slice":78}],295:[function(require,module,exports){
 (function (global){(function (){
 (function(a,b){if("function"==typeof define&&define.amd)define([],b);else if("undefined"!=typeof exports)b();else{b(),a.FileSaver={exports:{}}.exports}})(this,function(){"use strict";function b(a,b){return"undefined"==typeof b?b={autoBom:!1}:"object"!=typeof b&&(console.warn("Deprecated: Expected third argument to be a object"),b={autoBom:!b}),b.autoBom&&/^\s*(?:text\/\S*|application\/xml|\S*\/\S*\+xml)\s*;.*charset\s*=\s*utf-8/i.test(a.type)?new Blob(["\uFEFF",a],{type:a.type}):a}function c(a,b,c){var d=new XMLHttpRequest;d.open("GET",a),d.responseType="blob",d.onload=function(){g(d.response,b,c)},d.onerror=function(){console.error("could not download file")},d.send()}function d(a){var b=new XMLHttpRequest;b.open("HEAD",a,!1);try{b.send()}catch(a){}return 200<=b.status&&299>=b.status}function e(a){try{a.dispatchEvent(new MouseEvent("click"))}catch(c){var b=document.createEvent("MouseEvents");b.initMouseEvent("click",!0,!0,window,0,0,0,80,20,!1,!1,!1,!1,0,null),a.dispatchEvent(b)}}var f="object"==typeof window&&window.window===window?window:"object"==typeof self&&self.self===self?self:"object"==typeof global&&global.global===global?global:void 0,a=f.navigator&&/Macintosh/.test(navigator.userAgent)&&/AppleWebKit/.test(navigator.userAgent)&&!/Safari/.test(navigator.userAgent),g=f.saveAs||("object"!=typeof window||window!==f?function(){}:"download"in HTMLAnchorElement.prototype&&!a?function(b,g,h){var i=f.URL||f.webkitURL,j=document.createElement("a");g=g||b.name||"download",j.download=g,j.rel="noopener","string"==typeof b?(j.href=b,j.origin===location.origin?e(j):d(j.href)?c(b,g,h):e(j,j.target="_blank")):(j.href=i.createObjectURL(b),setTimeout(function(){i.revokeObjectURL(j.href)},4E4),setTimeout(function(){e(j)},0))}:"msSaveOrOpenBlob"in navigator?function(f,g,h){if(g=g||f.name||"download","string"!=typeof f)navigator.msSaveOrOpenBlob(b(f,h),g);else if(d(f))c(f,g,h);else{var i=document.createElement("a");i.href=f,i.target="_blank",setTimeout(function(){e(i)})}}:function(b,d,e,g){if(g=g||open("","_blank"),g&&(g.document.title=g.document.body.innerText="downloading..."),"string"==typeof b)return c(b,d,e);var h="application/octet-stream"===b.type,i=/constructor/i.test(f.HTMLElement)||f.safari,j=/CriOS\/[\d]+/.test(navigator.userAgent);if((j||h&&i||a)&&"undefined"!=typeof FileReader){var k=new FileReader;k.onloadend=function(){var a=k.result;a=j?a:a.replace(/^data:[^;]*;/,"data:attachment/file;"),g?g.location.href=a:location=a,g=null},k.readAsDataURL(b)}else{var l=f.URL||f.webkitURL,m=l.createObjectURL(b);g?g.location=m:location.href=m,g=null,setTimeout(function(){l.revokeObjectURL(m)},4E4)}});f.saveAs=g.saveAs=g,"undefined"!=typeof module&&(module.exports=g)});
 
 
 }).call(this)}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{}],265:[function(require,module,exports){
+},{}],296:[function(require,module,exports){
 /*!
- * jQuery JavaScript Library v3.7.0
+ * jQuery JavaScript Library v3.7.1
  * https://jquery.com/
  *
  * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license
  * https://jquery.org/license
  *
- * Date: 2023-05-11T18:29Z
+ * Date: 2023-08-28T13:37Z
  */
 ( function( global, factory ) {
 
@@ -38360,7 +34895,7 @@ function toType( obj ) {
 
 
 
-var version = "3.7.0",
+var version = "3.7.1",
 
 	rhtmlSuffix = /HTML$/i,
 
@@ -38624,9 +35159,14 @@ jQuery.extend( {
 				// Do not traverse comment nodes
 				ret += jQuery.text( node );
 			}
-		} else if ( nodeType === 1 || nodeType === 9 || nodeType === 11 ) {
+		}
+		if ( nodeType === 1 || nodeType === 11 ) {
 			return elem.textContent;
-		} else if ( nodeType === 3 || nodeType === 4 ) {
+		}
+		if ( nodeType === 9 ) {
+			return elem.documentElement.textContent;
+		}
+		if ( nodeType === 3 || nodeType === 4 ) {
 			return elem.nodeValue;
 		}
 
@@ -39339,12 +35879,17 @@ function setDocument( node ) {
 		documentElement.msMatchesSelector;
 
 	// Support: IE 9 - 11+, Edge 12 - 18+
-	// Accessing iframe documents after unload throws "permission denied" errors (see trac-13936)
-	// Support: IE 11+, Edge 17 - 18+
-	// IE/Edge sometimes throw a "Permission denied" error when strict-comparing
-	// two documents; shallow comparisons work.
-	// eslint-disable-next-line eqeqeq
-	if ( preferredDoc != document &&
+	// Accessing iframe documents after unload throws "permission denied" errors
+	// (see trac-13936).
+	// Limit the fix to IE & Edge Legacy; despite Edge 15+ implementing `matches`,
+	// all IE 9+ and Edge Legacy versions implement `msMatchesSelector` as well.
+	if ( documentElement.msMatchesSelector &&
+
+		// Support: IE 11+, Edge 17 - 18+
+		// IE/Edge sometimes throw a "Permission denied" error when strict-comparing
+		// two documents; shallow comparisons work.
+		// eslint-disable-next-line eqeqeq
+		preferredDoc != document &&
 		( subWindow = document.defaultView ) && subWindow.top !== subWindow ) {
 
 		// Support: IE 9 - 11+, Edge 12 - 18+
@@ -40907,12 +37452,12 @@ jQuery.find = find;
 jQuery.expr[ ":" ] = jQuery.expr.pseudos;
 jQuery.unique = jQuery.uniqueSort;
 
-// These have always been private, but they used to be documented
-// as part of Sizzle so let's maintain them in the 3.x line
-// for backwards compatibility purposes.
+// These have always been private, but they used to be documented as part of
+// Sizzle so let's maintain them for now for backwards compatibility purposes.
 find.compile = compile;
 find.select = select;
 find.setDocument = setDocument;
+find.tokenize = tokenize;
 
 find.escape = jQuery.escapeSelector;
 find.getText = jQuery.text;
@@ -44126,7 +40671,7 @@ function domManip( collection, args, callback, ignored ) {
 			if ( hasScripts ) {
 				doc = scripts[ scripts.length - 1 ].ownerDocument;
 
-				// Reenable scripts
+				// Re-enable scripts
 				jQuery.map( scripts, restoreScript );
 
 				// Evaluate executable scripts on first document insertion
@@ -44583,7 +41128,7 @@ var rboxStyle = new RegExp( cssExpand.join( "|" ), "i" );
 				trChild = document.createElement( "div" );
 
 				table.style.cssText = "position:absolute;left:-11111px;border-collapse:separate";
-				tr.style.cssText = "border:1px solid";
+				tr.style.cssText = "box-sizing:content-box;border:1px solid";
 
 				// Support: Chrome 86+
 				// Height set through cssText does not get applied.
@@ -44595,7 +41140,7 @@ var rboxStyle = new RegExp( cssExpand.join( "|" ), "i" );
 				// In our bodyBackground.html iframe,
 				// display for all div elements is set to "inline",
 				// which causes a problem only in Android 8 Chrome 86.
-				// Ensuring the div is display: block
+				// Ensuring the div is `display: block`
 				// gets around this issue.
 				trChild.style.display = "block";
 
@@ -48763,7 +45308,9 @@ jQuery.fn.extend( {
 	},
 
 	hover: function( fnOver, fnOut ) {
-		return this.mouseenter( fnOver ).mouseleave( fnOut || fnOver );
+		return this
+			.on( "mouseenter", fnOver )
+			.on( "mouseleave", fnOut || fnOver );
 	}
 } );
 
@@ -48916,7 +45463,7 @@ if ( typeof noGlobal === "undefined" ) {
 return jQuery;
 } );
 
-},{}],266:[function(require,module,exports){
+},{}],297:[function(require,module,exports){
 // Top level file is just a mixin of submodules & constants
 'use strict';
 
@@ -48932,7 +45479,7 @@ assign(pako, deflate, inflate, constants);
 
 module.exports = pako;
 
-},{"./lib/deflate":267,"./lib/inflate":268,"./lib/utils/common":269,"./lib/zlib/constants":272}],267:[function(require,module,exports){
+},{"./lib/deflate":298,"./lib/inflate":299,"./lib/utils/common":300,"./lib/zlib/constants":303}],298:[function(require,module,exports){
 'use strict';
 
 
@@ -49334,7 +45881,7 @@ exports.deflate = deflate;
 exports.deflateRaw = deflateRaw;
 exports.gzip = gzip;
 
-},{"./utils/common":269,"./utils/strings":270,"./zlib/deflate":274,"./zlib/messages":279,"./zlib/zstream":281}],268:[function(require,module,exports){
+},{"./utils/common":300,"./utils/strings":301,"./zlib/deflate":305,"./zlib/messages":310,"./zlib/zstream":312}],299:[function(require,module,exports){
 'use strict';
 
 
@@ -49759,7 +46306,7 @@ exports.inflate = inflate;
 exports.inflateRaw = inflateRaw;
 exports.ungzip  = inflate;
 
-},{"./utils/common":269,"./utils/strings":270,"./zlib/constants":272,"./zlib/gzheader":275,"./zlib/inflate":277,"./zlib/messages":279,"./zlib/zstream":281}],269:[function(require,module,exports){
+},{"./utils/common":300,"./utils/strings":301,"./zlib/constants":303,"./zlib/gzheader":306,"./zlib/inflate":308,"./zlib/messages":310,"./zlib/zstream":312}],300:[function(require,module,exports){
 'use strict';
 
 
@@ -49866,7 +46413,7 @@ exports.setTyped = function (on) {
 
 exports.setTyped(TYPED_OK);
 
-},{}],270:[function(require,module,exports){
+},{}],301:[function(require,module,exports){
 // String encode/decode helpers
 'use strict';
 
@@ -50055,7 +46602,7 @@ exports.utf8border = function (buf, max) {
   return (pos + _utf8len[buf[pos]] > max) ? pos : max;
 };
 
-},{"./common":269}],271:[function(require,module,exports){
+},{"./common":300}],302:[function(require,module,exports){
 'use strict';
 
 // Note: adler32 takes 12% for level 0 and 2% for level 6.
@@ -50108,7 +46655,7 @@ function adler32(adler, buf, len, pos) {
 
 module.exports = adler32;
 
-},{}],272:[function(require,module,exports){
+},{}],303:[function(require,module,exports){
 'use strict';
 
 // (C) 1995-2013 Jean-loup Gailly and Mark Adler
@@ -50178,7 +46725,7 @@ module.exports = {
   //Z_NULL:                 null // Use -1 or null inline, depending on var type
 };
 
-},{}],273:[function(require,module,exports){
+},{}],304:[function(require,module,exports){
 'use strict';
 
 // Note: we can't get significant speed boost here.
@@ -50239,7 +46786,7 @@ function crc32(crc, buf, len, pos) {
 
 module.exports = crc32;
 
-},{}],274:[function(require,module,exports){
+},{}],305:[function(require,module,exports){
 'use strict';
 
 // (C) 1995-2013 Jean-loup Gailly and Mark Adler
@@ -52115,7 +48662,7 @@ exports.deflatePrime = deflatePrime;
 exports.deflateTune = deflateTune;
 */
 
-},{"../utils/common":269,"./adler32":271,"./crc32":273,"./messages":279,"./trees":280}],275:[function(require,module,exports){
+},{"../utils/common":300,"./adler32":302,"./crc32":304,"./messages":310,"./trees":311}],306:[function(require,module,exports){
 'use strict';
 
 // (C) 1995-2013 Jean-loup Gailly and Mark Adler
@@ -52175,7 +48722,7 @@ function GZheader() {
 
 module.exports = GZheader;
 
-},{}],276:[function(require,module,exports){
+},{}],307:[function(require,module,exports){
 'use strict';
 
 // (C) 1995-2013 Jean-loup Gailly and Mark Adler
@@ -52522,7 +49069,7 @@ module.exports = function inflate_fast(strm, start) {
   return;
 };
 
-},{}],277:[function(require,module,exports){
+},{}],308:[function(require,module,exports){
 'use strict';
 
 // (C) 1995-2013 Jean-loup Gailly and Mark Adler
@@ -54080,7 +50627,7 @@ exports.inflateSyncPoint = inflateSyncPoint;
 exports.inflateUndermine = inflateUndermine;
 */
 
-},{"../utils/common":269,"./adler32":271,"./crc32":273,"./inffast":276,"./inftrees":278}],278:[function(require,module,exports){
+},{"../utils/common":300,"./adler32":302,"./crc32":304,"./inffast":307,"./inftrees":309}],309:[function(require,module,exports){
 'use strict';
 
 // (C) 1995-2013 Jean-loup Gailly and Mark Adler
@@ -54425,7 +50972,7 @@ module.exports = function inflate_table(type, lens, lens_index, codes, table, ta
   return 0;
 };
 
-},{"../utils/common":269}],279:[function(require,module,exports){
+},{"../utils/common":300}],310:[function(require,module,exports){
 'use strict';
 
 // (C) 1995-2013 Jean-loup Gailly and Mark Adler
@@ -54459,7 +51006,7 @@ module.exports = {
   '-6':   'incompatible version' /* Z_VERSION_ERROR (-6) */
 };
 
-},{}],280:[function(require,module,exports){
+},{}],311:[function(require,module,exports){
 'use strict';
 
 // (C) 1995-2013 Jean-loup Gailly and Mark Adler
@@ -55683,7 +52230,7 @@ exports._tr_flush_block  = _tr_flush_block;
 exports._tr_tally = _tr_tally;
 exports._tr_align = _tr_align;
 
-},{"../utils/common":269}],281:[function(require,module,exports){
+},{"../utils/common":300}],312:[function(require,module,exports){
 'use strict';
 
 // (C) 1995-2013 Jean-loup Gailly and Mark Adler
@@ -55732,7 +52279,7 @@ function ZStream() {
 
 module.exports = ZStream;
 
-},{}],282:[function(require,module,exports){
+},{}],313:[function(require,module,exports){
 /*!
  * PEP v0.4.3 | https://github.com/jquery/PEP
  * Copyright jQuery Foundation and other contributors | http://jquery.org/license
@@ -56580,11 +53127,9 @@ module.exports = ZStream;
     prepareButtonsForMove: function(e, inEvent) {
       var p = pointermap.get(this.POINTER_ID);
 
-	  const button_num  = [0,1,2];
-	  // Update buttons state after possible out-of-document mouseup.
-	  if(!button_num.includes(inEvent.button)||!p){ 
-		//   if (inEvent.button === 0 || !p) {
-			e.buttons = 0;
+      // Update buttons state after possible out-of-document mouseup.
+      if (inEvent.which === 0 || !p) {
+        e.buttons = 0;
       } else {
         e.buttons = p.buttons;
       }
@@ -57208,2636 +53753,7 @@ module.exports = ZStream;
   return pointerevents;
 
 }));
-},{}],283:[function(require,module,exports){
-(function (global){(function (){
-/**!
- * @fileOverview Kickass library to create and place poppers near their reference elements.
- * @version 1.16.1
- * @license
- * Copyright (c) 2016 Federico Zivolo and contributors
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
- */
-(function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-	typeof define === 'function' && define.amd ? define(factory) :
-	(global.Popper = factory());
-}(this, (function () { 'use strict';
-
-var isBrowser = typeof window !== 'undefined' && typeof document !== 'undefined' && typeof navigator !== 'undefined';
-
-var timeoutDuration = function () {
-  var longerTimeoutBrowsers = ['Edge', 'Trident', 'Firefox'];
-  for (var i = 0; i < longerTimeoutBrowsers.length; i += 1) {
-    if (isBrowser && navigator.userAgent.indexOf(longerTimeoutBrowsers[i]) >= 0) {
-      return 1;
-    }
-  }
-  return 0;
-}();
-
-function microtaskDebounce(fn) {
-  var called = false;
-  return function () {
-    if (called) {
-      return;
-    }
-    called = true;
-    window.Promise.resolve().then(function () {
-      called = false;
-      fn();
-    });
-  };
-}
-
-function taskDebounce(fn) {
-  var scheduled = false;
-  return function () {
-    if (!scheduled) {
-      scheduled = true;
-      setTimeout(function () {
-        scheduled = false;
-        fn();
-      }, timeoutDuration);
-    }
-  };
-}
-
-var supportsMicroTasks = isBrowser && window.Promise;
-
-/**
-* Create a debounced version of a method, that's asynchronously deferred
-* but called in the minimum time possible.
-*
-* @method
-* @memberof Popper.Utils
-* @argument {Function} fn
-* @returns {Function}
-*/
-var debounce = supportsMicroTasks ? microtaskDebounce : taskDebounce;
-
-/**
- * Check if the given variable is a function
- * @method
- * @memberof Popper.Utils
- * @argument {Any} functionToCheck - variable to check
- * @returns {Boolean} answer to: is a function?
- */
-function isFunction(functionToCheck) {
-  var getType = {};
-  return functionToCheck && getType.toString.call(functionToCheck) === '[object Function]';
-}
-
-/**
- * Get CSS computed property of the given element
- * @method
- * @memberof Popper.Utils
- * @argument {Eement} element
- * @argument {String} property
- */
-function getStyleComputedProperty(element, property) {
-  if (element.nodeType !== 1) {
-    return [];
-  }
-  // NOTE: 1 DOM access here
-  var window = element.ownerDocument.defaultView;
-  var css = window.getComputedStyle(element, null);
-  return property ? css[property] : css;
-}
-
-/**
- * Returns the parentNode or the host of the element
- * @method
- * @memberof Popper.Utils
- * @argument {Element} element
- * @returns {Element} parent
- */
-function getParentNode(element) {
-  if (element.nodeName === 'HTML') {
-    return element;
-  }
-  return element.parentNode || element.host;
-}
-
-/**
- * Returns the scrolling parent of the given element
- * @method
- * @memberof Popper.Utils
- * @argument {Element} element
- * @returns {Element} scroll parent
- */
-function getScrollParent(element) {
-  // Return body, `getScroll` will take care to get the correct `scrollTop` from it
-  if (!element) {
-    return document.body;
-  }
-
-  switch (element.nodeName) {
-    case 'HTML':
-    case 'BODY':
-      return element.ownerDocument.body;
-    case '#document':
-      return element.body;
-  }
-
-  // Firefox want us to check `-x` and `-y` variations as well
-
-  var _getStyleComputedProp = getStyleComputedProperty(element),
-      overflow = _getStyleComputedProp.overflow,
-      overflowX = _getStyleComputedProp.overflowX,
-      overflowY = _getStyleComputedProp.overflowY;
-
-  if (/(auto|scroll|overlay)/.test(overflow + overflowY + overflowX)) {
-    return element;
-  }
-
-  return getScrollParent(getParentNode(element));
-}
-
-/**
- * Returns the reference node of the reference object, or the reference object itself.
- * @method
- * @memberof Popper.Utils
- * @param {Element|Object} reference - the reference element (the popper will be relative to this)
- * @returns {Element} parent
- */
-function getReferenceNode(reference) {
-  return reference && reference.referenceNode ? reference.referenceNode : reference;
-}
-
-var isIE11 = isBrowser && !!(window.MSInputMethodContext && document.documentMode);
-var isIE10 = isBrowser && /MSIE 10/.test(navigator.userAgent);
-
-/**
- * Determines if the browser is Internet Explorer
- * @method
- * @memberof Popper.Utils
- * @param {Number} version to check
- * @returns {Boolean} isIE
- */
-function isIE(version) {
-  if (version === 11) {
-    return isIE11;
-  }
-  if (version === 10) {
-    return isIE10;
-  }
-  return isIE11 || isIE10;
-}
-
-/**
- * Returns the offset parent of the given element
- * @method
- * @memberof Popper.Utils
- * @argument {Element} element
- * @returns {Element} offset parent
- */
-function getOffsetParent(element) {
-  if (!element) {
-    return document.documentElement;
-  }
-
-  var noOffsetParent = isIE(10) ? document.body : null;
-
-  // NOTE: 1 DOM access here
-  var offsetParent = element.offsetParent || null;
-  // Skip hidden elements which don't have an offsetParent
-  while (offsetParent === noOffsetParent && element.nextElementSibling) {
-    offsetParent = (element = element.nextElementSibling).offsetParent;
-  }
-
-  var nodeName = offsetParent && offsetParent.nodeName;
-
-  if (!nodeName || nodeName === 'BODY' || nodeName === 'HTML') {
-    return element ? element.ownerDocument.documentElement : document.documentElement;
-  }
-
-  // .offsetParent will return the closest TH, TD or TABLE in case
-  // no offsetParent is present, I hate this job...
-  if (['TH', 'TD', 'TABLE'].indexOf(offsetParent.nodeName) !== -1 && getStyleComputedProperty(offsetParent, 'position') === 'static') {
-    return getOffsetParent(offsetParent);
-  }
-
-  return offsetParent;
-}
-
-function isOffsetContainer(element) {
-  var nodeName = element.nodeName;
-
-  if (nodeName === 'BODY') {
-    return false;
-  }
-  return nodeName === 'HTML' || getOffsetParent(element.firstElementChild) === element;
-}
-
-/**
- * Finds the root node (document, shadowDOM root) of the given element
- * @method
- * @memberof Popper.Utils
- * @argument {Element} node
- * @returns {Element} root node
- */
-function getRoot(node) {
-  if (node.parentNode !== null) {
-    return getRoot(node.parentNode);
-  }
-
-  return node;
-}
-
-/**
- * Finds the offset parent common to the two provided nodes
- * @method
- * @memberof Popper.Utils
- * @argument {Element} element1
- * @argument {Element} element2
- * @returns {Element} common offset parent
- */
-function findCommonOffsetParent(element1, element2) {
-  // This check is needed to avoid errors in case one of the elements isn't defined for any reason
-  if (!element1 || !element1.nodeType || !element2 || !element2.nodeType) {
-    return document.documentElement;
-  }
-
-  // Here we make sure to give as "start" the element that comes first in the DOM
-  var order = element1.compareDocumentPosition(element2) & Node.DOCUMENT_POSITION_FOLLOWING;
-  var start = order ? element1 : element2;
-  var end = order ? element2 : element1;
-
-  // Get common ancestor container
-  var range = document.createRange();
-  range.setStart(start, 0);
-  range.setEnd(end, 0);
-  var commonAncestorContainer = range.commonAncestorContainer;
-
-  // Both nodes are inside #document
-
-  if (element1 !== commonAncestorContainer && element2 !== commonAncestorContainer || start.contains(end)) {
-    if (isOffsetContainer(commonAncestorContainer)) {
-      return commonAncestorContainer;
-    }
-
-    return getOffsetParent(commonAncestorContainer);
-  }
-
-  // one of the nodes is inside shadowDOM, find which one
-  var element1root = getRoot(element1);
-  if (element1root.host) {
-    return findCommonOffsetParent(element1root.host, element2);
-  } else {
-    return findCommonOffsetParent(element1, getRoot(element2).host);
-  }
-}
-
-/**
- * Gets the scroll value of the given element in the given side (top and left)
- * @method
- * @memberof Popper.Utils
- * @argument {Element} element
- * @argument {String} side `top` or `left`
- * @returns {number} amount of scrolled pixels
- */
-function getScroll(element) {
-  var side = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'top';
-
-  var upperSide = side === 'top' ? 'scrollTop' : 'scrollLeft';
-  var nodeName = element.nodeName;
-
-  if (nodeName === 'BODY' || nodeName === 'HTML') {
-    var html = element.ownerDocument.documentElement;
-    var scrollingElement = element.ownerDocument.scrollingElement || html;
-    return scrollingElement[upperSide];
-  }
-
-  return element[upperSide];
-}
-
-/*
- * Sum or subtract the element scroll values (left and top) from a given rect object
- * @method
- * @memberof Popper.Utils
- * @param {Object} rect - Rect object you want to change
- * @param {HTMLElement} element - The element from the function reads the scroll values
- * @param {Boolean} subtract - set to true if you want to subtract the scroll values
- * @return {Object} rect - The modifier rect object
- */
-function includeScroll(rect, element) {
-  var subtract = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-
-  var scrollTop = getScroll(element, 'top');
-  var scrollLeft = getScroll(element, 'left');
-  var modifier = subtract ? -1 : 1;
-  rect.top += scrollTop * modifier;
-  rect.bottom += scrollTop * modifier;
-  rect.left += scrollLeft * modifier;
-  rect.right += scrollLeft * modifier;
-  return rect;
-}
-
-/*
- * Helper to detect borders of a given element
- * @method
- * @memberof Popper.Utils
- * @param {CSSStyleDeclaration} styles
- * Result of `getStyleComputedProperty` on the given element
- * @param {String} axis - `x` or `y`
- * @return {number} borders - The borders size of the given axis
- */
-
-function getBordersSize(styles, axis) {
-  var sideA = axis === 'x' ? 'Left' : 'Top';
-  var sideB = sideA === 'Left' ? 'Right' : 'Bottom';
-
-  return parseFloat(styles['border' + sideA + 'Width']) + parseFloat(styles['border' + sideB + 'Width']);
-}
-
-function getSize(axis, body, html, computedStyle) {
-  return Math.max(body['offset' + axis], body['scroll' + axis], html['client' + axis], html['offset' + axis], html['scroll' + axis], isIE(10) ? parseInt(html['offset' + axis]) + parseInt(computedStyle['margin' + (axis === 'Height' ? 'Top' : 'Left')]) + parseInt(computedStyle['margin' + (axis === 'Height' ? 'Bottom' : 'Right')]) : 0);
-}
-
-function getWindowSizes(document) {
-  var body = document.body;
-  var html = document.documentElement;
-  var computedStyle = isIE(10) && getComputedStyle(html);
-
-  return {
-    height: getSize('Height', body, html, computedStyle),
-    width: getSize('Width', body, html, computedStyle)
-  };
-}
-
-var classCallCheck = function (instance, Constructor) {
-  if (!(instance instanceof Constructor)) {
-    throw new TypeError("Cannot call a class as a function");
-  }
-};
-
-var createClass = function () {
-  function defineProperties(target, props) {
-    for (var i = 0; i < props.length; i++) {
-      var descriptor = props[i];
-      descriptor.enumerable = descriptor.enumerable || false;
-      descriptor.configurable = true;
-      if ("value" in descriptor) descriptor.writable = true;
-      Object.defineProperty(target, descriptor.key, descriptor);
-    }
-  }
-
-  return function (Constructor, protoProps, staticProps) {
-    if (protoProps) defineProperties(Constructor.prototype, protoProps);
-    if (staticProps) defineProperties(Constructor, staticProps);
-    return Constructor;
-  };
-}();
-
-
-
-
-
-var defineProperty = function (obj, key, value) {
-  if (key in obj) {
-    Object.defineProperty(obj, key, {
-      value: value,
-      enumerable: true,
-      configurable: true,
-      writable: true
-    });
-  } else {
-    obj[key] = value;
-  }
-
-  return obj;
-};
-
-var _extends = Object.assign || function (target) {
-  for (var i = 1; i < arguments.length; i++) {
-    var source = arguments[i];
-
-    for (var key in source) {
-      if (Object.prototype.hasOwnProperty.call(source, key)) {
-        target[key] = source[key];
-      }
-    }
-  }
-
-  return target;
-};
-
-/**
- * Given element offsets, generate an output similar to getBoundingClientRect
- * @method
- * @memberof Popper.Utils
- * @argument {Object} offsets
- * @returns {Object} ClientRect like output
- */
-function getClientRect(offsets) {
-  return _extends({}, offsets, {
-    right: offsets.left + offsets.width,
-    bottom: offsets.top + offsets.height
-  });
-}
-
-/**
- * Get bounding client rect of given element
- * @method
- * @memberof Popper.Utils
- * @param {HTMLElement} element
- * @return {Object} client rect
- */
-function getBoundingClientRect(element) {
-  var rect = {};
-
-  // IE10 10 FIX: Please, don't ask, the element isn't
-  // considered in DOM in some circumstances...
-  // This isn't reproducible in IE10 compatibility mode of IE11
-  try {
-    if (isIE(10)) {
-      rect = element.getBoundingClientRect();
-      var scrollTop = getScroll(element, 'top');
-      var scrollLeft = getScroll(element, 'left');
-      rect.top += scrollTop;
-      rect.left += scrollLeft;
-      rect.bottom += scrollTop;
-      rect.right += scrollLeft;
-    } else {
-      rect = element.getBoundingClientRect();
-    }
-  } catch (e) {}
-
-  var result = {
-    left: rect.left,
-    top: rect.top,
-    width: rect.right - rect.left,
-    height: rect.bottom - rect.top
-  };
-
-  // subtract scrollbar size from sizes
-  var sizes = element.nodeName === 'HTML' ? getWindowSizes(element.ownerDocument) : {};
-  var width = sizes.width || element.clientWidth || result.width;
-  var height = sizes.height || element.clientHeight || result.height;
-
-  var horizScrollbar = element.offsetWidth - width;
-  var vertScrollbar = element.offsetHeight - height;
-
-  // if an hypothetical scrollbar is detected, we must be sure it's not a `border`
-  // we make this check conditional for performance reasons
-  if (horizScrollbar || vertScrollbar) {
-    var styles = getStyleComputedProperty(element);
-    horizScrollbar -= getBordersSize(styles, 'x');
-    vertScrollbar -= getBordersSize(styles, 'y');
-
-    result.width -= horizScrollbar;
-    result.height -= vertScrollbar;
-  }
-
-  return getClientRect(result);
-}
-
-function getOffsetRectRelativeToArbitraryNode(children, parent) {
-  var fixedPosition = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-
-  var isIE10 = isIE(10);
-  var isHTML = parent.nodeName === 'HTML';
-  var childrenRect = getBoundingClientRect(children);
-  var parentRect = getBoundingClientRect(parent);
-  var scrollParent = getScrollParent(children);
-
-  var styles = getStyleComputedProperty(parent);
-  var borderTopWidth = parseFloat(styles.borderTopWidth);
-  var borderLeftWidth = parseFloat(styles.borderLeftWidth);
-
-  // In cases where the parent is fixed, we must ignore negative scroll in offset calc
-  if (fixedPosition && isHTML) {
-    parentRect.top = Math.max(parentRect.top, 0);
-    parentRect.left = Math.max(parentRect.left, 0);
-  }
-  var offsets = getClientRect({
-    top: childrenRect.top - parentRect.top - borderTopWidth,
-    left: childrenRect.left - parentRect.left - borderLeftWidth,
-    width: childrenRect.width,
-    height: childrenRect.height
-  });
-  offsets.marginTop = 0;
-  offsets.marginLeft = 0;
-
-  // Subtract margins of documentElement in case it's being used as parent
-  // we do this only on HTML because it's the only element that behaves
-  // differently when margins are applied to it. The margins are included in
-  // the box of the documentElement, in the other cases not.
-  if (!isIE10 && isHTML) {
-    var marginTop = parseFloat(styles.marginTop);
-    var marginLeft = parseFloat(styles.marginLeft);
-
-    offsets.top -= borderTopWidth - marginTop;
-    offsets.bottom -= borderTopWidth - marginTop;
-    offsets.left -= borderLeftWidth - marginLeft;
-    offsets.right -= borderLeftWidth - marginLeft;
-
-    // Attach marginTop and marginLeft because in some circumstances we may need them
-    offsets.marginTop = marginTop;
-    offsets.marginLeft = marginLeft;
-  }
-
-  if (isIE10 && !fixedPosition ? parent.contains(scrollParent) : parent === scrollParent && scrollParent.nodeName !== 'BODY') {
-    offsets = includeScroll(offsets, parent);
-  }
-
-  return offsets;
-}
-
-function getViewportOffsetRectRelativeToArtbitraryNode(element) {
-  var excludeScroll = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-
-  var html = element.ownerDocument.documentElement;
-  var relativeOffset = getOffsetRectRelativeToArbitraryNode(element, html);
-  var width = Math.max(html.clientWidth, window.innerWidth || 0);
-  var height = Math.max(html.clientHeight, window.innerHeight || 0);
-
-  var scrollTop = !excludeScroll ? getScroll(html) : 0;
-  var scrollLeft = !excludeScroll ? getScroll(html, 'left') : 0;
-
-  var offset = {
-    top: scrollTop - relativeOffset.top + relativeOffset.marginTop,
-    left: scrollLeft - relativeOffset.left + relativeOffset.marginLeft,
-    width: width,
-    height: height
-  };
-
-  return getClientRect(offset);
-}
-
-/**
- * Check if the given element is fixed or is inside a fixed parent
- * @method
- * @memberof Popper.Utils
- * @argument {Element} element
- * @argument {Element} customContainer
- * @returns {Boolean} answer to "isFixed?"
- */
-function isFixed(element) {
-  var nodeName = element.nodeName;
-  if (nodeName === 'BODY' || nodeName === 'HTML') {
-    return false;
-  }
-  if (getStyleComputedProperty(element, 'position') === 'fixed') {
-    return true;
-  }
-  var parentNode = getParentNode(element);
-  if (!parentNode) {
-    return false;
-  }
-  return isFixed(parentNode);
-}
-
-/**
- * Finds the first parent of an element that has a transformed property defined
- * @method
- * @memberof Popper.Utils
- * @argument {Element} element
- * @returns {Element} first transformed parent or documentElement
- */
-
-function getFixedPositionOffsetParent(element) {
-  // This check is needed to avoid errors in case one of the elements isn't defined for any reason
-  if (!element || !element.parentElement || isIE()) {
-    return document.documentElement;
-  }
-  var el = element.parentElement;
-  while (el && getStyleComputedProperty(el, 'transform') === 'none') {
-    el = el.parentElement;
-  }
-  return el || document.documentElement;
-}
-
-/**
- * Computed the boundaries limits and return them
- * @method
- * @memberof Popper.Utils
- * @param {HTMLElement} popper
- * @param {HTMLElement} reference
- * @param {number} padding
- * @param {HTMLElement} boundariesElement - Element used to define the boundaries
- * @param {Boolean} fixedPosition - Is in fixed position mode
- * @returns {Object} Coordinates of the boundaries
- */
-function getBoundaries(popper, reference, padding, boundariesElement) {
-  var fixedPosition = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : false;
-
-  // NOTE: 1 DOM access here
-
-  var boundaries = { top: 0, left: 0 };
-  var offsetParent = fixedPosition ? getFixedPositionOffsetParent(popper) : findCommonOffsetParent(popper, getReferenceNode(reference));
-
-  // Handle viewport case
-  if (boundariesElement === 'viewport') {
-    boundaries = getViewportOffsetRectRelativeToArtbitraryNode(offsetParent, fixedPosition);
-  } else {
-    // Handle other cases based on DOM element used as boundaries
-    var boundariesNode = void 0;
-    if (boundariesElement === 'scrollParent') {
-      boundariesNode = getScrollParent(getParentNode(reference));
-      if (boundariesNode.nodeName === 'BODY') {
-        boundariesNode = popper.ownerDocument.documentElement;
-      }
-    } else if (boundariesElement === 'window') {
-      boundariesNode = popper.ownerDocument.documentElement;
-    } else {
-      boundariesNode = boundariesElement;
-    }
-
-    var offsets = getOffsetRectRelativeToArbitraryNode(boundariesNode, offsetParent, fixedPosition);
-
-    // In case of HTML, we need a different computation
-    if (boundariesNode.nodeName === 'HTML' && !isFixed(offsetParent)) {
-      var _getWindowSizes = getWindowSizes(popper.ownerDocument),
-          height = _getWindowSizes.height,
-          width = _getWindowSizes.width;
-
-      boundaries.top += offsets.top - offsets.marginTop;
-      boundaries.bottom = height + offsets.top;
-      boundaries.left += offsets.left - offsets.marginLeft;
-      boundaries.right = width + offsets.left;
-    } else {
-      // for all the other DOM elements, this one is good
-      boundaries = offsets;
-    }
-  }
-
-  // Add paddings
-  padding = padding || 0;
-  var isPaddingNumber = typeof padding === 'number';
-  boundaries.left += isPaddingNumber ? padding : padding.left || 0;
-  boundaries.top += isPaddingNumber ? padding : padding.top || 0;
-  boundaries.right -= isPaddingNumber ? padding : padding.right || 0;
-  boundaries.bottom -= isPaddingNumber ? padding : padding.bottom || 0;
-
-  return boundaries;
-}
-
-function getArea(_ref) {
-  var width = _ref.width,
-      height = _ref.height;
-
-  return width * height;
-}
-
-/**
- * Utility used to transform the `auto` placement to the placement with more
- * available space.
- * @method
- * @memberof Popper.Utils
- * @argument {Object} data - The data object generated by update method
- * @argument {Object} options - Modifiers configuration and options
- * @returns {Object} The data object, properly modified
- */
-function computeAutoPlacement(placement, refRect, popper, reference, boundariesElement) {
-  var padding = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : 0;
-
-  if (placement.indexOf('auto') === -1) {
-    return placement;
-  }
-
-  var boundaries = getBoundaries(popper, reference, padding, boundariesElement);
-
-  var rects = {
-    top: {
-      width: boundaries.width,
-      height: refRect.top - boundaries.top
-    },
-    right: {
-      width: boundaries.right - refRect.right,
-      height: boundaries.height
-    },
-    bottom: {
-      width: boundaries.width,
-      height: boundaries.bottom - refRect.bottom
-    },
-    left: {
-      width: refRect.left - boundaries.left,
-      height: boundaries.height
-    }
-  };
-
-  var sortedAreas = Object.keys(rects).map(function (key) {
-    return _extends({
-      key: key
-    }, rects[key], {
-      area: getArea(rects[key])
-    });
-  }).sort(function (a, b) {
-    return b.area - a.area;
-  });
-
-  var filteredAreas = sortedAreas.filter(function (_ref2) {
-    var width = _ref2.width,
-        height = _ref2.height;
-    return width >= popper.clientWidth && height >= popper.clientHeight;
-  });
-
-  var computedPlacement = filteredAreas.length > 0 ? filteredAreas[0].key : sortedAreas[0].key;
-
-  var variation = placement.split('-')[1];
-
-  return computedPlacement + (variation ? '-' + variation : '');
-}
-
-/**
- * Get offsets to the reference element
- * @method
- * @memberof Popper.Utils
- * @param {Object} state
- * @param {Element} popper - the popper element
- * @param {Element} reference - the reference element (the popper will be relative to this)
- * @param {Element} fixedPosition - is in fixed position mode
- * @returns {Object} An object containing the offsets which will be applied to the popper
- */
-function getReferenceOffsets(state, popper, reference) {
-  var fixedPosition = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
-
-  var commonOffsetParent = fixedPosition ? getFixedPositionOffsetParent(popper) : findCommonOffsetParent(popper, getReferenceNode(reference));
-  return getOffsetRectRelativeToArbitraryNode(reference, commonOffsetParent, fixedPosition);
-}
-
-/**
- * Get the outer sizes of the given element (offset size + margins)
- * @method
- * @memberof Popper.Utils
- * @argument {Element} element
- * @returns {Object} object containing width and height properties
- */
-function getOuterSizes(element) {
-  var window = element.ownerDocument.defaultView;
-  var styles = window.getComputedStyle(element);
-  var x = parseFloat(styles.marginTop || 0) + parseFloat(styles.marginBottom || 0);
-  var y = parseFloat(styles.marginLeft || 0) + parseFloat(styles.marginRight || 0);
-  var result = {
-    width: element.offsetWidth + y,
-    height: element.offsetHeight + x
-  };
-  return result;
-}
-
-/**
- * Get the opposite placement of the given one
- * @method
- * @memberof Popper.Utils
- * @argument {String} placement
- * @returns {String} flipped placement
- */
-function getOppositePlacement(placement) {
-  var hash = { left: 'right', right: 'left', bottom: 'top', top: 'bottom' };
-  return placement.replace(/left|right|bottom|top/g, function (matched) {
-    return hash[matched];
-  });
-}
-
-/**
- * Get offsets to the popper
- * @method
- * @memberof Popper.Utils
- * @param {Object} position - CSS position the Popper will get applied
- * @param {HTMLElement} popper - the popper element
- * @param {Object} referenceOffsets - the reference offsets (the popper will be relative to this)
- * @param {String} placement - one of the valid placement options
- * @returns {Object} popperOffsets - An object containing the offsets which will be applied to the popper
- */
-function getPopperOffsets(popper, referenceOffsets, placement) {
-  placement = placement.split('-')[0];
-
-  // Get popper node sizes
-  var popperRect = getOuterSizes(popper);
-
-  // Add position, width and height to our offsets object
-  var popperOffsets = {
-    width: popperRect.width,
-    height: popperRect.height
-  };
-
-  // depending by the popper placement we have to compute its offsets slightly differently
-  var isHoriz = ['right', 'left'].indexOf(placement) !== -1;
-  var mainSide = isHoriz ? 'top' : 'left';
-  var secondarySide = isHoriz ? 'left' : 'top';
-  var measurement = isHoriz ? 'height' : 'width';
-  var secondaryMeasurement = !isHoriz ? 'height' : 'width';
-
-  popperOffsets[mainSide] = referenceOffsets[mainSide] + referenceOffsets[measurement] / 2 - popperRect[measurement] / 2;
-  if (placement === secondarySide) {
-    popperOffsets[secondarySide] = referenceOffsets[secondarySide] - popperRect[secondaryMeasurement];
-  } else {
-    popperOffsets[secondarySide] = referenceOffsets[getOppositePlacement(secondarySide)];
-  }
-
-  return popperOffsets;
-}
-
-/**
- * Mimics the `find` method of Array
- * @method
- * @memberof Popper.Utils
- * @argument {Array} arr
- * @argument prop
- * @argument value
- * @returns index or -1
- */
-function find(arr, check) {
-  // use native find if supported
-  if (Array.prototype.find) {
-    return arr.find(check);
-  }
-
-  // use `filter` to obtain the same behavior of `find`
-  return arr.filter(check)[0];
-}
-
-/**
- * Return the index of the matching object
- * @method
- * @memberof Popper.Utils
- * @argument {Array} arr
- * @argument prop
- * @argument value
- * @returns index or -1
- */
-function findIndex(arr, prop, value) {
-  // use native findIndex if supported
-  if (Array.prototype.findIndex) {
-    return arr.findIndex(function (cur) {
-      return cur[prop] === value;
-    });
-  }
-
-  // use `find` + `indexOf` if `findIndex` isn't supported
-  var match = find(arr, function (obj) {
-    return obj[prop] === value;
-  });
-  return arr.indexOf(match);
-}
-
-/**
- * Loop trough the list of modifiers and run them in order,
- * each of them will then edit the data object.
- * @method
- * @memberof Popper.Utils
- * @param {dataObject} data
- * @param {Array} modifiers
- * @param {String} ends - Optional modifier name used as stopper
- * @returns {dataObject}
- */
-function runModifiers(modifiers, data, ends) {
-  var modifiersToRun = ends === undefined ? modifiers : modifiers.slice(0, findIndex(modifiers, 'name', ends));
-
-  modifiersToRun.forEach(function (modifier) {
-    if (modifier['function']) {
-      // eslint-disable-line dot-notation
-      console.warn('`modifier.function` is deprecated, use `modifier.fn`!');
-    }
-    var fn = modifier['function'] || modifier.fn; // eslint-disable-line dot-notation
-    if (modifier.enabled && isFunction(fn)) {
-      // Add properties to offsets to make them a complete clientRect object
-      // we do this before each modifier to make sure the previous one doesn't
-      // mess with these values
-      data.offsets.popper = getClientRect(data.offsets.popper);
-      data.offsets.reference = getClientRect(data.offsets.reference);
-
-      data = fn(data, modifier);
-    }
-  });
-
-  return data;
-}
-
-/**
- * Updates the position of the popper, computing the new offsets and applying
- * the new style.<br />
- * Prefer `scheduleUpdate` over `update` because of performance reasons.
- * @method
- * @memberof Popper
- */
-function update() {
-  // if popper is destroyed, don't perform any further update
-  if (this.state.isDestroyed) {
-    return;
-  }
-
-  var data = {
-    instance: this,
-    styles: {},
-    arrowStyles: {},
-    attributes: {},
-    flipped: false,
-    offsets: {}
-  };
-
-  // compute reference element offsets
-  data.offsets.reference = getReferenceOffsets(this.state, this.popper, this.reference, this.options.positionFixed);
-
-  // compute auto placement, store placement inside the data object,
-  // modifiers will be able to edit `placement` if needed
-  // and refer to originalPlacement to know the original value
-  data.placement = computeAutoPlacement(this.options.placement, data.offsets.reference, this.popper, this.reference, this.options.modifiers.flip.boundariesElement, this.options.modifiers.flip.padding);
-
-  // store the computed placement inside `originalPlacement`
-  data.originalPlacement = data.placement;
-
-  data.positionFixed = this.options.positionFixed;
-
-  // compute the popper offsets
-  data.offsets.popper = getPopperOffsets(this.popper, data.offsets.reference, data.placement);
-
-  data.offsets.popper.position = this.options.positionFixed ? 'fixed' : 'absolute';
-
-  // run the modifiers
-  data = runModifiers(this.modifiers, data);
-
-  // the first `update` will call `onCreate` callback
-  // the other ones will call `onUpdate` callback
-  if (!this.state.isCreated) {
-    this.state.isCreated = true;
-    this.options.onCreate(data);
-  } else {
-    this.options.onUpdate(data);
-  }
-}
-
-/**
- * Helper used to know if the given modifier is enabled.
- * @method
- * @memberof Popper.Utils
- * @returns {Boolean}
- */
-function isModifierEnabled(modifiers, modifierName) {
-  return modifiers.some(function (_ref) {
-    var name = _ref.name,
-        enabled = _ref.enabled;
-    return enabled && name === modifierName;
-  });
-}
-
-/**
- * Get the prefixed supported property name
- * @method
- * @memberof Popper.Utils
- * @argument {String} property (camelCase)
- * @returns {String} prefixed property (camelCase or PascalCase, depending on the vendor prefix)
- */
-function getSupportedPropertyName(property) {
-  var prefixes = [false, 'ms', 'Webkit', 'Moz', 'O'];
-  var upperProp = property.charAt(0).toUpperCase() + property.slice(1);
-
-  for (var i = 0; i < prefixes.length; i++) {
-    var prefix = prefixes[i];
-    var toCheck = prefix ? '' + prefix + upperProp : property;
-    if (typeof document.body.style[toCheck] !== 'undefined') {
-      return toCheck;
-    }
-  }
-  return null;
-}
-
-/**
- * Destroys the popper.
- * @method
- * @memberof Popper
- */
-function destroy() {
-  this.state.isDestroyed = true;
-
-  // touch DOM only if `applyStyle` modifier is enabled
-  if (isModifierEnabled(this.modifiers, 'applyStyle')) {
-    this.popper.removeAttribute('x-placement');
-    this.popper.style.position = '';
-    this.popper.style.top = '';
-    this.popper.style.left = '';
-    this.popper.style.right = '';
-    this.popper.style.bottom = '';
-    this.popper.style.willChange = '';
-    this.popper.style[getSupportedPropertyName('transform')] = '';
-  }
-
-  this.disableEventListeners();
-
-  // remove the popper if user explicitly asked for the deletion on destroy
-  // do not use `remove` because IE11 doesn't support it
-  if (this.options.removeOnDestroy) {
-    this.popper.parentNode.removeChild(this.popper);
-  }
-  return this;
-}
-
-/**
- * Get the window associated with the element
- * @argument {Element} element
- * @returns {Window}
- */
-function getWindow(element) {
-  var ownerDocument = element.ownerDocument;
-  return ownerDocument ? ownerDocument.defaultView : window;
-}
-
-function attachToScrollParents(scrollParent, event, callback, scrollParents) {
-  var isBody = scrollParent.nodeName === 'BODY';
-  var target = isBody ? scrollParent.ownerDocument.defaultView : scrollParent;
-  target.addEventListener(event, callback, { passive: true });
-
-  if (!isBody) {
-    attachToScrollParents(getScrollParent(target.parentNode), event, callback, scrollParents);
-  }
-  scrollParents.push(target);
-}
-
-/**
- * Setup needed event listeners used to update the popper position
- * @method
- * @memberof Popper.Utils
- * @private
- */
-function setupEventListeners(reference, options, state, updateBound) {
-  // Resize event listener on window
-  state.updateBound = updateBound;
-  getWindow(reference).addEventListener('resize', state.updateBound, { passive: true });
-
-  // Scroll event listener on scroll parents
-  var scrollElement = getScrollParent(reference);
-  attachToScrollParents(scrollElement, 'scroll', state.updateBound, state.scrollParents);
-  state.scrollElement = scrollElement;
-  state.eventsEnabled = true;
-
-  return state;
-}
-
-/**
- * It will add resize/scroll events and start recalculating
- * position of the popper element when they are triggered.
- * @method
- * @memberof Popper
- */
-function enableEventListeners() {
-  if (!this.state.eventsEnabled) {
-    this.state = setupEventListeners(this.reference, this.options, this.state, this.scheduleUpdate);
-  }
-}
-
-/**
- * Remove event listeners used to update the popper position
- * @method
- * @memberof Popper.Utils
- * @private
- */
-function removeEventListeners(reference, state) {
-  // Remove resize event listener on window
-  getWindow(reference).removeEventListener('resize', state.updateBound);
-
-  // Remove scroll event listener on scroll parents
-  state.scrollParents.forEach(function (target) {
-    target.removeEventListener('scroll', state.updateBound);
-  });
-
-  // Reset state
-  state.updateBound = null;
-  state.scrollParents = [];
-  state.scrollElement = null;
-  state.eventsEnabled = false;
-  return state;
-}
-
-/**
- * It will remove resize/scroll events and won't recalculate popper position
- * when they are triggered. It also won't trigger `onUpdate` callback anymore,
- * unless you call `update` method manually.
- * @method
- * @memberof Popper
- */
-function disableEventListeners() {
-  if (this.state.eventsEnabled) {
-    cancelAnimationFrame(this.scheduleUpdate);
-    this.state = removeEventListeners(this.reference, this.state);
-  }
-}
-
-/**
- * Tells if a given input is a number
- * @method
- * @memberof Popper.Utils
- * @param {*} input to check
- * @return {Boolean}
- */
-function isNumeric(n) {
-  return n !== '' && !isNaN(parseFloat(n)) && isFinite(n);
-}
-
-/**
- * Set the style to the given popper
- * @method
- * @memberof Popper.Utils
- * @argument {Element} element - Element to apply the style to
- * @argument {Object} styles
- * Object with a list of properties and values which will be applied to the element
- */
-function setStyles(element, styles) {
-  Object.keys(styles).forEach(function (prop) {
-    var unit = '';
-    // add unit if the value is numeric and is one of the following
-    if (['width', 'height', 'top', 'right', 'bottom', 'left'].indexOf(prop) !== -1 && isNumeric(styles[prop])) {
-      unit = 'px';
-    }
-    element.style[prop] = styles[prop] + unit;
-  });
-}
-
-/**
- * Set the attributes to the given popper
- * @method
- * @memberof Popper.Utils
- * @argument {Element} element - Element to apply the attributes to
- * @argument {Object} styles
- * Object with a list of properties and values which will be applied to the element
- */
-function setAttributes(element, attributes) {
-  Object.keys(attributes).forEach(function (prop) {
-    var value = attributes[prop];
-    if (value !== false) {
-      element.setAttribute(prop, attributes[prop]);
-    } else {
-      element.removeAttribute(prop);
-    }
-  });
-}
-
-/**
- * @function
- * @memberof Modifiers
- * @argument {Object} data - The data object generated by `update` method
- * @argument {Object} data.styles - List of style properties - values to apply to popper element
- * @argument {Object} data.attributes - List of attribute properties - values to apply to popper element
- * @argument {Object} options - Modifiers configuration and options
- * @returns {Object} The same data object
- */
-function applyStyle(data) {
-  // any property present in `data.styles` will be applied to the popper,
-  // in this way we can make the 3rd party modifiers add custom styles to it
-  // Be aware, modifiers could override the properties defined in the previous
-  // lines of this modifier!
-  setStyles(data.instance.popper, data.styles);
-
-  // any property present in `data.attributes` will be applied to the popper,
-  // they will be set as HTML attributes of the element
-  setAttributes(data.instance.popper, data.attributes);
-
-  // if arrowElement is defined and arrowStyles has some properties
-  if (data.arrowElement && Object.keys(data.arrowStyles).length) {
-    setStyles(data.arrowElement, data.arrowStyles);
-  }
-
-  return data;
-}
-
-/**
- * Set the x-placement attribute before everything else because it could be used
- * to add margins to the popper margins needs to be calculated to get the
- * correct popper offsets.
- * @method
- * @memberof Popper.modifiers
- * @param {HTMLElement} reference - The reference element used to position the popper
- * @param {HTMLElement} popper - The HTML element used as popper
- * @param {Object} options - Popper.js options
- */
-function applyStyleOnLoad(reference, popper, options, modifierOptions, state) {
-  // compute reference element offsets
-  var referenceOffsets = getReferenceOffsets(state, popper, reference, options.positionFixed);
-
-  // compute auto placement, store placement inside the data object,
-  // modifiers will be able to edit `placement` if needed
-  // and refer to originalPlacement to know the original value
-  var placement = computeAutoPlacement(options.placement, referenceOffsets, popper, reference, options.modifiers.flip.boundariesElement, options.modifiers.flip.padding);
-
-  popper.setAttribute('x-placement', placement);
-
-  // Apply `position` to popper before anything else because
-  // without the position applied we can't guarantee correct computations
-  setStyles(popper, { position: options.positionFixed ? 'fixed' : 'absolute' });
-
-  return options;
-}
-
-/**
- * @function
- * @memberof Popper.Utils
- * @argument {Object} data - The data object generated by `update` method
- * @argument {Boolean} shouldRound - If the offsets should be rounded at all
- * @returns {Object} The popper's position offsets rounded
- *
- * The tale of pixel-perfect positioning. It's still not 100% perfect, but as
- * good as it can be within reason.
- * Discussion here: https://github.com/FezVrasta/popper.js/pull/715
- *
- * Low DPI screens cause a popper to be blurry if not using full pixels (Safari
- * as well on High DPI screens).
- *
- * Firefox prefers no rounding for positioning and does not have blurriness on
- * high DPI screens.
- *
- * Only horizontal placement and left/right values need to be considered.
- */
-function getRoundedOffsets(data, shouldRound) {
-  var _data$offsets = data.offsets,
-      popper = _data$offsets.popper,
-      reference = _data$offsets.reference;
-  var round = Math.round,
-      floor = Math.floor;
-
-  var noRound = function noRound(v) {
-    return v;
-  };
-
-  var referenceWidth = round(reference.width);
-  var popperWidth = round(popper.width);
-
-  var isVertical = ['left', 'right'].indexOf(data.placement) !== -1;
-  var isVariation = data.placement.indexOf('-') !== -1;
-  var sameWidthParity = referenceWidth % 2 === popperWidth % 2;
-  var bothOddWidth = referenceWidth % 2 === 1 && popperWidth % 2 === 1;
-
-  var horizontalToInteger = !shouldRound ? noRound : isVertical || isVariation || sameWidthParity ? round : floor;
-  var verticalToInteger = !shouldRound ? noRound : round;
-
-  return {
-    left: horizontalToInteger(bothOddWidth && !isVariation && shouldRound ? popper.left - 1 : popper.left),
-    top: verticalToInteger(popper.top),
-    bottom: verticalToInteger(popper.bottom),
-    right: horizontalToInteger(popper.right)
-  };
-}
-
-var isFirefox = isBrowser && /Firefox/i.test(navigator.userAgent);
-
-/**
- * @function
- * @memberof Modifiers
- * @argument {Object} data - The data object generated by `update` method
- * @argument {Object} options - Modifiers configuration and options
- * @returns {Object} The data object, properly modified
- */
-function computeStyle(data, options) {
-  var x = options.x,
-      y = options.y;
-  var popper = data.offsets.popper;
-
-  // Remove this legacy support in Popper.js v2
-
-  var legacyGpuAccelerationOption = find(data.instance.modifiers, function (modifier) {
-    return modifier.name === 'applyStyle';
-  }).gpuAcceleration;
-  if (legacyGpuAccelerationOption !== undefined) {
-    console.warn('WARNING: `gpuAcceleration` option moved to `computeStyle` modifier and will not be supported in future versions of Popper.js!');
-  }
-  var gpuAcceleration = legacyGpuAccelerationOption !== undefined ? legacyGpuAccelerationOption : options.gpuAcceleration;
-
-  var offsetParent = getOffsetParent(data.instance.popper);
-  var offsetParentRect = getBoundingClientRect(offsetParent);
-
-  // Styles
-  var styles = {
-    position: popper.position
-  };
-
-  var offsets = getRoundedOffsets(data, window.devicePixelRatio < 2 || !isFirefox);
-
-  var sideA = x === 'bottom' ? 'top' : 'bottom';
-  var sideB = y === 'right' ? 'left' : 'right';
-
-  // if gpuAcceleration is set to `true` and transform is supported,
-  //  we use `translate3d` to apply the position to the popper we
-  // automatically use the supported prefixed version if needed
-  var prefixedProperty = getSupportedPropertyName('transform');
-
-  // now, let's make a step back and look at this code closely (wtf?)
-  // If the content of the popper grows once it's been positioned, it
-  // may happen that the popper gets misplaced because of the new content
-  // overflowing its reference element
-  // To avoid this problem, we provide two options (x and y), which allow
-  // the consumer to define the offset origin.
-  // If we position a popper on top of a reference element, we can set
-  // `x` to `top` to make the popper grow towards its top instead of
-  // its bottom.
-  var left = void 0,
-      top = void 0;
-  if (sideA === 'bottom') {
-    // when offsetParent is <html> the positioning is relative to the bottom of the screen (excluding the scrollbar)
-    // and not the bottom of the html element
-    if (offsetParent.nodeName === 'HTML') {
-      top = -offsetParent.clientHeight + offsets.bottom;
-    } else {
-      top = -offsetParentRect.height + offsets.bottom;
-    }
-  } else {
-    top = offsets.top;
-  }
-  if (sideB === 'right') {
-    if (offsetParent.nodeName === 'HTML') {
-      left = -offsetParent.clientWidth + offsets.right;
-    } else {
-      left = -offsetParentRect.width + offsets.right;
-    }
-  } else {
-    left = offsets.left;
-  }
-  if (gpuAcceleration && prefixedProperty) {
-    styles[prefixedProperty] = 'translate3d(' + left + 'px, ' + top + 'px, 0)';
-    styles[sideA] = 0;
-    styles[sideB] = 0;
-    styles.willChange = 'transform';
-  } else {
-    // othwerise, we use the standard `top`, `left`, `bottom` and `right` properties
-    var invertTop = sideA === 'bottom' ? -1 : 1;
-    var invertLeft = sideB === 'right' ? -1 : 1;
-    styles[sideA] = top * invertTop;
-    styles[sideB] = left * invertLeft;
-    styles.willChange = sideA + ', ' + sideB;
-  }
-
-  // Attributes
-  var attributes = {
-    'x-placement': data.placement
-  };
-
-  // Update `data` attributes, styles and arrowStyles
-  data.attributes = _extends({}, attributes, data.attributes);
-  data.styles = _extends({}, styles, data.styles);
-  data.arrowStyles = _extends({}, data.offsets.arrow, data.arrowStyles);
-
-  return data;
-}
-
-/**
- * Helper used to know if the given modifier depends from another one.<br />
- * It checks if the needed modifier is listed and enabled.
- * @method
- * @memberof Popper.Utils
- * @param {Array} modifiers - list of modifiers
- * @param {String} requestingName - name of requesting modifier
- * @param {String} requestedName - name of requested modifier
- * @returns {Boolean}
- */
-function isModifierRequired(modifiers, requestingName, requestedName) {
-  var requesting = find(modifiers, function (_ref) {
-    var name = _ref.name;
-    return name === requestingName;
-  });
-
-  var isRequired = !!requesting && modifiers.some(function (modifier) {
-    return modifier.name === requestedName && modifier.enabled && modifier.order < requesting.order;
-  });
-
-  if (!isRequired) {
-    var _requesting = '`' + requestingName + '`';
-    var requested = '`' + requestedName + '`';
-    console.warn(requested + ' modifier is required by ' + _requesting + ' modifier in order to work, be sure to include it before ' + _requesting + '!');
-  }
-  return isRequired;
-}
-
-/**
- * @function
- * @memberof Modifiers
- * @argument {Object} data - The data object generated by update method
- * @argument {Object} options - Modifiers configuration and options
- * @returns {Object} The data object, properly modified
- */
-function arrow(data, options) {
-  var _data$offsets$arrow;
-
-  // arrow depends on keepTogether in order to work
-  if (!isModifierRequired(data.instance.modifiers, 'arrow', 'keepTogether')) {
-    return data;
-  }
-
-  var arrowElement = options.element;
-
-  // if arrowElement is a string, suppose it's a CSS selector
-  if (typeof arrowElement === 'string') {
-    arrowElement = data.instance.popper.querySelector(arrowElement);
-
-    // if arrowElement is not found, don't run the modifier
-    if (!arrowElement) {
-      return data;
-    }
-  } else {
-    // if the arrowElement isn't a query selector we must check that the
-    // provided DOM node is child of its popper node
-    if (!data.instance.popper.contains(arrowElement)) {
-      console.warn('WARNING: `arrow.element` must be child of its popper element!');
-      return data;
-    }
-  }
-
-  var placement = data.placement.split('-')[0];
-  var _data$offsets = data.offsets,
-      popper = _data$offsets.popper,
-      reference = _data$offsets.reference;
-
-  var isVertical = ['left', 'right'].indexOf(placement) !== -1;
-
-  var len = isVertical ? 'height' : 'width';
-  var sideCapitalized = isVertical ? 'Top' : 'Left';
-  var side = sideCapitalized.toLowerCase();
-  var altSide = isVertical ? 'left' : 'top';
-  var opSide = isVertical ? 'bottom' : 'right';
-  var arrowElementSize = getOuterSizes(arrowElement)[len];
-
-  //
-  // extends keepTogether behavior making sure the popper and its
-  // reference have enough pixels in conjunction
-  //
-
-  // top/left side
-  if (reference[opSide] - arrowElementSize < popper[side]) {
-    data.offsets.popper[side] -= popper[side] - (reference[opSide] - arrowElementSize);
-  }
-  // bottom/right side
-  if (reference[side] + arrowElementSize > popper[opSide]) {
-    data.offsets.popper[side] += reference[side] + arrowElementSize - popper[opSide];
-  }
-  data.offsets.popper = getClientRect(data.offsets.popper);
-
-  // compute center of the popper
-  var center = reference[side] + reference[len] / 2 - arrowElementSize / 2;
-
-  // Compute the sideValue using the updated popper offsets
-  // take popper margin in account because we don't have this info available
-  var css = getStyleComputedProperty(data.instance.popper);
-  var popperMarginSide = parseFloat(css['margin' + sideCapitalized]);
-  var popperBorderSide = parseFloat(css['border' + sideCapitalized + 'Width']);
-  var sideValue = center - data.offsets.popper[side] - popperMarginSide - popperBorderSide;
-
-  // prevent arrowElement from being placed not contiguously to its popper
-  sideValue = Math.max(Math.min(popper[len] - arrowElementSize, sideValue), 0);
-
-  data.arrowElement = arrowElement;
-  data.offsets.arrow = (_data$offsets$arrow = {}, defineProperty(_data$offsets$arrow, side, Math.round(sideValue)), defineProperty(_data$offsets$arrow, altSide, ''), _data$offsets$arrow);
-
-  return data;
-}
-
-/**
- * Get the opposite placement variation of the given one
- * @method
- * @memberof Popper.Utils
- * @argument {String} placement variation
- * @returns {String} flipped placement variation
- */
-function getOppositeVariation(variation) {
-  if (variation === 'end') {
-    return 'start';
-  } else if (variation === 'start') {
-    return 'end';
-  }
-  return variation;
-}
-
-/**
- * List of accepted placements to use as values of the `placement` option.<br />
- * Valid placements are:
- * - `auto`
- * - `top`
- * - `right`
- * - `bottom`
- * - `left`
- *
- * Each placement can have a variation from this list:
- * - `-start`
- * - `-end`
- *
- * Variations are interpreted easily if you think of them as the left to right
- * written languages. Horizontally (`top` and `bottom`), `start` is left and `end`
- * is right.<br />
- * Vertically (`left` and `right`), `start` is top and `end` is bottom.
- *
- * Some valid examples are:
- * - `top-end` (on top of reference, right aligned)
- * - `right-start` (on right of reference, top aligned)
- * - `bottom` (on bottom, centered)
- * - `auto-end` (on the side with more space available, alignment depends by placement)
- *
- * @static
- * @type {Array}
- * @enum {String}
- * @readonly
- * @method placements
- * @memberof Popper
- */
-var placements = ['auto-start', 'auto', 'auto-end', 'top-start', 'top', 'top-end', 'right-start', 'right', 'right-end', 'bottom-end', 'bottom', 'bottom-start', 'left-end', 'left', 'left-start'];
-
-// Get rid of `auto` `auto-start` and `auto-end`
-var validPlacements = placements.slice(3);
-
-/**
- * Given an initial placement, returns all the subsequent placements
- * clockwise (or counter-clockwise).
- *
- * @method
- * @memberof Popper.Utils
- * @argument {String} placement - A valid placement (it accepts variations)
- * @argument {Boolean} counter - Set to true to walk the placements counterclockwise
- * @returns {Array} placements including their variations
- */
-function clockwise(placement) {
-  var counter = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-
-  var index = validPlacements.indexOf(placement);
-  var arr = validPlacements.slice(index + 1).concat(validPlacements.slice(0, index));
-  return counter ? arr.reverse() : arr;
-}
-
-var BEHAVIORS = {
-  FLIP: 'flip',
-  CLOCKWISE: 'clockwise',
-  COUNTERCLOCKWISE: 'counterclockwise'
-};
-
-/**
- * @function
- * @memberof Modifiers
- * @argument {Object} data - The data object generated by update method
- * @argument {Object} options - Modifiers configuration and options
- * @returns {Object} The data object, properly modified
- */
-function flip(data, options) {
-  // if `inner` modifier is enabled, we can't use the `flip` modifier
-  if (isModifierEnabled(data.instance.modifiers, 'inner')) {
-    return data;
-  }
-
-  if (data.flipped && data.placement === data.originalPlacement) {
-    // seems like flip is trying to loop, probably there's not enough space on any of the flippable sides
-    return data;
-  }
-
-  var boundaries = getBoundaries(data.instance.popper, data.instance.reference, options.padding, options.boundariesElement, data.positionFixed);
-
-  var placement = data.placement.split('-')[0];
-  var placementOpposite = getOppositePlacement(placement);
-  var variation = data.placement.split('-')[1] || '';
-
-  var flipOrder = [];
-
-  switch (options.behavior) {
-    case BEHAVIORS.FLIP:
-      flipOrder = [placement, placementOpposite];
-      break;
-    case BEHAVIORS.CLOCKWISE:
-      flipOrder = clockwise(placement);
-      break;
-    case BEHAVIORS.COUNTERCLOCKWISE:
-      flipOrder = clockwise(placement, true);
-      break;
-    default:
-      flipOrder = options.behavior;
-  }
-
-  flipOrder.forEach(function (step, index) {
-    if (placement !== step || flipOrder.length === index + 1) {
-      return data;
-    }
-
-    placement = data.placement.split('-')[0];
-    placementOpposite = getOppositePlacement(placement);
-
-    var popperOffsets = data.offsets.popper;
-    var refOffsets = data.offsets.reference;
-
-    // using floor because the reference offsets may contain decimals we are not going to consider here
-    var floor = Math.floor;
-    var overlapsRef = placement === 'left' && floor(popperOffsets.right) > floor(refOffsets.left) || placement === 'right' && floor(popperOffsets.left) < floor(refOffsets.right) || placement === 'top' && floor(popperOffsets.bottom) > floor(refOffsets.top) || placement === 'bottom' && floor(popperOffsets.top) < floor(refOffsets.bottom);
-
-    var overflowsLeft = floor(popperOffsets.left) < floor(boundaries.left);
-    var overflowsRight = floor(popperOffsets.right) > floor(boundaries.right);
-    var overflowsTop = floor(popperOffsets.top) < floor(boundaries.top);
-    var overflowsBottom = floor(popperOffsets.bottom) > floor(boundaries.bottom);
-
-    var overflowsBoundaries = placement === 'left' && overflowsLeft || placement === 'right' && overflowsRight || placement === 'top' && overflowsTop || placement === 'bottom' && overflowsBottom;
-
-    // flip the variation if required
-    var isVertical = ['top', 'bottom'].indexOf(placement) !== -1;
-
-    // flips variation if reference element overflows boundaries
-    var flippedVariationByRef = !!options.flipVariations && (isVertical && variation === 'start' && overflowsLeft || isVertical && variation === 'end' && overflowsRight || !isVertical && variation === 'start' && overflowsTop || !isVertical && variation === 'end' && overflowsBottom);
-
-    // flips variation if popper content overflows boundaries
-    var flippedVariationByContent = !!options.flipVariationsByContent && (isVertical && variation === 'start' && overflowsRight || isVertical && variation === 'end' && overflowsLeft || !isVertical && variation === 'start' && overflowsBottom || !isVertical && variation === 'end' && overflowsTop);
-
-    var flippedVariation = flippedVariationByRef || flippedVariationByContent;
-
-    if (overlapsRef || overflowsBoundaries || flippedVariation) {
-      // this boolean to detect any flip loop
-      data.flipped = true;
-
-      if (overlapsRef || overflowsBoundaries) {
-        placement = flipOrder[index + 1];
-      }
-
-      if (flippedVariation) {
-        variation = getOppositeVariation(variation);
-      }
-
-      data.placement = placement + (variation ? '-' + variation : '');
-
-      // this object contains `position`, we want to preserve it along with
-      // any additional property we may add in the future
-      data.offsets.popper = _extends({}, data.offsets.popper, getPopperOffsets(data.instance.popper, data.offsets.reference, data.placement));
-
-      data = runModifiers(data.instance.modifiers, data, 'flip');
-    }
-  });
-  return data;
-}
-
-/**
- * @function
- * @memberof Modifiers
- * @argument {Object} data - The data object generated by update method
- * @argument {Object} options - Modifiers configuration and options
- * @returns {Object} The data object, properly modified
- */
-function keepTogether(data) {
-  var _data$offsets = data.offsets,
-      popper = _data$offsets.popper,
-      reference = _data$offsets.reference;
-
-  var placement = data.placement.split('-')[0];
-  var floor = Math.floor;
-  var isVertical = ['top', 'bottom'].indexOf(placement) !== -1;
-  var side = isVertical ? 'right' : 'bottom';
-  var opSide = isVertical ? 'left' : 'top';
-  var measurement = isVertical ? 'width' : 'height';
-
-  if (popper[side] < floor(reference[opSide])) {
-    data.offsets.popper[opSide] = floor(reference[opSide]) - popper[measurement];
-  }
-  if (popper[opSide] > floor(reference[side])) {
-    data.offsets.popper[opSide] = floor(reference[side]);
-  }
-
-  return data;
-}
-
-/**
- * Converts a string containing value + unit into a px value number
- * @function
- * @memberof {modifiers~offset}
- * @private
- * @argument {String} str - Value + unit string
- * @argument {String} measurement - `height` or `width`
- * @argument {Object} popperOffsets
- * @argument {Object} referenceOffsets
- * @returns {Number|String}
- * Value in pixels, or original string if no values were extracted
- */
-function toValue(str, measurement, popperOffsets, referenceOffsets) {
-  // separate value from unit
-  var split = str.match(/((?:\-|\+)?\d*\.?\d*)(.*)/);
-  var value = +split[1];
-  var unit = split[2];
-
-  // If it's not a number it's an operator, I guess
-  if (!value) {
-    return str;
-  }
-
-  if (unit.indexOf('%') === 0) {
-    var element = void 0;
-    switch (unit) {
-      case '%p':
-        element = popperOffsets;
-        break;
-      case '%':
-      case '%r':
-      default:
-        element = referenceOffsets;
-    }
-
-    var rect = getClientRect(element);
-    return rect[measurement] / 100 * value;
-  } else if (unit === 'vh' || unit === 'vw') {
-    // if is a vh or vw, we calculate the size based on the viewport
-    var size = void 0;
-    if (unit === 'vh') {
-      size = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
-    } else {
-      size = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
-    }
-    return size / 100 * value;
-  } else {
-    // if is an explicit pixel unit, we get rid of the unit and keep the value
-    // if is an implicit unit, it's px, and we return just the value
-    return value;
-  }
-}
-
-/**
- * Parse an `offset` string to extrapolate `x` and `y` numeric offsets.
- * @function
- * @memberof {modifiers~offset}
- * @private
- * @argument {String} offset
- * @argument {Object} popperOffsets
- * @argument {Object} referenceOffsets
- * @argument {String} basePlacement
- * @returns {Array} a two cells array with x and y offsets in numbers
- */
-function parseOffset(offset, popperOffsets, referenceOffsets, basePlacement) {
-  var offsets = [0, 0];
-
-  // Use height if placement is left or right and index is 0 otherwise use width
-  // in this way the first offset will use an axis and the second one
-  // will use the other one
-  var useHeight = ['right', 'left'].indexOf(basePlacement) !== -1;
-
-  // Split the offset string to obtain a list of values and operands
-  // The regex addresses values with the plus or minus sign in front (+10, -20, etc)
-  var fragments = offset.split(/(\+|\-)/).map(function (frag) {
-    return frag.trim();
-  });
-
-  // Detect if the offset string contains a pair of values or a single one
-  // they could be separated by comma or space
-  var divider = fragments.indexOf(find(fragments, function (frag) {
-    return frag.search(/,|\s/) !== -1;
-  }));
-
-  if (fragments[divider] && fragments[divider].indexOf(',') === -1) {
-    console.warn('Offsets separated by white space(s) are deprecated, use a comma (,) instead.');
-  }
-
-  // If divider is found, we divide the list of values and operands to divide
-  // them by ofset X and Y.
-  var splitRegex = /\s*,\s*|\s+/;
-  var ops = divider !== -1 ? [fragments.slice(0, divider).concat([fragments[divider].split(splitRegex)[0]]), [fragments[divider].split(splitRegex)[1]].concat(fragments.slice(divider + 1))] : [fragments];
-
-  // Convert the values with units to absolute pixels to allow our computations
-  ops = ops.map(function (op, index) {
-    // Most of the units rely on the orientation of the popper
-    var measurement = (index === 1 ? !useHeight : useHeight) ? 'height' : 'width';
-    var mergeWithPrevious = false;
-    return op
-    // This aggregates any `+` or `-` sign that aren't considered operators
-    // e.g.: 10 + +5 => [10, +, +5]
-    .reduce(function (a, b) {
-      if (a[a.length - 1] === '' && ['+', '-'].indexOf(b) !== -1) {
-        a[a.length - 1] = b;
-        mergeWithPrevious = true;
-        return a;
-      } else if (mergeWithPrevious) {
-        a[a.length - 1] += b;
-        mergeWithPrevious = false;
-        return a;
-      } else {
-        return a.concat(b);
-      }
-    }, [])
-    // Here we convert the string values into number values (in px)
-    .map(function (str) {
-      return toValue(str, measurement, popperOffsets, referenceOffsets);
-    });
-  });
-
-  // Loop trough the offsets arrays and execute the operations
-  ops.forEach(function (op, index) {
-    op.forEach(function (frag, index2) {
-      if (isNumeric(frag)) {
-        offsets[index] += frag * (op[index2 - 1] === '-' ? -1 : 1);
-      }
-    });
-  });
-  return offsets;
-}
-
-/**
- * @function
- * @memberof Modifiers
- * @argument {Object} data - The data object generated by update method
- * @argument {Object} options - Modifiers configuration and options
- * @argument {Number|String} options.offset=0
- * The offset value as described in the modifier description
- * @returns {Object} The data object, properly modified
- */
-function offset(data, _ref) {
-  var offset = _ref.offset;
-  var placement = data.placement,
-      _data$offsets = data.offsets,
-      popper = _data$offsets.popper,
-      reference = _data$offsets.reference;
-
-  var basePlacement = placement.split('-')[0];
-
-  var offsets = void 0;
-  if (isNumeric(+offset)) {
-    offsets = [+offset, 0];
-  } else {
-    offsets = parseOffset(offset, popper, reference, basePlacement);
-  }
-
-  if (basePlacement === 'left') {
-    popper.top += offsets[0];
-    popper.left -= offsets[1];
-  } else if (basePlacement === 'right') {
-    popper.top += offsets[0];
-    popper.left += offsets[1];
-  } else if (basePlacement === 'top') {
-    popper.left += offsets[0];
-    popper.top -= offsets[1];
-  } else if (basePlacement === 'bottom') {
-    popper.left += offsets[0];
-    popper.top += offsets[1];
-  }
-
-  data.popper = popper;
-  return data;
-}
-
-/**
- * @function
- * @memberof Modifiers
- * @argument {Object} data - The data object generated by `update` method
- * @argument {Object} options - Modifiers configuration and options
- * @returns {Object} The data object, properly modified
- */
-function preventOverflow(data, options) {
-  var boundariesElement = options.boundariesElement || getOffsetParent(data.instance.popper);
-
-  // If offsetParent is the reference element, we really want to
-  // go one step up and use the next offsetParent as reference to
-  // avoid to make this modifier completely useless and look like broken
-  if (data.instance.reference === boundariesElement) {
-    boundariesElement = getOffsetParent(boundariesElement);
-  }
-
-  // NOTE: DOM access here
-  // resets the popper's position so that the document size can be calculated excluding
-  // the size of the popper element itself
-  var transformProp = getSupportedPropertyName('transform');
-  var popperStyles = data.instance.popper.style; // assignment to help minification
-  var top = popperStyles.top,
-      left = popperStyles.left,
-      transform = popperStyles[transformProp];
-
-  popperStyles.top = '';
-  popperStyles.left = '';
-  popperStyles[transformProp] = '';
-
-  var boundaries = getBoundaries(data.instance.popper, data.instance.reference, options.padding, boundariesElement, data.positionFixed);
-
-  // NOTE: DOM access here
-  // restores the original style properties after the offsets have been computed
-  popperStyles.top = top;
-  popperStyles.left = left;
-  popperStyles[transformProp] = transform;
-
-  options.boundaries = boundaries;
-
-  var order = options.priority;
-  var popper = data.offsets.popper;
-
-  var check = {
-    primary: function primary(placement) {
-      var value = popper[placement];
-      if (popper[placement] < boundaries[placement] && !options.escapeWithReference) {
-        value = Math.max(popper[placement], boundaries[placement]);
-      }
-      return defineProperty({}, placement, value);
-    },
-    secondary: function secondary(placement) {
-      var mainSide = placement === 'right' ? 'left' : 'top';
-      var value = popper[mainSide];
-      if (popper[placement] > boundaries[placement] && !options.escapeWithReference) {
-        value = Math.min(popper[mainSide], boundaries[placement] - (placement === 'right' ? popper.width : popper.height));
-      }
-      return defineProperty({}, mainSide, value);
-    }
-  };
-
-  order.forEach(function (placement) {
-    var side = ['left', 'top'].indexOf(placement) !== -1 ? 'primary' : 'secondary';
-    popper = _extends({}, popper, check[side](placement));
-  });
-
-  data.offsets.popper = popper;
-
-  return data;
-}
-
-/**
- * @function
- * @memberof Modifiers
- * @argument {Object} data - The data object generated by `update` method
- * @argument {Object} options - Modifiers configuration and options
- * @returns {Object} The data object, properly modified
- */
-function shift(data) {
-  var placement = data.placement;
-  var basePlacement = placement.split('-')[0];
-  var shiftvariation = placement.split('-')[1];
-
-  // if shift shiftvariation is specified, run the modifier
-  if (shiftvariation) {
-    var _data$offsets = data.offsets,
-        reference = _data$offsets.reference,
-        popper = _data$offsets.popper;
-
-    var isVertical = ['bottom', 'top'].indexOf(basePlacement) !== -1;
-    var side = isVertical ? 'left' : 'top';
-    var measurement = isVertical ? 'width' : 'height';
-
-    var shiftOffsets = {
-      start: defineProperty({}, side, reference[side]),
-      end: defineProperty({}, side, reference[side] + reference[measurement] - popper[measurement])
-    };
-
-    data.offsets.popper = _extends({}, popper, shiftOffsets[shiftvariation]);
-  }
-
-  return data;
-}
-
-/**
- * @function
- * @memberof Modifiers
- * @argument {Object} data - The data object generated by update method
- * @argument {Object} options - Modifiers configuration and options
- * @returns {Object} The data object, properly modified
- */
-function hide(data) {
-  if (!isModifierRequired(data.instance.modifiers, 'hide', 'preventOverflow')) {
-    return data;
-  }
-
-  var refRect = data.offsets.reference;
-  var bound = find(data.instance.modifiers, function (modifier) {
-    return modifier.name === 'preventOverflow';
-  }).boundaries;
-
-  if (refRect.bottom < bound.top || refRect.left > bound.right || refRect.top > bound.bottom || refRect.right < bound.left) {
-    // Avoid unnecessary DOM access if visibility hasn't changed
-    if (data.hide === true) {
-      return data;
-    }
-
-    data.hide = true;
-    data.attributes['x-out-of-boundaries'] = '';
-  } else {
-    // Avoid unnecessary DOM access if visibility hasn't changed
-    if (data.hide === false) {
-      return data;
-    }
-
-    data.hide = false;
-    data.attributes['x-out-of-boundaries'] = false;
-  }
-
-  return data;
-}
-
-/**
- * @function
- * @memberof Modifiers
- * @argument {Object} data - The data object generated by `update` method
- * @argument {Object} options - Modifiers configuration and options
- * @returns {Object} The data object, properly modified
- */
-function inner(data) {
-  var placement = data.placement;
-  var basePlacement = placement.split('-')[0];
-  var _data$offsets = data.offsets,
-      popper = _data$offsets.popper,
-      reference = _data$offsets.reference;
-
-  var isHoriz = ['left', 'right'].indexOf(basePlacement) !== -1;
-
-  var subtractLength = ['top', 'left'].indexOf(basePlacement) === -1;
-
-  popper[isHoriz ? 'left' : 'top'] = reference[basePlacement] - (subtractLength ? popper[isHoriz ? 'width' : 'height'] : 0);
-
-  data.placement = getOppositePlacement(placement);
-  data.offsets.popper = getClientRect(popper);
-
-  return data;
-}
-
-/**
- * Modifier function, each modifier can have a function of this type assigned
- * to its `fn` property.<br />
- * These functions will be called on each update, this means that you must
- * make sure they are performant enough to avoid performance bottlenecks.
- *
- * @function ModifierFn
- * @argument {dataObject} data - The data object generated by `update` method
- * @argument {Object} options - Modifiers configuration and options
- * @returns {dataObject} The data object, properly modified
- */
-
-/**
- * Modifiers are plugins used to alter the behavior of your poppers.<br />
- * Popper.js uses a set of 9 modifiers to provide all the basic functionalities
- * needed by the library.
- *
- * Usually you don't want to override the `order`, `fn` and `onLoad` props.
- * All the other properties are configurations that could be tweaked.
- * @namespace modifiers
- */
-var modifiers = {
-  /**
-   * Modifier used to shift the popper on the start or end of its reference
-   * element.<br />
-   * It will read the variation of the `placement` property.<br />
-   * It can be one either `-end` or `-start`.
-   * @memberof modifiers
-   * @inner
-   */
-  shift: {
-    /** @prop {number} order=100 - Index used to define the order of execution */
-    order: 100,
-    /** @prop {Boolean} enabled=true - Whether the modifier is enabled or not */
-    enabled: true,
-    /** @prop {ModifierFn} */
-    fn: shift
-  },
-
-  /**
-   * The `offset` modifier can shift your popper on both its axis.
-   *
-   * It accepts the following units:
-   * - `px` or unit-less, interpreted as pixels
-   * - `%` or `%r`, percentage relative to the length of the reference element
-   * - `%p`, percentage relative to the length of the popper element
-   * - `vw`, CSS viewport width unit
-   * - `vh`, CSS viewport height unit
-   *
-   * For length is intended the main axis relative to the placement of the popper.<br />
-   * This means that if the placement is `top` or `bottom`, the length will be the
-   * `width`. In case of `left` or `right`, it will be the `height`.
-   *
-   * You can provide a single value (as `Number` or `String`), or a pair of values
-   * as `String` divided by a comma or one (or more) white spaces.<br />
-   * The latter is a deprecated method because it leads to confusion and will be
-   * removed in v2.<br />
-   * Additionally, it accepts additions and subtractions between different units.
-   * Note that multiplications and divisions aren't supported.
-   *
-   * Valid examples are:
-   * ```
-   * 10
-   * '10%'
-   * '10, 10'
-   * '10%, 10'
-   * '10 + 10%'
-   * '10 - 5vh + 3%'
-   * '-10px + 5vh, 5px - 6%'
-   * ```
-   * > **NB**: If you desire to apply offsets to your poppers in a way that may make them overlap
-   * > with their reference element, unfortunately, you will have to disable the `flip` modifier.
-   * > You can read more on this at this [issue](https://github.com/FezVrasta/popper.js/issues/373).
-   *
-   * @memberof modifiers
-   * @inner
-   */
-  offset: {
-    /** @prop {number} order=200 - Index used to define the order of execution */
-    order: 200,
-    /** @prop {Boolean} enabled=true - Whether the modifier is enabled or not */
-    enabled: true,
-    /** @prop {ModifierFn} */
-    fn: offset,
-    /** @prop {Number|String} offset=0
-     * The offset value as described in the modifier description
-     */
-    offset: 0
-  },
-
-  /**
-   * Modifier used to prevent the popper from being positioned outside the boundary.
-   *
-   * A scenario exists where the reference itself is not within the boundaries.<br />
-   * We can say it has "escaped the boundaries" — or just "escaped".<br />
-   * In this case we need to decide whether the popper should either:
-   *
-   * - detach from the reference and remain "trapped" in the boundaries, or
-   * - if it should ignore the boundary and "escape with its reference"
-   *
-   * When `escapeWithReference` is set to`true` and reference is completely
-   * outside its boundaries, the popper will overflow (or completely leave)
-   * the boundaries in order to remain attached to the edge of the reference.
-   *
-   * @memberof modifiers
-   * @inner
-   */
-  preventOverflow: {
-    /** @prop {number} order=300 - Index used to define the order of execution */
-    order: 300,
-    /** @prop {Boolean} enabled=true - Whether the modifier is enabled or not */
-    enabled: true,
-    /** @prop {ModifierFn} */
-    fn: preventOverflow,
-    /**
-     * @prop {Array} [priority=['left','right','top','bottom']]
-     * Popper will try to prevent overflow following these priorities by default,
-     * then, it could overflow on the left and on top of the `boundariesElement`
-     */
-    priority: ['left', 'right', 'top', 'bottom'],
-    /**
-     * @prop {number} padding=5
-     * Amount of pixel used to define a minimum distance between the boundaries
-     * and the popper. This makes sure the popper always has a little padding
-     * between the edges of its container
-     */
-    padding: 5,
-    /**
-     * @prop {String|HTMLElement} boundariesElement='scrollParent'
-     * Boundaries used by the modifier. Can be `scrollParent`, `window`,
-     * `viewport` or any DOM element.
-     */
-    boundariesElement: 'scrollParent'
-  },
-
-  /**
-   * Modifier used to make sure the reference and its popper stay near each other
-   * without leaving any gap between the two. Especially useful when the arrow is
-   * enabled and you want to ensure that it points to its reference element.
-   * It cares only about the first axis. You can still have poppers with margin
-   * between the popper and its reference element.
-   * @memberof modifiers
-   * @inner
-   */
-  keepTogether: {
-    /** @prop {number} order=400 - Index used to define the order of execution */
-    order: 400,
-    /** @prop {Boolean} enabled=true - Whether the modifier is enabled or not */
-    enabled: true,
-    /** @prop {ModifierFn} */
-    fn: keepTogether
-  },
-
-  /**
-   * This modifier is used to move the `arrowElement` of the popper to make
-   * sure it is positioned between the reference element and its popper element.
-   * It will read the outer size of the `arrowElement` node to detect how many
-   * pixels of conjunction are needed.
-   *
-   * It has no effect if no `arrowElement` is provided.
-   * @memberof modifiers
-   * @inner
-   */
-  arrow: {
-    /** @prop {number} order=500 - Index used to define the order of execution */
-    order: 500,
-    /** @prop {Boolean} enabled=true - Whether the modifier is enabled or not */
-    enabled: true,
-    /** @prop {ModifierFn} */
-    fn: arrow,
-    /** @prop {String|HTMLElement} element='[x-arrow]' - Selector or node used as arrow */
-    element: '[x-arrow]'
-  },
-
-  /**
-   * Modifier used to flip the popper's placement when it starts to overlap its
-   * reference element.
-   *
-   * Requires the `preventOverflow` modifier before it in order to work.
-   *
-   * **NOTE:** this modifier will interrupt the current update cycle and will
-   * restart it if it detects the need to flip the placement.
-   * @memberof modifiers
-   * @inner
-   */
-  flip: {
-    /** @prop {number} order=600 - Index used to define the order of execution */
-    order: 600,
-    /** @prop {Boolean} enabled=true - Whether the modifier is enabled or not */
-    enabled: true,
-    /** @prop {ModifierFn} */
-    fn: flip,
-    /**
-     * @prop {String|Array} behavior='flip'
-     * The behavior used to change the popper's placement. It can be one of
-     * `flip`, `clockwise`, `counterclockwise` or an array with a list of valid
-     * placements (with optional variations)
-     */
-    behavior: 'flip',
-    /**
-     * @prop {number} padding=5
-     * The popper will flip if it hits the edges of the `boundariesElement`
-     */
-    padding: 5,
-    /**
-     * @prop {String|HTMLElement} boundariesElement='viewport'
-     * The element which will define the boundaries of the popper position.
-     * The popper will never be placed outside of the defined boundaries
-     * (except if `keepTogether` is enabled)
-     */
-    boundariesElement: 'viewport',
-    /**
-     * @prop {Boolean} flipVariations=false
-     * The popper will switch placement variation between `-start` and `-end` when
-     * the reference element overlaps its boundaries.
-     *
-     * The original placement should have a set variation.
-     */
-    flipVariations: false,
-    /**
-     * @prop {Boolean} flipVariationsByContent=false
-     * The popper will switch placement variation between `-start` and `-end` when
-     * the popper element overlaps its reference boundaries.
-     *
-     * The original placement should have a set variation.
-     */
-    flipVariationsByContent: false
-  },
-
-  /**
-   * Modifier used to make the popper flow toward the inner of the reference element.
-   * By default, when this modifier is disabled, the popper will be placed outside
-   * the reference element.
-   * @memberof modifiers
-   * @inner
-   */
-  inner: {
-    /** @prop {number} order=700 - Index used to define the order of execution */
-    order: 700,
-    /** @prop {Boolean} enabled=false - Whether the modifier is enabled or not */
-    enabled: false,
-    /** @prop {ModifierFn} */
-    fn: inner
-  },
-
-  /**
-   * Modifier used to hide the popper when its reference element is outside of the
-   * popper boundaries. It will set a `x-out-of-boundaries` attribute which can
-   * be used to hide with a CSS selector the popper when its reference is
-   * out of boundaries.
-   *
-   * Requires the `preventOverflow` modifier before it in order to work.
-   * @memberof modifiers
-   * @inner
-   */
-  hide: {
-    /** @prop {number} order=800 - Index used to define the order of execution */
-    order: 800,
-    /** @prop {Boolean} enabled=true - Whether the modifier is enabled or not */
-    enabled: true,
-    /** @prop {ModifierFn} */
-    fn: hide
-  },
-
-  /**
-   * Computes the style that will be applied to the popper element to gets
-   * properly positioned.
-   *
-   * Note that this modifier will not touch the DOM, it just prepares the styles
-   * so that `applyStyle` modifier can apply it. This separation is useful
-   * in case you need to replace `applyStyle` with a custom implementation.
-   *
-   * This modifier has `850` as `order` value to maintain backward compatibility
-   * with previous versions of Popper.js. Expect the modifiers ordering method
-   * to change in future major versions of the library.
-   *
-   * @memberof modifiers
-   * @inner
-   */
-  computeStyle: {
-    /** @prop {number} order=850 - Index used to define the order of execution */
-    order: 850,
-    /** @prop {Boolean} enabled=true - Whether the modifier is enabled or not */
-    enabled: true,
-    /** @prop {ModifierFn} */
-    fn: computeStyle,
-    /**
-     * @prop {Boolean} gpuAcceleration=true
-     * If true, it uses the CSS 3D transformation to position the popper.
-     * Otherwise, it will use the `top` and `left` properties
-     */
-    gpuAcceleration: true,
-    /**
-     * @prop {string} [x='bottom']
-     * Where to anchor the X axis (`bottom` or `top`). AKA X offset origin.
-     * Change this if your popper should grow in a direction different from `bottom`
-     */
-    x: 'bottom',
-    /**
-     * @prop {string} [x='left']
-     * Where to anchor the Y axis (`left` or `right`). AKA Y offset origin.
-     * Change this if your popper should grow in a direction different from `right`
-     */
-    y: 'right'
-  },
-
-  /**
-   * Applies the computed styles to the popper element.
-   *
-   * All the DOM manipulations are limited to this modifier. This is useful in case
-   * you want to integrate Popper.js inside a framework or view library and you
-   * want to delegate all the DOM manipulations to it.
-   *
-   * Note that if you disable this modifier, you must make sure the popper element
-   * has its position set to `absolute` before Popper.js can do its work!
-   *
-   * Just disable this modifier and define your own to achieve the desired effect.
-   *
-   * @memberof modifiers
-   * @inner
-   */
-  applyStyle: {
-    /** @prop {number} order=900 - Index used to define the order of execution */
-    order: 900,
-    /** @prop {Boolean} enabled=true - Whether the modifier is enabled or not */
-    enabled: true,
-    /** @prop {ModifierFn} */
-    fn: applyStyle,
-    /** @prop {Function} */
-    onLoad: applyStyleOnLoad,
-    /**
-     * @deprecated since version 1.10.0, the property moved to `computeStyle` modifier
-     * @prop {Boolean} gpuAcceleration=true
-     * If true, it uses the CSS 3D transformation to position the popper.
-     * Otherwise, it will use the `top` and `left` properties
-     */
-    gpuAcceleration: undefined
-  }
-};
-
-/**
- * The `dataObject` is an object containing all the information used by Popper.js.
- * This object is passed to modifiers and to the `onCreate` and `onUpdate` callbacks.
- * @name dataObject
- * @property {Object} data.instance The Popper.js instance
- * @property {String} data.placement Placement applied to popper
- * @property {String} data.originalPlacement Placement originally defined on init
- * @property {Boolean} data.flipped True if popper has been flipped by flip modifier
- * @property {Boolean} data.hide True if the reference element is out of boundaries, useful to know when to hide the popper
- * @property {HTMLElement} data.arrowElement Node used as arrow by arrow modifier
- * @property {Object} data.styles Any CSS property defined here will be applied to the popper. It expects the JavaScript nomenclature (eg. `marginBottom`)
- * @property {Object} data.arrowStyles Any CSS property defined here will be applied to the popper arrow. It expects the JavaScript nomenclature (eg. `marginBottom`)
- * @property {Object} data.boundaries Offsets of the popper boundaries
- * @property {Object} data.offsets The measurements of popper, reference and arrow elements
- * @property {Object} data.offsets.popper `top`, `left`, `width`, `height` values
- * @property {Object} data.offsets.reference `top`, `left`, `width`, `height` values
- * @property {Object} data.offsets.arrow] `top` and `left` offsets, only one of them will be different from 0
- */
-
-/**
- * Default options provided to Popper.js constructor.<br />
- * These can be overridden using the `options` argument of Popper.js.<br />
- * To override an option, simply pass an object with the same
- * structure of the `options` object, as the 3rd argument. For example:
- * ```
- * new Popper(ref, pop, {
- *   modifiers: {
- *     preventOverflow: { enabled: false }
- *   }
- * })
- * ```
- * @type {Object}
- * @static
- * @memberof Popper
- */
-var Defaults = {
-  /**
-   * Popper's placement.
-   * @prop {Popper.placements} placement='bottom'
-   */
-  placement: 'bottom',
-
-  /**
-   * Set this to true if you want popper to position it self in 'fixed' mode
-   * @prop {Boolean} positionFixed=false
-   */
-  positionFixed: false,
-
-  /**
-   * Whether events (resize, scroll) are initially enabled.
-   * @prop {Boolean} eventsEnabled=true
-   */
-  eventsEnabled: true,
-
-  /**
-   * Set to true if you want to automatically remove the popper when
-   * you call the `destroy` method.
-   * @prop {Boolean} removeOnDestroy=false
-   */
-  removeOnDestroy: false,
-
-  /**
-   * Callback called when the popper is created.<br />
-   * By default, it is set to no-op.<br />
-   * Access Popper.js instance with `data.instance`.
-   * @prop {onCreate}
-   */
-  onCreate: function onCreate() {},
-
-  /**
-   * Callback called when the popper is updated. This callback is not called
-   * on the initialization/creation of the popper, but only on subsequent
-   * updates.<br />
-   * By default, it is set to no-op.<br />
-   * Access Popper.js instance with `data.instance`.
-   * @prop {onUpdate}
-   */
-  onUpdate: function onUpdate() {},
-
-  /**
-   * List of modifiers used to modify the offsets before they are applied to the popper.
-   * They provide most of the functionalities of Popper.js.
-   * @prop {modifiers}
-   */
-  modifiers: modifiers
-};
-
-/**
- * @callback onCreate
- * @param {dataObject} data
- */
-
-/**
- * @callback onUpdate
- * @param {dataObject} data
- */
-
-// Utils
-// Methods
-var Popper = function () {
-  /**
-   * Creates a new Popper.js instance.
-   * @class Popper
-   * @param {Element|referenceObject} reference - The reference element used to position the popper
-   * @param {Element} popper - The HTML / XML element used as the popper
-   * @param {Object} options - Your custom options to override the ones defined in [Defaults](#defaults)
-   * @return {Object} instance - The generated Popper.js instance
-   */
-  function Popper(reference, popper) {
-    var _this = this;
-
-    var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
-    classCallCheck(this, Popper);
-
-    this.scheduleUpdate = function () {
-      return requestAnimationFrame(_this.update);
-    };
-
-    // make update() debounced, so that it only runs at most once-per-tick
-    this.update = debounce(this.update.bind(this));
-
-    // with {} we create a new object with the options inside it
-    this.options = _extends({}, Popper.Defaults, options);
-
-    // init state
-    this.state = {
-      isDestroyed: false,
-      isCreated: false,
-      scrollParents: []
-    };
-
-    // get reference and popper elements (allow jQuery wrappers)
-    this.reference = reference && reference.jquery ? reference[0] : reference;
-    this.popper = popper && popper.jquery ? popper[0] : popper;
-
-    // Deep merge modifiers options
-    this.options.modifiers = {};
-    Object.keys(_extends({}, Popper.Defaults.modifiers, options.modifiers)).forEach(function (name) {
-      _this.options.modifiers[name] = _extends({}, Popper.Defaults.modifiers[name] || {}, options.modifiers ? options.modifiers[name] : {});
-    });
-
-    // Refactoring modifiers' list (Object => Array)
-    this.modifiers = Object.keys(this.options.modifiers).map(function (name) {
-      return _extends({
-        name: name
-      }, _this.options.modifiers[name]);
-    })
-    // sort the modifiers by order
-    .sort(function (a, b) {
-      return a.order - b.order;
-    });
-
-    // modifiers have the ability to execute arbitrary code when Popper.js get inited
-    // such code is executed in the same order of its modifier
-    // they could add new properties to their options configuration
-    // BE AWARE: don't add options to `options.modifiers.name` but to `modifierOptions`!
-    this.modifiers.forEach(function (modifierOptions) {
-      if (modifierOptions.enabled && isFunction(modifierOptions.onLoad)) {
-        modifierOptions.onLoad(_this.reference, _this.popper, _this.options, modifierOptions, _this.state);
-      }
-    });
-
-    // fire the first update to position the popper in the right place
-    this.update();
-
-    var eventsEnabled = this.options.eventsEnabled;
-    if (eventsEnabled) {
-      // setup event listeners, they will take care of update the position in specific situations
-      this.enableEventListeners();
-    }
-
-    this.state.eventsEnabled = eventsEnabled;
-  }
-
-  // We can't use class properties because they don't get listed in the
-  // class prototype and break stuff like Sinon stubs
-
-
-  createClass(Popper, [{
-    key: 'update',
-    value: function update$$1() {
-      return update.call(this);
-    }
-  }, {
-    key: 'destroy',
-    value: function destroy$$1() {
-      return destroy.call(this);
-    }
-  }, {
-    key: 'enableEventListeners',
-    value: function enableEventListeners$$1() {
-      return enableEventListeners.call(this);
-    }
-  }, {
-    key: 'disableEventListeners',
-    value: function disableEventListeners$$1() {
-      return disableEventListeners.call(this);
-    }
-
-    /**
-     * Schedules an update. It will run on the next UI update available.
-     * @method scheduleUpdate
-     * @memberof Popper
-     */
-
-
-    /**
-     * Collection of utilities useful when writing custom modifiers.
-     * Starting from version 1.7, this method is available only if you
-     * include `popper-utils.js` before `popper.js`.
-     *
-     * **DEPRECATION**: This way to access PopperUtils is deprecated
-     * and will be removed in v2! Use the PopperUtils module directly instead.
-     * Due to the high instability of the methods contained in Utils, we can't
-     * guarantee them to follow semver. Use them at your own risk!
-     * @static
-     * @private
-     * @type {Object}
-     * @deprecated since version 1.8
-     * @member Utils
-     * @memberof Popper
-     */
-
-  }]);
-  return Popper;
-}();
-
-/**
- * The `referenceObject` is an object that provides an interface compatible with Popper.js
- * and lets you use it as replacement of a real DOM node.<br />
- * You can use this method to position a popper relatively to a set of coordinates
- * in case you don't have a DOM node to use as reference.
- *
- * ```
- * new Popper(referenceObject, popperNode);
- * ```
- *
- * NB: This feature isn't supported in Internet Explorer 10.
- * @name referenceObject
- * @property {Function} data.getBoundingClientRect
- * A function that returns a set of coordinates compatible with the native `getBoundingClientRect` method.
- * @property {number} data.clientWidth
- * An ES6 getter that will return the width of the virtual reference element.
- * @property {number} data.clientHeight
- * An ES6 getter that will return the height of the virtual reference element.
- */
-
-
-Popper.Utils = (typeof window !== 'undefined' ? window : global).PopperUtils;
-Popper.placements = placements;
-Popper.Defaults = Defaults;
-
-return Popper;
-
-})));
-
-
-}).call(this)}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-
-},{}],284:[function(require,module,exports){
+},{}],314:[function(require,module,exports){
 /*!
  * EventEmitter v5.2.9 - git.io/ee
  * Unlicense - http://unlicense.org/

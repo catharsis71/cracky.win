@@ -17,12 +17,11 @@
 		user-select: none;
 		}
 	</style>
-	<script>
-		function fixtegaki() {
-			document.addEventListener('dblclick', function(e){ e.preventDefault()}, { passive: false });
-		}
-		window.addEventListener('DOMContentLoaded',fixtegaki,false);
-	</script>
+<script>
+	document.addEventListener('DOMContentLoaded',()=>{
+	document.addEventListener('dblclick', (e)=>{ e.preventDefault()}, { passive: false });
+	});
+</script>
 </head>
 <body>
 
@@ -84,7 +83,7 @@ Tegaki.open({
 
     Tegaki.flatten().toBlob(
       function(blob) {
-        console.log(blob);
+        // console.log(blob);
 		var tgkr = Tegaki.replayRecorder ? Tegaki.replayRecorder.toBlob() : null;
 		var formData = new FormData();
 		if(tgkr){

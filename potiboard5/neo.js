@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 var Neo = function () {};
 
-Neo.version = "1.6.0";
+Neo.version = "1.6.1";
 Neo.painter;
 Neo.fullScreen = false;
 Neo.uploaded = false;
@@ -4812,6 +4812,9 @@ Neo.DrawToolBase.prototype.freeHandDownHandler = function (oe) {
     var rect = oe.getBound(oe.mouseX, oe.mouseY, oe.mouseX, oe.mouseY, r);
     oe.updateDestCanvas(rect[0], rect[1], rect[2], rect[3], true);
   }
+  if (!Neo.isMobile()){
+	this.drawCursor(oe);
+  }
 };
 
 Neo.DrawToolBase.prototype.freeHandUpHandler = function (oe) {
@@ -4846,6 +4849,9 @@ Neo.DrawToolBase.prototype.freeHandMoveHandler = function (oe) {
   var r = Math.ceil(oe.lineWidth / 2);
   var rect = oe.getBound(oe.mouseX, oe.mouseY, oe.prevMouseX, oe.prevMouseY, r);
   oe.updateDestCanvas(rect[0], rect[1], rect[2], rect[3], true);
+  if (!Neo.isMobile()){
+	this.drawCursor(oe);
+  }
 };
 
 Neo.DrawToolBase.prototype.freeHandUpMoveHandler = function (oe) {
@@ -4860,11 +4866,11 @@ Neo.DrawToolBase.prototype.freeHandUpMoveHandler = function (oe) {
 };
 
 Neo.DrawToolBase.prototype.drawCursor = function (oe) {
-  if (oe.lineWidth <= 8) return;
-  var mx = oe.mouseX;
+// if (oe.lineWidth <= 8) return;//オリジナルは8px以下のときは円カーソルを出さない
+var mx = oe.mouseX;
   var my = oe.mouseY;
   var d = oe.lineWidth;
-
+  d = (d==1) ? 2 : d;//1pxの時は2px相当の円カーソルを表示
   var x = (mx - oe.zoomX + (oe.destCanvas.width * 0.5) / oe.zoom) * oe.zoom;
   var y = (my - oe.zoomY + (oe.destCanvas.height * 0.5) / oe.zoom) * oe.zoom;
   var r = d * 0.5 * oe.zoom;
