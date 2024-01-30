@@ -1,6 +1,6 @@
 <?php
 //----------------------------------------------------------------------
-// picpost.php lot.231226 for POTI-board
+// picpost.php lot.20240128 for POTI-board
 // by さとぴあ & POTI-board redevelopment team >> https://paintbbs.sakura.ne.jp/poti/ 
 // originalscript (c)SakaQ 2005 >> http://www.punyu.net/php/
 // しぃからPOSTされたお絵かき画像をTEMPに保存
@@ -8,6 +8,7 @@
 // このスクリプトはPaintBBS（藍珠CGI）のPNG保存ルーチンを参考に
 // PHP用に作成したものです。
 //----------------------------------------------------------------------
+// 2024/01/28 拡張ヘッダーからGETによる取得に変更。ユーザーコードはCookieとSESSIONの比較のみに。
 // 2023/12/27 ユーザーコードをSESSIONに格納して、CookieとSESSIONどちらかが一致していれば投稿可能になるようにした。
 // 2023/11/17 Javaプラグインが動作する数少ないブラウザWaterfoxから投稿できなくなっていたのを修正。
 // 2023/10/10 セキュリティ対策。pchデータのmime typeチェックを追加。
@@ -66,7 +67,7 @@ $lang = ($http_langs = isset($_SERVER['HTTP_ACCEPT_LANGUAGE']) ? $_SERVER['HTTP_
 	$errormsg_5 = "There was an illegal image. The drawng image is not saved.";
 	$errormsg_6 = "Failed to open PCH file. Please try posting again after a while.";
 	$errormsg_7 = "Failed to create user data. Please try posting again after a while.";
-	$errormsg_8 = "User code mismatch.";
+	$errormsg_8 = "User code has been reissued.\nPlease try again.";
 	$errormsg_9 = "The post has been rejected.";
 	$errormsg_10 = "The image appears to be corrupted.\nPlease consider saving a screenshot to preserve your work.";
 }else{//日本語
@@ -77,7 +78,7 @@ $lang = ($http_langs = isset($_SERVER['HTTP_ACCEPT_LANGUAGE']) ? $_SERVER['HTTP_
 	$errormsg_5 = "不正な画像を検出しました。お絵かき画像は保存されません。";
 	$errormsg_6 = "PCHファイルの作成に失敗しました。時間を置いて再度投稿してみて下さい。";
 	$errormsg_7 = "ユーザーデータの作成に失敗しました。時間を置いて再度投稿してみて下さい。";
-	$errormsg_8 = "ユーザーコードが一致しません。";
+	$errormsg_8 = "ユーザーコードを再発行しました。\n再度投稿してみてください。";
 	$errormsg_9 = "拒絶されました。";
 	$errormsg_10 = "破損した画像が検出されました。\nスクリーンショットを撮り作品を保存する事を強くおすすめします。";
 }
@@ -140,35 +141,50 @@ if($imgh=="PNG\r\n"){
 }
 /* ---------- 投稿者情報記録 ---------- */
 $userdata = "$u_ip\t$u_host\t$u_agent\t$imgext";
+//GETで取得
+$tool = (string)filter_input(INPUT_GET, 'tool');
+$tool= is_paint_tool_name($tool);
+$resto = (string)filter_input(INPUT_GET, 'resto',FILTER_VALIDATE_INT);
+$repcode = (string)filter_input(INPUT_GET, 'repcode');
+$stime = (string)filter_input(INPUT_GET, 'stime',FILTER_VALIDATE_INT);
+
 // 拡張ヘッダーを取り出す
 $sendheader = substr($buffer, 1 + 8, $headerLength);
-$usercode='';
 if($sendheader){
 	$sendheader = str_replace("&amp;", "&", $sendheader);
 	parse_str($sendheader, $u);
-	$usercode = isset($u['usercode']) ? $u['usercode'] : '';
-	$tool = isset($u['tool']) ? $u['tool'] : 'Shi-Painter';
-	$tool=is_paint_tool_name($tool);
-	$resto = isset($u['resto']) ? $u['resto'] : '';
-	$repcode = isset($u['repcode']) ? $u['repcode'] : '';
-	$stime = isset($u['stime']) ? $u['stime'] : '';
+	//GETで取得できなかった時は、拡張ヘッダから取得		
+	$_tool = isset($u['tool']) ? $u['tool'] : 'Shi-Painter';
+	$tool= $tool ? $tool : is_paint_tool_name($_tool);
+	$resto = $resto ? $resto : (isset($u['resto']) ? $u['resto'] : '');
+	$repcode = $repcode ? $repcode : (isset($u['repcode']) ? $u['repcode'] : '');
+	$stime = $stime ? $stime : (isset($u['stime']) ? $u['stime'] : '');
 	$count = isset($u['count']) ? $u['count'] : 0;
-	$timer = isset($u['timer']) ? ($u['timer']/1000) : 0;
-	//usercode 差し換え認識コード 描画開始 完了時間 レス先 を追加
-	$userdata .= "\t$usercode\t$repcode\t$stime\t$time\t$resto\t$tool";
 }
-$userdata .= "\n";
-
-//CSRF
-$c_usercode=(string)filter_input(INPUT_COOKIE, 'usercode');//Waterfoxではクロスオリジン制約でCookieが取得できない
-$is_send_java=(stripos($u_agent,"Java/")!==false);//Javaプラグインからの送信ならtrue
+$timer = $time -$stime;
+//usercode 差し換え認識コード 描画開始 完了時間 レス先 を追加
 session_start();
 $session_usercode = isset($_SESSION['usercode']) ? $_SESSION['usercode'] : "";
+
+$userdata .= "\t$session_usercode\t$repcode\t$stime\t$time\t$resto\t$tool";
+$userdata .= "\n";
+
+$c_usercode=(string)filter_input(INPUT_COOKIE, 'usercode');//Waterfoxではクロスオリジン制約でCookieが取得できない
+$is_send_java=(stripos($u_agent,"Java/")!==false);//Javaプラグインからの送信ならtrue
 if(!$is_send_java
-&& (!$usercode
-|| (!$c_usercode && !$session_usercode)
-|| ($usercode !== $c_usercode) && ($usercode !== $session_usercode)
- )){
+&& (!$c_usercode || !$session_usercode)
+|| ($c_usercode !== $session_usercode)
+){
+//user-codeの発行
+if(!$c_usercode){//user-codeがなければ発行
+	$userip = get_uip();
+	$usercode = (string)substr(crypt(md5($userip.ID_SEED.uniqid()),'id'),-12);
+	//念の為にエスケープ文字があればアルファベットに変換
+	$usercode = strtr($usercode,"!\"#$%&'()+,/:;<=>?@[\\]^`/{|}~\t","ABCDEFGHIJKLMNOabcdefghijklmno");
+}
+setcookie("usercode", $usercode, time()+(86400*365),"","",false,true);//1年間
+$_SESSION['usercode']=$usercode;
+
 	die("error\n{$errormsg_8}");
 }
 if(((bool)SECURITY_TIMER && !$repcode && (bool)$timer) && ((int)$timer<(int)SECURITY_TIMER)){
@@ -180,7 +196,6 @@ if(((bool)SECURITY_TIMER && !$repcode && (bool)$timer) && ((int)$timer<(int)SECU
 	}else{
 		die("error\n描画時間が短すぎます。あと{$waiting_time}。");
 	}
-
 }
 if(((int)SECURITY_CLICK && !$repcode && $count) && ($count<(int)SECURITY_CLICK)){
 	$nokori=(int)SECURITY_CLICK-$count;
@@ -190,7 +205,6 @@ if(((int)SECURITY_CLICK && !$repcode && $count) && ($count<(int)SECURITY_CLICK))
 	}else{
 		die("error\n工程数が少なすぎます。あと{$nokori}工程。");
 	}
-
 }
 $imgfile = time().substr(microtime(),2,6);//画像ファイル名
 $imgfile = is_file(TEMP_DIR.$imgfile.$imgext) ? ((time()+1).substr(microtime(),2,6)) : $imgfile;
