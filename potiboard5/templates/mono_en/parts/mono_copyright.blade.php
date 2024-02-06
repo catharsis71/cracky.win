@@ -16,14 +16,14 @@
 		OekakiApp - <a href="http://hp.vector.co.jp/authors/VA016309/" target="_blank" rel="noopener noreferrer" title="by しぃちゃん">Shi-Painter</a>
 		<a href="https://github.com/funige/neo/" target="_blank" rel="noopener noreferrer" title="by funige">PaintBBS NEO</a>
 		<a href="https://github.com/desuwa/tegaki" target="_blank" rel="noopener noreferrer" title="by Maxime Youdine">Tegaki</a> 
-		<a href="https://github.com/bitbof/klecks"  target="_blank" rel="noopener noreferrer" title="by bitbof">klecks</a>
+		<a href="https://github.com/bitbof/klecks"  target="_blank" rel="noopener noreferrer" title="by bitbof">Klecks</a>
 		<a href="https://github.com/satopian/ChickenPaint_Be" target="_blank" rel="noopener noreferrer" title="by satopian">ChickenPaint Be</a>
 	</p>
 	@endif
 	<p>
 		UseFunction -
 		<span title="by WonderCatStudio">DynamicPalette</span> <!-- http://wondercatstudio.com/ -->
-		<a href="https://github.com/imgix/luminous" target="_blank" rel="noopener noreferrer" title="by Zebrafish Labs" >luminous</a>
+		<a href="http://lokeshdhakar.com/projects/lightbox2/" target="_blank" rel="noopener noreferrer" title="by Lokesh Dhakar" >Lightbox</a>
 		<a href="https://github.com/EFTEC/BladeOne" target="_blank" rel="noopener noreferrer" title="BladeOne">BladeOne</a>
 	</p>
 </div>
