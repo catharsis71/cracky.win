@@ -110,7 +110,7 @@ if (window.PointerEvent) {
 }
 //ブラウザデフォルトのキー操作をキャンセル
 document.addEventListener("keydown", function (e) {
-  var keys = ["+", ";", "=", "-", "s", "h", "r"];
+  var keys = ["+", ";", "=", "-", "s", "h", "r", "o"];
   if ((e.ctrlKey || e.metaKey) && keys.includes(e.key.toLowerCase()) || e.key === "Enter") {
     // console.log("e.key",e.key);
     e.preventDefault();
@@ -1000,6 +1000,10 @@ function ChickenPaint(options) {
       },
       CPPost: {
         action: function action() {
+          //画面移動の関数が定義されている時はユーザーが定義した関数で画面移動
+          if (typeof handleExit === 'function') {
+            return handleExit();
+          }
           window.location = options.postUrl;
         },
         isSupported: function isSupported() {
@@ -5327,6 +5331,9 @@ CPBlend.normalOntoOpaqueFusionWithTransparentLayer = function (fusion, layer, la
         color1 = void 0;
       if (alpha1) {
         if (false) {
+          fusion.data[pixIndex] = layer.data[pixIndex];
+          fusion.data[pixIndex + 1] = layer.data[pixIndex + 1];
+          fusion.data[pixIndex + 2] = layer.data[pixIndex + 2];
         } else {
           var invAlpha1 = 255 - alpha1;
           color1 = layer.data[pixIndex];
@@ -5500,6 +5507,9 @@ CPBlend.normalOntoOpaqueFusionWithTransparentLayerMasked = function (fusion, lay
         color1 = void 0;
       if (alpha1) {
         if (false) {
+          fusion.data[pixIndex] = layer.data[pixIndex];
+          fusion.data[pixIndex + 1] = layer.data[pixIndex + 1];
+          fusion.data[pixIndex + 2] = layer.data[pixIndex + 2];
         } else {
           var invAlpha1 = 255 - alpha1;
           color1 = layer.data[pixIndex];
@@ -18620,12 +18630,13 @@ function CPBrushPanel(controller) {
   });
   tipCombo.addEventListener("change", function (e) {
     controller.getBrushInfo().tip = parseInt(tipCombo.value, 10);
+    tipCombo.blur();
   });
-  tipCombo.onfocus = function () {
-    //フォーカスを検出したら
-    document.activeElement.blur(); //フォーカスを外す
-    // console.log(document.activeElement);
-  };
+  // tipCombo.onfocus = ()=>{//フォーカスを検出したら
+  // 	document.activeElement.blur();//フォーカスを外す
+  // 	// console.log(document.activeElement);
+
+  // }; 
 
   tipCombo.className = "form-control form-control-sm";
   tipCombo.tabIndex = -1;
@@ -21035,7 +21046,9 @@ function CPCanvas(controller) {
   canvas.addEventListener("pointerdown", handlePointerDown);
   canvas.addEventListener("pointermove", handlePointerMove);
   canvas.addEventListener("pointerup", handlePointerUp);
-  canvas.addEventListener("wheel", handleMouseWheel);
+  canvas.addEventListener("wheel", handleMouseWheel, {
+    passive: false
+  });
   document.addEventListener("keydown", handleKeyDown);
   document.addEventListener("keyup", handleKeyUp);
 
@@ -23341,12 +23354,12 @@ function CPLayersPalette(controller) {
       action: "CPSetLayerBlendMode",
       blendMode: parseInt(blendCombo.value, 10)
     });
+    blendCombo.blur();
   });
-  blendCombo.onfocus = function () {
-    //フォーカスを検出したら
-    document.activeElement.blur(); //フォーカスを外す
-    // console.log(document.activeElement);
-  };
+  // blendCombo.onfocus = ()=>{//フォーカスを検出したら
+  // 	document.activeElement.blur();//フォーカスを外す
+  // 	// console.log(document.activeElement);
+  // }; 
 
   body.appendChild(blendCombo);
   alphaSlider.title = function (value) {
