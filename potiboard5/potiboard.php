@@ -3,8 +3,8 @@
 
 // POTI-board EVO
 // バージョン :
-const POTI_VER = 'v6.25.7';
-const POTI_LOT = 'lot.20240218';
+const POTI_VER = 'v6.29.0';
+const POTI_LOT = 'lot.20240311';
 
 /*
   (C) 2018-2023 POTI改 POTI-board redevelopment team
@@ -43,9 +43,9 @@ const POTI_LOT = 'lot.20240218';
 ご質問は、<https://paintbbs.sakura.ne.jp/poti/>までどうぞ。
 */
 $en=lang_en();
-if (version_compare(PHP_VERSION, '7.2.5', '<')) {
-	die($en? "Error. PHP version 7.2.5 or higher is required for this program to work. <br>\n(Current PHP version:".PHP_VERSION.")":
-		"エラー。本プログラムの動作には PHPバージョン 7.2.5 以上が必要です。<br>\n(現在のPHPバージョン：".PHP_VERSION.")"
+if (version_compare(PHP_VERSION, '7.4.0', '<')) {
+	die($en? "Error. PHP version 7.4.0 or higher is required for this program to work. <br>\n(Current PHP version:".PHP_VERSION.")":
+		"エラー。本プログラムの動作には PHPバージョン 7.4.0 以上が必要です。<br>\n(現在のPHPバージョン：".PHP_VERSION.")"
 	);
 }
 
@@ -118,6 +118,11 @@ require(__DIR__.'/save.inc.php');
 if($save_inc_ver < 20240127){
 die($en ? "Please update save.inc.php" : "save.inc.phpを更新してください。");
 }
+require(__DIR__.'/picpost.inc.php');
+
+if($picpost_inc_ver < 20240223){
+die($en ? "Please update picpost.inc.php" : "picpost.inc.phpを更新してください。");
+}
 $path = __DIR__.'/'.IMG_DIR;
 $temppath = __DIR__.'/'.TEMP_DIR;
 
@@ -189,6 +194,8 @@ defined("X_FRAME_OPTIONS_DENY") or define("X_FRAME_OPTIONS_DENY", "1");
 defined("CHECK_PASSWORD_INPUT_ERROR_COUNT") or define("CHECK_PASSWORD_INPUT_ERROR_COUNT", "0");
 //管理者は設定に関わらすべてのアプリを使用できるようにする する:1 しない:0
 defined("ALLOW_ADMINS_TO_USE_ALL_APPS_REGARDLESS_OF_SETTINGS") or define("ALLOW_ADMINS_TO_USE_ALL_APPS_REGARDLESS_OF_SETTINGS", "1");
+//続きを描く時は設定に関わらずすべてのアプリが使用できるようにする する:1 しない:0
+defined("ALLOW_ALL_APPS_TO_CONTINUE_DRAWING") or define("ALLOW_ALL_APPS_TO_CONTINUE_DRAWING", "0");
 //URL入力欄を使用する する:1 しない:0
 defined("USE_URL_INPUT_FIELD") or define("USE_URL_INPUT_FIELD", "1");
 defined("SWITCH_SNS") or define("SWITCH_SNS", "1");
@@ -248,7 +255,6 @@ $pwd = (string)newstring(filter_input(INPUT_POST, 'pwd'));
 $type = (string)newstring(filter_input(INPUT_POST, 'type'));
 $admin = (string)filter_input(INPUT_POST, 'admin');
 $pass = (string)newstring(filter_input(INPUT_POST, 'pass'));
-
 //INPUT_GETから変数を取得
 
 $res = (string)filter_input(INPUT_GET, 'res',FILTER_VALIDATE_INT);
@@ -280,7 +286,7 @@ $_SESSION['usercode']=$usercode;
 switch($mode){
 	case 'regist':
 		if(DIARY && !$resto){
-			if($pwd && ($pwd !== $ADMIN_PASS)){
+			if(!$pwd||($pwd !== $ADMIN_PASS)){
 				return error(MSG029);
 			}
 			$admin=$pwd;
@@ -294,7 +300,7 @@ switch($mode){
 		}
 		check_same_origin(true);
 		check_password_input_error_count();
-		if($pass && ($pass !== $ADMIN_PASS)) 
+		if(!$pass || ($pass !== $ADMIN_PASS)) 
 		return error(MSG029);
 	
 		if($admin==="del") return admindel($pass);
@@ -351,6 +357,8 @@ switch($mode){
 		return sns_share::post_share_server();
 	case 'saveimage':
 		return saveimage();
+	case 'picpost':
+		return picpost::saveimage();
 	default:
 		if($res){
 			return res($res);
@@ -595,6 +603,7 @@ function form_admin_in($adminin=""){
 		$dat['select_app'] = true;
 		$dat['app_to_use'] = false;
 		$dat['use_neo'] = true;
+		$dat['use_tegaki'] = true;
 		$dat['use_shi_painter'] = true; 
 		$dat['use_chickenpaint'] = true;
 		$dat['use_klecks'] = true;
@@ -875,6 +884,11 @@ function error($mes,$dest=''){
 	safe_unlink($dest);
 	$dat['err_mode'] = true;
 	$mes=preg_replace("#<br( *)/?>#i","\n", $mes);
+	if((bool)(isset($_SERVER['HTTP_X_REQUESTED_WITH']))){
+		header('Content-type: text/plain');
+		return die(h("error\n{$mes}"));
+	}
+
 	$dat['mes'] = nl2br(h($mes));
 		htmloutput(OTHERFILE,$dat);
 	exit;
@@ -1340,13 +1354,13 @@ function regist(){
 		}else{
 			$data['subject'] = '['.TITLE.'] '.NOTICE_MAIL_NEWPOST;
 		}
-		$data['option'][] = NOTICE_MAIL_URL.','.ROOT_URL.PHP_SELF."?res={$resno}#{$time}";
+		$data['option'][] = NOTICE_MAIL_URL.','.ROOT_URL.PHP_SELF."?res={$resno}#{$no}";
 		$data['comment'] = SEND_COM ? preg_replace("#<br( *)/?>#i","\n", $com) : '';
 
 		noticemail::send($data);
 	}
 	redirect(
-		PHP_SELF."?res={$resno}#{$time}"
+		PHP_SELF."?res={$resno}#{$no}"
 		,
 		1,
 		$message,
@@ -1763,19 +1777,21 @@ function paintform(){
 
 		$cont_paint_same_thread=(bool)filter_input(INPUT_POST, 'cont_paint_same_thread',FILTER_VALIDATE_BOOLEAN);
 
+		
+		$tp=fopen(TREEFILE,"r");
+		while($tree = fgets($tp)){
+			if(!trim($tree)){
+				continue;
+			}	
+			if (strpos(',' . trim($tree) . ',',',' . $no . ',') !== false) {
+				list($oyano,) = explode(',', trim($tree));
+				break;
+			}
+		}
+		closeFile($tp);
+		$dat['oyano']=$oyano;
 		if($type!=='rep'){
 
-			$tp=fopen(TREEFILE,"r");
-			while($tree = fgets($tp)){
-				if(!trim($tree)){
-					continue;
-				}	
-				if (strpos(',' . trim($tree) . ',',',' . $no . ',') !== false) {
-					list($oyano,) = explode(',', trim($tree));
-					break;
-				}
-			}
-			closeFile($tp);
 			$resto = ($cont_paint_same_thread && $oyano) ? $oyano : '';
 
 			// $resto= ($oyano&&((int)$oyano!==$no)) ? $oyano :'';
@@ -1882,13 +1898,15 @@ function paintform(){
 	$dat['rep']=false;//klecks
 	$dat['repcode']='';
 	if($type==='rep'){
-		$dat['rep']=true;//klecks
 		$time=time();
 		$userip = get_uip();
 		$repcode = substr(crypt(md5($no.$userip.$pwd.uniqid()),'id'),-12);
 		//念の為にエスケープ文字があればアルファベットに変換
 		$repcode = strtr($repcode,"!\"#$%&'()+,/:;<=>?@[\\]^`/{|}~\t","ABCDEFGHIJKLMNOabcdefghijklmno");
-		$dat['repcode']=$repcode;//klecks
+		$dat['rep']=true;
+		$dat['no']=$no;
+		$dat['pwd']=$pwd;
+		$dat['repcode']=$repcode;
 		$dat['mode'] = 'picrep&no='.$no.'&pwd='.$pwd.'&repcode='.$repcode;
 		$usercode.='&repcode='.$repcode;
 	}
@@ -1944,9 +1962,7 @@ function paintcom(){
 	$resto = (string)filter_input(INPUT_GET, 'resto',FILTER_VALIDATE_INT);
 	$stime = (string)filter_input(INPUT_GET, 'stime',FILTER_VALIDATE_INT);
 	//描画時間
-	if($stime && DSP_PAINTTIME){
-		$dat['ptime'] = calcPtime(time()-$stime);
-	}
+	$dat['ptime'] = ($stime && DSP_PAINTTIME) ? calcPtime(time()-$stime) :"";
 
 	if(USE_RESUB && $resto) {
 
@@ -2084,7 +2100,7 @@ function incontinue(){
 	$dat['pch_mode'] = false;
 	$dat['useneo'] = false;
 	$dat['chickenpaint'] = false;
-	
+
 	$name='';
 	$sub='';
 	$cext='';
@@ -2127,7 +2143,7 @@ function incontinue(){
 	$dat['ext'] = h($cext);
 	//描画時間
 	$cptime=is_numeric($cptime) ? h(calcPtime($cptime)) : h($cptime); 
-	if(DSP_PAINTTIME) $dat['painttime'] = $cptime;
+	$dat['painttime'] = DSP_PAINTTIME ? $cptime :"";
 	$dat['ctype_img'] = true;
 	$dat['ctype_pch'] = false;
 	$pch_ext=check_pch_ext(PCH_DIR.$ctim,['upfile'=>true]);
@@ -2166,9 +2182,17 @@ function incontinue(){
 	}
 
 	$dat = array_merge($dat,form());
+
+	if(ALLOW_ALL_APPS_TO_CONTINUE_DRAWING){
+		$dat['use_neo'] = true;
+		$dat['use_tegaki'] = true;
+		$dat['use_shi_painter'] = true; 
+		$dat['use_chickenpaint'] = true;
+		$dat['use_klecks'] = true;
+	}
 	$arr_apps=app_to_use();
 
-	$dat['select_app']= $select_app ? $dat['select_app'] : false;
+	$dat['select_app']= $select_app ? ($dat['select_app']||ALLOW_ALL_APPS_TO_CONTINUE_DRAWING) : false;
 	$dat['app_to_use']=($dat['paint'] && !$dat['select_app'] && !$app_to_use) ? $arr_apps[0]: $app_to_use;
 
 	if(mime_content_type(IMG_DIR.$ctim.$cext)==='image/webp'){
@@ -2436,13 +2460,20 @@ global $ADMIN_PASS;
 	);
 }
 // 画像差し換え
-function replace(){
-	global $path,$temppath;
+function replace($no="",$pwd="",$repcode="",$java=""){
+	
+	global $path,$temppath,$en;
 
-	$no = (string)filter_input(INPUT_GET, 'no',FILTER_VALIDATE_INT);
-	$pwd = (string)newstring(filter_input(INPUT_GET, 'pwd'));
-	$repcode = (string)newstring(filter_input(INPUT_GET, 'repcode'));
-	$message="";
+	$replace_error_msg = $en ? 
+	"Image replacement failed.\nIt may be left in [Recover Images]."
+	:"画像の差し換えに失敗しました。\n未投稿画像に残っている可能性があります。";
+
+	$no = $no ? $no : (string)filter_input(INPUT_POST, 'no',FILTER_VALIDATE_INT);
+	$no = $no ? $no : (string)filter_input(INPUT_GET, 'no',FILTER_VALIDATE_INT);
+	$pwd = $pwd ? $pwd : (string)newstring(filter_input(INPUT_POST, 'pwd'));
+	$pwd = $pwd ? $pwd : (string)newstring(filter_input(INPUT_GET, 'pwd'));
+	$repcode = $repcode ? $repcode : (string)newstring(filter_input(INPUT_POST, 'repcode'));
+	$repcode = $repcode ? $repcode : (string)newstring(filter_input(INPUT_GET, 'repcode'));
 	$tool = "";
 	$userip = get_uip();
 	//ホスト取得
@@ -2467,7 +2498,10 @@ function replace(){
 	}
 	closedir($handle);
 	if(!$find){//見つからなかった時は
-		return paintcom();//通常のお絵かきコメント画面へ。
+		if($java){
+			die("error\n{$replace_error_msg}");
+		}
+		return location_paintcom();//通常のお絵かきコメント画面へ。
 	}
 
 	// 時間
@@ -2528,7 +2562,10 @@ function replace(){
 
 			if(!check_elapsed_days($etim,$logver)||!$oyano){//指定日数より古い画像差し換えは新規投稿にする
 				closeFile($fp);
-				return paintcom();
+				if($java){
+					die("error\n{$replace_error_msg}");
+				}
+				return location_paintcom();
 			}
 
 			$upfile = $temppath.$file_name.$imgext;
@@ -2599,7 +2636,10 @@ function replace(){
 	}
 	if(!$flag){
 		closeFile($fp);
-		return error(MSG028);
+		if($java){
+			die("error\n{$replace_error_msg}");
+		}
+		return location_paintcom();
 	}
 
 	writeFile($fp, implode("\n", $line));
@@ -2615,14 +2655,13 @@ function replace(){
 	safe_unlink($src);
 	safe_unlink($upfile);
 	safe_unlink($temppath.$file_name.".dat");
-
-	redirect(
-		//$oyanoがFalseの時は新規投稿になるので分岐不要
-		PHP_SELF.'?res='.h($oyano) . '#'.$time,
-		1,
-		$message,
-		THE_SCREEN_CHANGES
-	);
+	if(!$java){
+		return header("Location: ./".PHP_SELF."?res={$oyano}&resid={$no}#{$no}");
+	}
+}
+//非同期通信の時にpaintcom()を呼び出すためのリダイレクト
+function location_paintcom(){
+	header('Location:'.PHP_SELF.'?mode=piccom');
 }
 
 // カタログ
@@ -2866,15 +2905,8 @@ function htmloutput($template,$dat,$buf_flag=''){
 }
 
 function redirect ($url, $wait = 0, $message1 = '',$message2 = '') {
-	header("Content-type: text/html; charset=UTF-8");
-	echo '<!DOCTYPE html>'
-		. '<html lang="ja"><head>'
-		. '<meta http-equiv="refresh" content="' . (int)h($wait) . '; URL=' . h($url) . '">'
-		. '<meta name="robots" content="noindex,nofollow">'
-		. '<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">'
-		. '<meta charset="UTF-8"><title></title></head>'
-		. '<body>' . h($message1).($message1 ? '<br><br>':'').h($message2). '</body></html>';
-	exit;
+
+	return header("Location: {$url}");
 }
 
 function getImgType ($dest) {
