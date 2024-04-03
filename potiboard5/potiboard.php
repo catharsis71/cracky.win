@@ -3,8 +3,8 @@
 
 // POTI-board EVO
 // バージョン :
-const POTI_VER = 'v6.30.3';
-const POTI_LOT = 'lot.20240318';
+const POTI_VER = 'v6.30.5';
+const POTI_LOT = 'lot.20240329';
 
 /*
   (C) 2018-2023 POTI改 POTI-board redevelopment team
@@ -3627,7 +3627,7 @@ function create_line_from_treenumber ($fp,$trees){
 
 	rewind($fp);
 	$line=[];
-	$treeSet = array_flip($trees);//配列とキーを反転
+	$treeSet = array_flip($trees);//配列のキーと値を反転
 	while($lines = fgets($fp)){
 		if(!trim($lines)){
 			continue;
