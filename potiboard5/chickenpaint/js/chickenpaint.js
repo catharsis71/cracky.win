@@ -108,14 +108,6 @@ function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == 
 if (window.PointerEvent) {
   window.hasNativePointerEvents = true;
 }
-//ブラウザデフォルトのキー操作をキャンセル
-document.addEventListener("keydown", function (e) {
-  var keys = ["+", ";", "=", "-", "s", "h", "r", "o"];
-  if ((e.ctrlKey || e.metaKey) && keys.includes(e.key.toLowerCase()) || e.key === "Enter") {
-    // console.log("e.key",e.key);
-    e.preventDefault();
-  }
-});
 require("pepjs"); // Needs to use require() instead of import so we can run code before it
 function checkBrowserSupport() {
   var supportsAPIs = (0, _CPPolyfill.isCanvasSupported)() && "Uint8Array" in window;
@@ -132,7 +124,7 @@ function checkBrowserSupport() {
   return true;
 }
 function isSmallScreen() {
-  return (0, _jquery.default)(window).width() < 430 || (0, _jquery.default)(window).height() < 430;
+  return window.innerWidth <= 450 || window.innerHeight <= 450;
 }
 function createDrawingTools() {
   var tools = new Array(ChickenPaint.T_MAX);
@@ -356,8 +348,24 @@ function ChickenPaint(options) {
   if (options.language) {
     (0, _lang.setLanguage)(options.language);
   }
+  var uiElem = options.uiElem;
+
+  //ブラウザデフォルトのキー操作をキャンセル
+  document.addEventListener("keydown", function (e) {
+    var keys = ["+", ";", "=", "-", "s", "h", "r", "o"];
+    if ((e.ctrlKey || e.metaKey) && keys.includes(e.key.toLowerCase()) || e.key === "Enter") {
+      // console.log("e.key",e.key);
+      e.preventDefault();
+    }
+  });
+  //長押しでコンテキストメニューを開かない
+  uiElem.addEventListener('contextmenu', function (e) {
+    e.preventDefault();
+    e.stopPropagation();
+  }, {
+    passive: false
+  });
   var that = this,
-    uiElem = options.uiElem,
     /**
         * @type {CPCanvas}
         */
@@ -18395,6 +18403,17 @@ function CPBoxBlurDialog(parent, controller) {
   // Bootstrap 5: Modalコンストラクタを使用してmodalを初期化
   var modal = new bootstrap.Modal(dialog[0]);
   this.show = function () {
+    // ハンバガーメニューとモーダルの二重表示防止
+    // chickenpaint-main-menu-contentのIDを持つcollapse要素を閉じる
+    var collapseElement = document.getElementById('chickenpaint-main-menu-content');
+    if (collapseElement && collapseElement.classList.contains('show')) {
+      var bsCollapse = new bootstrap.Collapse(collapseElement, {
+        toggle: false // すでに閉じている場合のエラーを防ぐ
+      });
+
+      bsCollapse.hide();
+    }
+    //モーダルを表示
     modal.show();
   };
   applyButton[0].addEventListener('click', function (e) {
@@ -21957,6 +21976,17 @@ function CPGridDialog(parent, canvas) {
   // Bootstrap 5: Modal コンストラクタを使用して modal を初期化
   var modal = new bootstrap.Modal(dialog[0]);
   this.show = function () {
+    // ハンバガーメニューとモーダルの二重表示防止
+    // chickenpaint-main-menu-contentのIDを持つcollapse要素を閉じる
+    var collapseElement = document.getElementById('chickenpaint-main-menu-content');
+    if (collapseElement && collapseElement.classList.contains('show')) {
+      var bsCollapse = new bootstrap.Collapse(collapseElement, {
+        toggle: false // すでに閉じている場合のエラーを防ぐ
+      });
+
+      bsCollapse.hide();
+    }
+    //モーダルを表示
     modal.show();
   };
   gridSizeElem.val(canvas.getGridSize());
@@ -23517,6 +23547,68 @@ function CPMainGUI(controller, uiElem) {
   canvas.on("canvasRotated90", function (newAngle) {
     paletteManager.palettes.layers.setRotation90(newAngle);
   });
+
+  // デバイスの向きの変更時にパレットの配置を初期化
+  if (screen.orientation) {
+    //非対応ブラウザ対策
+    screen.orientation.addEventListener("change", function (e) {
+      //何通りも、試してどれかが有効になる事を期待
+      _this.resize();
+      // パレット初期化
+      controller.actionPerformed({
+        action: "CPArrangePalettes"
+      });
+      setTimeout(function () {
+        _this.resize();
+        // パレット初期化
+        controller.actionPerformed({
+          action: "CPArrangePalettes"
+        });
+      }, 10);
+      Promise.resolve().then(function () {
+        _this.resize();
+      }).then(function () {
+        // パレット初期化
+        controller.actionPerformed({
+          action: "CPArrangePalettes"
+        });
+      });
+    });
+  }
+  // ハンバガーメニューとモーダルの二重表示防止
+  var collapseElement = document.getElementById('chickenpaint-main-menu-content');
+  document.addEventListener('show.bs.modal', function () {
+    // chickenpaint-main-menu-contentのIDを持つcollapse要素を閉じる
+    if (collapseElement && collapseElement.classList.contains('show')) {
+      var bsCollapse = new bootstrap.Collapse(collapseElement, {
+        toggle: false // すでに閉じている場合のエラーを防ぐ
+      });
+
+      bsCollapse.hide();
+    }
+  });
+  if (collapseElement) {
+    var WidgetNav = document.querySelector('.chickenpaint .widget-nav');
+    if (WidgetNav) {
+      collapseElement.addEventListener('show.bs.collapse', function (e) {
+        //ハンバガーメニューを表示する時に
+        // .navbar-nav を非表示にする
+        WidgetNav.classList.add('hidden');
+      });
+      collapseElement.addEventListener('hidden.bs.collapse', function (e) {
+        //ハンバガーメニューを閉じる時に
+        // .navbar-nav を表示する
+        WidgetNav.classList.remove('hidden');
+      });
+    }
+    window.addEventListener("resize", function () {
+      // .navbar-nav を表示する
+      WidgetNav.classList.remove('hidden');
+    });
+  }
+
+  //Bootstrap5のコラプスでメニューバーが閉じる時にリサイズする
+  document.addEventListener("hidden.bs.collapse", this.resize.bind(this));
   window.addEventListener("resize", this.resize.bind(this));
   controller.on("fullScreen", function (fullscreen) {
     return _this.setFullScreenMode(fullscreen);
@@ -23888,7 +23980,7 @@ var MENU_ENTRIES = [{
  * @constructor
  */
 function CPMainMenu(controller, mainGUI) {
-  var bar = (0, _jquery.default)('<nav class="navbar navbar-expand-md navbar-light bg-light">' + '<a class="navbar-brand" href="#">ChickenPaint Be</a>' + '<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#chickenpaint-main-menu-content" aria-controls="chickenpaint-main-menu-content" aria-expanded="false" aria-label="Toggle main menu">' + '<span class="navbar-toggler-icon"></span>' + '</button>' + '<div class="collapse navbar-collapse" id="chickenpaint-main-menu-content">' + '<div class="navbar-nav mr-auto">' + '</div>' + '</div>' + '<div class="widget-nav" id="chickenpaint-palette-toggler-content"></div>' + '</nav>');
+  var bar = (0, _jquery.default)('<nav class="navbar navbar-expand-md navbar-light bg-light">' + '<div class="navbar-upper"><a class="navbar-brand" href="#">ChickenPaint Be</a>' + '<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#chickenpaint-main-menu-content" aria-controls="chickenpaint-main-menu-content" aria-expanded="false" aria-label="Toggle main menu">' + '<span class="navbar-toggler-icon"></span>' + '</button></div>' + '<div class="collapse navbar-collapse" id="chickenpaint-main-menu-content">' + '<div class="navbar-nav mr-auto">' + '</div>' + '</div>' + '<div class="widget-nav" id="chickenpaint-palette-toggler-content"></div>' + '</nav>');
   // macPlatform = /^Mac/i.test(navigator.platform),
 
   var macPlatform = navigator.userAgent.toLowerCase().includes('mac os');
@@ -25430,8 +25522,10 @@ function CPStrokePalette(cpController) {
       cpController.actionPerformed({
         action: button.command
       });
-      that.userIsDoneWithUs();
+      // that.userIsDoneWithUs();
+      //ボタンクリック時にパレットを折りたたむ機能を削除
     });
+
     body.appendChild(listElem);
   }
   buildButtons();
@@ -25620,9 +25714,11 @@ function CPSwatchesPalette(controller) {
         controller.setCurColor(new _CPColor.default(parseInt(swatch.getAttribute("data-color"), 10)));
         e.stopPropagation();
         e.preventDefault();
-        that.userIsDoneWithUs();
+        // that.userIsDoneWithUs();
+        //ボタンクリック時にパレットを折りたたむ機能を削除
       }
     });
+
     swatchPanel.addEventListener("contextmenu", function (e) {
       var swatch = e.target;
       if (!/^<a data-color=/i.test(swatch.outerHTML) || !/chickenpaint-color-swatch/.test(swatch.className)) {
@@ -26346,9 +26442,11 @@ function CPToolPalette(cpController) {
       cpController.actionPerformed({
         action: button.command
       });
-      that.userIsDoneWithUs();
+      // that.userIsDoneWithUs();
+      //ボタンクリック時にパレットを折りたたむ機能を削除
     }
   }
+
   function buildButtons() {
     var body = that.getBodyElement();
     listElem.className = "chickenpaint-tools list-unstyled";
