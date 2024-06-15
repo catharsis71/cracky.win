@@ -79,6 +79,7 @@ header, main > section > .thread, main > div#catalog, footer > div, footer > div
 
 footer > div form {
   text-align: right;
+  line-height: 2;
 }
 
 footer > div.copy {
@@ -185,6 +186,10 @@ em.thispage {
 
 .name:hover {
   background-color: #f0f8ff;
+}
+
+.epost form {
+  line-height: 2;
 }
 
 h1 a {
