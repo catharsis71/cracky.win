@@ -1572,13 +1572,16 @@ body.chickenpaint-full-screen {
   /* .chickenpaint .chickenpaint-layer-buttons .chickenpaint-small-toolbar-button {
     margin-right: 4px;
   } */
-  .chickenpaint-palette-brush {
-    min-width: 160px;
-  }
   .chickenpaint-texture-swatches {
     max-height: 200px;
   }
 }
+/* ツールオプションパレットの幅 */
+@media (max-width: 599px) {
+	.chickenpaint-palette-brush {
+	  min-width: 160px;
+	}
+  }
 /* パレット表示非表示のショートカットメニュー */
 @media (max-width: 519px) {
 
