@@ -137,7 +137,7 @@
 						</td>
 					</tr>
 					<tr>
-						<td>Mail</td>
+						<td>Email</td>
 						<td><input class="form" type="text" name="email" size="28" value="" autocomplete="email">
 						</td>
 					</tr>
@@ -148,7 +148,7 @@
 					</tr>
 					@endif
 					<tr>
-						<td>Sub @if($usesub){{$usesub}}@endif</td>
+						<td>Subject @if($usesub){{$usesub}}@endif</td>
 						<td>
 							<input class="form" type="text" name="sub" size="20" value="@if($resub){{$resub}}@endif"
 								autocomplete="section-sub">
@@ -156,13 +156,13 @@
 						</td>
 					</tr>
 					<tr>
-						<td>Com @if($usecom){{$usecom}}@endif</td>
+						<td>Comment @if($usecom){{$usecom}}@endif</td>
 						<td><textarea class="form" name="com" cols="28" rows="4" wrap="soft"
 								id="p_input_com"></textarea></td>
 					</tr>
 					@if($upfile)
 					<tr>
-						<td>UpFile</td>
+						<td>File</td>
 						<td>
 							<input class="form" type="file" name="upfile" accept="image/*">
 							<span class="preview"></span>
@@ -170,7 +170,7 @@
 					</tr>
 					@endif
 					<tr>
-						<td>Pass</td>
+						<td>Password</td>
 						<td><input class="form" type="password" name="pwd" value=""
 								autocomplete="current-password"><small>(For editing and deleting)</small></td>
 					</tr>
