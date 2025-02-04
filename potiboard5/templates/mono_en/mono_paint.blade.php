@@ -14,6 +14,24 @@
 			@include('parts.style-switcher')
 			<link rel="preload" as="script" href="lib/{{$jquery}}">
 			<link rel="preload" as="script" href="{{$skindir}}js/mono_common.js?{{$ver}}">
+		{{-- アプレットの幅がmax-widthを超える時はmax-widthにアプレット+パレットの幅を設定する --}}
+
+		@isset($w)
+			@if(($w+192)>1350)
+			<style>	
+			header,
+			main > section > .thread,
+			main > div#catalog,
+			footer > div,
+			footer > div.copy {
+			margin: 0px auto;
+			display: block;
+			max-width: calc({{$w}}px + 192px);
+			}
+			</style>
+			@endif
+		@endisset
+
 		@endif
 
 		@if($paint_mode)
@@ -33,37 +51,6 @@
 			<link rel="stylesheet" href="neo.css?{{$parameter_day}}&{{$ver}}">
 			<script src="neo.js?{{$parameter_day}}&{{$ver}}"></script>
 		<script>
-			// https://qiita.com/tsmd/items/cfb5dcbec8433b87dc36
-			function isPinchZooming () {//ピンチズームを検知
-				if ('visualViewport' in window) {
-					return window.visualViewport.scale > 1
-				} else {
-					return document.documentElement.clientWidth > window.innerWidth
-				}
-			}
-		
-			function neo_disable_touch_move (e) {//NEOの網目でスワイプしない
-				let screenwidth = Number(screen.width);
-				let appw = Number({{$w}});
-				if((screenwidth-appw)>100){
-					if (typeof e.cancelable !== 'boolean' || e.cancelable) {
-					e.preventDefault();
-					e.stopPropagation();
-					}
-				}
-			}
-		
-			function neo_add_disable_touch_move() {
-				document.getElementById('NEO').addEventListener('touchmove', neo_disable_touch_move ,{ passive: false });
-			}
-			document.addEventListener('touchmove', function(e) {
-				neo_add_disable_touch_move();
-				if(isPinchZooming ()){//ピンチズーム使用時はNEOの網目でスワイプする
-					document.getElementById('NEO').removeEventListener('touchmove', neo_disable_touch_move ,{ passive: false });
-				}
-			});
-			window.addEventListener('DOMContentLoaded',neo_add_disable_touch_move,false);
-
 			Neo.handleExit=()=>{
 			@if($rep)
 			// 画像差し換えに必要なフォームデータをセット
@@ -193,7 +180,11 @@
 			<hr>
 			<div>
 				<p class="menu">
+					@if($continue_mode||$pch_mode)
+					<a href="{{$self}}?res={{$oyano}}#{{$no}}">[Back]</a>
+					@else
 					<a href="{{$self2}}">[Back]</a>
+					@endif
 				</p>
 			</div>
 			<hr>
@@ -230,7 +221,8 @@
 					allowDownload: true,
 					resourcesRoot: "chickenpaint/",
 					disableBootstrapAPI: true,
-					fullScreenMode: "force"
+					fullScreenMode: "force",
+					post_max_size: {{$max_pch}}
 				});
 			});
 			const handleExit=()=>{
@@ -322,8 +314,11 @@
 						<param name="neo_max_pch" value="{{$max_pch}}">
 					@endif
 						<param name="neo_send_with_formdata" value="true">
+						<param name="neo_confirm_layer_info_notsaved" value="true">
 						<param name="neo_confirm_unload" value="true">
 						<param name="neo_show_right_button" value="true">
+						<param name="neo_animation_skip" value="true">
+						<param name="neo_disable_grid_touch_move" value="true">
 					@else 
 					<applet code="pbbs.PaintBBS.class" archive="./PaintBBS.jar" name="paintbbs" width="{{$w}}" height="{{$h}}" mayscript>
 					@endif
@@ -373,7 +368,7 @@
 						<param name="url_save" value="{{$self}}?mode=picpost">
 						<param name="send_header" value="usercode={{$usercode}}&amp;tool={{$tool}}&amp;rep={{$rep}}&amp;no={{$no}}&amp;pwd={{$pwd}}">
 							@if($rep)
-							<param name="url_exit" value="{{$self}}?res={{$oyano}}">
+							<param name="url_exit" value="{{$self}}?res={{$oyano}}&amp;resid={{$no}}">
 							@else
 							<param name="url_exit" value="{{$self}}?mode=piccom&amp;stime={{$stime}}">
 							@endif
@@ -398,7 +393,8 @@
 					</applet>
 					@endif
 				</div>
-				<div class="palette">
+				<div class="palette_wrap">
+					<div class="palette">
 					<form name="Palette">
 						@if($useneo)
 						<fieldset>
@@ -486,7 +482,8 @@
 					</form>
 				</div>
 			</div>
-			@if($paint_mode)
+		</div>
+		@if($paint_mode)
 			<section>
 				<div class="thread">
 					<hr>
@@ -674,7 +671,7 @@
 						@endif
 					</div>
 					<p>
-						<a href="{{$pchfile}}" target="_blank">Download</a> - Datasize : {{$datasize}} KB
+						<a href="{{$pchfile}}" target="_blank" rel="nofollow noopener noreferrer">Download</a> - Datasize : {{$datasize}} KB
 					</p>
 					<p>
 						<a href="javascript:close()">close</a>
@@ -730,11 +727,12 @@
 						@if($select_app)
 
 						<select name="shi">
-							@if ($use_neo)<option value="neo">PaintBBS NEO</option>@endif
-							@if ($use_tegaki)<option value="tegaki">Tegaki</option>@endif
+							@if($use_neo)<option value="neo">PaintBBS NEO</option>@endif
+							@if($use_tegaki)<option value="tegaki">Tegaki</option>@endif
+							@if($use_axnos)<option value="axnos">Axnos Paint</option>@endif
 							@if($use_shi_painter)<option value="1" class="for_pc">Shi-Painter</option>@endif
 							@if($use_chickenpaint)<option value="chicken">ChickenPaint</option>@endif
-							@if ($use_klecks)<option value="klecks">Klecks</option>@endif
+							@if($use_klecks)<option value="klecks">Klecks</option>@endif
 						</select>
 						@endif
 						@if($app_to_use)
@@ -742,7 +740,7 @@
 						@endif
 
 						@if($use_select_palettes)
-						Palettes <select name="selected_palette_no" title="パレット" class="form">{!!$palette_select_tags!!}</select>
+						Palettes <select name="selected_palette_no" title="Palettes" class="form">{!!$palette_select_tags!!}</select>
 							@endif
 
 						<span class="input_disp_none"><input type="text" value="" autocomplete="username"></span>
@@ -798,7 +796,7 @@
 			@endif
 		</main>
 		<footer>
-		{{--  著作権表示 削除しないでください --}}
+		{{-- 著作権表示 削除しないでください --}}
 		@include('parts.mono_copyright')
 
 			</footer>

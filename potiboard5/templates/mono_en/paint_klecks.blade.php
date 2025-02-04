@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <!-- mocked drawing page -->
-<html lang="en">
+<html>
 <head>
 	<meta charset="UTF-8">
 	<title>{{$title}}</title> 
 	<!-- this is important -->
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0">
 
 	<style>
 		:not(input){
@@ -23,6 +23,10 @@
 				// console.log("e.key",e.key);
 				e.preventDefault();
 			}
+		});
+		//ブラウザデフォルトのコンテキストメニューをキャンセル
+		document.addEventListener("contextmenu",(e)=>{
+			e.preventDefault();
 		});
 	</script>
 </head>
@@ -56,9 +60,9 @@
 	}());
 
 	const klecks = new Klecks({
-		
+
 		disableAutoFit: true,
-		
+
 		onSubmit: (onSuccess, onError) => {
 			// download png
 			// saveData(klecks.getPNG(), 'drawing.png');
@@ -72,7 +76,7 @@
 			onSuccess();
 			//2022-2024 (c)satopian MIT Licence
 			//この箇所はさとぴあが作成したMIT Licenceのコードです。
-				const postData = (path, data) => {
+			const postData = (path, data) => {
 					fetch(path, {
 						method: 'post',
 						mode: 'same-origin',
@@ -85,13 +89,13 @@
 					.then((response) => {
 						if (response.ok) {
 							response.text().then((text) => {
-							console.log(text)
-							if(text==='ok'){
-								@if($rep)
+								console.log(text)
+								if(text==='ok'){
+									@if($rep)
 									return repData();
-								@endif
-								return window.location.href = "?mode=piccom&stime={{$stime}}";
-							}
+									@endif
+									return window.location.href = "?mode=piccom&stime={{$stime}}";
+								}
 								return alert(text);
 							})
 						}else{
@@ -101,7 +105,7 @@
 								return alert(@if($en)'It may be a WAF false positive.\nTry to draw a little more.'@else'投稿に失敗。\nWAFの誤検知かもしれません。\nもう少し描いてみてください。'@endif);
 							}
 							if(response_status===404){
-								return alert(@if($en)'404 not found\nsave.inc.php'@else'エラー404\nsave.inc.phpがありません。'@endif);	
+								return alert(@if($en)'404 not found\nThe PHP file to save the image does not exist.'@else'エラー404\n画像を保存するPHPファイルがありません。'@endif);	
 							}
 							return alert(@if($en)'Your picture upload failed!\nPlease try again!'@else'投稿に失敗\n時間をおいて再度投稿してみてください。'@endif);
 						}
@@ -111,8 +115,13 @@
 					})
 				}
 				klecks.getPSD().then((psd)=>{
-					var formData = new FormData();
-					formData.append("picture", klecks.getPNG(),'blob');
+					const png = klecks.getPNG();
+					const	TotalSiz=((png.size+psd.size)/1024/1024).toFixed(3);
+					if(TotalSiz>{{$max_pch}}){
+						return alert(`<?php if($en):?>File size is too large.<?php else:?>ファイルサイズが大きすぎます。<?php endif;?>\n<?php if($en):?>limit size<?php else:?>制限値<?php endif;?>:{{$max_pch}}MB\n<?php if($en):?>Current size<?php else:?>現在値<?php endif;?>:${TotalSiz}MB`);
+					}
+					const formData = new FormData();
+					formData.append("picture", png,'blob');
 					formData.append("psd", psd,'blob');
 					formData.append("usercode", "{{$klecksusercode}}");
 					@if($rep)formData.append("repcode", "{{$repcode}}");@endif
@@ -120,7 +129,7 @@
 					formData.append("resto", "{{$resto}}");
 					formData.append("tool", "Klecks");
 					postData("?mode=saveimage&tool=klecks", formData);
-
+					
 				});
 				// (c)satopian MIT Licence ここまで
 				// location.reload();
@@ -129,7 +138,7 @@
 	});
 	//2022-2024 (c)satopian MIT Licence
 	//この箇所はさとぴあが作成したMIT Licenceのコードです。
-	@if($rep)
+@if($rep)
 	const repData = () => {
     // 画像差し換えに必要なフォームデータをセット
     const formData = new FormData();
@@ -167,62 +176,75 @@
 		return window.location.href = "?mode=piccom&stime={{$stime}}";
     });
 	}
-	@endif
+@endif
 	// (c)satopian MIT Licence ここまで
-	if (psdURL) {
-		fetch(new Request(psdURL)).then(response => {
-			return response.arrayBuffer();
-		}).then(buffer => {
-			return klecks.readPSD(buffer); // resolves to Klecks project
-		}).then(project => {
-			klecks.openProject(project);
-		}).catch(e => {
-			klecks.initError(@if($en)'failed to read image'@else'画像の読み込みに失敗しました。'@endif);
+if (psdURL) {
+	fetch(new Request(psdURL)).then(response => {
+		return response.arrayBuffer();
+	}).then(buffer => {
+		return klecks.readPSD(buffer); // resolves to Klecks project
+	}).then(project => {
+		klecks.openProject(project);
+	}).catch(e => {
+		klecks.initError(@if($en)'failed to read image'@else'画像の読み込みに失敗しました。'@endif);
+	});
+
+} else {
+	const loadImage = (src) => {
+		return new Promise((resolve) => {
+			const img = new Image();
+			img.onload = () => resolve(img);
+			img.onerror = () => klecks.initError(<?php if($en):?>'failed to read image'<?php else:?>'画像の読み込みに失敗しました。'<?php endif;?>);
+			img.src = src;
 		});
+	};
 
-	} else {
+	(async () => {
+	const createCanvasWithImage = async () => {
+		const canvas = document.createElement('canvas');
+		canvas.width = {{$picw}};
+		canvas.height = {{$pich}};
+		const ctx = canvas.getContext('2d');
 
-		klecks.openProject({
-			width: {{$picw}},
-			height: {{$pich}},
+		@if($imgfile)
+		try {
+		const img = await loadImage("{{$imgfile}}");
+		ctx.drawImage(img, 0, 0);
+		} catch (error) {
+		console.error(error);
+		}
+		@else
+		ctx.save();
+		ctx.fillStyle = '#fff';
+		ctx.fillRect(0, 0, canvas.width, canvas.height);
+		ctx.restore();
+		@endif
 
-			layers: [{
-				name: 'Background',
-				opacity: 1,
-				mixModeStr: 'source-over',
+		return canvas;
+	};
 
-				image: (() => {
-					const canvas = document.createElement('canvas');
-					canvas.width = {{$picw}};
-					canvas.height = {{$pich}};
-					const ctx = canvas.getContext('2d');
-					//PSDがなくて画像がある時はcanvasに読み込む
-					@if($imgfile)
-						var img = new Image();
-						img.src = "{{$imgfile}}";
-						img.onload = function(){
-							ctx.drawImage(img, 0, 0);
-						}
-					@endif
-					ctx.save();
-					ctx.fillStyle = '#fff';
-					ctx.fillRect(0, 0, canvas.width, canvas.height);
-					ctx.restore();
-					return canvas;
-				})(),
-			},{
+	const backgroundCanvas = await createCanvasWithImage();
+	const emptyCanvas = document.createElement('canvas');
+	emptyCanvas.width = {{$picw}};
+	emptyCanvas.height = {{$pich}};
+
+	klecks.openProject({
+		width: {{$picw}},
+		height: {{$pich}},
+		layers: [{
+			name: @if($en)'Background'@else'背景'@endif,
+			opacity: 1,
+			mixModeStr: 'source-over',
+			image: backgroundCanvas
+			}, {
 				name: '{{$TranslatedLayerName}} 1',
 				opacity: 1,
 				mixModeStr: 'source-over',
-				image: (() => {
-					const canvas = document.createElement('canvas');
-					canvas.width = {{$picw}};
-					canvas.height = {{$pich}};
-					return canvas;
-				})()
-			}
-		]});
-	}
+				image: emptyCanvas
+			}]
+		});
+	})();
+}
 </script>
 <!-- embed end -->
 </body>

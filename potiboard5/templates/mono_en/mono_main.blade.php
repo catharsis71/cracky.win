@@ -229,7 +229,7 @@
 				<div class="res">
 					{{-- 子レスヘッダ --}}
 					<h4>
-					<span class="oyaresno">[{{$res['no']}}]</span>
+					<span class="oyaresno" id="{{$res['no']}}">[{{$res['no']}}]</span>
 					@if(!isset($res['not_deleted'])||$res['not_deleted'])
 						<span class="rsub">{{$res['sub']}}</span> :
 						<span class="name"><a
@@ -254,9 +254,9 @@
 						{{$res['tool']}}</span>@endif
 						<br>
 						@if($res['continue']) <a
-							href="{{$self}}?mode=continue&amp;no={{$res['continue']}}">*Continue</a>@endif
+							href="{{$self}}?mode=continue&amp;no={{$res['continue']}}&amp;resno={{$ress[0]['no']}}">*Continue</a>@endif
 						@if($res['spch'])<span class="for_pc">@endif @if($res['pch']) <a
-								href="{{$self}}?mode=openpch&amp;pch={{$res['pch']}}" target="_blank">*Replay</a>@endif
+								href="{{$self}}?mode=openpch&amp;pch={{$res['pch']}}&amp;resno={{$ress[0]['no']}}&no={{$res['no']}}" target="_blank">*Replay</a>@endif
 							@if($res['spch'])</span>@endif
 					</div>
 					<figure @if($res['w']>=750) style="float:none;margin-right:0"@endif>
@@ -279,7 +279,9 @@
 					@if ($res['skipres'])
 					<hr>
 					<div class="article_skipres">
-						{{$res['skipres']}} posts Omitted.
+						{{$res['skipres']}} 
+						@if($res['skipres']>1) posts @else post @endif
+						 omitted.
 					</div>
 					@endif
 					@endif

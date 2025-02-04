@@ -77,8 +77,9 @@ define('MSG046', "[The password is too short. At least 6 characters.]");
 define('MSG047', "[The size of the picture is too large. You can not continue.]");
 define('MSG048', "[There is an inappropriate URL.]");
 define('MSG049', "[Rejected.]");
-define('MSG050', "[Cookie check failed,]");
-
+define('MSG050', "[Cookie check failed.]");
+define("MSG051", "[Locked due to incorrect password attempts.]");
+define("MSG052", "[The log file size has exceeded the limit, so the process has been stopped.]");
 //Text color table 'value[,name]'
 $fontcolors = array('white,White'
 ,'lime,Green'
