@@ -471,7 +471,7 @@ define("IMAGE_SIZE", "2048");
 //大きな値を設定すると動作が不安定になる可能性があります。
 // Maximum file size limit for the log file (in MB)
 // Setting a large value may cause instability.
-define("MAX_LOG_FILESIZE", "15");
+define("MAX_LOG_FILESIZE", "50");
 
 // フォーム下の追加お知らせ
 // (例)"<li>お知らせデース</li>
