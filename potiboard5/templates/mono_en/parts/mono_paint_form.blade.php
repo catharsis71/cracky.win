@@ -10,12 +10,13 @@
 		Height : <input name="pich" type="number" title="Height" class="form" value="{{$pdefh}}" min="{{$pminh}}" max="{{$pmaxh}}">
 		@if($select_app)
 			Tool:
-			<select name="shi">
+			<select name="shi" id="select_app">
 			@if($use_neo)<option value="neo">PaintBBS NEO</option>@endif
-			@if ($use_tegaki)<option value="tegaki">Tegaki</option>@endif
+			@if($use_tegaki)<option value="tegaki">Tegaki</option>@endif
+			@if($use_axnos)<option value="axnos">Axnos Paint</option>@endif
 			@if($use_shi_painter)<option value="1" class="for_pc">Shi-Painter</option>@endif
 			@if($use_chickenpaint)<option value="chicken">ChickenPaint</option>@endif
-			@if ($use_klecks)<option value="klecks">Klecks</option>@endif
+			@if($use_klecks)<option value="klecks">Klecks</option>@endif
 		</select>
 		@endif 
 		{{-- 選択メニューを出さない時に起動するアプリ --}}
@@ -29,8 +30,8 @@
 		@if($resno)
 		<input type="hidden" name="resto" value="{{$resno}}">
 		@endif
-		@if($anime)<label><input type="checkbox" value="true" name="anime" title="Save Playback" @if($animechk){{$animechk}}@endif>Save Playback</label>@endif
 		<input type="hidden" name="mode" value="paint">
 		<input class="button" type="submit" value="Paint">
+		@if($anime)<label id="save_playback"><input type="checkbox" value="true" name="anime" title="Save Playback" @if($animechk){{$animechk}}@endif>Save Playback</label>@endif
 	</p>
 </form>

@@ -72,6 +72,10 @@ define("USE_CHICKENPAINT", "1");
 // (1: Enabled, 0: Disabled) 
 define("USE_TEGAKI", "1");
 
+//Use Axnos Paint 
+// (1: Enabled, 0: Disabled) 
+define("USE_AXNOS", "1");
+
 //Use Klecks
 // (1: Enabled, 0: Disabled) 
 define("USE_KLECKS", "1");
@@ -172,9 +176,10 @@ define("USE_URL_INPUT_FIELD", "1");
 // Set to 0 to disable.
 define("ELAPSED_DAYS","0");
 
-// 拒絶するファイルのmd5
-// Reject files with following MD5 hashes.
-$badfile = array("dummy","dummy2");
+// 拒絶する画像のハッシュ値
+// Reject files with the following image hashes.
+$badfile = array("dummyhash","dummyhash2");
+
 
 // 拒絶するホスト
 // Block following IPs
@@ -462,6 +467,12 @@ define("DIARY", "0");
 // Files that exceed this value will be compressed as JPEG files.
 define("IMAGE_SIZE", "2048");	
 
+//ログファイルのファイルサイズの制限値(単位MB)
+//大きな値を設定すると動作が不安定になる可能性があります。
+// Maximum file size limit for the log file (in MB)
+// Setting a large value may cause instability.
+define("MAX_LOG_FILESIZE", "15");
+
 // フォーム下の追加お知らせ
 // (例)"<li>お知らせデース</li>
 //     <li>サーバの規約でアダルト禁止</li>"
@@ -529,6 +540,7 @@ $servers =
 
 	["X","https://x.com"],
 	["Bluesky","https://bsky.app"],
+	["Threads","https://www.threads.net"],
 	["pawoo.net","https://pawoo.net"],
 	["fedibird.com","https://fedibird.com"],
 	["misskey.io","https://misskey.io"],
@@ -540,10 +552,10 @@ $servers =
 
 // Width and height of window to open when SNS sharing
 
-//window width initial value 350
-define("SNS_WINDOW_WIDTH","350"); 
-//window height initial value 490 
-define("SNS_WINDOW_HEIGHT","490");
+//window width initial value 600
+define("SNS_WINDOW_WIDTH","600"); 
+//window height initial value 600 
+define("SNS_WINDOW_HEIGHT","600");
 
 /* ---------- お絵かき詳細設定(Advanced Setting for OEKAKI) ---------- */
 

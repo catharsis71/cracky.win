@@ -141,6 +141,7 @@
 									value="{{$catalog_pageno}}">@endif
 								@if(!$catalog_pageno)<input type="hidden" name="catalog_pageno" value="0">@endif
 								<input type="hidden" name="no" value="{{$rewrite}}">
+								<input type="hidden" name="edittime" value="{{$time}}">
 								<input type="hidden" name="pwd" value="{{$pwd}}">
 								@endif
 								@if($admin)
@@ -201,6 +202,7 @@
 						<li>Attached image larger than width {{$maxw_px}}px height {{$maxh_px}}px will be reduced size.</li>
 						<li>Images larger than width {{$maxw}}px height {{$maxh}}px will be thumbnailed.</li>
 						<li>The maximum amount of posted data is {{$maxkb}}KB. With sage function.</li>
+						{!!$addinfo!!}
 						@endif
 						@if($rewrite)
 						<li>Cookies are not saved in edit mode. The position does not change even if sage is added.</li>
@@ -268,7 +270,7 @@
 							<th>Comment</th>
 							<th>Host</th>
 							<th>Image (KB) </th>
-							<th>MD5</th>
+							<th>Hash</th>
 					</tr>
 						@foreach ($dels as $del)
 						<tr>

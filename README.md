@@ -11,7 +11,7 @@ You may lose all log files.
 
 Please update to v5.x or higher.
 
-## A POTI-board that can use HTML5 versions of PaintBBS NEO , ChickenPaint , and klecks.
+## A POTI-board that can use HTML5 versions of PaintBBS NEO ,tegaki.js , Axnos Paint , ChickenPaint , and klecks.
 
 ![PaintBBS NEO](https://user-images.githubusercontent.com/44894014/130362908-27922b42-6a4c-4c73-8ab6-a1f678014eed.png)
 
@@ -28,7 +28,7 @@ This is a project to translate [POTI-board EVO](https://github.com/satopian/poti
 
 ## Required php version
 
-Required PHP version.PHP7.4 to PHP8.3
+Required PHP version.PHP7.4 to PHP8.4
 
 ### To change the color scheme of the Default theme MONO
 MONO's HTML and CSS have been significantly updated in v3.07.5.  
@@ -42,7 +42,723 @@ It's easy to change the color scheme because the settings are separated for the 
 However, an environment that can handle SCSS is required.  
 For example, the free [Visual Studio Code](https://azure.microsoft.com/en-us/products/visual-studio-code/) and its extension, [DartJS Sass Compiler and Sass Watcher](https://marketplace.visualstudio.com/items?itemName=codelios.dartsass).
 
-## 2024/02/03 v6.22.0
+## 2024/12/17 v6.58.0
+### "Share on SNS" Now Support Meta "Threads"
+  
+![241216_Threads対応](https://github.com/user-attachments/assets/a07cb6fc-1df9-4a87-9ad7-fb54d372727f)
+  
+- You can now create shared links for Meta's SNS "Threads."
+The number of files to be changed is small, but you will need to reconfigure `config.php` to make it compatible with "Threads."
+If you do not need to make it compatible with "Threads," there is no need to reconfigure `config.php`.
+```
+$servers =
+[
+
+	["X","https://x.com"],
+	["Bluesky","https://bsky.app"],
+	["Threads","https://www.threads.net"],
+	["pawoo.net","https://pawoo.net"],
+	["fedibird.com","https://fedibird.com"],
+	["misskey.io","https://misskey.io"],
+	["misskey.design","https://misskey.design"],
+	["nijimiss.moe","https://nijimiss.moe"],
+	["sushi.ski","https://sushi.ski"],
+
+];
+
+// Width and height of window to open when SNS sharing
+
+//window width initial value 600
+define("SNS_WINDOW_WIDTH","600"); 
+//window height initial value 600 
+define("SNS_WINDOW_HEIGHT","600");
+
+```
+ 
+## 2024/12/12 v6.57.1
+### Issue a warning if layer information has not been saved in PaintBBS NEO
+- If time-lapse data has not been saved in PaintBBS NEO, a confirmation dialog will now be displayed saying "Layer information will not be saved.Are you sure you want to continue?".
+### Improved Markdown link function
+- Improved Markdown link `[string](URL)`.
+If there is a `[]` within a `[]` that specifies a string, escape it with a backslash.
+When escaped, it will become a link like this
+[\[12345\] Petit Note](https://example.com)
+Example)
+```
+[\[12345\] Petit Note](https://example.com)
+```
+## 2024/12/08 v6.56.6
+### AXNOS Paint has been updated
+- The UI is now easier to use even on devices with small screens.
+
+## 2024/12/04 v6.56.5
+### ChickenPaint Be has been updated.
+- Displays the HTTP status code more clearly when the network response was not ok.
+  
+![image](https://github.com/user-attachments/assets/e2ec8c70-1d30-44cf-ac15-e3f031cef32b)
+
+![image](https://github.com/user-attachments/assets/0942b769-d474-4504-a76f-fa6dec23d2a2)
+
+## 2024/12/03 v6.56.3
+### Review of user authentication code
+- The user code has been expanded to 64 characters.
+- The password is no longer used as a seed for the hash value of the authentication code when replacing an image.
+- To improve the reliability of authentication, the authentication code when replacing an image now includes the article number and article ID as is.
+- Added identity verification for posted images when replacing an image, and the image is posted only if the user code or IP address matches.
+### Fixed an issue that occurred when replacing an image/editing an article after deleting an article.
+- An issue occurs when someone deletes an article while an article is continuing, and the password of a new post posted afterwards is the same.
+This is because the "article number" and "password" of the newly posted article are the same.
+In this case, The new post is overwritten by the "continuation" post.
+The same issue occurs if you delete an article you are editing and then post a new post with the same "article number" and "password" as the article you are editing.
+- To avoid this issue, the UNIX time of the article is now used to check whether the article you are overwriting when "continuing" or editing is the same as the original article.
+
+### ChickenPaint Be Update
+
+[Feature request/proposal: converting brightness to opacity · Issue #4 · satopian/ChickenPaint_Be](https://github.com/satopian/ChickenPaint_Be/issues/4)
+
+- Added a function to convert brightness to transparency.
+
+- Based on the prototype created by [@SuzuSuzu-HaruHaru](https://github.com/SuzuSuzu-HaruHaru), we adjusted the method of calculating opacity and implemented it as a function equivalent to that of general paint software.
+
+![image](https://github.com/user-attachments/assets/e90861fd-3edd-4e97-a50a-3f0889e37fad)
+
+## 2024/11/26 v6.53.8
+### Code cleanup
+- The long foreach nest for image replacement has been shortened.
+- Unnecessary basename() has been removed.
+- The function that checked whether GD was available has been simplified and consolidated into a class method in thumbnail_gd.inc.php.
+
+- In PHP8.4, exit() has become a function instead of a language structure, so `exit;` without parentheses has been changed to `exit();`.
+`exit;` without parentheses may be deprecated in future versions of PHP.
+### Bug fix
+- Fixed a problem where explode() would fail and cause a PHP error if a non-existent article number was intentionally specified during password authentication processing when drawing a continuation.
+(This did not occur in normal use, but was recorded as a PHP error in the server error log when an invalid process was performed.)
+
+- Fixed a bug where additional explanations for the bulletin board were not displayed in the new post form even if they were specified in $addinfo in config.php;.
+(Additional explanations were displayed when drawing and replying, but not in the new post form)
+
+## 2024/11/21 v6.51.3
+### 5MB limit on log file size removed
+When the log file exceeded 5MB, the file was cut off in a way that required items were cut off in the middle of the log file.  
+Therefore, the 5MB limit when acquiring a log file has been removed.  
+Instead, a check on the log file size has been added.  
+If the log file exceeds 15MB, an error message will be displayed. (When writing and pressing the paint button)  
+However, by the time the log file size reaches 15MB, the bulletin board should be quite heavy.  
+It has been proven that it works up to about 8,000 posts, but if it exceeds that, it is likely to become unstable.  
+
+If you want to store more posts, consider using.  
+satopian/Petit_Note_EN: Petit Note English ver. PHP script for PaintBBS NEO, tegaki.js,AXNOS Paint,ChickenPaint and Klecks. (PHP5.6 - PHP8.4)
+https://github.com/satopian/Petit_Note_EN
+
+This is a one thread, one log file format, so you can operate up to 8000 threads instead of 8000 comments.
+With 200 posts per thread, you can have 8000x200=1.6 million posts.
+
+### Added new configuration item to config.php
+The limit value for the log file size check could be set to 15MB uniformly, but now it is configurable.
+If you don't have any particular preference, there is no need to add a configuration item.
+If the configuration item does not exist, the default limit value of 15MB will be applied.
+
+```
+// Maximum file size limit for the log file (in MB)
+// Setting a large value may cause instability.
+define("MAX_LOG_FILESIZE", "15");
+
+```
+
+## 2024/11/19 v6.50.3
+### Replacing Functions Marked for Removal in the PHP 8.4 RFC with New Functions  
+
+POTI Board EVO previously used functions that were proposed for removal in the PHP 8.4 RFC. Although these functions were not deprecated due to a slightly higher number of votes against their removal, I have decided to replace them proactively to ensure future compatibility.  
+
+#### New Functions for Cryptographic Operations  
+**Deprecation of `uniqid()`**  
+I will stop using `uniqid()` and replace it with `random_bytes()`.  
+
+#### Changing the Hash Algorithm for Duplicate Image Detection from `md5` to `sha256`  
+**Deprecation of `md5()`**  
+Since the deprecation of `md5()` was proposed in the PHP 8.4 RFC, the method for generating image hash values to prevent duplicate image posts has been changed from `md5` to `sha256`.  
+
+```
+// Reject files with the following image hashes.
+$badfile = array("dummyhash","dummyhash2");
+```
+If you have specified images to reject, you must reconfigure this setting.
+
+
+## 2024/11/11 v6.39.12
+### The .htaccess description method has been changed to Apache 2.4 format
+- Official support for Apache 2.2 ended in 2017, so the Apache 2.2 format .htaccess files has been rewritten to Apache 2.4 format.
+
+## 2024/11/08 v6.39.11
+### Display detailed error message when file size is too large in Klecks
+- Display error message in format like "File size is too large. Limit size: 20MB Current size:30MB".
+When the total size of PNG format image file and PSD format layer information output by Klecks exceeds the server's allowable size, it displays detailed information on why posting is not possible.
+Until now, it only displayed "Your picture upload failed!\nPlease try again!"
+Since the file size includes layer information, the more layers there are, the easier it is to exceed the limit.
+The file size will be smaller if you combine layers.
+
+![image](https://github.com/user-attachments/assets/967c4189-b32b-47e6-883a-2cfd9634b1e8)
+
+When displaying Japanese.
+
+![image](https://github.com/user-attachments/assets/5ab0a273-619c-4206-a24e-f2451aded124)
+
+When displayed in English.
+
+## 2024/11/06 v6.39.9
+### ChickenPaint Be has been updated
+- Displays a more detailed error message when the file size exceeds the server's allowable value.
+Displays the current file size and displays the error message "The file size exceeds the server limit."
+Previously, it only displayed "Sorry, your drawing could not be saved, please try again later."
+If you merge and organize ChickenPaint Be's layers, the file size at the time of posting will be smaller. If you are unable to post because this error message appears, merging the layers may enable posting.
+  
+![image](https://github.com/user-attachments/assets/bc71e714-dde6-458e-bd57-e0d69859e2da)
+  
+If you have a rental server that has a default limit of 5MB and you want to allow file sizes larger than that, edit php.ini.
+POTI-board looks at both post_max_size and upload_max_filesize and  ​​uses the smaller of them as the limit value, so you need to adjust the following two upper limits.
+Please check the server manual for instructions on how to edit php.ini.
+
+The units in the following setting examples are MB.
+Please note that if you set the limit too high, you may be more vulnerable to DDoS attacks.
+Considering the stability of JavaScript apps, I think a maximum of 25MB is appropriate.
+#### Example settings
+
+```
+; Maximum size of POST data that PHP will accept.
+; Its value may be 0 to disable the limit. It is ignored if POST data reading
+; is disabled through enable_post_data_reading.
+; https://php.net/post-max-size
+post_max_size = 20M
+
+; Maximum allowed size for uploaded files.
+; https://php.net/upload-max-filesize
+upload_max_filesize = 20M
+
+```  
+## 2024/11/03 v6.39.8
+### ChickenPaint Be has been updated
+- Fixed an issue where the ChickenPaint Be texture palette could not be scrolled.  
+(Scrolling the texture palette is necessary on devices with small screens such as smartphones.)  
+
+
+## 2024/11/03 v6.39.7
+### Classify the series of GD processes for thumbnail creation to make the source code more readable
+- As a result of cramming functions into `thumbnail_gd.php`, the readability of the source code significantly decreased, so we reorganized it into a static class.  
+`thumbnail_gd.php` has been deleted.  
+Use `thumbnail_gd.inc.php` instead.  
+`thumbnail_gd.php` is no longer necessary, but there is no problem if it remains on the server.  
+Please be careful when deleting, as you may delete a necessary file when trying to delete an unnecessary file.
+thumbnail_gd.inc.php` is now a common class with [Petit Note](https://github.com/satopian/Petit_Note).  
+There is no longer a need to maintain two types of files, one for Petit Note and one for POTI-board.  
+### Fixed a bug that reduced the actual size of drawing images.
+```
+// The maximum size for width and height during upload, any larger will be resized.  
+define("MAX_W_PX", "1024"); //Width  
+define("MAX_H_PX", "1024"); //Height  
+```
+Fixed a bug that reduced the image size when the size set with `MAX_W_PX` or `MAX_H_PX` was smaller than the maximum size that can be drawn.  
+The image size limit for drawing images should have been specified as the maximum size that can be drawn, and it was unintended that the image would become smaller than the initial image after posting.  
+
+### When posting, the screen now scrolls to the posted reply
+- Because there is an input field at the top, previously the top of the reply screen was displayed once posting was completed.  
+However, this could make it difficult to tell if the reply comment was posted, so we've made it so that the screen scrolls to a position where the reply comment is visible.  
+
+## 2024/11/01 v6.39.3
+- I have improved the function to convert PNG images to JPEG when they exceed MAX_KB, and moved the GD processing that was processed in potiboard.php to thumbnail_gd.php.  
+By utilizing the existing GD processing, the code in potiboard.php has been shortened.  
+
+- When drawing, even if the image file size exceeds the value specified in MAX_KB, the post will be completed without an error.  
+As before, images attached from the posting form will result in an error when they exceed MAX_KB.  
+This specification has existed until now, but even if the original file size is very large, it will be reduced due to the vertical and horizontal limitations, and if the file size is larger than MAX_KB, PNG will be converted to JPEG, and if the final file size is within the MAX_KB range, the post will be successful.  
+
+## 2024/10/26 v6.38.1
+### ChickenPaint Be has been updated.
+#### You can now change the brush size by dragging the circle in the brush preview screen with the pen
+
+![2024-10-26-Brush Palette](https://github.com/user-attachments/assets/aa5747a9-6102-45fd-8fcd-05139e8894b4)  
+
+- The process that was optimized for the mouse has been rewritten as PointerEvent so that it can be operated with the pen.  
+In addition, to prevent malfunctions, the default behavior of touchmoveEvent for each palette and the main menu has been canceled.  
+Fixed an issue where a dragged object would continue to move even if the pen was removed from the screen.  
+
+
+## 2024/10/25 v6.38.0
+### ChickenPaint Be has been updated.
+#### Added noise texture to texture palette
+![Image](https://github.com/user-attachments/assets/7799d25c-2783-44a5-bae0-9185a3c628b2)
+- Added "Noise Texture" to "Texture Palette".
+Previously, you could add noise by using the "Monochrome Noise" option in the Effects menu in combination with layer effects, but the addition of "Noise Texture" allows you to create a slightly different type of noise.  
+By using it in combination with a pen or pencil, you can draw more pencil-like lines.  
+It is also effective when applying thick paint with a watercolor brush.  
+
+#### Disable texture when using eraser
+
+- Added a process to disable texture when using eraser.  
+You can now erase with the eraser even if a texture is selected.  
+Previously, if you selected a texture and used the eraser, you could not erase it completely.  
+- Textures are applied when using the soft eraser. Please use the soft eraser when creating patterns by combining textures with the eraser.
+
+## 2024/10/23 v6.37.8
+### Search code optimization
+- To improve code readability, the same process was made into a function.
+By making it a function, 16 lines that repeated the same process were reduced to 4 lines.  
+### ChickenPaint Be updated
+- Bootstrap is no longer declared globally, but is imported where necessary.  
+In addition, processes that can be reduced were deleted.  
+The build date is now listed in "About ChickenPaint Be".  
+This makes it possible to see at a glance when ChickenPaint Be was built.  
+
+![image](https://github.com/user-attachments/assets/79592935-e77b-4907-a4e3-05dc8dbe663a)
+
+
+## 2024/10/15 v6.37.7
+### ChickenPaint Be has been updated.
+- The shortcut keys for zooming in and out in ChickenPaint Be have been changed to "+" and "-", the same as Klecks and AXNOS Paint.  
+Previously, it was necessary to press the "ctrl key" at the same time, such as "ctrl + +" or "ctrl + -".  
+
+- The file size of ChickenPaint Be has been reduced by 23.7%.  
+By changing the build tool and removing the polyfill package used for IE compatibility, the file size, which was 779KB, has been reduced to 594KB.  
+This weight reduction has made startup faster.  
+
+
+## 2024/10/04 v6.37.6
+### Lightbox Updated
+- Lightbox updated to v2.11.5 and changed to a drawing board.
+### AXNOS Paint Updated
+- The background of the layer thumbnail images has been changed from a solid gray to a checkerboard pattern.  
+This is a change in the unofficial version of AXNOS Paint. The original AXNOS Paint developer is not responsible for any issues caused by this change, so please do not contact the original AXNOS Paint developer.  
+
+## 2024/09/30 v6.37.3
+### PaintBBS NEO has been updated
+PaintBBS NEO has a function to restore images when you move to another page or accidentally close the browser tab, but if you accidentally select a small canvas size when restoring, the image will be cropped to fit that small canvas size.  
+Even if you then select a larger canvas size and reopen the image, the image will remain cropped small.  
+With this update, you can now restore the image to its original size by selecting a larger canvas size and reopening it.  
+
+## 2024/09/28 v6.37.2
+### PaintBBS NEO has been updated
+#### Images can now be restored even if the PC is turned off
+
+PaintBBS NEO has a function to restore images when you move to another page or accidentally close the browser tab, but if the PC is turned off due to a power outage caused by lightning, images cannot be restored.  
+Backup data was only saved when you moved to another page or closed the tab, so if an unexpected power outage caused by lightning occurred, the data for restoration was not saved.
+To address this issue, data for restoration will be saved every 10 strokes.
+Data will also be saved if the browser is closed.  
+The data storage destination has been changed to local storage, similar to mobile devices.
+However, this alone will still leave problems.  
+Test drawing data, etc. will continue to be saved for more than a week and may be restored at unexpected times.  
+Taking this into consideration, restoration data older than three days will be automatically discarded.  
+Due to recent climate change, power outages due to thunderstorms are increasing.
+With PaintBBS NEO v1.6.5, you can now restore your Drawing bulletin board data even in the event of a sudden power outage.  
+
+Operation has been confirmed on PC versions of Chrome, Edge, and Firefox.  
+
+
+## 2024/09/27 v6.37.0
+### Now supports PHP 8.4
+We created a test environment for the PHP8.4 RC version, which is scheduled to be released in November 2024, and tested POTI-board.  
+As a result, we found that a deprecated error occurred in BladeOne.
+Since PHP8.4 has not yet been officially released, it will be some time before BladeOne supports PHP8.4.  
+For this reason, we created an unofficial patched version of BladeOne and included it.
+
+### PaintBBS NEO update
+
+Code that mixed substring() and slice() has been unified into slice(). (No change in behavior)
+
+## 2024/09/19 v6.36.3
+### ChickenPaint Be has been updated
+- Removed unnecessary Bootstrap 3 and Bootstrap 4 legacy CSS classes.
+### The singular "post" and plural "posts" are now displayed correctly.
+- "1 post omitted" and "2 posts omitted" now display correctly in singular and plural.
+
+## 2024/09/07 v6.36.1
+### Updated the Paint screen template.
+- Fixed a bug that caused image files such as PNG and JPEG to fail to load when continuing to draw with Klecks.
+- Fixed a bug in template used with Klecks where loading a transparent PNG would result in a white background instead of transparent.
+This issue was discovered late, as it did not occur when a PSD file with layer information was present.
+- Fixed the 404 error message that appears when the file to save the image does not exist.
+The error message displayed the file name that was included but not called directly.
+### Updated AXNOS Paint
+The released AXNOS Paint V2.3.0 has been remodeled for POTI-board.
+
+## 2024/09/05 v6.36.0
+### AXNOS Paint has been updated.
+- The maximum and minimum canvas size set in the bulletin board are now reflected in the maximum and minimum canvas size in the AXNOS Paint Settings tab.
+- If the browser's preferred language setting is anything other than Japanese, the UI now launches in English.
+- The draft image loading process has been replaced with the official AXNOS Paint one.  
+  
+![image](https://github.com/user-attachments/assets/f086f1b0-28c5-428c-9e78-c84157d66789)
+  
+
+## 2024/08/21 v6.35.3
+### Updates to AXNOS Paint derivatives
+- Modified the layer compositing results to be closer to SAI and FireAlpaca.
+This is currently a change to the specifications of AXNOS Paint derivatives, so if any problems with the layer compositing results occur due to this change, it is a problem with the derivative, not the original version.
+- Implemented a measure to prevent repeated pressing of the post button in AXNOS Paint and Tegaki
+Fixed an issue where multiple images were sent when the post button was pressed repeatedly, and were added to the list of unposted images.
+Changed the communication process to comply with AXNOS Paint specifications.
+
+## 2024/08/09 v6.35.2
+### AXNOS paint has been updated.
+- Resolved an issue when moving the tool palette on Mac Safari browser.  
+This issue does not reproduce in the latest versions of Safari. This is an unofficial fix to address an issue occurring in Safari 14.  
+
+## 2024/08/08 v6.35.1
+### Now supports AXNOS Paint.
+[What is AXNOS Paint (What is Axnos Paint) [Word article] - Niconico Encyclopedia](https://dic.nicovideo.jp/a/axnos%20paint)  
+  
+![Image](https://github.com/user-attachments/assets/367fc239-7897-4859-904d-08e91f5cf75e)
+  
+### A new setting item has been added to config.php
+```
+//Use Axnos Paint 
+// (1: Enabled, 0: Disabled) 
+define("USE_AXNOS", "1");
+
+```
+If this setting item does not exist, Axnos Paint will be used.
+If you don't want Axnos Paint to appear in the paint app selection list, add the above setting.
+
+
+## 2024/08/04 v6.33.8
+### ChickenPaint Be Updates
+- The Blur tool in the Tool Palette now has a shortcut key set to U.
+This assigns all shortcut keys in the Tool Palette except for rotating the canvas and moving the hand tool.
+Since rotating the canvas is already available with R+drag and the hand tool with Shift+drag, there is no need to set shortcut keys for these functions in the Tool Palette.
+- The apply transform button now expands to the full width of the palette, just like in the original ChickenPaint.
+This was an issue we ran into when we changed to Bootstrap 5, which was missing some needed CSS from the original ChickenPaint, so we restored some of the CSS from the original ChickenPaint.
+### potiboard.php code cleanup
+- The code handling matching article numbers and passwords when rendering continuations is now less nested.
+
+## 2024/07/27 v6.33.6
+### Added error message.
+>"MSG051", "[Locked due to incorrect password attempts.]"
+
+## 2024/07/27 v6.33.5
+### Fixed a bug in ChickenPaint Be.
+- 2024/07/13 In v6.32.9, ChickenPaint Be starts with two layers, but the transparent layer that is automatically created at that time did not work properly.
+When drawing with a watercolor brush, black was dragged and the screen became black.
+This issue was fixed by setting the layer color correctly.
+
+## 2024/07/19 v6.32.11
+### ChickenPaint Be has been updated.
+- Added a duplicate icon to the Layer palette.
+You can now duplicate layers and layer groups with one tap.
+Previously you had to use a shortcut key or select duplicate from the top menu.
+- Changed the Merge Down icon.
+- The layer group merge icon is now in the same position as the Merge Down icon.
+When you select a layer group folder, it becomes the group merge icon, and when you select a layer, it is replaced by the Merge Down icon.
+
+![Added a duplicate icon to ChickenPaint's Layer palette](https://github.com/user-attachments/assets/75543a04-3e51-4960-9c97-571cf8e007a0)
+
+
+## 2024/07/13 v6.32.9
+### ChickenPaint Be updated
+- Starts with a total of two layers: background layer and transparent layer.
+
+Reduces accidents of drawing lines on a white background layer.
+
+![image](https://github.com/user-attachments/assets/bd641562-5f49-4d27-b938-fe9b3c0d5501)
+
+
+## 2024/07/05 v6.32.7
+
+### Updated ChickenPaint Be
+- If the iPad Air width or height is 820px or less and is a touch device, it will launch in mobile mode.
+Previously, the width or height was 800px or less, so the app launched in PC UI when using iPad Air.
+
+Also, the app switched to the mobile screen when the browser window size was reduced on the PC, but by adding touch device detection processing, the app will launch in PC UI when using PC.
+
+### Updated .htaccess
+- The setting was set to prohibit the calling of files with the `.json` extension. However, this also prohibits the calling of `manifest.json`, which sets the icons to be set on the home screen of PWA and smartphones. Since this makes it impossible to set touch icons, the setting was changed to allow the calling of files with the file name `manifest.json`.
+
+### Updated the template engine BladeOne to the latest version
+- BladeOne has been updated to the latest version v4.13.
+
+
+## 2024/06/19 v6.32.5
+![localhost_221021_59_poti-kaini-EN_potiboard5_potiboard php_mode=newpost(iPad Mini)](https://github.com/satopian/poti-kaini-EN/assets/44894014/6edfbe7e-306d-4c8e-84b4-69404441a38d) ![localhost_221021_59_poti-kaini-EN_potiboard5_potiboard php_mode=newpost(Pixel 7)](https://github.com/satopian/poti-kaini-EN/assets/44894014/16db4c3f-9fb5-415d-a051-c2849ecb7983)
+
+The template has been updated.
+The explanations for the form input fields have been made easier to understand.
+The way the form is displayed on mobile devices has been changed.
+
+## 2024/06/12 v6.32.2
+
+### ChickenPaint Be updated
+
+- Fixed an issue where the text on the opacity adjustment slider in the layer palette was blurred.
+
+![image](https://github.com/satopian/Petit_Note/assets/44894014/021ccbba-4c53-4299-8655-6a188910e754)
+
+- Increased the spacing between the tool option sliders so they can be operated with your finger.
+
+
+## 2024/06/10 v6.32.1
+
+### ChickenPaint Update
+- Switch to mobile UI and collapse palette when using a device with width and height less than 768px. The UI takes up less space and you can draw on a larger canvas.
+
+https://github.com/satopian/Petit_Note/assets/44894014/efb5fe8e-aafe-44c6-b3a0-b01b54b5c5f0
+
+- The margins of color swatches in mobile UI have been enlarged so that they can be tapped with a finger.
+
+### Issue where on-screen keyboard appears when tapping the drawing time clock on PaintBBS NEO drawing screen
+- Added readonly attribute to prevent on-screen keyboard from appearing.
+![Screenshot_20240610-103937_600](https://github.com/satopian/Petit_Note/assets/44894014/f7c27259-b996-4e5a-88ff-3a97fcf80c89)
+This issue occurred before 2018.
+
+
+## 2024/06/09 v6.31.23
+### ChickenPaint Be Update
+- The thickness of the palette title bar in smartphone mode has been increased to make collapse/expand easier.
+- The spacing between the operation icons in the layer palette in smartphone mode was narrow, so it has been widened.
+- Displaying both the collapse/expand icon and the close icon could lead to accidental tapping and accidentally closing the palette, so the close icon is no longer displayed in smartphone mode.
+Instead, use the show/hide shortcut menu at the top.
+
+![Screenshot_20240609-201946](https://github.com/satopian/poti-kaini/assets/44894014/e9608591-78d4-4614-a8f4-ae27900e452c) ![Screenshot_20240609-201955](https://github.com/satopian/poti-kaini/assets/44894014/c9d77422-0277-4fd8-b984-9cb624b34020)
+
+
+## 2024/06/08 v6.31.22
+### ChickenPaint Be Update
+- The shortcut menu for hiding palettes is now always visible on devices other than smartphones and tablets.
+- Further optimized responsive design for different widths.
+- The color of the shortcut menu has been changed from yellow to light gray.
+
+https://github.com/satopian/Petit_Note/assets/44894014/e2519331-4898-462f-b911-c8b483acb011
+
+
+## 2024/06/07 v6.31.21
+
+### ChickenPaint Be's Update
+- The brand logo is now intentionally visible even in smartphone mode to prevent accidentally tapping the browser home button.
+- The shortcut menu to hide palettes now spans the entire width of the device.
+Previously, the spacing was too narrow, so it was sometimes impossible to tap the yellow shortcut menu where you intended.
+
+![Screenshot_20240607-214641](https://github.com/satopian/Petit_Note/assets/44894014/fe33539d-959d-477d-ab33-008a9b431e7d) ![Screenshot_20240607-214737](https://github.com/satopian/Petit_Note/assets/44894014/1885f673-b6a5-49fe-801b-13b9e01e5841) ![Screenshot_20240607-214650](https://github.com/satopian/Petit_Note/assets/44894014/d9726f15-f5c8-4956-b611-e0f8c0f78a05)  
+![Screenshot_20240607-214831](https://github.com/satopian/Petit_Note/assets/44894014/28eec37d-aca1-4250-a2bd-89a6eff16221)  
+
+
+## 2024/06/06 v6.31.20
+
+- In v1.36.10, we fixed the issue of the canvas size not returning to full screen after entering numerical values ​​for blurring, grid settings, etc., when using the ChickenPaint menu on a smartphone. However, there was an issue with the palette placement being misaligned when performing this operation, which remained as an issue.
+We found that this issue was caused by both the modal window and the Hamburger menu being displayed, so we set it so that the display event of the modal window is obtained and the Hamburger menu is automatically closed.
+This fixed the issue of the palette placement being misaligned.
+- Detects changes in the orientation of the smartphone or tablet and initializes the palette placement of ChickenPaint.
+In v6.31.10, we added a process to initialize the palette placement when the window size was changed, but the appearance of the on-screen keyboard when renaming a layer was detected as a window size change, making it impossible to change the layer name, so we decided to initialize the palette placement when the smartphone or tablet orientation was changed.
+- If you want to change brushes while drawing, collapsing the palette each time would require more taps.
+Since you can hide all palettes by tapping the shortcut menu in Mobile mode, we have removed the auto-collapse feature for tool palettes.
+- Smartphone mode with collapsed palettes can now be displayed even on smartphones with large screens.
+
+![Screenshot_20240607-141136](https://github.com/satopian/Petit_Note/assets/44894014/078b3f26-1a21-4be0-b248-8b06518b8bfe)  
+
+![Screenshot_20240607-141149](https://github.com/satopian/Petit_Note/assets/44894014/73b84217-2216-4970-b540-1f98734da059)  
+
+
+## 2024/06/01 v6.31.10
+- Fixed an issue where the canvas size would not return to full screen after entering numerical values ​​for blurring, grid settings, etc., when using the ChickenPaint menu on a smartphone.
+- ~~To address the issue where the layer palette would not appear in the expected position when tilting the smartphone vertically or horizontally, the palette layout is now automatically initialized when the screen is resized.
+The palette layout is also initialized every time the browser window size is changed on a PC.
+This also solves the issue where the palette would shift to the left when the window width was narrowed and would not return to its original position even if the window was widened again.
+However, since the palette layout is initialized even if the window is changed slightly, problems may occur if you want to move the palette position while drawing.
+However, it will not be initialized unless the window size is changed, so there should be no problem if you draw with a fixed browsers window size.~~
+
+
+## 2024/05/28 v6.31.9
+- Adjusted the operation icons of ChickenPaint Be's layer palette so that they fit in one horizontal row.
+
+## 2024/05/26 v6.31.8
+### Added horizontal flip icon to ChickenPaint Be
+- Added a horizontal flip icon to the operation palette of ChickenPaint Be.  
+You can now easily flip horizontally even on devices that cannot use keyboard shortcut keys.
+
+![左右反転アイコンを追加](https://github.com/satopian/Petit_Note/assets/44894014/f01c755a-801f-4ca8-9269-d76f2d7dd446)
+
+
+## 2024/05/23 v6.31.3
+### ChickenPaint Be has been updated
+
+- Updated the bootstrap used by ChickenPaint Be to v5.3.3.
+- Fixed ChickenPaint Be's deprecated JavaScript syntax `returnValue`.
+
+
+## 2024/05/21 v6.31.2
+### twitter.com→x.com
+Even if the setting is `twitter.com` or `x.com`, a SNS sharing link will now be created with the `x.com` URL.
+
+```
+// Servers displayed in the list when sharing on SNS
+//Example ["Display name","https://example.com (SNS server URL)"], (comma is required at the end)
+$servers =
+[
+
+	["X","https://x.com"],
+	["Bluesky","https://bsky.app"],
+	["pawoo.net","https://pawoo.net"],
+	["fedibird.com","https://fedibird.com"],
+	["misskey.io","https://misskey.io"],
+	["misskey.design","https://misskey.design"],
+	["nijimiss.moe","https://nijimiss.moe"],
+	["sushi.ski","https://sushi.ski"],
+
+];
+```
+You can now create a link to `x.com` without any problems even if the URL of X (old Twitter) in `config.php` remains `twitter.com`.
+If you don't mind leaving the name of the SNS that opens in the list as "Twitter", there is no need to modify config.php.
+However, the settings in `config.php` take precedence, so if you want to display the old Twitter as "X", change to `["X","https://x.com"] ,`.
+
+## 2024/05/13 v6.31.1
+### Improvement
+  
+- Even if Bluesky is not in the sharing list, you can now share to Bluesky by directly entering `https://bsky.app`.  
+- Fixed an issue where when sharing to X, Bluesky, Misskey, etc. on a smartphone, the app version would launch and the shared server selection screen would remain on the Chrome side.  
+We solved this problem by closing the screen when the focus is removed from the SNS shared server list screen.  
+However, if the screen has already been moved from the list screen to an SNS site, it will not close even if the focus is removed.  
+If so, it's because you're already typing or viewing a social media post.  
+Also resolved the problem that occurred when using the app on a PC, where multiple SNS sharing windows remained open.  
+
+## 2024/05/07 v6.31.0
+### "Share on SNS" now supports Bluesky
+![image](https://github.com/satopian/poti-kaini-EN/assets/44894014/79a98272-529c-442d-812b-b3db2a42dc1e)
+
+```
+// Servers displayed in the list when sharing on SNS
+//Example ["Display name","https://example.com (SNS server URL)"], (comma is required at the end)
+
+$servers =
+[
+
+	["Twitter","https://twitter.com"],
+	["Bluesky","https://bsky.app"],
+	["pawoo.net","https://pawoo.net"],
+	["fedibird.com","https://fedibird.com"],
+	["misskey.io","https://misskey.io"],
+	["misskey.design","https://misskey.design"],
+	["nijimiss.moe","https://nijimiss.moe"],
+	["sushi.ski","https://sushi.ski"],
+
+];
+
+```
+Bluesky must be added to the SNS server list in config.php.  
+`["Bluesky","https://bsky.app"],`
+
+
+## 2024/04/20 v6.30.8
+```
+const handleExit=()=>{
+```
+When I attempted to change `handleExit` to a constant by adding `const`, this function stopped working. To avoid that, the `handleExit` function has been moved from inside "DOMContentLoaded" to outside.
+
+## 2024/04/16 v6.30.7
+### Autolink feature now supports Internet Archive URL format
+Fixed regular expressions for automatic links. Identifies `:` as part of the URL.
+This allows automatic linking of Internet Archive URLs.
+#### Example URL for autolink feature
+`https://example.com/https://www.example.com`
+
+## 2024/03/29 v6.30.5
+### ChickenPaint has been updated.
+Fixed an issue where the ChickenPaintn screen would remain scrolled and the menu bar would disappear when you finished using the iPad's onscreen keyboard.
+When you rename the ChickenPaint layer, an onscreen keyboard appears and forces scrolling.
+Displaying the onscreen keyboard forces the screen to scroll. And I had a problem with the keyboard not returning to its original position after it disappeared.
+Fixed this issue.
+
+
+## 2024/03/18 v6.30.3
+### Fixed an issue where IP address check did not work when using Java Applet + IPv6
+The IP address sent by the Java applet is IPv4, but the PHP script receives an IPv6 IP address.  
+As a result, there were cases where posts were not determined to be by the same person.  
+Fixed an issue where the image would not be displayed in the posted image list even if you posted a drawing image due to an IP address mismatch.  
+Even if the IP addresses do not match, if the cookies match, the image will be displayed in the posted image list, so this problem rarely occurred.  
+### "Tegaki" updated
+In addition to the conventional right-click, you can now register colors in the palette by long-pressing with a pen or finger.
+However, if you press the palette for a long time, it will become a long press and will register the color instead of selecting the color.
+Please be careful not to press for too long when just picking up colors.
+### "ChickenPaint Be" updated
+Added shortcut keys. You can now invert negative and positive images using "ctrl+i".
+It is also possible to invert negative and positive layer masks. You can also invert the visible area by inverting the negative/positive mask.
+
+## 2024/03/11 v6.29.0
+Due to the update of the template engine BladeOne, the operating environment has been changed to PHP7.4-PHP8.2.  
+If PHP is lower than 7.4, please switch the PHP version using the server control panel etc. to PHP 7.4.0 or higher.  
+
+## 2024/03/06 v6.28.0
+### Fixed an issue where the Palette selection menu in ChickenPaint Be did not work on iPad iOS.
+Fixed an issue where the ChickenPaint Be selection menu was not working in Safari and Chrome on iPad iOS.
+### Fixed an issue where it was possible to post using a password other than the admin password even if the admin pass was set to be required for new posts.
+Fixed a bug where new posts were made using a password other than the administrator password, even though the administrator password was set to be required for new posts.
+This is a bug that has existed since v3.x.
+
+## 2024/02/26 v6.27.9
+### While drawing, the browser's default shortcut key "ctrl+o" is disabled
+
+## 2024/02/24 v6.27.8
+### Improvement
+The format of article IDs sent via email has also been unified to `"?res={$resno}#{$no}"`.
+### Bug fixes
+Fixed an issue where `session_start()` was called in `picpost.inc.php` when the SESSION had already started, causing a minor error.
+### Avoid warnings from Chrome
+Avoid warnings from Chrome by explicitly setting "passive" values for ChickenPaint and PaintBBS NEO event listener handling.
+
+### Improvement. 
+Sensitive data in Java applet Shi-Painter has been changed from GET to more secure POST.
+
+## 2024/02/21 v6.26.10
+### Improvement. 
+Changed sensitive data in the HTML5 version of the Paint app from GET to more secure POST.
+### Bug Fix
+Fixed undefined error in paint time.
+Fixed an issue where Shi-Painter posting would fail when using the Waterfox Classic+Java plugin.
+
+## 2024/02/18 v6.25.7
+### Fixed a lightbox vulnerability discovered by GitHub code scanning
+Fixed an issue where variable text was being interpreted as HTML.
+
+## 2024/02/12 v6.25.5
+### Improved key input restrictions for PaintBBS NEO
+On the screen where NEO is running, key operations other than NEO's keyboard shortcut keys and text input could not be performed.
+Therefore, it was only possible to use the right-click menu of the mouse to paste palette data to the "textarea" of the dynamic palette.
+It was also not possible to edit the pasted palette data.
+
+![image](https://github.com/satopian/Petit_Note/assets/44894014/8b5ec588-def4-4950-97b2-d4d381f75831)
+
+By acquiring and pasting dynamic palette data, you can use your own palette on any bulletin board.
+With this update, it is now possible to enter keys in the palette data input field.
+Like the original PaintBBS, ctrl+v (paste) crtl+x (cut) ctrl+c (copy) crtl+a (select all), etc. can now be used in the palette data input field.
+
+Additionally, an issue where browser shortcut keys such as ctrl+r (reload) would work when using the text input function has been fixed.
+
+## 2024/02/09 v6.25.2
+### Fixed an issue where neo's drawing animation file size became too large and could not be posted.
+We fixed an issue where neo's drawing animation file size was too large for the server to handle, causing all posts containing images to fail.
+If the post from neo exceeds the POST limit, we will stop posting the drawing animation file and allow the image post to succeed.
+
+![image](https://github.com/satopian/poti-kaini-EN/assets/44894014/672a08f1-93cc-4aaa-9f0b-48041de6c631)
+
+If you want to upload a large drawing animation file, please make the following settings in php.ini.
+
+```
+upload_max_filesize = 25M
+post_max_size = 25M
+
+```
+
+## 2024/02/05 v6.23.1.1
+### CheerpJ v3.0 supports Shi-Painter's drawing playback function and detailed settings of dynamic palette
+#### CheerpJ v3.0 is now available
+CheerpJ is a tool that converts Java applets to JavaScript on your browser.
+Previously, with CheerpJ v2, it was not possible to adjust the brightness or create gradients in the dynamic palette of the Java applet ShiPainter or PaintBBS. 　
+
+Unfortunately, CheerpJ v3 is designed to not work on XAMPP's Localhost, and posts by Shi-Painter will also fail.
+This can be said to be a specification of CheerpJ because it only supports Java applets that are published on the Internet, not in the local environment.
+#### If you need CheerpJ v2.3, set it in config.php
+
+```
+//Use an older version of CheerpJ Yes:1 No:0
+//If there is a problem with the latest version, do this:1
+define("USE_CHEERPJ_OLD_VERSION","1");
+
+```
+## 2024/02/03 v6.22.1
 ### Use "Lightbox" for pop-up displays
 "Luminous" which was used to display popup images, The LICENSE file has been removed from the repository, so LICENSE is now unknown.
 To resolve this issue, use a "Lightbox" to display the popup.
@@ -79,8 +795,6 @@ To maintain compatibility, if it is not possible to obtain with GET, it is now p
 - Transform is "ctrl+h".
 
 
-### Changed Template
-- templates/mono_en/paint_klecks.blade.php
 
 ## 2024/01/22 v6.19.5
 ### Updated the ChickenPaint.
@@ -507,9 +1221,6 @@ Previously, it was added at the end of the line.
 - Klecks update
 - Blade One update
 
-### Changed Templates
-(fixes deprecated jQuery syntax)
-
 ## [2023/05/03] v5.58.9
 - klecks update
 
@@ -565,14 +1276,6 @@ If set like this:
 ### Improvements
 - Fixed that the order of the search screen was not in the latest order.
 - Improved search screen code.
-
-
-
-## [2023/02/26] v5.56.2.3
-### Bug fix
-### changed Templates
-- templates/mono_en/paint_klecks.blade.php
-Fixed an issue where illustrations that were drawn when the server status was 502 Bad Gateway disappeared.
 
 ## [2023/02/09] v5.56.2.2
 - Added missing klecks help file.

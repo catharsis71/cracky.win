@@ -1,6 +1,6 @@
 <?php
 //----------------------------------------------------------------------
-// picpost.php lot.20240128 for POTI-board
+// picpost.php lot.20241117 for POTI-board
 // by さとぴあ & POTI-board redevelopment team >> https://paintbbs.sakura.ne.jp/poti/ 
 // originalscript (c)SakaQ 2005 >> http://www.punyu.net/php/
 // しぃからPOSTされたお絵かき画像をTEMPに保存
@@ -8,6 +8,8 @@
 // このスクリプトはPaintBBS（藍珠CGI）のPNG保存ルーチンを参考に
 // PHP用に作成したものです。
 //----------------------------------------------------------------------
+// 2024/11/18 不正画像検出はpotiboard.phpで。
+// 2024/11/17 potiboard.phpでユーザーコードを再発行。
 // 2024/01/28 ユーザーコードはCookieとSESSIONの比較のみに。
 // 2023/12/27 ユーザーコードをSESSIONに格納して、CookieとSESSIONどちらかが一致していれば投稿可能になるようにした。
 // 2023/11/17 Javaプラグインが動作する数少ないブラウザWaterfoxから投稿できなくなっていたのを修正。
@@ -49,12 +51,10 @@
 // 2003/07/11 perl版初公開
 $picpost_inc_ver=20240223;
 class picpost{
-	Public static function saveimage(){
-
+	Public static function saveimage(): void {
 	if(($_SERVER["REQUEST_METHOD"]) !== "POST"){
-		return header( "Location: ./ ") ;
+		header( "Location: ./ ") ;
 	}
-
 	$lang = ($http_langs = isset($_SERVER['HTTP_ACCEPT_LANGUAGE']) ? $_SERVER['HTTP_ACCEPT_LANGUAGE'] : '')
 	? explode( ',', $http_langs )[0] : '';
 	$en= (stripos($lang,'ja')!==0) ? true : false;
@@ -161,7 +161,6 @@ class picpost{
 		$no = isset($u['no']) ? $u['no'] : '';
 		$pwd = isset($u['pwd']) ? $u['pwd'] : '';
 		$repcode = isset($u['repcode']) ? $u['repcode'] : '';
-		$repcode = isset($u['repcode']) ? $u['repcode'] : '';
 		$stime = isset($u['stime']) ? $u['stime'] : '';
 		$count = isset($u['count']) ? $u['count'] : 0;
 	}
@@ -177,16 +176,7 @@ class picpost{
 	((!$c_usercode || !$session_usercode)
 	|| ($c_usercode !== $session_usercode))
 	){
-	//user-codeの発行
-	if(!$c_usercode){//user-codeがなければ発行
-		$userip = get_uip();
-		$usercode = (string)substr(crypt(md5($userip.ID_SEED.uniqid()),'id'),-12);
-		//念の為にエスケープ文字があればアルファベットに変換
-		$usercode = strtr($usercode,"!\"#$%&'()+,/:;<=>?@[\\]^`/{|}~\t","ABCDEFGHIJKLMNOabcdefghijklmno");
-	}
-	setcookie("usercode", $usercode, time()+(86400*365),"","",false,true);//1年間
-	$_SESSION['usercode']=$usercode;
-
+	//user-code再発行
 		die("error\n{$errormsg_8}");
 	}
 	if(((bool)SECURITY_TIMER && !$repcode && (bool)$timer) && ((int)$timer<(int)SECURITY_TIMER)){
@@ -203,9 +193,9 @@ class picpost{
 		$nokori=(int)SECURITY_CLICK-$count;
 
 		if($en){
-			return die("error\nPlease draw more. Further {$nokori} steps.");
+			die("error\nPlease draw more. Further {$nokori} steps.");
 		}else{
-			return die("error\n工程数が少なすぎます。あと{$nokori}工程。");
+			die("error\n工程数が少なすぎます。あと{$nokori}工程。");
 		}
 	}
 	$imgfile = time().substr(microtime(),2,6);//画像ファイル名
@@ -233,18 +223,6 @@ class picpost{
 	}
 
 	chmod($full_imgfile,PERMISSION_FOR_DEST);
-
-	// 不正画像チェック(検出したら削除)
-		$chk = md5_file($full_imgfile);
-		if(isset($badfile)&&is_array($badfile)){
-			foreach($badfile as $value){
-				if(preg_match("/\A$value/",$chk)){
-					unlink($full_imgfile);
-					// 不正な画像を検出しました。画像は保存されません。
-					die("error\n{$errormsg_5}");
-				}
-			}
-		}
 
 	// PCHファイルの長さを取り出す
 	$pchLength = substr($buffer, 1 + 8 + $headerLength + 8 + 2 + $imgLength, 8);

@@ -1,4 +1,4 @@
-﻿.vscode/*
+.vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
@@ -11,4 +11,5 @@ src/
 thumb/
 tmp/
 cache/
+errorlog/
 *.afphoto~lock~

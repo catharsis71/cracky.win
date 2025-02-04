@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 var Neo = function () {};
 
-Neo.version = "1.6.3";
+Neo.version = "1.6.12";
 Neo.painter;
 Neo.fullScreen = false;
 Neo.uploaded = false;
@@ -108,7 +108,7 @@ Neo.init2 = function () {
   Neo.animation = Neo.config.thumbnail_type == "animation";
 
   // 続きから描く
-  Neo.storage = Neo.isMobile() ? localStorage : sessionStorage;
+  Neo.storage = localStorage; //PCの時にもlocalStorageを使用
 
   var filename = Neo.getFilename();
   var message =
@@ -116,32 +116,51 @@ Neo.init2 = function () {
       ? "描きかけの画像があります。復元しますか？"
       : "描きかけの画像があります。動画の読み込みを中止して復元しますか？";
 
-  if (Neo.storage.getItem("timestamp") && confirm(Neo.translate(message))) {
+  let storageTimestamp = Neo.storage.getItem("timestamp");
+  const nowTimestamp = new Date().getTime();
+
+  if (
+    Number.isInteger(Number(storageTimestamp)) &&
+    nowTimestamp - storageTimestamp > 3 * 86400 * 1000
+  ) {
+    //3日経過した復元データは破棄
+    Neo.painter.clearSession();
+    storageTimestamp = null;
+  }
+  if (storageTimestamp && confirm(Neo.translate(message))) {
     var oe = Neo.painter;
     setTimeout(function () {
       oe.loadSession(function () {
         oe._pushUndo();
         oe._actionMgr.restore();
+        //復元時にサイズが違うキャンバスで開き直した時に画像が切り取られないようにするため
+        //復元処理の直後はデータが変更されていない事にする
+        oe.dirty = false;
       });
     }, 1);
-  } else if (filename) {
-    if (filename.slice(-4).toLowerCase() == ".pch") {
-      Neo.painter.loadAnimation(filename);
-    } else {
-      Neo.painter.loadImage(filename);
+  } else {
+    //復元しないを選択した時
+    Neo.painter.clearSession();
+    if (filename) {
+      if (filename.slice(-4).toLowerCase() == ".pch") {
+        Neo.painter.loadAnimation(filename);
+      } else {
+        Neo.painter.loadImage(filename);
+      }
     }
   }
-
   window.addEventListener(
-    "pagehide",
+    // "pagehide",
+    "beforeunload", //ブラウザを終了した時にも復元データを保存
     function (e) {
       if (!Neo.uploaded && Neo.painter.isDirty()) {
         Neo.painter.saveSession();
-      } else {
+      } else if (Neo.uploaded) {
+        //投稿完了時にクリア
         Neo.painter.clearSession();
       }
     },
-    false
+    false,
   );
 };
 
@@ -228,6 +247,64 @@ Neo.initConfig = function (applet) {
   Neo.reservePen = Neo.clone(Neo.config.reserves[0]);
   Neo.reserveEraser = Neo.clone(Neo.config.reserves[1]);
 };
+document.addEventListener("DOMContentLoaded", () => {
+  // ピンチズーム検出
+  Neo.isPinchZooming = function () {
+    if ("visualViewport" in window) {
+      return window.visualViewport.scale > 1;
+    } else {
+      return document.documentElement.clientWidth > window.innerWidth;
+    }
+  };
+
+  // グリッド部分の touchmove イベントのデフォルトの動作をキャンセル
+  Neo.touch_move_grid_control = function (e) {
+    if (Neo.config.neo_disable_grid_touch_move) {
+      let screenwidth = Number(screen.width);
+      if (screenwidth - Neo.config.applet_width > 100) {
+        if (typeof e.cancelable !== "boolean" || e.cancelable) {
+          e.preventDefault();
+          e.stopPropagation();
+        }
+      }
+    }
+  };
+
+  // グリッド部分の touchmove イベントをキャンセルする関数をイベントリスナーに追加
+  Neo.add_touch_move_grid_control = function () {
+    if (Neo.config.neo_disable_grid_touch_move) {
+      // すでにリスナーが追加されていない場合のみ追加
+      const elementNeo = document.getElementById("NEO");
+      if (!elementNeo._touchMoveListenerAdded) {
+        elementNeo.addEventListener("touchmove", Neo.touch_move_grid_control, {
+          passive: false,
+        });
+        elementNeo._touchMoveListenerAdded = true; // リスナーが追加されたことを記録
+      }
+    }
+  };
+
+  // グリッド部分の touchmove イベントをキャンセルする関数の追加とリムーブ
+  document.getElementById("NEO").addEventListener("touchmove", function (e) {
+    if (Neo.config.neo_disable_grid_touch_move) {
+      Neo.add_touch_move_grid_control();
+      if (Neo.isPinchZooming()) {
+        const elementNeo = document.getElementById("NEO");
+        elementNeo.removeEventListener(
+          "touchmove",
+          Neo.touch_move_grid_control,
+          {
+            passive: false,
+          },
+        );
+        elementNeo._touchMoveListenerAdded = false; // リスナーが削除されたことを記録
+      }
+    }
+  });
+
+  // 初期化
+  Neo.add_touch_move_grid_control();
+});
 
 Neo.fixConfig = function (value) {
   // javaでは"#12345"を色として解釈するがjavascriptでは"#012345"に変換しないとだめ
@@ -257,12 +334,12 @@ Neo.initSkin = function () {
   Neo.addRule(
     ".NEO .layerControl .label1",
     "color",
-    Neo.config.tool_color_text
+    Neo.config.tool_color_text,
   );
   Neo.addRule(
     ".NEO .layerControl .label0",
     "color",
-    Neo.config.tool_color_text
+    Neo.config.tool_color_text,
   );
   Neo.addRule(".NEO .toolTipOn .label", "color", Neo.config.tool_color_text);
   Neo.addRule(".NEO .toolTipOff .label", "color", Neo.config.tool_color_text);
@@ -272,7 +349,7 @@ Neo.initSkin = function () {
   Neo.addRule(
     ".NEO .layerControl .bg",
     "border-bottom",
-    "1px solid " + Neo.config.tool_color_text
+    "1px solid " + Neo.config.tool_color_text,
   );
 
   Neo.addRule(".NEO .buttonOn", "color", Neo.config.color_text);
@@ -283,13 +360,13 @@ Neo.initSkin = function () {
     ".NEO .buttonOff",
     "border-top",
     "1px solid ",
-    Neo.config.color_icon
+    Neo.config.color_icon,
   );
   Neo.addRule(
     ".NEO .buttonOff",
     "border-left",
     "1px solid ",
-    Neo.config.color_icon
+    Neo.config.color_icon,
   );
   Neo.addRule(
     ".NEO .buttonOff",
@@ -297,23 +374,23 @@ Neo.initSkin = function () {
     "0 0 0 1px " +
       Neo.config.color_icon +
       ", 0 0 0 2px " +
-      Neo.config.color_frame
+      Neo.config.color_frame,
   );
 
   Neo.addRule(
     ".NEO .buttonOff:hover",
     "background-color",
-    Neo.config.color_icon
+    Neo.config.color_icon,
   );
   Neo.addRule(
     ".NEO .buttonOff:hover",
     "border-top",
-    "1px solid " + lightBorder
+    "1px solid " + lightBorder,
   );
   Neo.addRule(
     ".NEO .buttonOff:hover",
     "border-left",
-    "1px solid " + lightBorder
+    "1px solid " + lightBorder,
   );
   Neo.addRule(
     ".NEO .buttonOff:hover",
@@ -321,23 +398,23 @@ Neo.initSkin = function () {
     "0 0 0 1px " +
       Neo.config.color_iconselect +
       ", 0 0 0 2px " +
-      Neo.config.color_frame
+      Neo.config.color_frame,
   );
 
   Neo.addRule(
     ".NEO .buttonOff:active, .NEO .buttonOn",
     "background-color",
-    darkBorder
+    darkBorder,
   );
   Neo.addRule(
     ".NEO .buttonOff:active, .NEO .buttonOn",
     "border-top",
-    "1px solid " + darkBorder
+    "1px solid " + darkBorder,
   );
   Neo.addRule(
     ".NEO .buttonOff:active, .NEO .buttonOn",
     "border-left",
-    "1px solid " + darkBorder
+    "1px solid " + darkBorder,
   );
   Neo.addRule(
     ".NEO .buttonOff:active, .NEO .buttonOn",
@@ -345,129 +422,129 @@ Neo.initSkin = function () {
     "0 0 0 1px " +
       Neo.config.color_iconselect +
       ", 0 0 0 2px " +
-      Neo.config.color_frame
+      Neo.config.color_frame,
   );
 
   Neo.addRule(".NEO #canvas", "border", "1px solid " + Neo.config.color_frame);
   Neo.addRule(
     ".NEO #scrollH, .NEO #scrollV",
     "background-color",
-    Neo.config.color_icon
+    Neo.config.color_icon,
   );
   Neo.addRule(
     ".NEO #scrollH, .NEO #scrollV",
     "box-shadow",
-    "0 0 0 1px white" + ", 0 0 0 2px " + Neo.config.color_frame
+    "0 0 0 1px white" + ", 0 0 0 2px " + Neo.config.color_frame,
   );
 
   Neo.addRule(
     ".NEO #scrollH div, .NEO #scrollV div",
     "background-color",
-    Neo.config.color_bar
+    Neo.config.color_bar,
   );
   Neo.addRule(
     ".NEO #scrollH div, .NEO #scrollV div",
     "box-shadow",
-    "0 0 0 1px " + Neo.config.color_icon
+    "0 0 0 1px " + Neo.config.color_icon,
   );
   Neo.addRule(
     ".NEO #scrollH div:hover, .NEO #scrollV div:hover",
     "box-shadow",
-    "0 0 0 1px " + Neo.config.color_iconselect
+    "0 0 0 1px " + Neo.config.color_iconselect,
   );
 
   Neo.addRule(
     ".NEO #scrollH div, .NEO #scrollV div",
     "border-top",
-    "1px solid " + lightBar
+    "1px solid " + lightBar,
   );
   Neo.addRule(
     ".NEO #scrollH div, .NEO #scrollV div",
     "border-left",
-    "1px solid " + lightBar
+    "1px solid " + lightBar,
   );
   Neo.addRule(
     ".NEO #scrollH div, .NEO #scrollV div",
     "border-right",
-    "1px solid " + darkBar
+    "1px solid " + darkBar,
   );
   Neo.addRule(
     ".NEO #scrollH div, .NEO #scrollV div",
     "border-bottom",
-    "1px solid " + darkBar
+    "1px solid " + darkBar,
   );
 
   Neo.addRule(
     ".NEO .toolTipOn",
     "background-color",
-    Neo.multColor(Neo.config.tool_color_button, 0.7)
+    Neo.multColor(Neo.config.tool_color_button, 0.7),
   );
   Neo.addRule(
     ".NEO .toolTipOff",
     "background-color",
-    Neo.config.tool_color_button
+    Neo.config.tool_color_button,
   );
   Neo.addRule(
     ".NEO .toolTipFixed",
     "background-color",
-    Neo.config.tool_color_button2
+    Neo.config.tool_color_button2,
   );
 
   Neo.addRule(
     ".NEO .colorSlider, .NEO .sizeSlider",
     "background-color",
-    Neo.config.tool_color_bar
+    Neo.config.tool_color_bar,
   );
   Neo.addRule(
     ".NEO .reserveControl",
     "background-color",
-    Neo.config.tool_color_bar
+    Neo.config.tool_color_bar,
   );
   Neo.addRule(
     ".NEO .reserveControl",
     "background-color",
-    Neo.config.tool_color_bar
+    Neo.config.tool_color_bar,
   );
   Neo.addRule(
     ".NEO .layerControl",
     "background-color",
-    Neo.config.tool_color_bar
+    Neo.config.tool_color_bar,
   );
 
   Neo.addRule(
     ".NEO .colorTipOn, .NEO .colorTipOff",
     "box-shadow",
-    "0 0 0 1px " + Neo.config.tool_color_frame
+    "0 0 0 1px " + Neo.config.tool_color_frame,
   );
   Neo.addRule(
     ".NEO .toolTipOn, .NEO .toolTipOff",
     "box-shadow",
-    "0 0 0 1px " + Neo.config.tool_color_frame
+    "0 0 0 1px " + Neo.config.tool_color_frame,
   );
   Neo.addRule(
     ".NEO .toolTipFixed",
     "box-shadow",
-    "0 0 0 1px " + Neo.config.tool_color_frame
+    "0 0 0 1px " + Neo.config.tool_color_frame,
   );
   Neo.addRule(
     ".NEO .colorSlider, .NEO .sizeSlider",
     "box-shadow",
-    "0 0 0 1px " + Neo.config.tool_color_frame
+    "0 0 0 1px " + Neo.config.tool_color_frame,
   );
   Neo.addRule(
     ".NEO .reserveControl",
     "box-shadow",
-    "0 0 0 1px " + Neo.config.tool_color_frame
+    "0 0 0 1px " + Neo.config.tool_color_frame,
   );
   Neo.addRule(
     ".NEO .layerControl",
     "box-shadow",
-    "0 0 0 1px " + Neo.config.tool_color_frame
+    "0 0 0 1px " + Neo.config.tool_color_frame,
   );
   Neo.addRule(
     ".NEO .reserveControl .reserve",
     "border",
-    "1px solid " + Neo.config.tool_color_frame
+    "1px solid " + Neo.config.tool_color_frame,
   );
 
   if (navigator.language.indexOf("ja") != 0) {
@@ -553,9 +630,9 @@ Neo.backgroundImage = function () {
   var bgCanvas = document.createElement("canvas");
   bgCanvas.width = 16;
   bgCanvas.height = 16;
-  var ctx = bgCanvas.getContext("2d",{
-		willReadFrequently: true,
-	});
+  var ctx = bgCanvas.getContext("2d", {
+    willReadFrequently: true,
+  });
   var imageData = ctx.getImageData(0, 0, 16, 16);
   var buf32 = new Uint32Array(imageData.data.buffer);
   var buf8 = new Uint8ClampedArray(imageData.data.buffer);
@@ -571,9 +648,9 @@ Neo.backgroundImage = function () {
 };
 
 Neo.multColor = function (c, scale) {
-  var r = Math.round(parseInt(c.substring(1, 3), 16) * scale);
-  var g = Math.round(parseInt(c.substring(3, 5), 16) * scale);
-  var b = Math.round(parseInt(c.substring(5, 7), 16) * scale);
+  var r = Math.round(parseInt(c.slice(1, 3), 16) * scale);
+  var g = Math.round(parseInt(c.slice(3, 5), 16) * scale);
+  var b = Math.round(parseInt(c.slice(5, 7), 16) * scale);
   r = ("0" + Math.min(Math.max(r, 0), 255).toString(16)).slice(-2);
   g = ("0" + Math.min(Math.max(g, 0), 255).toString(16)).slice(-2);
   b = ("0" + Math.min(Math.max(b, 0), 255).toString(16)).slice(-2);
@@ -752,14 +829,14 @@ Neo.initComponents = function () {
         container.style.borderColor = Neo.config.inherit_color;
         e.stopPropagation();
       },
-      false
+      false,
     );
     document.addEventListener(
       "mousedown",
       function (e) {
         container.style.borderColor = "transparent";
       },
-      false
+      false,
     );
   }
 
@@ -771,7 +848,7 @@ Neo.initComponents = function () {
         Neo.painter.cancelTool(e.target);
       }
     },
-    false
+    false,
   );
 
   // 投稿に失敗する可能性があるときは警告を表示する
@@ -846,14 +923,14 @@ Neo.initButtons = function () {
   });
   Neo.sliders[Neo.SLIDERTYPE_GREEN] = new Neo.ColorSlider().init(
     "sliderGreen",
-    { type: Neo.SLIDERTYPE_GREEN }
+    { type: Neo.SLIDERTYPE_GREEN },
   );
   Neo.sliders[Neo.SLIDERTYPE_BLUE] = new Neo.ColorSlider().init("sliderBlue", {
     type: Neo.SLIDERTYPE_BLUE,
   });
   Neo.sliders[Neo.SLIDERTYPE_ALPHA] = new Neo.ColorSlider().init(
     "sliderAlpha",
-    { type: Neo.SLIDERTYPE_ALPHA }
+    { type: Neo.SLIDERTYPE_ALPHA },
   );
 
   // sizeSlider
@@ -935,7 +1012,7 @@ Neo.showWarning = function () {
   if (futaba || samplebbs) {
     if (ms || (edge && edge < 15)) {
       str = Neo.translate(
-        "このブラウザでは<br>投稿に失敗することがあります<br>"
+        "このブラウザでは<br>投稿に失敗することがあります<br>",
       );
     }
   }
@@ -1046,9 +1123,9 @@ Neo.resizeCanvas = function () {
 
   Neo.painter.destCanvas.width = width;
   Neo.painter.destCanvas.height = height;
-  Neo.painter.destCanvasCtx = Neo.painter.destCanvas.getContext("2d",{
-		willReadFrequently: true,
-	});
+  Neo.painter.destCanvasCtx = Neo.painter.destCanvas.getContext("2d", {
+    willReadFrequently: true,
+  });
   Neo.painter.destCanvasCtx.imageSmoothingEnabled = false;
   //Neo.painter.destCanvasCtx.mozImageSmoothingEnabled = false;
 
@@ -1103,12 +1180,12 @@ Neo.openURL = function (url) {
 };
 
 Neo.getAbsoluteURL = function (board, url) {
-  if (url && (url.indexOf('://') > 0 || url.indexOf('//') === 0)) {
+  if (url && (url.indexOf("://") > 0 || url.indexOf("//") === 0)) {
     return url;
   } else {
     return board + url;
   }
-}
+};
 
 Neo.submit = function (board, blob, thumbnail, thumbnail2) {
   var url = Neo.getAbsoluteURL(board, Neo.config.url_save);
@@ -1140,7 +1217,7 @@ Neo.submit = function (board, blob, thumbnail, thumbnail2) {
   if (Neo.config.send_header_timer == "true") {
     headerString = "timer=" + timer + "&" + headerString;
   }
-//console.log("header: " + headerString);
+  //   console.log("header: " + headerString);
 
   if (Neo.config.neo_emulate_security_error == "true") {
     var securityError = false;
@@ -1164,24 +1241,40 @@ Neo.submit = function (board, blob, thumbnail, thumbnail2) {
     }
   }
 
-  let pchFileNotAppended=false;
-
+  if (thumbnail2) {
+    const thumbnailSize = thumbnail2.size;
+    // 動画容量を制限するオリジナルのPaintBBSのパラメータ
+    // 単位KB
+    if (!isNaN(Neo.config.animation_max) && Number(Neo.config.animation_max)) {
+      const maxSize = Number(Neo.config.animation_max) * 1024;
+      if (maxSize < thumbnailSize) {
+        thumbnail2 = null;
+      }
+    }
+  }
   if (Neo.config.neo_send_with_formdata == "true") {
-	var formData = new FormData();
-	formData.append('header', headerString);
-	formData.append('picture',blob,blob);
-	let thumbnail_size = 0;
-	if (thumbnail) {
-		formData.append('thumbnail',thumbnail,blob);
-		thumbnail_size=thumbnail.size;
-	}
-	if (thumbnail2) {
-	  if (!Neo.config.neo_max_pch || isNaN(parseInt(Neo.config.neo_max_pch)) || ((parseInt(Neo.config.neo_max_pch)*1024*1024) > (headerString.length+blob.size+thumbnail_size+thumbnail2.size))) {
-		formData.append('pch',thumbnail2,blob);
-		}else{
-			pchFileNotAppended = true;
-		}
-	  }
+    var formData = new FormData();
+    formData.append("header", headerString);
+    formData.append("picture", blob, blob);
+    let thumbnail_size = 0;
+    if (thumbnail) {
+      formData.append("thumbnail", thumbnail, blob);
+      thumbnail_size = thumbnail.size;
+    }
+    if (thumbnail2) {
+      // 動画容量を制限するNEO独自のパラメータ
+      // 単位MB
+      if (
+        !Neo.config.neo_max_pch ||
+        isNaN(Neo.config.neo_max_pch) ||
+        Number(Neo.config.neo_max_pch) * 1024 * 1024 >
+          headerString.length + blob.size + thumbnail_size + thumbnail2.size
+      ) {
+        formData.append("pch", thumbnail2, blob);
+      } else {
+        thumbnail2 = null;
+      }
+    }
   }
 
   //console.log("submit url=" + url + " header=" + headerString);
@@ -1208,94 +1301,110 @@ Neo.submit = function (board, blob, thumbnail, thumbnail2) {
     array.push(thumbnail2Length, thumbnail2);
   }
 
-	var futaba = location.hostname.match(/2chan.net/i);
-	var subtype = futaba ? "octet-binary" : "octet-stream"; // 念のため
-	var body = new Blob(array, { type: "application/" + subtype });
+  var futaba = location.hostname.match(/2chan.net/i);
+  var subtype = futaba ? "octet-binary" : "octet-stream"; // 念のため
+  var body = new Blob(array, { type: "application/" + subtype });
 
-	const postData = (path, data) => {
-		var errorMessage=path+"\n";
+  const postData = (path, data) => {
+    var errorMessage = path + "\n";
 
-		const requestOptions = {
-			method: 'post',
-			body: data,
-		};
-		
-		if (!futaba) {//ふたばの時は、'X-Requested-With'を追加しない
-			requestOptions.mode = 'same-origin';
-			requestOptions.headers = {
-			'X-Requested-With': 'PaintBBS'
-			};
-		}
+    const requestOptions = {
+      method: "post",
+      body: data,
+    };
 
-		fetch(path, requestOptions)
-		.then((response) => {
-			if (response.ok) {
-				response.text().then((text) => {
-				console.log(text)
-				if (text.match(/^error\n/m)) {
-					Neo.submitButton.enable();
-					return alert(text.replace(/^error\n/m, ''));
-				}
-				if (text!=="ok") {
-					Neo.submitButton.enable();
-					return alert(errorMessage + 
-					Neo.translate("投稿に失敗。時間を置いて再度投稿してみてください。"));
-				}
+    if (!futaba) {
+      //ふたばの時は、'X-Requested-With'を追加しない
+      requestOptions.mode = "same-origin";
+      requestOptions.headers = {
+        "X-Requested-With": "PaintBBS",
+      };
+    }
 
-				var exitURL = Neo.getAbsoluteURL(board, Neo.config.url_exit);
-				var responseURL = text.replace(/&amp;/g, "&");
-			
-				// ふたばではresponseの文字列をそのままURLとして解釈する
-				if (responseURL.match(/painttmp=/)) {
-				exitURL = responseURL;
-				}
-				// responseが "URL:〜" の形だった場合はそのURLへ
-				if (responseURL.match(/^URL:/)) {
-				exitURL = responseURL.replace(/^URL:/, "");
-				}
-				Neo.uploaded = true;
-				//画面移動の関数が定義されている時はユーザーが定義した関数で画面移動
-				if (typeof Neo.handleExit === 'function') {
-					return Neo.handleExit();
-				}
-				return location.href = exitURL;
-				})
-			}else{
-				Neo.submitButton.enable();
-				let response_status = response.status; 
-				if (response_status == 403) {
+    fetch(path, requestOptions)
+      .then((response) => {
+        if (response.ok) {
+          response.text().then((text) => {
+            console.log(text);
+            if (text.match(/^error\n/m)) {
+              Neo.submitButton.enable();
+              return alert(text.replace(/^error\n/m, ""));
+            }
+            if (text !== "ok") {
+              Neo.submitButton.enable();
+              return alert(
+                errorMessage +
+                  Neo.translate(
+                    "投稿に失敗。時間を置いて再度投稿してみてください。",
+                  ),
+              );
+            }
+            var exitURL = Neo.getAbsoluteURL(board, Neo.config.url_exit);
+            var responseURL = text.replace(/&amp;/g, "&");
 
-					return alert(errorMessage + Neo.translate("投稿に失敗。\nWAFの誤検知かもしれません。\nもう少し描いてみてください。"));
-				}
-				if(response_status===404) {
-				return alert(errorMessage + Neo.translate("ファイルが見当たりません。"));
-				}
-				return alert(errorMessage + 
-				Neo.translate("投稿に失敗。時間を置いて再度投稿してみてください。"));
+            // ふたばではresponseの文字列をそのままURLとして解釈する
+            if (responseURL.match(/painttmp=/)) {
+              exitURL = responseURL;
+            }
+            // responseが "URL:〜" の形だった場合はそのURLへ
+            if (responseURL.match(/^URL:/)) {
+              exitURL = responseURL.replace(/^URL:/, "");
+            }
+            Neo.uploaded = true;
+            //画面移動の関数が定義されている時はユーザーが定義した関数で画面移動
+            if (typeof Neo.handleExit === "function") {
+              return Neo.handleExit();
+            }
+            return (location.href = exitURL);
+          });
+        } else {
+          Neo.submitButton.enable();
+          let response_status = response.status;
+          if (response_status == 403) {
+            return alert(
+              errorMessage +
+                Neo.translate(
+                  "投稿に失敗。\nWAFの誤検知かもしれません。\nもう少し描いてみてください。",
+                ),
+            );
+          }
+          if (response_status === 404) {
+            return alert(
+              errorMessage + Neo.translate("ファイルが見当たりません。"),
+            );
+          }
+          return alert(
+            errorMessage +
+              Neo.translate(
+                "投稿に失敗。時間を置いて再度投稿してみてください。",
+              ),
+          );
+        }
+      })
+      .catch((error) => {
+        Neo.submitButton.enable();
+        return alert(
+          errorMessage +
+            Neo.translate("投稿に失敗。時間を置いて再度投稿してみてください。"),
+        );
+      });
+  };
 
-			}
-		})
-		.catch((error) => {
-			Neo.submitButton.enable();
-			return alert(errorMessage + 
-				Neo.translate("投稿に失敗。時間を置いて再度投稿してみてください。"));
-		})
-	}
-	if (Neo.config.neo_send_with_formdata == "true") {
+  if (Neo.config.neo_confirm_layer_info_notsaved && !thumbnail2) {
+    const isConfirmed = window.confirm(
+      Neo.translate("レイヤー情報は保存されません。\n続行してよろしいですか?"),
+    );
 
-		if(pchFileNotAppended){
-			if (window.confirm(Neo.translate("画像のみが送信されます。\nレイヤー情報は保持されません。"))) {
-				postData(url, formData);
-			} else {
-				console.log("中止しました。");
-			}
-		}else{
-			postData(url, formData);
-		}
+    if (!isConfirmed) {
+      Neo.submitButton.enable();
+      console.log("中止しました。");
+      return; // ユーザーが続行しない場合、処理を中断
+    }
+  }
 
-	}else{
-		postData(url, body);
-	}
+  // データ送信処理
+  const data = Neo.config.neo_send_with_formdata === "true" ? formData : body;
+  postData(url, data);
 };
 
 /*
@@ -1534,8 +1643,9 @@ Neo.dictionary = {
       "Please push send button again.",
     "投稿に失敗。\nWAFの誤検知かもしれません。\nもう少し描いてみてください。":
       "It may be a WAF false positive.\nTry to draw a little more.",
-    "ファイルが見当たりません。":"File not found",
-	"画像のみが送信されます。\nレイヤー情報は保持されません。":"Only image will be sent.\nLayer information will not be retained.",
+    "ファイルが見当たりません。": "File not found",
+    "レイヤー情報は保存されません。\n続行してよろしいですか?":
+      "Layer information will not be saved.\nAre you sure you want to continue?",
   },
   enx: {
     やり直し: "Redo",
@@ -1596,9 +1706,10 @@ Neo.dictionary = {
       "Failed to upload image. please try again.",
     "投稿に失敗。\nWAFの誤検知かもしれません。\nもう少し描いてみてください。":
       "It may be a WAF false positive.\nTry to draw a little more.",
-    "ファイルが見当たりません。":"File not found.",
-	"画像のみが送信されます。\nレイヤー情報は保持されません。":"Only image will be sent.\nLayer information will not be retained.",
- },
+    "ファイルが見当たりません。": "File not found.",
+    "レイヤー情報は保存されません。\n続行してよろしいですか?":
+      "Layer information will not be saved.\nAre you sure you want to continue?",
+  },
   es: {
     やり直し: "Rehacer",
     元に戻す: "Deshacer",
@@ -1657,10 +1768,11 @@ Neo.dictionary = {
     "投稿に失敗。時間を置いて再度投稿してみてください。":
       "No se pudo cargar la imagen. por favor, inténtalo de nuevo.",
     "投稿に失敗。\nWAFの誤検知かもしれません。\nもう少し描いてみてください。":
-	  "Puede ser un falso positivo de WAF.\nIntenta dibujar un poco más.",
-    "ファイルが見当たりません。":"Archivo no encontrado.",
-	"画像のみが送信されます。\nレイヤー情報は保持されません。":"Sólo se enviará la imagen.\nNo se conservará la información de la capa.",
-},
+      "Puede ser un falso positivo de WAF.\nIntenta dibujar un poco más.",
+    "ファイルが見当たりません。": "Archivo no encontrado.",
+    "レイヤー情報は保存されません。\n続行してよろしいですか?":
+      "La información de las capas no se guardará.\n¿Está seguro de que desea continuar?",
+  },
 };
 
 Neo.translate = (function () {
@@ -1965,9 +2077,9 @@ Neo.Painter.prototype._initCanvas = function (div, width, height) {
     this.canvas[i] = document.createElement("canvas");
     this.canvas[i].width = width;
     this.canvas[i].height = height;
-    this.canvasCtx[i] = this.canvas[i].getContext("2d",{
-		willReadFrequently: true,
-	});
+    this.canvasCtx[i] = this.canvas[i].getContext("2d", {
+      willReadFrequently: true,
+    });
 
     this.canvas[i].style.imageRendering = "pixelated";
     this.canvasCtx[i].imageSmoothingEnabled = false;
@@ -1978,9 +2090,9 @@ Neo.Painter.prototype._initCanvas = function (div, width, height) {
   this.tempCanvas = document.createElement("canvas");
   this.tempCanvas.width = width;
   this.tempCanvas.height = height;
-  this.tempCanvasCtx = this.tempCanvas.getContext("2d",{
-		willReadFrequently: true,
-	});
+  this.tempCanvasCtx = this.tempCanvas.getContext("2d", {
+    willReadFrequently: true,
+  });
   this.tempCanvas.style.position = "absolute";
   this.tempCanvas.enabled = false;
 
@@ -1992,9 +2104,9 @@ Neo.Painter.prototype._initCanvas = function (div, width, height) {
     this.container.appendChild(this.destCanvas);
   }
 
-  this.destCanvasCtx = this.destCanvas.getContext("2d",{
-		willReadFrequently: true,
-	});
+  this.destCanvasCtx = this.destCanvas.getContext("2d", {
+    willReadFrequently: true,
+  });
   this.destCanvas.width = destWidth;
   this.destCanvas.height = destHeight;
 
@@ -2027,25 +2139,22 @@ Neo.Painter.prototype._initCanvas = function (div, width, height) {
       function (e) {
         ref._mouseDownHandler(e);
       },
-	  { passive: false,
-		capture: false }
-		);
+      { passive: false, capture: false },
+    );
     container.addEventListener(
       "touchmove",
       function (e) {
         ref._mouseMoveHandler(e);
       },
-	  { passive: false,
-		capture: false }
-	  );
+      { passive: false, capture: false },
+    );
     container.addEventListener(
       "touchend",
       function (e) {
         ref._mouseUpHandler(e);
       },
-	  { passive: false,
-		capture: false }
-	  );
+      { passive: false, capture: false },
+    );
 
     document.onkeydown = function (e) {
       ref._keyDownHandler(e);
@@ -2107,21 +2216,7 @@ Neo.Painter.prototype._initToneData = function () {
 
 Neo.Painter.prototype.getToneData = function (alpha) {
   var alphaTable = [
-    23,
-    47,
-    69,
-    92,
-    114,
-    114,
-    114,
-    138,
-    161,
-    184,
-    184,
-    207,
-    230,
-    230,
-    253,
+    23, 47, 69, 92, 114, 114, 114, 138, 161, 184, 184, 207, 230, 230, 253,
   ];
 
   for (var i = 0; i < alphaTable.length; i++) {
@@ -2180,47 +2275,60 @@ Neo.Painter.prototype._keyDownHandler = function (e) {
   this.isShiftDown = e.shiftKey;
   this.isCtrlDown = e.ctrlKey;
   this.isAltDown = e.altKey;
-  var key=e.key.toLowerCase();
-  if (key === ' ') this.isSpaceDown = true;
-  
+  var key = e.key.toLowerCase();
+  if (key === " ") this.isSpaceDown = true;
+
   if (!this.isShiftDown && this.isCtrlDown) {
-	if (!this.isAltDown) {
-	  if (key === 'z' || key === 'u') this.undo(); // Ctrl+Z, Ctrl+U
-	  if (key === 'y') this.redo(); // Ctrl+Y
-	} else {
-	  if (key === 'z') this.redo(); // Ctrl+Alt+Z
-	}
+    if (!this.isAltDown) {
+      if (key === "z" || key === "u") this.undo(); // Ctrl+Z, Ctrl+U
+      if (key === "y") this.redo(); // Ctrl+Y
+    } else {
+      if (key === "z") this.redo(); // Ctrl+Alt+Z
+    }
   }
   if (!this.isShiftDown && !this.isCtrlDown && !this.isAltDown) {
-    if (key == '+') new Neo.ZoomPlusCommand(this).execute(); // +
-    if (key == '-') new Neo.ZoomMinusCommand(this).execute(); // -
+    if (key == "+") new Neo.ZoomPlusCommand(this).execute(); // +
+    if (key == "-") new Neo.ZoomMinusCommand(this).execute(); // -
   }
 
   if (this.tool.keyDownHandler) {
     this.tool.keyDownHandler(e);
   }
 
-	//スペース・Shift+スペースででスクロールしないように
-	// if (document.activeElement != this.inputText) e.preventDefault();
-	// console.log(document.activeElement.tagName)
-	//ctrlキーとの組み合わせのブラウザデフォルトのショートカットキーを無効化
-	//但しctrl+v,ctrl+x,ctrl+aは使用可能
-	const keys = ["+",";","=","-","s","h","r","y","z","u","o"];
-	if ((e.ctrlKey||e.metaKey) && keys.includes(e.key.toLowerCase())){
-		e.preventDefault();
-	}
-	//text入力と、入力フォーム以外はすべてのキーボードイベントを無効化
-	if(document.activeElement != this.inputText){
-		if (!(document.activeElement.tagName.toLocaleUpperCase() === "INPUT" || document.activeElement.tagName.toLocaleUpperCase() === "TEXTAREA")) {
-		e.preventDefault();
-		}
-	}
-} 
+  //スペース・Shift+スペースででスクロールしないように
+  // if (document.activeElement != this.inputText) e.preventDefault();
+  // console.log(document.activeElement.tagName)
+  //ctrlキーとの組み合わせのブラウザデフォルトのショートカットキーを無効化
+  //但しctrl+v,ctrl+x,ctrl+aは使用可能
+  const keys = ["+", ";", "=", "-", "s", "h", "r", "y", "z", "u", "o"];
+  if ((e.ctrlKey || e.metaKey) && keys.includes(e.key.toLowerCase())) {
+    e.preventDefault();
+  }
+  //FirefoxのメニューがAltキーで開閉しないようにする
+  document.addEventListener("keyup", (e) => {
+    // e.key を利用して特定のキーのアップイベントを検知する
+    if (e.key.toLowerCase() === "alt") {
+      e.preventDefault(); // Altキーのデフォルトの動作をキャンセル
+    }
+  });
+
+  //text入力と、入力フォーム以外はすべてのキーボードイベントを無効化
+  if (document.activeElement != this.inputText) {
+    if (
+      !(
+        document.activeElement.tagName.toLocaleUpperCase() === "INPUT" ||
+        document.activeElement.tagName.toLocaleUpperCase() === "TEXTAREA"
+      )
+    ) {
+      e.preventDefault();
+    }
+  }
+};
 Neo.Painter.prototype._keyUpHandler = function (e) {
   this.isShiftDown = e.shiftKey;
   this.isCtrlDown = e.ctrlKey;
   this.isAltDown = e.altKey;
-  if (e.key == ' ') this.isSpaceDown = false;
+  if (e.key == " ") this.isSpaceDown = false;
 
   if (this.tool.keyUpHandler) {
     this.tool.keyUpHandler(oe);
@@ -2274,6 +2382,10 @@ Neo.Painter.prototype._mouseDownHandler = function (e) {
   this.prevMouseX = this.mouseX;
   this.prevMouseY = this.mouseY;
   this.securityCount++;
+  let autosaveCount = this.securityCount;
+  if (autosaveCount % 10 === 0 && Neo.painter.isDirty()) {
+    Neo.painter.saveSession(); //10ストロークごとに自動バックアップ
+  }
 
   if (this.isMouseDownRight) {
     this.isMouseDownRight = false;
@@ -2463,7 +2575,7 @@ Neo.Painter.prototype.undo = function () {
       undoItem.x,
       undoItem.y,
       undoItem.width,
-      undoItem.height
+      undoItem.height,
     );
   }
 };
@@ -2481,7 +2593,7 @@ Neo.Painter.prototype.redo = function () {
       undoItem.x,
       undoItem.y,
       undoItem.width,
-      undoItem.height
+      undoItem.height,
     );
   }
 };
@@ -2699,9 +2811,9 @@ Neo.Painter.prototype.getImage = function (imageWidth, imageHeight) {
   var pngCanvas = document.createElement("canvas");
   pngCanvas.width = imageWidth;
   pngCanvas.height = imageHeight;
-  var pngCanvasCtx = pngCanvas.getContext("2d",{
-		willReadFrequently: true,
-	});
+  var pngCanvasCtx = pngCanvas.getContext("2d", {
+    willReadFrequently: true,
+  });
   pngCanvasCtx.fillStyle = "#ffffff";
   pngCanvasCtx.fillRect(0, 0, imageWidth, imageHeight);
 
@@ -2715,7 +2827,7 @@ Neo.Painter.prototype.getImage = function (imageWidth, imageHeight) {
       0,
       0,
       imageWidth,
-      imageHeight
+      imageHeight,
     );
   }
   if (this.visible[1]) {
@@ -2728,7 +2840,7 @@ Neo.Painter.prototype.getImage = function (imageWidth, imageHeight) {
       0,
       0,
       imageWidth,
-      imageHeight
+      imageHeight,
     );
   }
   return pngCanvas;
@@ -2822,7 +2934,7 @@ Neo.Painter.prototype.updateDestCanvas = function (
   y,
   width,
   height,
-  useTemp
+  useTemp,
 ) {
   var canvasWidth = this.canvasWidth;
   var canvasHeight = this.canvasHeight;
@@ -2879,7 +2991,7 @@ Neo.Painter.prototype.updateDestCanvas = function (
       x + this.tempX,
       y + this.tempY,
       width,
-      height
+      height,
     );
   }
   ctx.restore();
@@ -2906,9 +3018,9 @@ Neo.Painter.prototype.getBound = function (x0, y0, x1, y1, r) {
 
 Neo.Painter.prototype.getColor = function (c) {
   if (!c) c = this.foregroundColor;
-  var r = parseInt(c.substring(1, 3), 16);
-  var g = parseInt(c.substring(3, 5), 16);
-  var b = parseInt(c.substring(5, 7), 16);
+  var r = parseInt(c.slice(1, 3), 16);
+  var g = parseInt(c.slice(3, 5), 16);
+  var b = parseInt(c.slice(5, 7), 16);
   var a = Math.floor(this.alpha * 255);
   return (a << 24) | (b << 16) | (g << 8) | r;
 };
@@ -2962,14 +3074,14 @@ Neo.Painter.prototype.getAlpha = function (type) {
 };
 
 Neo.Painter.prototype.prepareDrawing = function () {
-  var r = parseInt(this.foregroundColor.substring(1, 3), 16);
-  var g = parseInt(this.foregroundColor.substring(3, 5), 16);
-  var b = parseInt(this.foregroundColor.substring(5, 7), 16);
+  var r = parseInt(this.foregroundColor.slice(1, 3), 16);
+  var g = parseInt(this.foregroundColor.slice(3, 5), 16);
+  var b = parseInt(this.foregroundColor.slice(5, 7), 16);
   var a = Math.floor(this.alpha * 255);
 
-  var maskR = parseInt(this.maskColor.substring(1, 3), 16);
-  var maskG = parseInt(this.maskColor.substring(3, 5), 16);
-  var maskB = parseInt(this.maskColor.substring(5, 7), 16);
+  var maskR = parseInt(this.maskColor.slice(1, 3), 16);
+  var maskG = parseInt(this.maskColor.slice(3, 5), 16);
+  var maskB = parseInt(this.maskColor.slice(5, 7), 16);
 
   this._currentColor = [r, g, b, a];
   this._currentMask = [maskR, maskG, maskB];
@@ -3051,7 +3163,7 @@ Neo.Painter.prototype.setPoint = function (
   y0,
   left,
   top,
-  type
+  type,
 ) {
   var x = x0 - left;
   var y = y0 - top;
@@ -3428,7 +3540,7 @@ Neo.Painter.prototype.getBezierPoint = function (
   x2,
   y2,
   x3,
-  y3
+  y3,
 ) {
   var a0 = (1 - t) * (1 - t) * (1 - t);
   var a1 = (1 - t) * (1 - t) * t * 3;
@@ -3452,7 +3564,7 @@ Neo.Painter.prototype.drawBezier = function (
   y3,
   type,
   isReplay,
-  isPreview
+  isPreview,
 ) {
   var points = [
     [x0, y0],
@@ -3596,7 +3708,7 @@ Neo.Painter.prototype.xorRect = function (
   y,
   width,
   height,
-  c
+  c,
 ) {
   var index = y * bufWidth + x;
   for (var j = 0; j < height; j++) {
@@ -3615,7 +3727,7 @@ Neo.Painter.prototype.drawXORRect = function (
   width,
   height,
   isFill,
-  c
+  c,
 ) {
   x = Math.round(x);
   y = Math.round(y);
@@ -3671,7 +3783,7 @@ Neo.Painter.prototype.drawXOREllipse = function (
   width,
   height,
   isFill,
-  c
+  c,
 ) {
   x = Math.round(x);
   y = Math.round(y);
@@ -4310,7 +4422,7 @@ Neo.Painter.prototype.getDestCanvasPosition = function (
   mx,
   my,
   isClip,
-  isCenter
+  isCenter,
 ) {
   var mx = Math.floor(mx); //Math.round(mx);
   var my = Math.floor(my); //Math.round(my);
@@ -4374,19 +4486,20 @@ Neo.Painter.prototype.cancelTool = function (e) {
 Neo.Painter.prototype.loadImage = function (filename) {
   console.log("loadImage " + filename);
   var img = new Image();
-  img.src = filename;
   img.onload = function () {
     var oe = Neo.painter;
     oe.canvasCtx[0].drawImage(img, 0, 0);
     oe.updateDestCanvas(0, 0, oe.canvasWidth, oe.canvasHeight);
   };
+  img.src = filename;
 };
 
 Neo.Painter.prototype.loadAnimation = function (filename) {
   console.log("loadAnimation " + filename);
 
   Neo.painter.busy = true;
-  Neo.painter.busySkipped = false;
+  //続きを描く画面で動画をスキップする時はbusySkippedをtrueにする
+  Neo.painter.busySkipped = Neo.config.neo_animation_skip == "true";
 
   Neo.getPCH(filename, function (pch) {
     //console.log(pch);
@@ -4399,10 +4512,8 @@ Neo.Painter.prototype.loadAnimation = function (filename) {
 Neo.Painter.prototype.loadSession = function (callback) {
   if (Neo.storage) {
     var img0 = new Image();
-    img0.src = Neo.storage.getItem("layer0");
     img0.onload = function () {
       var img1 = new Image();
-      img1.src = Neo.storage.getItem("layer1");
       img1.onload = function () {
         var oe = Neo.painter;
         oe.canvasCtx[0].clearRect(0, 0, oe.canvasWidth, oe.canvasHeight);
@@ -4413,13 +4524,15 @@ Neo.Painter.prototype.loadSession = function (callback) {
 
         if (callback) callback();
       };
+      img1.src = Neo.storage.getItem("layer1");
     };
+    img0.src = Neo.storage.getItem("layer0");
   }
 };
 
 Neo.Painter.prototype.saveSession = function () {
   if (Neo.storage) {
-    Neo.storage.setItem("timestamp", +new Date());
+    Neo.storage.setItem("timestamp", new Date().getTime());
     Neo.storage.setItem("layer0", this.canvas[0].toDataURL("image/png"));
     Neo.storage.setItem("layer1", this.canvas[1].toDataURL("image/png"));
   }
@@ -4448,7 +4561,7 @@ Neo.Painter.prototype.doText = function (
   alpha,
   string,
   fontSize,
-  fontFamily
+  fontFamily,
 ) {
   //テキスト描画
   if (string.length <= 0) return;
@@ -4505,7 +4618,7 @@ Neo.Painter.prototype.doText = function (
     0,
     0,
     this.canvasWidth,
-    this.canvasHeight
+    this.canvasHeight,
   );
 
   this.tempCanvasCtx.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
@@ -4850,8 +4963,8 @@ Neo.DrawToolBase.prototype.freeHandDownHandler = function (oe) {
     var rect = oe.getBound(oe.mouseX, oe.mouseY, oe.mouseX, oe.mouseY, r);
     oe.updateDestCanvas(rect[0], rect[1], rect[2], rect[3], true);
   }
-  if (!Neo.isMobile()){
-	this.drawCursor(oe);
+  if (!Neo.isMobile()) {
+    this.drawCursor(oe);
   }
 };
 
@@ -4887,8 +5000,8 @@ Neo.DrawToolBase.prototype.freeHandMoveHandler = function (oe) {
   var r = Math.ceil(oe.lineWidth / 2);
   var rect = oe.getBound(oe.mouseX, oe.mouseY, oe.prevMouseX, oe.prevMouseY, r);
   oe.updateDestCanvas(rect[0], rect[1], rect[2], rect[3], true);
-  if (!Neo.isMobile()){
-	this.drawCursor(oe);
+  if (!Neo.isMobile()) {
+    this.drawCursor(oe);
   }
 };
 
@@ -4904,11 +5017,12 @@ Neo.DrawToolBase.prototype.freeHandUpMoveHandler = function (oe) {
 };
 
 Neo.DrawToolBase.prototype.drawCursor = function (oe) {
-// if (oe.lineWidth <= 8) return;//オリジナルは8px以下のときは円カーソルを出さない
-var mx = oe.mouseX;
+  //   if (oe.lineWidth <= 8) return;
+  var mx = oe.mouseX;
   var my = oe.mouseY;
   var d = oe.lineWidth;
-  d = (d==1) ? 2 : d;//1pxの時は2px相当の円カーソルを表示
+  d = d == 1 ? 2 : d; //1pxの時は2px相当の円カーソルを表示
+
   var x = (mx - oe.zoomX + (oe.destCanvas.width * 0.5) / oe.zoom) * oe.zoom;
   var y = (my - oe.zoomY + (oe.destCanvas.height * 0.5) / oe.zoom) * oe.zoom;
   var r = d * 0.5 * oe.zoom;
@@ -5036,7 +5150,7 @@ Neo.DrawToolBase.prototype.bezierUpHandler = function (oe) {
         this.y2,
         this.x3,
         this.y3,
-        this.lineType
+        this.lineType,
       );
       oe.tempCanvasCtx.clearRect(0, 0, oe.canvasWidth, oe.canvasHeight);
 
@@ -5079,7 +5193,7 @@ Neo.DrawToolBase.prototype.bezierUpMoveHandler = function (oe) {
 };
 
 Neo.DrawToolBase.prototype.bezierKeyDownHandler = function (e) {
-  if (e.key == 'Escape') {
+  if (e.key == "Escape") {
     //Escでキャンセル
     this.step = 0;
 
@@ -5122,7 +5236,7 @@ Neo.DrawToolBase.prototype.drawBezierCursor1 = function (oe) {
     this.y3,
     Neo.Painter.LINETYPE_PEN, //this.lineType,
     false,
-    true
+    true,
   );
   ctx.save();
   ctx.translate(oe.destCanvas.width * 0.5, oe.destCanvas.height * 0.5);
@@ -5137,7 +5251,7 @@ Neo.DrawToolBase.prototype.drawBezierCursor1 = function (oe) {
     0,
     0,
     oe.canvasWidth,
-    oe.canvasHeight
+    oe.canvasHeight,
   );
 
   ctx.restore();
@@ -5179,7 +5293,7 @@ Neo.DrawToolBase.prototype.drawBezierCursor2 = function (oe) {
     this.y3,
     Neo.Painter.LINETYPE_PEN, //this.lineType,
     false,
-    true
+    true,
   );
   ctx.save();
   ctx.translate(oe.destCanvas.width * 0.5, oe.destCanvas.height * 0.5);
@@ -5194,7 +5308,7 @@ Neo.DrawToolBase.prototype.drawBezierCursor2 = function (oe) {
     0,
     0,
     oe.canvasWidth,
-    oe.canvasHeight
+    oe.canvasHeight,
   );
   ctx.restore();
 };
@@ -5412,7 +5526,7 @@ Neo.SliderTool.prototype.downHandler = function (oe) {
   var sliderType = this.alt ? Neo.SLIDERTYPE_SIZE : this.target["data-slider"];
   Neo.sliders[sliderType].downHandler(
     oe.rawMouseX - rect.left,
-    oe.rawMouseY - rect.top
+    oe.rawMouseY - rect.top,
   );
 };
 
@@ -5424,7 +5538,7 @@ Neo.SliderTool.prototype.upHandler = function (oe) {
   var sliderType = this.alt ? Neo.SLIDERTYPE_SIZE : this.target["data-slider"];
   Neo.sliders[sliderType].upHandler(
     oe.rawMouseX - rect.left,
-    oe.rawMouseY - rect.top
+    oe.rawMouseY - rect.top,
   );
 };
 
@@ -5436,7 +5550,7 @@ Neo.SliderTool.prototype.moveHandler = function (oe) {
       : this.target["data-slider"];
     Neo.sliders[sliderType].moveHandler(
       oe.rawMouseX - rect.left,
-      oe.rawMouseY - rect.top
+      oe.rawMouseY - rect.top,
     );
   }
 };
@@ -5778,7 +5892,7 @@ Neo.PasteTool.prototype.moveHandler = function (oe) {
 };
 
 Neo.PasteTool.prototype.keyDownHandler = function (e) {
-  if (e.key == 'Escape') {
+  if (e.key == "Escape") {
     //Escでキャンセル
     var oe = Neo.painter;
     oe.updateDestCanvas(0, 0, oe.canvasWidth, oe.canvasHeight, true);
@@ -5801,7 +5915,7 @@ Neo.PasteTool.prototype.drawCursor = function (oe) {
   var end = oe.getDestCanvasPosition(
     this.x + this.width,
     this.y + this.height,
-    true
+    true,
   );
 
   var x = start.x + oe.tempX * oe.zoom;
@@ -5920,7 +6034,7 @@ Neo.TextTool.prototype.rollOverHandler = function (oe) {};
 Neo.TextTool.prototype.rollOutHandler = function (oe) {};
 
 Neo.TextTool.prototype.keyDownHandler = function (e) {
-  if (e.key == 'Enter') {
+  if (e.key == "Enter") {
     // Returnで確定
     e.preventDefault();
 
@@ -5948,7 +6062,7 @@ Neo.TextTool.prototype.keyDownHandler = function (e) {
         alpha,
         string,
         size,
-        family
+        family,
       );
 
       text.style.display = "none";
@@ -6102,8 +6216,8 @@ Neo.CopyrightCommand.prototype.execute = function () {
   if (
     confirm(
       Neo.translate(
-        "PaintBBS NEOは、お絵描きしぃ掲示板 PaintBBS (©2000-2004 しぃちゃん) をhtml5化するプロジェクトです。\n\nPaintBBS NEOのホームページを表示しますか？"
-      ) + "\n"
+        "PaintBBS NEOは、お絵描きしぃ掲示板 PaintBBS (©2000-2004 しぃちゃん) をhtml5化するプロジェクトです。\n\nPaintBBS NEOのホームページを表示しますか？",
+      ) + "\n",
     )
   ) {
     Neo.openURL(url);
@@ -6222,50 +6336,7 @@ Neo.ActionManager.prototype.play = function () {
     return;
   }
 
-  if (this._head < this._items.length && this._head < this._mark) {
-    var item = this._items[this._head];
-
-    if (!Neo.viewer) {
-      Neo.painter._pushUndo(
-        0,
-        0,
-        Neo.painter.canvasWidth,
-        Neo.painter.canvasHeight,
-        true
-      );
-    }
-
-    if (Neo.viewer && Neo.viewerSpeed && this._index == 0) {
-      Neo.viewerSpeed.update();
-      //console.log("play", item[0], this._head + 1, this._items.length);
-    }
-
-    var func = item[0] && this[item[0]] ? item[0] : "dummy";
-    var that = this;
-    var wait = this._prevSpeed < 0 ? 0 : this._prevSpeed;
-
-    this[func](item, function (result) {
-      if (result) {
-        if (
-          Neo.painter.busySkipped &&
-          that._head < that._mark - 2 &&
-          that._mark - 2 >= 0 &&
-          that._items[that._mark - 1][0] == "restore"
-        ) {
-          that._head = that._mark - 2;
-        } else {
-          that._head++;
-        }
-        that._index = 0;
-        that._prevSpeed = Neo.speed;
-      }
-
-      setTimeout(function () {
-        Neo.painter._actionMgr.play();
-      }, wait);
-    });
-
-  } else {
+  if (this._head >= this._items.length || this._head >= this._mark) {
     Neo.painter.dirty = false;
     Neo.painter.busy = false;
 
@@ -6275,9 +6346,63 @@ Neo.ActionManager.prototype.play = function () {
     } else {
       console.log("animation finished");
     }
+    return;
   }
-};
 
+  var item = this._items[this._head];
+
+  if (!Neo.viewer && !Neo.painter.busySkipped) {
+    Neo.painter._pushUndo(
+      0,
+      0,
+      Neo.painter.canvasWidth,
+      Neo.painter.canvasHeight,
+      true,
+    );
+  }
+
+  if (Neo.viewer && Neo.viewerSpeed && this._index == 0) {
+    Neo.viewerSpeed.update();
+    //console.log("play", item[0], this._head + 1, this._items.length);
+  }
+
+  var func;
+  // restoreが存在するかどうか判定
+  //古いPCHファイルにはrestoreが存在しないためアニメーションをスキップできない
+  const hasRestore = this._items.some((item) => item[0] === "restore");
+  if (Neo.painter.busySkipped && hasRestore) {
+    // アニメーションをスキップする時はrestoreのみを関数として扱う
+    func =
+      item[0] && this[item[0]] && item[0] === "restore" ? item[0] : "dummy";
+  } else {
+    // アニメーションを再生する時は全ての関数を実行する
+    func = item[0] && this[item[0]] ? item[0] : "dummy";
+  }
+
+  var that = this;
+  var wait = this._prevSpeed < 0 ? 0 : this._prevSpeed;
+
+  this[func](item, function (result) {
+    if (result) {
+      if (
+        Neo.painter.busySkipped &&
+        that._head < that._mark - 2 &&
+        that._mark - 2 >= 0 &&
+        that._items[that._mark - 1][0] == "restore"
+      ) {
+        that._head = that._mark - 2;
+      } else {
+        that._head++;
+      }
+      that._index = 0;
+      that._prevSpeed = Neo.speed;
+    }
+
+    setTimeout(function () {
+      Neo.painter._actionMgr.play();
+    }, wait);
+  });
+};
 /*
 -------------------------------------------------------------------------
     Action
@@ -6489,7 +6614,7 @@ Neo.ActionManager.prototype.bezier = function (
   y2,
   x3,
   y3,
-  lineType
+  lineType,
 ) {
   var oe = Neo.painter;
   var layer = oe.current;
@@ -6526,7 +6651,7 @@ Neo.ActionManager.prototype.bezier = function (
     x3,
     y3,
     lineType,
-    isReplay
+    isReplay,
   );
   oe.updateDestCanvas(0, 0, oe.canvasWidth, oe.canvasHeight);
 
@@ -6769,7 +6894,7 @@ Neo.ActionManager.prototype.text = function (
   alpha,
   string,
   size,
-  family
+  family,
 ) {
   var oe = Neo.painter;
   var layer = oe.current;
@@ -6811,10 +6936,8 @@ Neo.ActionManager.prototype.restore = function () {
     var callback = arguments[1];
 
     var img0 = new Image();
-    img0.src = item[1];
     img0.onload = function () {
       var img1 = new Image();
-      img1.src = item[2];
       img1.onload = function () {
         oe.canvasCtx[0].clearRect(0, 0, width, height);
         oe.canvasCtx[1].clearRect(0, 0, width, height);
@@ -6824,7 +6947,9 @@ Neo.ActionManager.prototype.restore = function () {
 
         if (callback && typeof callback == "function") callback(true);
       };
+      img1.src = item[2];
     };
+    img0.src = item[1];
   }
 };
 
@@ -6933,7 +7058,7 @@ Neo.initViewer = function (pch) {
     function () {
       Neo.painter._actionMgr.isMouseDown = true;
     },
-    false
+    false,
   );
 
   document.addEventListener(
@@ -6946,7 +7071,7 @@ Neo.initViewer = function (pch) {
         Neo.painter.setZoomPosition(x, y);
       }
     },
-    false
+    false,
   );
   document.addEventListener(
     "mouseup",
@@ -6954,7 +7079,7 @@ Neo.initViewer = function (pch) {
       Neo.painter._actionMgr.isMouseDown = false;
       Neo.viewerBar.isMouseDown = false;
     },
-    false
+    false,
   );
 
   if (pch) {
@@ -6983,63 +7108,63 @@ Neo.startViewer = function () {
   Neo.addRule(
     ".NEO #viewerButtonsWrapper",
     "border",
-    "1px solid " + Neo.config.color_frame + " !important"
+    "1px solid " + Neo.config.color_frame + " !important",
   );
 
   Neo.addRule(
     ".NEO #viewerButtons",
     "border",
-    "1px solid " + Neo.config.color_back + " !important"
+    "1px solid " + Neo.config.color_back + " !important",
   );
   Neo.addRule(
     ".NEO #viewerButtons",
     "border-left",
-    "1px solid " + lightBack + " !important"
+    "1px solid " + lightBack + " !important",
   );
   Neo.addRule(
     ".NEO #viewerButtons",
     "border-top",
-    "1px solid " + lightBack + " !important"
+    "1px solid " + lightBack + " !important",
   );
 
   Neo.addRule(
     ".NEO #viewerButtons >div.buttonOff",
     "background-color",
-    Neo.config.color_icon + " !important"
+    Neo.config.color_icon + " !important",
   );
 
   Neo.addRule(
     ".NEO #viewerButtons >div.buttonOff:active",
     "background-color",
-    darkBack + " !important"
+    darkBack + " !important",
   );
   Neo.addRule(
     ".NEO #viewerButtons >div.buttonOn",
     "background-color",
-    darkBack + " !important"
+    darkBack + " !important",
   );
 
   Neo.addRule(
     ".NEO #viewerButtons >div",
     "border",
-    "1px solid " + Neo.config.color_frame + " !important"
+    "1px solid " + Neo.config.color_frame + " !important",
   );
 
   Neo.addRule(
     ".NEO #viewerButtons >div.buttonOff:hover",
     "border",
-    "1px solid" + Neo.config.color_bar_select + " !important"
+    "1px solid" + Neo.config.color_bar_select + " !important",
   );
 
   Neo.addRule(
     ".NEO #viewerButtons >div.buttonOff:active",
     "border",
-    "1px solid" + Neo.config.color_bar_select + " !important"
+    "1px solid" + Neo.config.color_bar_select + " !important",
   );
   Neo.addRule(
     ".NEO #viewerButtons >div.buttonOn",
     "border",
-    "1px solid" + Neo.config.color_bar_select + " !important"
+    "1px solid" + Neo.config.color_bar_select + " !important",
   );
 
   Neo.addRule(".NEO #viewerBar >div", "background-color", Neo.config.color_bar);
@@ -7047,7 +7172,7 @@ Neo.startViewer = function () {
   Neo.addRule(
     ".NEO #viewerBarMark",
     "background-color",
-    Neo.config.color_text + " !important"
+    Neo.config.color_text + " !important",
   );
 
   setTimeout(function () {
@@ -7089,19 +7214,19 @@ Neo.getPCH = function (filename, callback) {
   if (!filename || filename.slice(-4).toLowerCase() != ".pch") return null;
 
   fetch(filename)
-  .then(response => response.arrayBuffer())
-  .then(buffer => {
-    var pch = Neo.decodePCH(buffer);
-    if (pch) {
-      if (callback) callback(pch);
-    } else {
-      console.log("not a NEO animation");
-    }
-  })
-  .catch(error => {
-    console.log(error);
-  });
-}
+    .then((response) => response.arrayBuffer())
+    .then((buffer) => {
+      var pch = Neo.decodePCH(buffer);
+      if (pch) {
+        if (callback) callback(pch);
+      } else {
+        console.log("not a NEO animation");
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
 
 Neo.decodePCH = function (rawdata) {
   var byteArray = new Uint8Array(rawdata);
@@ -7162,12 +7287,13 @@ Neo.setSpeed = function (value) {
 };
 
 Neo.setVisit = function (layer, value) {
-  Neo.painter.visible[layer] = (value == 0) ? false : true;
+  Neo.painter.visible[layer] = value == 0 ? false : true;
   Neo.painter.updateDestCanvas(
     0,
     0,
     Neo.painter.canvasWidth,
-    Neo.painter.canvasHeight);
+    Neo.painter.canvasHeight,
+  );
 };
 
 Neo.setMark = function (value) {
@@ -7232,21 +7358,19 @@ Neo.Button.prototype.init = function (name, params) {
       ref._mouseDownHandler(e);
       e.preventDefault();
     },
-	{ passive: false,
-	capture: true }
-	);
+    { passive: false, capture: true },
+  );
   this.element.addEventListener(
     "touchend",
     function (e) {
       ref._mouseUpHandler(e);
     },
-	{ passive: false,
-	capture: true }
-	  );
+    { passive: false, capture: true },
+  );
 
   this.element.className = !this.params.type == "fill" ? "button" : "buttonOff";
 
-  this.disable = function(wait) {
+  this.disable = function (wait) {
     this.element.style.pointerEvents = "none";
     this.element.style.opacity = "0.5";
     if (wait) {
@@ -7254,13 +7378,13 @@ Neo.Button.prototype.init = function (name, params) {
         ref.enable();
       }, wait);
     }
-  }
+  };
 
-  this.enable = function() {
+  this.enable = function () {
     this.element.style.pointerEvents = "inherit";
     this.element.style.opacity = "1.0";
-  }
-  
+  };
+
   return this;
 };
 
@@ -7400,15 +7524,14 @@ Neo.ColorTip.prototype.init = function (name, params) {
       ref._mouseDownHandler(e);
       e.preventDefault();
     },
-	{ passive: false,
-	capture: true }
-	  );
+    { passive: false, capture: true },
+  );
   this.element.addEventListener(
     "touchend",
     function (e) {
       ref._mouseUpHandler(e);
     },
-    true
+    true,
   );
 
   this.element.className = "colorTipOff";
@@ -7536,15 +7659,14 @@ Neo.ToolTip.prototype.init = function (name, params) {
       ref._mouseDownHandler(e);
       e.preventDefault();
     },
-	{ passive: false,
-	capture: true }
+    { passive: false, capture: true },
   );
   this.element.addEventListener(
     "touchend",
     function (e) {
       ref._mouseUpHandler(e);
     },
-    true
+    true,
   );
 
   this.selected = this.params.type == "pen" ? true : false;
@@ -7620,20 +7742,20 @@ Neo.ToolTip.prototype.update = function () {};
 Neo.ToolTip.prototype.draw = function (c) {
   if (this.hasTintImage) {
     if (typeof c != "string") c = Neo.painter.getColorString(c);
-    var ctx = this.canvas.getContext("2d",{
-		willReadFrequently: true,
-	});
+    var ctx = this.canvas.getContext("2d", {
+      willReadFrequently: true,
+    });
 
     if (this.prevMode != this.mode) {
       this.prevMode = this.mode;
 
       var img = new Image();
-      img.src = this.toolIcons[this.mode];
       img.onload = function () {
         var ref = this;
         ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.drawTintImage(ctx, img, c, 0, 0);
       }.bind(this);
+      img.src = this.toolIcons[this.mode];
     } else {
       Neo.tintImage(ctx, c);
     }
@@ -7795,9 +7917,9 @@ Neo.Pen2Tip.prototype.update = function () {
 };
 
 Neo.Pen2Tip.prototype.drawTone = function () {
-  var ctx = this.canvas.getContext("2d",{
-		willReadFrequently: true,
-	});
+  var ctx = this.canvas.getContext("2d", {
+    willReadFrequently: true,
+  });
 
   var imageData = ctx.getImageData(0, 0, 46, 18);
   var buf32 = new Uint32Array(imageData.data.buffer);
@@ -7870,16 +7992,16 @@ Neo.EraserTip.prototype.update = function () {
 };
 
 Neo.EraserTip.prototype.draw = function () {
-  var ctx = this.canvas.getContext("2d",{
-		willReadFrequently: true,
-	});
+  var ctx = this.canvas.getContext("2d", {
+    willReadFrequently: true,
+  });
   ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
   var img = new Image();
 
-  img.src = Neo.ToolTip.eraser;
   img.onload = function () {
     ctx.drawImage(img, 0, 0);
   };
+  img.src = Neo.ToolTip.eraser;
 };
 
 /*
@@ -8037,9 +8159,9 @@ Neo.MaskTip.prototype.update = function () {
 Neo.MaskTip.prototype.draw = function (c) {
   if (typeof c != "string") c = Neo.painter.getColorString(c);
 
-  var ctx = this.canvas.getContext("2d",{
-		willReadFrequently: true,
-	});
+  var ctx = this.canvas.getContext("2d", {
+    willReadFrequently: true,
+  });
   ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
   ctx.fillStyle = c;
   ctx.fillRect(1, 1, 43, 9);
@@ -8397,8 +8519,7 @@ Neo.LayerControl.prototype.init = function (name, params) {
       ref._mouseDownHandler(e);
       e.preventDefault();
     },
-	{ passive: false,
-	capture: true }
+    { passive: false, capture: true },
   );
 
   this.element.className = "layerControl";
@@ -8438,7 +8559,7 @@ Neo.LayerControl.prototype._mouseDownHandler = function (e) {
     0,
     0,
     Neo.painter.canvasWidth,
-    Neo.painter.canvasHeight
+    Neo.painter.canvasHeight,
   );
   if (Neo.painter.tool.type == Neo.Painter.TOOLTYPE_PASTE) {
     Neo.painter.tool.drawCursor(Neo.painter);
@@ -8479,8 +8600,7 @@ Neo.ReserveControl.prototype.init = function (name, params) {
       ref._mouseDownHandler(e);
       e.preventDefault();
     },
-	{ passive: false,
-	capture: true }
+    { passive: false, capture: true },
   );
 
   this.element.className = "reserve";
@@ -8593,18 +8713,18 @@ Neo.ViewerButton.prototype.init = function (name, params) {
   if (name != "viewerSpeed") {
     this.element.innerHTML = "<canvas width=24 height=24></canvas>";
     this.canvas = this.element.getElementsByTagName("canvas")[0];
-    var ctx = this.canvas.getContext("2d",{
-		willReadFrequently: true,
-	});
+    var ctx = this.canvas.getContext("2d", {
+      willReadFrequently: true,
+    });
 
     var img = new Image();
-    img.src = Neo.ViewerButton[name.toLowerCase().replace(/viewer/, "")];
     img.onload = function () {
       var ref = this;
       ctx.clearRect(0, 0, 24, 24);
       ctx.drawImage(img, 0, 0);
       Neo.tintImage(ctx, Neo.config.color_text);
     }.bind(this);
+    img.src = Neo.ViewerButton[name.toLowerCase().replace(/viewer/, "")];
   } else {
     this.element.innerHTML = "<div></div><canvas width=24 height=24></canvas>";
     this.update();
@@ -8684,8 +8804,7 @@ Neo.ViewerBar.prototype.init = function (name, params) {
       ref._touchHandler(e);
       e.preventDefault();
     },
-	{ passive: false,
-	capture: true }
+    { passive: false, capture: true },
   );
 
   this.update();
@@ -8724,137 +8843,255 @@ Neo.ViewerBar.prototype._touchHandler = function (e) {
 // http://pieroxy.net/blog/pages/lz-string/testing.html
 //
 // LZ-based compression algorithm, version 1.4.4
-var LZString = (function() {
+var LZString = (function () {
+  // private property
+  var f = String.fromCharCode;
+  var keyStrBase64 =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
+  var keyStrUriSafe =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+-$";
+  var baseReverseDic = {};
 
-// private property
-var f = String.fromCharCode;
-var keyStrBase64 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
-var keyStrUriSafe = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+-$";
-var baseReverseDic = {};
-
-function getBaseValue(alphabet, character) {
-  if (!baseReverseDic[alphabet]) {
-    baseReverseDic[alphabet] = {};
-    for (var i=0 ; i<alphabet.length ; i++) {
-      baseReverseDic[alphabet][alphabet.charAt(i)] = i;
+  function getBaseValue(alphabet, character) {
+    if (!baseReverseDic[alphabet]) {
+      baseReverseDic[alphabet] = {};
+      for (var i = 0; i < alphabet.length; i++) {
+        baseReverseDic[alphabet][alphabet.charAt(i)] = i;
+      }
     }
+    return baseReverseDic[alphabet][character];
   }
-  return baseReverseDic[alphabet][character];
-}
 
-var LZString = {
-  compressToBase64 : function (input) {
-    if (input == null) return "";
-    var res = LZString._compress(input, 6, function(a){return keyStrBase64.charAt(a);});
-    switch (res.length % 4) { // To produce valid Base64
-    default: // When could this happen ?
-    case 0 : return res;
-    case 1 : return res+"===";
-    case 2 : return res+"==";
-    case 3 : return res+"=";
-    }
-  },
+  var LZString = {
+    compressToBase64: function (input) {
+      if (input == null) return "";
+      var res = LZString._compress(input, 6, function (a) {
+        return keyStrBase64.charAt(a);
+      });
+      switch (
+        res.length % 4 // To produce valid Base64
+      ) {
+        default: // When could this happen ?
+        case 0:
+          return res;
+        case 1:
+          return res + "===";
+        case 2:
+          return res + "==";
+        case 3:
+          return res + "=";
+      }
+    },
 
-  decompressFromBase64 : function (input) {
-    if (input == null) return "";
-    if (input == "") return null;
-    return LZString._decompress(input.length, 32, function(index) { return getBaseValue(keyStrBase64, input.charAt(index)); });
-  },
+    decompressFromBase64: function (input) {
+      if (input == null) return "";
+      if (input == "") return null;
+      return LZString._decompress(input.length, 32, function (index) {
+        return getBaseValue(keyStrBase64, input.charAt(index));
+      });
+    },
 
-  compressToUTF16 : function (input) {
-    if (input == null) return "";
-    return LZString._compress(input, 15, function(a){return f(a+32);}) + " ";
-  },
+    compressToUTF16: function (input) {
+      if (input == null) return "";
+      return (
+        LZString._compress(input, 15, function (a) {
+          return f(a + 32);
+        }) + " "
+      );
+    },
 
-  decompressFromUTF16: function (compressed) {
-    if (compressed == null) return "";
-    if (compressed == "") return null;
-    return LZString._decompress(compressed.length, 16384, function(index) { return compressed.charCodeAt(index) - 32; });
-  },
+    decompressFromUTF16: function (compressed) {
+      if (compressed == null) return "";
+      if (compressed == "") return null;
+      return LZString._decompress(compressed.length, 16384, function (index) {
+        return compressed.charCodeAt(index) - 32;
+      });
+    },
 
-  //compress into uint8array (UCS-2 big endian format)
-  compressToUint8Array: function (uncompressed) {
-    var compressed = LZString.compress(uncompressed);
-    var buf=new Uint8Array(compressed.length*2); // 2 bytes per character
+    //compress into uint8array (UCS-2 big endian format)
+    compressToUint8Array: function (uncompressed) {
+      var compressed = LZString.compress(uncompressed);
+      var buf = new Uint8Array(compressed.length * 2); // 2 bytes per character
 
-    for (var i=0, TotalLen=compressed.length; i<TotalLen; i++) {
-      var current_value = compressed.charCodeAt(i);
-      buf[i*2] = current_value >>> 8;
-      buf[i*2+1] = current_value % 256;
-    }
-    return buf;
-  },
+      for (var i = 0, TotalLen = compressed.length; i < TotalLen; i++) {
+        var current_value = compressed.charCodeAt(i);
+        buf[i * 2] = current_value >>> 8;
+        buf[i * 2 + 1] = current_value % 256;
+      }
+      return buf;
+    },
 
-  //decompress from uint8array (UCS-2 big endian format)
-  decompressFromUint8Array:function (compressed) {
-    if (compressed===null || compressed===undefined){
+    //decompress from uint8array (UCS-2 big endian format)
+    decompressFromUint8Array: function (compressed) {
+      if (compressed === null || compressed === undefined) {
         return LZString.decompress(compressed);
-    } else {
-        var buf=new Array(compressed.length/2); // 2 bytes per character
-        for (var i=0, TotalLen=buf.length; i<TotalLen; i++) {
-          buf[i]=compressed[i*2]*256+compressed[i*2+1];
+      } else {
+        var buf = new Array(compressed.length / 2); // 2 bytes per character
+        for (var i = 0, TotalLen = buf.length; i < TotalLen; i++) {
+          buf[i] = compressed[i * 2] * 256 + compressed[i * 2 + 1];
         }
 
         var result = [];
         buf.forEach(function (c) {
           result.push(f(c));
         });
-        return LZString.decompress(result.join(''));
+        return LZString.decompress(result.join(""));
+      }
+    },
 
-    }
+    //compress into a string that is already URI encoded
+    compressToEncodedURIComponent: function (input) {
+      if (input == null) return "";
+      return LZString._compress(input, 6, function (a) {
+        return keyStrUriSafe.charAt(a);
+      });
+    },
 
-  },
+    //decompress from an output of compressToEncodedURIComponent
+    decompressFromEncodedURIComponent: function (input) {
+      if (input == null) return "";
+      if (input == "") return null;
+      input = input.replace(/ /g, "+");
+      return LZString._decompress(input.length, 32, function (index) {
+        return getBaseValue(keyStrUriSafe, input.charAt(index));
+      });
+    },
 
-
-  //compress into a string that is already URI encoded
-  compressToEncodedURIComponent: function (input) {
-    if (input == null) return "";
-    return LZString._compress(input, 6, function(a){return keyStrUriSafe.charAt(a);});
-  },
-
-  //decompress from an output of compressToEncodedURIComponent
-  decompressFromEncodedURIComponent:function (input) {
-    if (input == null) return "";
-    if (input == "") return null;
-    input = input.replace(/ /g, "+");
-    return LZString._decompress(input.length, 32, function(index) { return getBaseValue(keyStrUriSafe, input.charAt(index)); });
-  },
-
-  compress: function (uncompressed) {
-    return LZString._compress(uncompressed, 16, function(a){return f(a);});
-  },
-  _compress: function (uncompressed, bitsPerChar, getCharFromInt) {
-    if (uncompressed == null) return "";
-    var i, value,
-        context_dictionary= {},
-        context_dictionaryToCreate= {},
-        context_c="",
-        context_wc="",
-        context_w="",
-        context_enlargeIn= 2, // Compensate for the first entry which should not count
-        context_dictSize= 3,
-        context_numBits= 2,
-        context_data=[],
-        context_data_val=0,
-        context_data_position=0,
+    compress: function (uncompressed) {
+      return LZString._compress(uncompressed, 16, function (a) {
+        return f(a);
+      });
+    },
+    _compress: function (uncompressed, bitsPerChar, getCharFromInt) {
+      if (uncompressed == null) return "";
+      var i,
+        value,
+        context_dictionary = {},
+        context_dictionaryToCreate = {},
+        context_c = "",
+        context_wc = "",
+        context_w = "",
+        context_enlargeIn = 2, // Compensate for the first entry which should not count
+        context_dictSize = 3,
+        context_numBits = 2,
+        context_data = [],
+        context_data_val = 0,
+        context_data_position = 0,
         ii;
 
-    for (ii = 0; ii < uncompressed.length; ii += 1) {
-      context_c = uncompressed.charAt(ii);
-      if (!Object.prototype.hasOwnProperty.call(context_dictionary,context_c)) {
-        context_dictionary[context_c] = context_dictSize++;
-        context_dictionaryToCreate[context_c] = true;
+      for (ii = 0; ii < uncompressed.length; ii += 1) {
+        context_c = uncompressed.charAt(ii);
+        if (
+          !Object.prototype.hasOwnProperty.call(context_dictionary, context_c)
+        ) {
+          context_dictionary[context_c] = context_dictSize++;
+          context_dictionaryToCreate[context_c] = true;
+        }
+
+        context_wc = context_w + context_c;
+        if (
+          Object.prototype.hasOwnProperty.call(context_dictionary, context_wc)
+        ) {
+          context_w = context_wc;
+        } else {
+          if (
+            Object.prototype.hasOwnProperty.call(
+              context_dictionaryToCreate,
+              context_w,
+            )
+          ) {
+            if (context_w.charCodeAt(0) < 256) {
+              for (i = 0; i < context_numBits; i++) {
+                context_data_val = context_data_val << 1;
+                if (context_data_position == bitsPerChar - 1) {
+                  context_data_position = 0;
+                  context_data.push(getCharFromInt(context_data_val));
+                  context_data_val = 0;
+                } else {
+                  context_data_position++;
+                }
+              }
+              value = context_w.charCodeAt(0);
+              for (i = 0; i < 8; i++) {
+                context_data_val = (context_data_val << 1) | (value & 1);
+                if (context_data_position == bitsPerChar - 1) {
+                  context_data_position = 0;
+                  context_data.push(getCharFromInt(context_data_val));
+                  context_data_val = 0;
+                } else {
+                  context_data_position++;
+                }
+                value = value >> 1;
+              }
+            } else {
+              value = 1;
+              for (i = 0; i < context_numBits; i++) {
+                context_data_val = (context_data_val << 1) | value;
+                if (context_data_position == bitsPerChar - 1) {
+                  context_data_position = 0;
+                  context_data.push(getCharFromInt(context_data_val));
+                  context_data_val = 0;
+                } else {
+                  context_data_position++;
+                }
+                value = 0;
+              }
+              value = context_w.charCodeAt(0);
+              for (i = 0; i < 16; i++) {
+                context_data_val = (context_data_val << 1) | (value & 1);
+                if (context_data_position == bitsPerChar - 1) {
+                  context_data_position = 0;
+                  context_data.push(getCharFromInt(context_data_val));
+                  context_data_val = 0;
+                } else {
+                  context_data_position++;
+                }
+                value = value >> 1;
+              }
+            }
+            context_enlargeIn--;
+            if (context_enlargeIn == 0) {
+              context_enlargeIn = Math.pow(2, context_numBits);
+              context_numBits++;
+            }
+            delete context_dictionaryToCreate[context_w];
+          } else {
+            value = context_dictionary[context_w];
+            for (i = 0; i < context_numBits; i++) {
+              context_data_val = (context_data_val << 1) | (value & 1);
+              if (context_data_position == bitsPerChar - 1) {
+                context_data_position = 0;
+                context_data.push(getCharFromInt(context_data_val));
+                context_data_val = 0;
+              } else {
+                context_data_position++;
+              }
+              value = value >> 1;
+            }
+          }
+          context_enlargeIn--;
+          if (context_enlargeIn == 0) {
+            context_enlargeIn = Math.pow(2, context_numBits);
+            context_numBits++;
+          }
+          // Add wc to the dictionary.
+          context_dictionary[context_wc] = context_dictSize++;
+          context_w = String(context_c);
+        }
       }
 
-      context_wc = context_w + context_c;
-      if (Object.prototype.hasOwnProperty.call(context_dictionary,context_wc)) {
-        context_w = context_wc;
-      } else {
-        if (Object.prototype.hasOwnProperty.call(context_dictionaryToCreate,context_w)) {
-          if (context_w.charCodeAt(0)<256) {
-            for (i=0 ; i<context_numBits ; i++) {
-              context_data_val = (context_data_val << 1);
-              if (context_data_position == bitsPerChar-1) {
+      // Output the code for w.
+      if (context_w !== "") {
+        if (
+          Object.prototype.hasOwnProperty.call(
+            context_dictionaryToCreate,
+            context_w,
+          )
+        ) {
+          if (context_w.charCodeAt(0) < 256) {
+            for (i = 0; i < context_numBits; i++) {
+              context_data_val = context_data_val << 1;
+              if (context_data_position == bitsPerChar - 1) {
                 context_data_position = 0;
                 context_data.push(getCharFromInt(context_data_val));
                 context_data_val = 0;
@@ -8863,9 +9100,9 @@ var LZString = {
               }
             }
             value = context_w.charCodeAt(0);
-            for (i=0 ; i<8 ; i++) {
-              context_data_val = (context_data_val << 1) | (value&1);
-              if (context_data_position == bitsPerChar-1) {
+            for (i = 0; i < 8; i++) {
+              context_data_val = (context_data_val << 1) | (value & 1);
+              if (context_data_position == bitsPerChar - 1) {
                 context_data_position = 0;
                 context_data.push(getCharFromInt(context_data_val));
                 context_data_val = 0;
@@ -8876,9 +9113,9 @@ var LZString = {
             }
           } else {
             value = 1;
-            for (i=0 ; i<context_numBits ; i++) {
+            for (i = 0; i < context_numBits; i++) {
               context_data_val = (context_data_val << 1) | value;
-              if (context_data_position ==bitsPerChar-1) {
+              if (context_data_position == bitsPerChar - 1) {
                 context_data_position = 0;
                 context_data.push(getCharFromInt(context_data_val));
                 context_data_val = 0;
@@ -8888,9 +9125,9 @@ var LZString = {
               value = 0;
             }
             value = context_w.charCodeAt(0);
-            for (i=0 ; i<16 ; i++) {
-              context_data_val = (context_data_val << 1) | (value&1);
-              if (context_data_position == bitsPerChar-1) {
+            for (i = 0; i < 16; i++) {
+              context_data_val = (context_data_val << 1) | (value & 1);
+              if (context_data_position == bitsPerChar - 1) {
                 context_data_position = 0;
                 context_data.push(getCharFromInt(context_data_val));
                 context_data_val = 0;
@@ -8908,9 +9145,9 @@ var LZString = {
           delete context_dictionaryToCreate[context_w];
         } else {
           value = context_dictionary[context_w];
-          for (i=0 ; i<context_numBits ; i++) {
-            context_data_val = (context_data_val << 1) | (value&1);
-            if (context_data_position == bitsPerChar-1) {
+          for (i = 0; i < context_numBits; i++) {
+            context_data_val = (context_data_val << 1) | (value & 1);
+            if (context_data_position == bitsPerChar - 1) {
               context_data_position = 0;
               context_data.push(getCharFromInt(context_data_val));
               context_data_val = 0;
@@ -8919,135 +9156,49 @@ var LZString = {
             }
             value = value >> 1;
           }
-
-
         }
         context_enlargeIn--;
         if (context_enlargeIn == 0) {
           context_enlargeIn = Math.pow(2, context_numBits);
           context_numBits++;
         }
-        // Add wc to the dictionary.
-        context_dictionary[context_wc] = context_dictSize++;
-        context_w = String(context_c);
       }
-    }
 
-    // Output the code for w.
-    if (context_w !== "") {
-      if (Object.prototype.hasOwnProperty.call(context_dictionaryToCreate,context_w)) {
-        if (context_w.charCodeAt(0)<256) {
-          for (i=0 ; i<context_numBits ; i++) {
-            context_data_val = (context_data_val << 1);
-            if (context_data_position == bitsPerChar-1) {
-              context_data_position = 0;
-              context_data.push(getCharFromInt(context_data_val));
-              context_data_val = 0;
-            } else {
-              context_data_position++;
-            }
-          }
-          value = context_w.charCodeAt(0);
-          for (i=0 ; i<8 ; i++) {
-            context_data_val = (context_data_val << 1) | (value&1);
-            if (context_data_position == bitsPerChar-1) {
-              context_data_position = 0;
-              context_data.push(getCharFromInt(context_data_val));
-              context_data_val = 0;
-            } else {
-              context_data_position++;
-            }
-            value = value >> 1;
-          }
+      // Mark the end of the stream
+      value = 2;
+      for (i = 0; i < context_numBits; i++) {
+        context_data_val = (context_data_val << 1) | (value & 1);
+        if (context_data_position == bitsPerChar - 1) {
+          context_data_position = 0;
+          context_data.push(getCharFromInt(context_data_val));
+          context_data_val = 0;
         } else {
-          value = 1;
-          for (i=0 ; i<context_numBits ; i++) {
-            context_data_val = (context_data_val << 1) | value;
-            if (context_data_position == bitsPerChar-1) {
-              context_data_position = 0;
-              context_data.push(getCharFromInt(context_data_val));
-              context_data_val = 0;
-            } else {
-              context_data_position++;
-            }
-            value = 0;
-          }
-          value = context_w.charCodeAt(0);
-          for (i=0 ; i<16 ; i++) {
-            context_data_val = (context_data_val << 1) | (value&1);
-            if (context_data_position == bitsPerChar-1) {
-              context_data_position = 0;
-              context_data.push(getCharFromInt(context_data_val));
-              context_data_val = 0;
-            } else {
-              context_data_position++;
-            }
-            value = value >> 1;
-          }
+          context_data_position++;
         }
-        context_enlargeIn--;
-        if (context_enlargeIn == 0) {
-          context_enlargeIn = Math.pow(2, context_numBits);
-          context_numBits++;
-        }
-        delete context_dictionaryToCreate[context_w];
-      } else {
-        value = context_dictionary[context_w];
-        for (i=0 ; i<context_numBits ; i++) {
-          context_data_val = (context_data_val << 1) | (value&1);
-          if (context_data_position == bitsPerChar-1) {
-            context_data_position = 0;
-            context_data.push(getCharFromInt(context_data_val));
-            context_data_val = 0;
-          } else {
-            context_data_position++;
-          }
-          value = value >> 1;
-        }
-
-
+        value = value >> 1;
       }
-      context_enlargeIn--;
-      if (context_enlargeIn == 0) {
-        context_enlargeIn = Math.pow(2, context_numBits);
-        context_numBits++;
+
+      // Flush the last char
+      while (true) {
+        context_data_val = context_data_val << 1;
+        if (context_data_position == bitsPerChar - 1) {
+          context_data.push(getCharFromInt(context_data_val));
+          break;
+        } else context_data_position++;
       }
-    }
+      return context_data.join("");
+    },
 
-    // Mark the end of the stream
-    value = 2;
-    for (i=0 ; i<context_numBits ; i++) {
-      context_data_val = (context_data_val << 1) | (value&1);
-      if (context_data_position == bitsPerChar-1) {
-        context_data_position = 0;
-        context_data.push(getCharFromInt(context_data_val));
-        context_data_val = 0;
-      } else {
-        context_data_position++;
-      }
-      value = value >> 1;
-    }
+    decompress: function (compressed) {
+      if (compressed == null) return "";
+      if (compressed == "") return null;
+      return LZString._decompress(compressed.length, 32768, function (index) {
+        return compressed.charCodeAt(index);
+      });
+    },
 
-    // Flush the last char
-    while (true) {
-      context_data_val = (context_data_val << 1);
-      if (context_data_position == bitsPerChar-1) {
-        context_data.push(getCharFromInt(context_data_val));
-        break;
-      }
-      else context_data_position++;
-    }
-    return context_data.join('');
-  },
-
-  decompress: function (compressed) {
-    if (compressed == null) return "";
-    if (compressed == "") return null;
-    return LZString._decompress(compressed.length, 32768, function(index) { return compressed.charCodeAt(index); });
-  },
-
-  _decompress: function (length, resetValue, getNextValue) {
-    var dictionary = [],
+    _decompress: function (length, resetValue, getNextValue) {
+      var dictionary = [],
         next,
         enlargeIn = 4,
         dictSize = 4,
@@ -9056,168 +9207,171 @@ var LZString = {
         result = [],
         i,
         w,
-        bits, resb, maxpower, power,
+        bits,
+        resb,
+        maxpower,
+        power,
         c,
-        data = {val:getNextValue(0), position:resetValue, index:1};
+        data = { val: getNextValue(0), position: resetValue, index: 1 };
 
-    for (i = 0; i < 3; i += 1) {
-      dictionary[i] = i;
-    }
-
-    bits = 0;
-    maxpower = Math.pow(2,2);
-    power=1;
-    while (power!=maxpower) {
-      resb = data.val & data.position;
-      data.position >>= 1;
-      if (data.position == 0) {
-        data.position = resetValue;
-        data.val = getNextValue(data.index++);
-      }
-      bits |= (resb>0 ? 1 : 0) * power;
-      power <<= 1;
-    }
-
-    switch (next = bits) {
-      case 0:
-          bits = 0;
-          maxpower = Math.pow(2,8);
-          power=1;
-          while (power!=maxpower) {
-            resb = data.val & data.position;
-            data.position >>= 1;
-            if (data.position == 0) {
-              data.position = resetValue;
-              data.val = getNextValue(data.index++);
-            }
-            bits |= (resb>0 ? 1 : 0) * power;
-            power <<= 1;
-          }
-        c = f(bits);
-        break;
-      case 1:
-          bits = 0;
-          maxpower = Math.pow(2,16);
-          power=1;
-          while (power!=maxpower) {
-            resb = data.val & data.position;
-            data.position >>= 1;
-            if (data.position == 0) {
-              data.position = resetValue;
-              data.val = getNextValue(data.index++);
-            }
-            bits |= (resb>0 ? 1 : 0) * power;
-            power <<= 1;
-          }
-        c = f(bits);
-        break;
-      case 2:
-        return "";
-    }
-    dictionary[3] = c;
-    w = c;
-    result.push(c);
-    while (true) {
-      if (data.index > length) {
-        return "";
+      for (i = 0; i < 3; i += 1) {
+        dictionary[i] = i;
       }
 
       bits = 0;
-      maxpower = Math.pow(2,numBits);
-      power=1;
-      while (power!=maxpower) {
+      maxpower = Math.pow(2, 2);
+      power = 1;
+      while (power != maxpower) {
         resb = data.val & data.position;
         data.position >>= 1;
         if (data.position == 0) {
           data.position = resetValue;
           data.val = getNextValue(data.index++);
         }
-        bits |= (resb>0 ? 1 : 0) * power;
+        bits |= (resb > 0 ? 1 : 0) * power;
         power <<= 1;
       }
 
-      switch (c = bits) {
+      switch ((next = bits)) {
         case 0:
           bits = 0;
-          maxpower = Math.pow(2,8);
-          power=1;
-          while (power!=maxpower) {
+          maxpower = Math.pow(2, 8);
+          power = 1;
+          while (power != maxpower) {
             resb = data.val & data.position;
             data.position >>= 1;
             if (data.position == 0) {
               data.position = resetValue;
               data.val = getNextValue(data.index++);
             }
-            bits |= (resb>0 ? 1 : 0) * power;
+            bits |= (resb > 0 ? 1 : 0) * power;
             power <<= 1;
           }
-
-          dictionary[dictSize++] = f(bits);
-          c = dictSize-1;
-          enlargeIn--;
+          c = f(bits);
           break;
         case 1:
           bits = 0;
-          maxpower = Math.pow(2,16);
-          power=1;
-          while (power!=maxpower) {
+          maxpower = Math.pow(2, 16);
+          power = 1;
+          while (power != maxpower) {
             resb = data.val & data.position;
             data.position >>= 1;
             if (data.position == 0) {
               data.position = resetValue;
               data.val = getNextValue(data.index++);
             }
-            bits |= (resb>0 ? 1 : 0) * power;
+            bits |= (resb > 0 ? 1 : 0) * power;
             power <<= 1;
           }
-          dictionary[dictSize++] = f(bits);
-          c = dictSize-1;
-          enlargeIn--;
+          c = f(bits);
           break;
         case 2:
-          return result.join('');
+          return "";
       }
+      dictionary[3] = c;
+      w = c;
+      result.push(c);
+      while (true) {
+        if (data.index > length) {
+          return "";
+        }
 
-      if (enlargeIn == 0) {
-        enlargeIn = Math.pow(2, numBits);
-        numBits++;
-      }
+        bits = 0;
+        maxpower = Math.pow(2, numBits);
+        power = 1;
+        while (power != maxpower) {
+          resb = data.val & data.position;
+          data.position >>= 1;
+          if (data.position == 0) {
+            data.position = resetValue;
+            data.val = getNextValue(data.index++);
+          }
+          bits |= (resb > 0 ? 1 : 0) * power;
+          power <<= 1;
+        }
 
-      if (dictionary[c]) {
-        entry = dictionary[c];
-      } else {
-        if (c === dictSize) {
-          entry = w + w.charAt(0);
+        switch ((c = bits)) {
+          case 0:
+            bits = 0;
+            maxpower = Math.pow(2, 8);
+            power = 1;
+            while (power != maxpower) {
+              resb = data.val & data.position;
+              data.position >>= 1;
+              if (data.position == 0) {
+                data.position = resetValue;
+                data.val = getNextValue(data.index++);
+              }
+              bits |= (resb > 0 ? 1 : 0) * power;
+              power <<= 1;
+            }
+
+            dictionary[dictSize++] = f(bits);
+            c = dictSize - 1;
+            enlargeIn--;
+            break;
+          case 1:
+            bits = 0;
+            maxpower = Math.pow(2, 16);
+            power = 1;
+            while (power != maxpower) {
+              resb = data.val & data.position;
+              data.position >>= 1;
+              if (data.position == 0) {
+                data.position = resetValue;
+                data.val = getNextValue(data.index++);
+              }
+              bits |= (resb > 0 ? 1 : 0) * power;
+              power <<= 1;
+            }
+            dictionary[dictSize++] = f(bits);
+            c = dictSize - 1;
+            enlargeIn--;
+            break;
+          case 2:
+            return result.join("");
+        }
+
+        if (enlargeIn == 0) {
+          enlargeIn = Math.pow(2, numBits);
+          numBits++;
+        }
+
+        if (dictionary[c]) {
+          entry = dictionary[c];
         } else {
-          return null;
+          if (c === dictSize) {
+            entry = w + w.charAt(0);
+          } else {
+            return null;
+          }
+        }
+        result.push(entry);
+
+        // Add w+entry[0] to the dictionary.
+        dictionary[dictSize++] = w + entry.charAt(0);
+        enlargeIn--;
+
+        w = entry;
+
+        if (enlargeIn == 0) {
+          enlargeIn = Math.pow(2, numBits);
+          numBits++;
         }
       }
-      result.push(entry);
-
-      // Add w+entry[0] to the dictionary.
-      dictionary[dictSize++] = w + entry.charAt(0);
-      enlargeIn--;
-
-      w = entry;
-
-      if (enlargeIn == 0) {
-        enlargeIn = Math.pow(2, numBits);
-        numBits++;
-      }
-
-    }
-  }
-};
+    },
+  };
   return LZString;
 })();
 
-if (typeof define === 'function' && define.amd) {
-  define(function () { return LZString; });
-} else if( typeof module !== 'undefined' && module != null ) {
-  module.exports = LZString
-} else if( typeof angular !== 'undefined' && angular != null ) {
-  angular.module('LZString', [])
-  .factory('LZString', function () {
+if (typeof define === "function" && define.amd) {
+  define(function () {
+    return LZString;
+  });
+} else if (typeof module !== "undefined" && module != null) {
+  module.exports = LZString;
+} else if (typeof angular !== "undefined" && angular != null) {
+  angular.module("LZString", []).factory("LZString", function () {
     return LZString;
   });
 }
