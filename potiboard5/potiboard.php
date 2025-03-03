@@ -3,8 +3,8 @@
 
 // POTI-board EVO
 // バージョン :
-const POTI_VER = 'v6.65.1';
-const POTI_LOT = 'lot.20250209';
+const POTI_VER = 'v6.67.5';
+const POTI_LOT = 'lot.20250303';
 
 /*
   (C) 2018-2025 POTI改 POTI-board redevelopment team
@@ -62,10 +62,15 @@ defined('USE_CHEERPJ_OLD_VERSION') or define('USE_CHEERPJ_OLD_VERSION',"0");
 if(USE_CHEERPJ_OLD_VERSION){//2.3
 	define('CHEERPJ_URL','https://cjrtnc.leaningtech.com/2.3/loader.js');
 	define('CHEERPJ_HASH','sha384-1s6C2I0gGJltmNWfLfzHgXW5Dj4JB4kQTpnS37fU6CaQR/FrYG219xbhcAFRcHKE');
+	define('CHEERPJ_PRELOAD','');
 }else{//cj3
 	define('CHEERPJ_URL','https://cjrtnc.leaningtech.com/3.1/cj3loader.js');
 	define('CHEERPJ_HASH','sha384-Gktch8f4Bz1CImPunwHa96WmqMngIXVkCnlyJCQtPldjKqLpIlwGiuLXaTq9hfYN');
+	define('CHEERPJ_PRELOAD','{preloadResources:{"/lt/fc/ttf/LiberationSans-Regular.ttf":[0,131072,262144,393216],"/lt/8/jre/lib/rt.jar":[0,131072,9699328,10878976,11272192,11534336,11665408,12189696,12320768,12451840,15204352,15335424,15466496,15597568,15990784,16384000,16777216,16908288,17039360,17563648,17694720,17825792,18087936,18612224,18743296,18874368,19005440,19136512,19529728,19660800,20185088,20316160,20840448,21757952,21889024,26869760],"/lt/fc/cache/e21edda6a7db77f35ca341e0c3cb2a22-le32d8.cache-7":[0,131072],"/lt/fc/fonts/fonts.conf":[0,131072],"/lt/etc/resolv.conf":[0,131072],"/lt/8/lib/security/java.policy":[0,131072],"/lt/8/lib/security/java.security":[0,131072],"/lt/8/jre/lib/meta-index":[0,131072],"/lt/8/jre/lib/javaws.jar":[0,131072,1441792,1703936],"/lt/8/jre/lib/resources.jar":[0,131072,917504,1179648],"/lt/8/jre/lib/charsets.jar":[0,131072,1703936,1835008],"/lt/8/jre/lib/jce.jar":[0,131072],"/lt/8/jre/lib/jsse.jar":[0,131072,786432,917504],"/lt/8/lib/ext/meta-index":[0,131072],"/lt/etc/passwd":[0,131072],"/lt/8/jre/lib/cheerpj-awt.jar":[0,131072],"/lt/etc/localtime":[],"/lt/8/lib/ext":[],"/lt/8/lib/ext/index.list":[],"/lt/8/lib/ext/localedata.jar":[],"/lt/8/lib/ext/sunjce_provider.jar":[],"/lt/8/jre/lib":[],"/lt/8/lib/accessibility.properties":[],"/lt/8/lib/fonts/LucidaSansRegular.ttf":[],"/lt/8/lib/ext/*":[],"/lt/etc/hosts":[],"/lt/8/lib/fonts/badfonts.txt":[],"/lt/8/lib/fonts":[],"/lt/8/lib/fonts/fallback":[],"/lt/fc/ttf":[]}}');
 }
+define('CHEERPJ_DEBUG','{ enableDebug: true }');
+define('CHEERPJ_DEBUG_MODE',0);
+
 // $ cat FILENAME.js | openssl dgst -sha384 -binary | openssl base64 -A
 // https://developer.mozilla.org/docs/Web/Security/Subresource_Integrity
 
@@ -193,7 +198,7 @@ defined("MAX_H_PX") or define("MAX_H_PX", "1024"); //高さ
 //ログファイルのファイルサイズの制限値(単位MB)
 defined("MAX_LOG_FILESIZE") or define("MAX_LOG_FILESIZE", "15"); //
 
-$badurl= isset($badurl) ? $badurl : [];//拒絶するurl
+$badurl= $badurl ?? [];//拒絶するurl
 
 //パーミッション
 
@@ -218,7 +223,7 @@ defined("MSG050") or define("MSG050", "Cookieが確認できません。");
 defined("MSG051") or define("MSG051", "連続したパスワードの誤入力を検知したためロックしています。");
 defined("MSG052") or define("MSG052", "ログファイルのファイルサイズが制限値を超過したため処理を停止しました。");
 
-$ADMIN_PASS=isset($ADMIN_PASS) ? $ADMIN_PASS : false; 
+$ADMIN_PASS= $ADMIN_PASS ?? false;
 if(!$ADMIN_PASS){
 	error(MSG040);
 }
@@ -255,7 +260,8 @@ init();
 deltemp();
 
 session_sta();
-$session_usercode = isset($_SESSION['usercode']) ? (string)$_SESSION['usercode'] : "";
+$session_usercode = $_SESSION['usercode'] ?? "";
+$session_usercode = (string)$session_usercode;
 $usercode = $usercode ? $usercode : $session_usercode;
 
 //user-codeの発行
@@ -318,6 +324,9 @@ switch($mode){
 		if(CONTINUE_PASS||$type==='rep') check_cont_pass();
 		return paintform();
 	case 'newpost':
+		if(!USE_IMG_UPLOAD && DENY_COMMENTS_ONLY||DIARY){
+			redirect(h(PHP_SELF2));
+		}
 		$dat['post_mode'] = true;
 		$dat['regist'] = true;
 		$dat = array_merge($dat,form());
@@ -354,10 +363,10 @@ exit();
 
 //ユーザーip
 function get_uip(): string {
-	$ip = isset($_SERVER["HTTP_CLIENT_IP"]) ? $_SERVER["HTTP_CLIENT_IP"] :'';
-	$ip = $ip ? $ip : (isset($_SERVER["HTTP_INCAP_CLIENT_IP"]) ? $_SERVER["HTTP_INCAP_CLIENT_IP"] : '');
-	$ip = $ip ? $ip : (isset($_SERVER["HTTP_X_FORWARDED_FOR"]) ? $_SERVER["HTTP_X_FORWARDED_FOR"] : '');
-	$ip = $ip ? $ip : (isset($_SERVER["REMOTE_ADDR"]) ? $_SERVER["REMOTE_ADDR"] : '');
+	$ip = $_SERVER["HTTP_CLIENT_IP"] ?? '';
+	$ip = $ip ? $ip : ($_SERVER["HTTP_INCAP_CLIENT_IP"] ?? '');
+	$ip = $ip ? $ip : ($_SERVER["HTTP_X_FORWARDED_FOR"] ?? '');
+	$ip = $ip ? $ip : ($_SERVER["REMOTE_ADDR"] ?? '');
 	if (strstr($ip, ', ')) {
 		$ips = explode(', ', $ip);
 		$ip = $ips[0];
@@ -391,7 +400,7 @@ function check_csrf_token(): void {
 	check_same_origin(true);
 	session_sta();
 	$token=(string)filter_input(INPUT_POST,'token');
-	$session_token=isset($_SESSION['token']) ? $_SESSION['token'] : '';
+	$session_token= $_SESSION['token'] ?? '';
 	if(!$session_token||$token!==$session_token){
 		error(MSG006);
 	}
@@ -400,7 +409,8 @@ function check_same_origin($cookie_check=false): void {
 	global $usercode,$en;
 	session_sta();
 	$c_usercode = (string)filter_input(INPUT_COOKIE, 'usercode');//user-codeを取得
-	$session_usercode = isset($_SESSION['usercode']) ? (string)$_SESSION['usercode'] : "";
+	$session_usercode = $_SESSION['usercode'] ?? "";
+	$session_usercode = (string)$session_usercode;
 
 	if($cookie_check){
 		if(!$c_usercode){
@@ -461,6 +471,7 @@ function basicpart(): array {
 	$dat['jquery']=JQUERY;
 	$dat['cheerpj_url']=CHEERPJ_URL;
 	$dat['cheerpj_hash']=CHEERPJ_HASH;
+	$dat['cheerpj_preload']=CHEERPJ_DEBUG_MODE ? CHEERPJ_DEBUG : CHEERPJ_PRELOAD;
 	$dat['n']=false;//コメント行
 	//言語
 	$dat['en']=lang_en();
@@ -913,18 +924,19 @@ function regist(): void {
 	if(strlen((string)$pwd) < 6) error(MSG046);
 
 	//画像アップロード
-	$upfile_name = isset($_FILES["upfile"]["name"]) ? basename($_FILES["upfile"]["name"]) : "";
+	$upfile_name = $_FILES["upfile"]["name"] ?? "";
+	$upfile_name = basename($upfile_name);
 	if(strlen((string)$upfile_name)>256){
 		error(MSG015);
 	}
-	$upfile = isset($_FILES["upfile"]["tmp_name"]) ? $_FILES["upfile"]["tmp_name"] : "";
+	$upfile = $_FILES["upfile"]["tmp_name"] ?? "";
 
 	if(isset($_FILES["upfile"]["error"])){//エラーチェック
 		if(in_array($_FILES["upfile"]["error"],[1,2])){
 			error(MSG034);//容量オーバー
 		} 
 	}
-	$filesize = isset($_FILES["upfile"]['size']) ? $_FILES["upfile"]['size'] :'';
+	$filesize = $_FILES["upfile"]['size'] ?? 0;
 	if($filesize > MAX_KB*1024*2){//png→jpegで容量が減るかもしれないので2倍
 		error(MSG034);//容量オーバー
 	}
@@ -1587,7 +1599,7 @@ function init(): void {
 }
 
 function lang_en() : bool {//言語が日本語以外ならtrue。
-	$lang = ($http_langs = isset($_SERVER['HTTP_ACCEPT_LANGUAGE']) ? $_SERVER['HTTP_ACCEPT_LANGUAGE'] : '')
+	$lang = ($http_langs = $_SERVER['HTTP_ACCEPT_LANGUAGE'] ?? '')
 	? explode( ',', $http_langs )[0] : '';
   return (stripos($lang,'ja')!==0);
 }
@@ -1680,12 +1692,13 @@ function paintform(): void {
 	//pchファイルアップロードペイント
 	if($admin&&($admin===$ADMIN_PASS)){
 		
-		$pchtmp= isset($_FILES['pch_upload']['tmp_name']) ? $_FILES['pch_upload']['tmp_name'] :'';
+		$pchtmp= $_FILES['pch_upload']['tmp_name'] ?? '';
 		if(isset($_FILES['pch_upload']['error']) && in_array($_FILES['pch_upload']['error'],[1,2])){//容量オーバー
 			error(MSG034);
 		} 
 		if ($pchtmp && $_FILES['pch_upload']['error'] === UPLOAD_ERR_OK){
-			$pchfilename = isset($_FILES['pch_upload']['name']) ? newstring(basename($_FILES['pch_upload']['name'])) : '';
+			$pchfilename = $_FILES['pch_upload']['name'] ?? '';
+			$pchfilename = newstring(basename($pchfilename));
 
 			$time = (string)(time().substr(microtime(),2,6));
 			$pchext=pathinfo($pchfilename, PATHINFO_EXTENSION);
@@ -2193,7 +2206,7 @@ function incontinue(): void {
 }
 
 // コンティニュー認証
-function check_cont_pass(): bool {
+function check_cont_pass(): void {
 
 	check_same_origin(true);
 
@@ -2201,6 +2214,7 @@ function check_cont_pass(): bool {
 	$pwd = (string)newstring(filter_input(INPUT_POST, 'pwd'));
 	$pwdc = (string)filter_input(INPUT_COOKIE, 'pwdc');
 	$pwd = $pwd ? $pwd : newstring($pwdc);
+	$flag = false;
 	$fp=fopen(LOGFILE,"r");
 	while($line = fgets($fp)){
 		if(!trim($line)){
@@ -2211,14 +2225,14 @@ function check_cont_pass(): bool {
 			= explode(",", trim($line).",,,,,,,,");
 		
 			if($cno == $no && check_password($pwd, $cpwd) && check_elapsed_days($ctime,$logver)){
-				closeFile($fp);
-				return true;
+				$flag = true;
+				break;
 			}
 			break;
 		}
 	}
 	closeFile($fp);
-	error(MSG028);
+	if(!$flag) error(MSG028);
 }
 function download_app_dat(): void {
 
@@ -2294,10 +2308,12 @@ function editform(): void {
 	$flag = FALSE;
 	foreach($line as $value){
 		if($value){
-			list($no,,$name,$email,$sub,$com,$url,$ehost,$pass,,,,$time,,,$fcolor,,,,$logver) = explode(",", rtrim($value).",,,,,,,,");
-			if ($no == $del[0] && check_password($pwd, $pass, $pwd)){
-				$flag = TRUE;
-				break;
+			if(strpos($value . ',',$del[0]. ',') === 0){
+				list($no,,$name,$email,$sub,$com,$url,$ehost,$pass,,,,$time,,,$fcolor,,,,$logver) = explode(",", rtrim($value).",,,,,,,,");
+				if ($no == $del[0] && check_password($pwd, $pass, $pwd)){
+					$flag = TRUE;
+					break;
+				}
 			}
 		}
 	}
@@ -2414,17 +2430,19 @@ function rewrite(): void {
 		if(!trim($value)){
 			continue;
 		}
-		list($eno,$edate,$ename,,$esub,$ecom,$eurl,$ehost,$epwd,$ext,$w,$h,$time,$chk,$ptime,$efcolor,$pchext,$thumbnail,$tool,$logver,) = explode(",", rtrim($value).',,,,,,,');
-		if((!$edittime || $edittime == $time) && $eno == $no && check_password($pwd, $epwd, $admin)){
-			$date=DO_NOT_CHANGE_POSTS_TIME ? $edate : $date;
-			if(!$name) $name = $ename;
-			if(!$sub)  $sub  = $esub;
-			if(!$com)  $com  = $ecom;
-			if(!$fcolor) $fcolor = $efcolor;
-			$tool=is_paint_tool_name($tool);
-			$line[$i] = "$no,$date,$name,$email,$sub,$com,$url,$host,$epwd,$ext,$w,$h,$time,$chk,$ptime,$fcolor,$pchext,$thumbnail,$tool,$logver,";
-			$flag = TRUE;
-			break;
+		if(strpos($value . ',', $no . ',') === 0){
+			list($eno,$edate,$ename,,$esub,$ecom,$eurl,$ehost,$epwd,$ext,$w,$h,$time,$chk,$ptime,$efcolor,$pchext,$thumbnail,$tool,$logver,) = explode(",", rtrim($value).',,,,,,,');
+			if((!$edittime || $edittime == $time) && $eno == $no && check_password($pwd, $epwd, $admin)){
+				$date=DO_NOT_CHANGE_POSTS_TIME ? $edate : $date;
+				if(!$name) $name = $ename;
+				if(!$sub)  $sub  = $esub;
+				if(!$com)  $com  = $ecom;
+				if(!$fcolor) $fcolor = $efcolor;
+				$tool=is_paint_tool_name($tool);
+				$line[$i] = "$no,$date,$name,$email,$sub,$com,$url,$host,$epwd,$ext,$w,$h,$time,$chk,$ptime,$fcolor,$pchext,$thumbnail,$tool,$logver,";
+				$flag = TRUE;
+				break;
+			}
 		}
 	}
 	if(!$flag){
@@ -2546,11 +2564,13 @@ function replace($no="",$pwd="",$repcode="",$java=""): void {
 		if(!trim($value)){
 			continue;
 		}
-		list($eno,$edate,$name,$email,$sub,$com,$url,$ehost,$epwd,$ext,$_w,$_h,$etim,,$ptime,$fcolor,$epchext,$ethumbnail,$etool,$logver,) = explode(",", rtrim($value).',,,,,,,');
-		//画像差し換えに管理パスは使っていない
-		if((!$reptime || ($reptime === $etim)) &&  ($eno === $no) && check_password($pwd, $epwd)){
-			$flag = true;
-			break;
+			if(strpos($value . ',', $no . ',') === 0){
+			list($eno,$edate,$name,$email,$sub,$com,$url,$ehost,$epwd,$ext,$_w,$_h,$etim,,$ptime,$fcolor,$epchext,$ethumbnail,$etool,$logver,) = explode(",", rtrim($value).',,,,,,,');
+			//画像差し換えに管理パスは使っていない
+			if((!$reptime || ($reptime === $etim)) &&  ($eno === $no) && check_password($pwd, $epwd)){
+				$flag = true;
+				break;
+			}
 		}
 	}
 	if(!$flag){
@@ -2799,9 +2819,8 @@ function Reject_if_NGword_exists_in_the_post(): void {
 	//本文に日本語がなければ拒絶
 	if (USE_JAPANESEFILTER) {
 		mb_regex_encoding("UTF-8");
-		if ($com_len && !preg_match("/[ぁ-んァ-ヶー一-龠]+/u",$chk_com)) error(MSG035);
+		if ($com_len && !preg_match("/[ぁ-んァ-ヶｧ-ﾝー一-龠]+/u",$chk_com)) error(MSG035);
 	}
-
 	//本文へのURLの書き込みを禁止
 	if(!(($pwd&&$pwd===$ADMIN_PASS)||($admin&&($admin===$ADMIN_PASS)))){//どちらも一致しなければ
 		if(DENY_COMMENTS_URL && preg_match('/:\/\/|\.co|\.ly|\.gl|\.net|\.org|\.cc|\.ru|\.su|\.ua|\.gd/i', $com)) error(MSG036);
@@ -2905,7 +2924,7 @@ function redirect ($url): void {
 	exit();
 }
 
-function getImgType ($dest) : string {
+function getImgType ($dest) {
 
 	$img_type=mime_content_type($dest);
 
@@ -3056,7 +3075,7 @@ function check_jpeg_exif($dest): void {
 	}
 	//画像回転の検出
 	$exif = exif_read_data($dest);
-	$orientation = isset($exif["Orientation"]) ? $exif["Orientation"] : 1;
+	$orientation = $exif["Orientation"] ?? 1;
 	//位置情報はあるか?
 	$gpsdata_exists =(isset($exif['GPSLatitude']) && isset($exif['GPSLongitude'])); 
 
@@ -3558,7 +3577,7 @@ if(!$ADMIN_PASS || $ADMIN_PASS!==filter_input(INPUT_POST,'pass')){
 }
 
 function isIE(): bool {
-	$userAgent = isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : "";
+	$userAgent = $_SERVER['HTTP_USER_AGENT'] ?? "";
     return (bool) strpos($userAgent, 'MSIE') || (bool) strpos($userAgent, 'Trident/');
 }
 function not_support_async_await(): bool {
@@ -3579,7 +3598,7 @@ function not_support_async_await(): bool {
 
 // 優先言語のリストをチェックして対応する言語があればその翻訳されたレイヤー名を返す
 function getTranslatedLayerName(): string {
-	$acceptedLanguages = isset($_SERVER['HTTP_ACCEPT_LANGUAGE']) ? $_SERVER['HTTP_ACCEPT_LANGUAGE'] : '';
+	$acceptedLanguages = $_SERVER['HTTP_ACCEPT_LANGUAGE'] ?? '';
 	$languageList = explode(',', $acceptedLanguages);
 
 	foreach ($languageList as $language) {
