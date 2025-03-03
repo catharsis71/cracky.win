@@ -2,14 +2,14 @@
   SSLRequireSSL
 </If>
 
-<Files ~ "\.(html|php)?$">
+<Files ~ "(?i)\.(php|html?)$">
 	<IfModule mod_headers.c>
 		Header set Pragma no-cache
 		Header set Cache-Control no-cache
 		Header set Expires "Thu, 12 Oct 1989 00:00:00 GMT"
 	</IfModule>
 </Files>
-<files ~ "(^config\.php$|\.(ini|log|dat|json|inc)$)">
+<files ~ "(?i)(^config\.php$|\.(ini|log|dat|json|inc)$)">
 	Require all denied
 </files>
 <Files "manifest.json">
