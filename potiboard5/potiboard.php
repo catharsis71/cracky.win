@@ -3,8 +3,8 @@
 
 // POTI-board EVO
 // バージョン :
-const POTI_VER = 'v6.69.2';
-const POTI_LOT = 'lot.20250324';
+const POTI_VER = 'v6.71.0';
+const POTI_LOT = 'lot.20250327';
 
 /*
   (C) 2018-2025 POTI改 POTI-board redevelopment team
@@ -1051,7 +1051,7 @@ function regist(): void {
 	//ログ読み込み
 	chmod(LOGFILE,PERMISSION_FOR_LOG);
 	$fp=fopen(LOGFILE,"r+");
-	flock($fp, LOCK_EX);
+	file_lock($fp, LOCK_EX);
 	$buf = get_buffer_from_fp($fp);
 	if(!$buf){error(MSG019,$dest);}
 	$buf = charconvert($buf);
@@ -1234,7 +1234,7 @@ function regist(): void {
 	chmod(TREEFILE,PERMISSION_FOR_LOG);
 	$tp=fopen(TREEFILE,"r+");
 	stream_set_write_buffer($tp, 0);
-	flock($tp, LOCK_EX); //*
+	file_lock($tp, LOCK_EX);
 	$buf = get_buffer_from_fp($tp);
 	if(!$buf){error(MSG023);}
 	$line = explode("\n", trim($buf));
@@ -1353,7 +1353,7 @@ function h_decode($str): string {
 function treedel($delno): bool {
 	chmod(TREEFILE,PERMISSION_FOR_LOG);
 	$fp=fopen(TREEFILE,"r+");
-	flock($fp, LOCK_EX);
+	file_lock($fp, LOCK_EX);
 	$buf = get_buffer_from_fp($fp);
 	if(!$buf){error(MSG024);}
 	$line = explode("\n", trim($buf));
@@ -1421,7 +1421,7 @@ function userdel(): void {
 	$pwd = $pwd ? $pwd : newstring($pwdc);
 	chmod(LOGFILE,PERMISSION_FOR_LOG);
 	$fp=fopen(LOGFILE,"r+");
-	flock($fp, LOCK_EX);
+	file_lock($fp, LOCK_EX);
 	$buf = get_buffer_from_fp($fp);
 	if(!$buf){error(MSG027);}
 	$buf = charconvert($buf);
@@ -1506,7 +1506,7 @@ function admindel($pass): void {
 			'srcname' => "",
 		] ;
 		list($name,) = separateNameAndTrip($name);
-		$res['now']  = preg_replace("/( ID:.*)/","",$date);//ID以降除去
+		$res['now']  = preg_replace("/ ID:.*/","",$date);//ID以降除去
 		$res['name'] = strip_tags($name);//タグ除去
 		$res['sub'] = strip_tags($sub);
 		if(strlen($res['name']) > 10) $res['name'] = mb_strcut($res['name'],0,9).".";
@@ -1542,7 +1542,7 @@ function admindel($pass): void {
 	if(is_array($del)){
 		chmod(LOGFILE,PERMISSION_FOR_LOG);
 		$fp=fopen(LOGFILE,"r+");
-		flock($fp, LOCK_EX);
+		file_lock($fp, LOCK_EX);
 		$buf = get_buffer_from_fp($fp);
 		if(!$buf){error(MSG030);}
 		$buf = charconvert($buf);
@@ -2306,7 +2306,7 @@ function editform(): void {
 
 	$pwd = $pwd ? $pwd : $pwdc;
 	$fp=fopen(LOGFILE,"r");
-	flock($fp, LOCK_EX);
+	file_lock($fp, LOCK_EX);
 	$buf = get_buffer_from_fp($fp);
 	if(!$buf){error(MSG019);}
 	$buf = charconvert($buf);
@@ -2424,7 +2424,7 @@ function rewrite(): void {
 	//ログ読み込み
 	chmod(LOGFILE,PERMISSION_FOR_LOG);
 	$fp=fopen(LOGFILE,"r+");
-	flock($fp, LOCK_EX);
+	file_lock($fp, LOCK_EX);
 	$buf = get_buffer_from_fp($fp);
 	if(!$buf){error(MSG019);}
 	$buf = charconvert($buf);
@@ -2552,7 +2552,7 @@ function replace($no="",$pwd="",$repcode="",$java=""): void {
 	//ログ読み込み
 	chmod(LOGFILE,PERMISSION_FOR_LOG);
 	$fp=fopen(LOGFILE,"r+");
-	flock($fp, LOCK_EX);
+	file_lock($fp, LOCK_EX,['paintcom'=>true]);
 	$buf = get_buffer_from_fp($fp);
 	if(!$buf){error(MSG019);}
 	$buf = charconvert($buf);
@@ -2878,16 +2878,20 @@ function create_formatted_text_from_post($com,$name,$email,$url,$sub,$fcolor,$de
 	$url = str_replace(",", "", $url);
 
 	//トリップ(名前の後ろの#と文字列をもとに生成)
-	if(preg_match("/(#|＃)(.*)/",$name,$regs)){
-		$cap = $regs[2];
+	if(preg_match("/(.*?)(#|＃)(.*)/",$name,$regs)){
+		$cap = $regs[3];
 		$cap=strtr($cap,"&amp;", "&");
 		$cap=strtr($cap,"&#44;", ",");
-		$name=preg_replace("/(#|＃)(.*)/","",$name);
-		$salt=substr($cap."H.",1,2);
-		$salt=preg_replace("/[^\.-z]/",".",$salt);
-		$salt=strtr($salt,":;<=>?@[\\]^_`","ABCDEFGabcdef");
-		$trip="◆".substr(crypt($cap,$salt),-10);
-		$trip = strtr($trip,"!\"#$%&'()+,/:;<=>?@[\\]^`/{|}~\t","ABCDEFGHIJKLMNOabcdefghijklmno");
+		$name = $regs[1];
+		$trip = "";
+		if($cap){
+			$salt=substr($cap."H.",1,2);
+			$salt=preg_replace("/[^\.-z]/",".",$salt);
+			$salt=strtr($salt,":;<=>?@[\\]^_`","ABCDEFGabcdef");
+			$trip="◆".substr(crypt($cap,$salt),-10);
+			$trip = strtr($trip,"!\"#$%&'()+,/:;<=>?@[\\]^`/{|}~\t","ABCDEFGHIJKLMNOabcdefghijklmno");
+		}
+		if(!$name) $name=DEF_NAME;
 		$name.=$trip;
 	}
 
@@ -3311,8 +3315,8 @@ function saveimage(): void {
  * @return array
  */
 function separateDatetimeAndId ($date): array {
-	if (preg_match("/( ID:)(.*)/", $date, $regs)){
-		return [$regs[2], preg_replace("/( ID:.*)/","",$date)];
+	if (preg_match("/(.+) ID:(.*)/", $date, $regs)){
+		return [$regs[2],$regs[1]];
 	}
 	return ['', $date];
 }
@@ -3324,8 +3328,8 @@ function separateDatetimeAndId ($date): array {
  */
 function separateNameAndTrip ($name): array {
 	$name=strip_tags($name);//タグ除去
-	if(preg_match("/(◆.*)/", $name, $regs)){
-		return [preg_replace("/(◆.*)/","",$name), $regs[1]];
+	if(preg_match("/(.*)(◆.*)/", $name, $regs)){
+		return [$regs[1], $regs[2]];
 	}
 	return [$name, ''];
 }
@@ -3353,7 +3357,7 @@ function writeFile ($fp, $data): void {
 function closeFile ($fp): void {
 	if($fp){
 		fflush($fp);
-		flock($fp, LOCK_UN);
+		file_lock($fp, LOCK_UN);
 		fclose($fp);
 	}
 }
@@ -3665,6 +3669,22 @@ function make_thumbnail($imgfile,$time,$max_w,$max_h): string {
 
 	return $thumbnail;
 }
+
+//flockのラッパー関数
+function file_lock($fp, int $lock, array $options=[]): void {
+
+	global $en;
+	$flock=flock($fp, $lock);
+	if (!$flock) {
+			if($lock !== LOCK_UN){
+				if(isset($options['paintcom'])){
+					location_paintcom();//未投稿画像の投稿フォームへ
+				}
+				error($en ? 'Failed to lock the file.' : 'ファイルのロックに失敗しました。');
+		}
+	}
+}
+
 //filter_input のラッパー関数
 function filter_input_data(string $input, string $key, int $filter=0) {
 	// $_GETまたは$_POSTからデータを取得
