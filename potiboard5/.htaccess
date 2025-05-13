@@ -1,15 +1,15 @@
-<If "%{HTTP_HOST} != 'catharsisqs4vi43ml3axj3x5akpimxislcidk7nwb6iol7pn4co4rqd.onion'">
+<If "%{HTTP_HOST} !~ m#.onion#i">
   SSLRequireSSL
 </If>
 
-<Files ~ "(?i)\.(php|html?)$">
+<Files ~ "\.(html|php)?$">
 	<IfModule mod_headers.c>
 		Header set Pragma no-cache
 		Header set Cache-Control no-cache
 		Header set Expires "Thu, 12 Oct 1989 00:00:00 GMT"
 	</IfModule>
 </Files>
-<files ~ "(?i)(^config\.php$|\.(ini|log|dat|json|inc)$)">
+<files ~ "(^config\.php$|\.(ini|log|dat|json)$)">
 	Require all denied
 </files>
 <Files "manifest.json">
