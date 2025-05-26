@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 var Neo = function () {};
 
-Neo.version = "1.6.15";
+Neo.version = "1.6.17";
 Neo.painter;
 Neo.fullScreen = false;
 Neo.uploaded = false;
@@ -247,6 +247,7 @@ Neo.initConfig = function (applet) {
   Neo.reservePen = Neo.clone(Neo.config.reserves[0]);
   Neo.reserveEraser = Neo.clone(Neo.config.reserves[1]);
 };
+
 document.addEventListener("DOMContentLoaded", () => {
   // ピンチズーム検出
   Neo.isPinchZooming = function () {
@@ -270,13 +271,13 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
+  const elementNeo = document.getElementById("NEO");
   // グリッド部分の touchmove イベントをキャンセルする関数をイベントリスナーに追加
   Neo.add_touch_move_grid_control = function () {
     if (Neo.config.neo_disable_grid_touch_move) {
       // すでにリスナーが追加されていない場合のみ追加
-      const elementNeo = document.getElementById("NEO");
-      if (!elementNeo._touchMoveListenerAdded) {
-        elementNeo.addEventListener("touchmove", Neo.touch_move_grid_control, {
+      if (!elementNeo?._touchMoveListenerAdded) {
+        elementNeo?.addEventListener("touchmove", Neo.touch_move_grid_control, {
           passive: false,
         });
         elementNeo._touchMoveListenerAdded = true; // リスナーが追加されたことを記録
@@ -285,11 +286,10 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   // グリッド部分の touchmove イベントをキャンセルする関数の追加とリムーブ
-  document.getElementById("NEO").addEventListener("touchmove", function (e) {
+  elementNeo?.addEventListener("touchmove", function (e) {
     if (Neo.config.neo_disable_grid_touch_move) {
       Neo.add_touch_move_grid_control();
       if (Neo.isPinchZooming()) {
-        const elementNeo = document.getElementById("NEO");
         elementNeo.removeEventListener(
           "touchmove",
           Neo.touch_move_grid_control,
@@ -301,7 +301,6 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
   });
-
   // 初期化
   Neo.add_touch_move_grid_control();
 });
@@ -983,7 +982,7 @@ Neo.isMobile = function () {
 };
 
 Neo.showWarning = function () {
-  var futaba = location.hostname.match(/^(?:.+\.)?2chan\.net$/i);//サブドメインありなし両方に対応
+  var futaba = location.hostname.match(/^(?:.+\.)?2chan\.net$/i); //サブドメインありなし両方に対応
   var samplebbs = location.hostname.match(/^(?:.+\.)?neo\.websozai\.jp$/i);
 
   var chrome = navigator.userAgent.match(/Chrome\/(\d+)/i);
@@ -1314,7 +1313,7 @@ Neo.submit = function (board, blob, thumbnail, thumbnail2) {
               Neo.submitButton.enable();
               return alert(text.replace(/^error\n/m, ""));
             }
-            if(Neo.config.neo_validate_exact_ok_text_in_response === "true") {
+            if (Neo.config.neo_validate_exact_ok_text_in_response === "true") {
               if (text !== "ok") {
                 Neo.submitButton.enable();
                 return alert(
@@ -1346,34 +1345,36 @@ Neo.submit = function (board, blob, thumbnail, thumbnail2) {
         } else {
           Neo.submitButton.enable();
           const response_status = response.status;
-          let httpErrorMessag="";
+          let httpErrorMessag = "";
           switch (response_status) {
             case 400:
-                httpErrorMessag = "Bad Request";
-                break;
+              httpErrorMessag = "Bad Request";
+              break;
             case 401:
-                httpErrorMessag = "Unauthorized";
-                break;
+              httpErrorMessag = "Unauthorized";
+              break;
             case 403:
-                httpErrorMessag = "Forbidden";
-                break;
+              httpErrorMessag = "Forbidden";
+              break;
             case 404:
-                httpErrorMessag = "Not Found";
-                break;
+              httpErrorMessag = "Not Found";
+              break;
             case 500:
-                httpErrorMessag = "Internal Server Error";
-                break;
+              httpErrorMessag = "Internal Server Error";
+              break;
             case 502:
-                httpErrorMessag = "Bad gateway";
-                break;
+              httpErrorMessag = "Bad Gateway";
+              break;
             case 503:
-                httpErrorMessag = "Service Unavailable";
-                break;
+              httpErrorMessag = "Service Unavailable";
+              break;
             default:
-                httpErrorMessag = "Unknown Error";
-                break;
-        }
-            return alert(`${Neo.translate("HTTPステータスコード")} ${response_status} : ${httpErrorMessag}\n${errorMessage}${Neo.translate("投稿に失敗。時間を置いて再度投稿してみてください。")}`);
+              httpErrorMessag = "Unknown Error";
+              break;
+          }
+          return alert(
+            `${Neo.translate("HTTPステータスコード")} ${response_status} : ${httpErrorMessag}\n${errorMessage}${Neo.translate("投稿に失敗。時間を置いて再度投稿してみてください。")}`,
+          );
         }
       })
       .catch((error) => {
@@ -1635,11 +1636,10 @@ Neo.dictionary = {
     既: "M",
     鈍: "L",
     "投稿に失敗。時間を置いて再度投稿してみてください。":
-    "Please push send button again.",
-    "HTTPステータスコード":
-    "HTTP status code",
+      "Please push send button again.",
+    HTTPステータスコード: "HTTP status code",
     "レイヤー情報は保存されません。\n続行してよろしいですか?":
-    "Layer information will not be saved.\nAre you sure you want to continue?",
+      "Layer information will not be saved.\nAre you sure you want to continue?",
   },
   enx: {
     やり直し: "Redo",
@@ -1698,10 +1698,9 @@ Neo.dictionary = {
     鈍: "L",
     "投稿に失敗。時間を置いて再度投稿してみてください。":
       "Failed to upload image. please try again.",
-    "HTTPステータスコード":
-    "HTTP status code",
+    HTTPステータスコード: "HTTP status code",
     "レイヤー情報は保存されません。\n続行してよろしいですか?":
-    "Layer information will not be saved.\nAre you sure you want to continue?",
+      "Layer information will not be saved.\nAre you sure you want to continue?",
   },
   es: {
     やり直し: "Rehacer",
@@ -1759,11 +1758,10 @@ Neo.dictionary = {
     既: "M",
     鈍: "L",
     "投稿に失敗。時間を置いて再度投稿してみてください。":
-    "No se pudo cargar la imagen. por favor, inténtalo de nuevo.",
-    "HTTPステータスコード":
-    "Código de estado HTTP",
+      "No se pudo cargar la imagen. por favor, inténtalo de nuevo.",
+    HTTPステータスコード: "Código de estado HTTP",
     "レイヤー情報は保存されません。\n続行してよろしいですか?":
-    "La información de las capas no se guardará.\n¿Está seguro de que desea continuar?",
+      "La información de las capas no se guardará.\n¿Está seguro de que desea continuar?",
   },
 };
 
@@ -7046,16 +7044,24 @@ Neo.initViewer = function (pch) {
   };
 
   painter.addEventListener(
-    "mousedown",
+    "pointerdown",
     function () {
       Neo.painter._actionMgr.isMouseDown = true;
     },
     false,
   );
+  painter.addEventListener(
+    "touchmove",
+    function (e) {
+      e.preventDefault();
+    },
+    { passive: false, capture: false },
+  );
 
   document.addEventListener(
-    "mousemove",
+    "pointermove",
     function (e) {
+      e.preventDefault();
       if (Neo.painter._actionMgr.isMouseDown) {
         var zoom = Neo.painter.zoom;
         var x = Neo.painter.zoomX - e.movementX / zoom;
@@ -7063,10 +7069,10 @@ Neo.initViewer = function (pch) {
         Neo.painter.setZoomPosition(x, y);
       }
     },
-    false,
+    { passive: false, capture: false },
   );
   document.addEventListener(
-    "mouseup",
+    "pointerup",
     function () {
       Neo.painter._actionMgr.isMouseDown = false;
       Neo.viewerBar.isMouseDown = false;
@@ -8779,11 +8785,12 @@ Neo.ViewerBar.prototype.init = function (name, params) {
   this.seek = 0;
 
   var ref = this;
-  this.element.onmousedown = function (e) {
+  this.element.onpointerdown = function (e) {
     ref.isMouseDown = true;
     ref._touchHandler(e);
   };
-  this.element.onmousemove = function (e) {
+  this.element.onpointermove = function (e) {
+    e.preventDefault();
     if (ref.isMouseDown) {
       ref._touchHandler(e);
     }
@@ -8816,9 +8823,12 @@ Neo.ViewerBar.prototype.update = function () {
 };
 
 Neo.ViewerBar.prototype._touchHandler = function (e) {
+  if (e.offsetX === undefined) {
+    return;
+  }
+
   var x = e.offsetX / this.width;
   x = Math.max(Math.min(x, 1), 0);
-
   Neo.painter._actionMgr._mark = Math.round(x * this.length);
   //this.update();
   //  console.log('mark=', this.mark, 'head=', Neo.painter._actionMgr._head);

@@ -3,8 +3,8 @@
 
 // POTI-board EVO
 // バージョン :
-const POTI_VER = 'v6.71.0';
-const POTI_LOT = 'lot.20250327';
+const POTI_VER = 'v6.76.3';
+const POTI_LOT = 'lot.20250525';
 
 /*
   (C) 2018-2025 POTI改 POTI-board redevelopment team
@@ -64,9 +64,11 @@ if(USE_CHEERPJ_OLD_VERSION){//2.3
 	define('CHEERPJ_HASH','sha384-1s6C2I0gGJltmNWfLfzHgXW5Dj4JB4kQTpnS37fU6CaQR/FrYG219xbhcAFRcHKE');
 	define('CHEERPJ_PRELOAD','');
 }else{//cj3
-	define('CHEERPJ_URL','https://cjrtnc.leaningtech.com/3_20250317_627/cj3loader.js');
-	define('CHEERPJ_HASH','sha384-Gktch8f4Bz1CImPunwHa96WmqMngIXVkCnlyJCQtPldjKqLpIlwGiuLXaTq9hfYN');
-	define('CHEERPJ_PRELOAD','{"/lt/8/jre/lib/cheerpj-awt.jar":[0,131072],"/lt/8/jre/lib/rt.jar":[0,131072,9699328,11010048,11272192,11534336,11665408,12189696,12320768,12451840,15204352,15335424,15466496,15597568,15990784,16384000,16777216,16908288,17039360,17563648,17694720,17825792,18087936,18612224,18743296,18874368,19005440,19136512,19529728,19660800,20185088,20316160,20840448,26869760],"/lt/etc/passwd":[0,131072],"/lt/8/lib/ext/meta-index":[0,131072],"/lt/8/jre/lib/jsse.jar":[0,131072,786432,917504],"/lt/8/jre/lib/jce.jar":[0,131072],"/lt/8/jre/lib/charsets.jar":[0,131072,1703936,1835008],"/lt/8/jre/lib/resources.jar":[0,131072,917504,1179648],"/lt/8/jre/lib/javaws.jar":[0,131072,1441792,1703936],"/lt/8/jre/lib/meta-index":[0,131072],"/lt/8/lib/security/java.security":[0,131072],"/lt/8/lib/security/java.policy":[0,131072],"/lt/etc/localtime":[],"/lt/etc/resolv.conf":[0,131072],"/lt/fc/fonts/fonts.conf":[0,131072],"/lt/fc/cache/e21edda6a7db77f35ca341e0c3cb2a22-le32d8.cache-7":[0,131072],"/lt/8/lib/ext":[],"/lt/8/lib/ext/index.list":[],"/lt/8/lib/ext/localedata.jar":[],"/lt/8/lib/ext/sunjce_provider.jar":[],"/lt/8/jre/lib":[],"/lt/8/lib/accessibility.properties":[],"/lt/8/lib/fonts/LucidaSansRegular.ttf":[],"/lt/fc/ttf/LiberationSans-Regular.ttf":[0,131072,262144,393216],"/lt/8/lib/ext/*":[],"/lt/etc/hosts":[],"/lt/8/lib/fonts/badfonts.txt":[],"/lt/8/lib/fonts":[],"/lt/8/lib/fonts/fallback":[],"/lt/fc/ttf":[]}');
+	define('CHEERPJ_URL','https://cjrtnc.leaningtech.com/3_20250509_1325/loader.js');
+	define('CHEERPJ_HASH','sha384-uKhK9NUHrSpoCfjhgnQkV7vDjOB6IhQZY1esOxD+TF1yvLbbJS/DRhX7g6ATh/wX');
+	define('CHEERPJ_PRELOAD','{preloadResources:
+	{"/lt/8/lib/ext/meta-index":[0,131072],"/lt/8/jre/lib/rt.jar":[0,131072,9699328,11010048,11272192,11534336,11665408,12189696,12320768,12451840,15204352,15335424,15466496,15597568,15990784,16384000,16777216,16908288,17039360,17563648,17694720,17825792,18087936,18612224,18743296,18874368,19005440,19136512,19529728,19660800,20185088,20316160,20840448,21757952,21889024,26869760],"/lt/8/jre/lib/cheerpj-awt.jar":[0,131072],"/lt/8/jre/lib/jsse.jar":[0,131072,786432,917504],"/lt/8/jre/lib/jce.jar":[0,131072],"/lt/etc/users":[0,131072],"/lt/8/jre/lib/charsets.jar":[0,131072,1703936,1835008],"/lt/8/jre/lib/resources.jar":[0,131072,917504,1179648],"/lt/8/jre/lib/javaws.jar":[0,131072,1441792,1703936],"/lt/8/jre/lib/meta-index":[0,131072],"/lt/8/lib/security/java.security":[0,131072],"/lt/8/lib/security/java.policy":[0,131072],"/lt/etc/resolv.conf":[0,131072],"/lt/fc/fonts/fonts.conf":[0,131072],"/lt/fc/cache/e21edda6a7db77f35ca341e0c3cb2a22-le32d8.cache-7":[0,131072],"/lt/etc/localtime":[],"/lt/8/lib/ext":[],"/lt/fc/ttf/LiberationSans-Regular.ttf":[0,131072,262144,393216],"/lt/8/lib/ext/index.list":[],"/lt/8/lib/ext/localedata.jar":[],"/lt/8/lib/ext/sunec.jar":[],"/lt/8/lib/ext/sunjce_provider.jar":[],"/lt/8/lib/ext/zipfs.jar":[],"/lt/8/jre/lib":[],"/lt/8/lib/accessibility.properties":[],"/lt/8/lib/fonts/LucidaSansRegular.ttf":[],"/lt/8/lib/ext/*":[],"/lt/etc/hosts":[],"/lt/8/lib/fonts/badfonts.txt":[],"/lt/8/lib/fonts":[],"/lt/8/lib/fonts/fallback":[],"/lt/fc/ttf":[]}
+	}');
 }
 define('CHEERPJ_DEBUG','{ enableDebug: true }');
 define('CHEERPJ_DEBUG_MODE',0);
@@ -228,6 +230,7 @@ defined("MSG049") or define("MSG049", "拒絶されました。");
 defined("MSG050") or define("MSG050", "Cookieが確認できません。");
 defined("MSG051") or define("MSG051", "連続したパスワードの誤入力を検知したためロックしています。");
 defined("MSG052") or define("MSG052", "ログファイルのファイルサイズが制限値を超過したため処理を停止しました。");
+defined("MSG053") or define("MSG053", "少し待ってください。");
 
 $ADMIN_PASS= $ADMIN_PASS ?? false;
 if(!$ADMIN_PASS){
@@ -239,7 +242,7 @@ if(!defined('LOG_MAX')|| !LOG_MAX || !is_numeric(LOG_MAX)){
 }
 
 if(X_FRAME_OPTIONS_DENY){
-	header('X-Frame-Options: DENY');//フレーム内への表示を拒否
+	header("Content-Security-Policy: frame-ancestors 'none';");//フレーム内への表示を拒否
 }
 
 //POSTから変数を取得
@@ -251,11 +254,11 @@ $pwd = (string)newstring(filter_input_data('POST', 'pwd'));
 $type = (string)newstring(filter_input_data('POST', 'type'));
 $admin = (string)filter_input_data('POST', 'admin');
 $pass = (string)newstring(filter_input_data('POST', 'pass'));
-//INPUT_GETから変数を取得
+//GETから変数を取得
 
 $res = (string)filter_input_data('GET', 'res',FILTER_VALIDATE_INT);
 
-//INPUT_COOKIEから変数を取得
+//COOKIEから変数を取得
 
 $usercode = (string)filter_input_data('COOKIE', 'usercode');//nullならuser-codeを発行
 
@@ -281,7 +284,7 @@ $_SESSION['usercode']=$usercode;
 switch($mode){
 	case 'regist':
 		if(DIARY && !$resto){
-			if(!$pwd||($pwd !== $ADMIN_PASS)){
+			if(!is_adminpass($pwd)){
 				error(MSG029);
 			}
 			$admin=$pwd;
@@ -291,12 +294,21 @@ switch($mode){
 
 		if(!$pass){
 			$dat['admin_in'] = true;
+
+			//フォームの表示時刻をセット
+			set_form_display_time();
+
 			return htmloutput(OTHERFILE,$dat);
 		}
 		check_same_origin(true);
+
+		//投稿間隔をチェック
+		check_submission_interval();
+
 		check_password_input_error_count();
-		if(!$pass || ($pass !== $ADMIN_PASS)) 
-		error(MSG029);
+		if(!is_adminpass($pass)){ 
+			error(MSG029);
+		}
 	
 		if($admin==="del") return admindel($pass);
 		if($admin==="post"){
@@ -304,6 +316,10 @@ switch($mode){
 			$dat['regist'] = true;
 			$dat = array_merge($dat,form($res));
 			$dat = array_merge($dat,form_admin_in('valid'));
+
+			//フォームの表示時刻をセット
+			set_form_display_time();
+
 			return htmloutput(OTHERFILE,$dat);
 		}
 		if($admin==="update"){
@@ -336,6 +352,10 @@ switch($mode){
 		$dat['post_mode'] = true;
 		$dat['regist'] = true;
 		$dat = array_merge($dat,form());
+
+		//フォームの表示時刻をセット
+		set_form_display_time();
+
 		return htmloutput(OTHERFILE,$dat);
 	case 'edit':
 		return editform();
@@ -407,7 +427,7 @@ function check_csrf_token(): void {
 	session_sta();
 	$token=(string)filter_input_data('POST','token');
 	$session_token= $_SESSION['token'] ?? '';
-	if(!$session_token||$token!==$session_token){
+	if(!$token||!$session_token||!hash_equals($session_token,$token)){
 		error(MSG006);
 	}
 }
@@ -494,7 +514,6 @@ function basicpart(): array {
 function form($resno="",$tmp=[]): array {
 	global $addinfo;
 	global $fontcolors,$qualitys;
-	global $ADMIN_PASS;
 
 	//csrfトークンをセット
 	$dat['token']= get_csrf_token();
@@ -819,6 +838,9 @@ function res($resno = 0): void {
 		}
 		$dat['view_other_works']=$view_other_works;
 	}
+	//フォームの表示時刻をセット
+	set_form_display_time();
+
 	htmloutput(RESFILE,$dat);
 }
 
@@ -887,11 +909,13 @@ function similar_str($str1,$str2): int {
 
 // 記事書き込み
 function regist(): void {
-	global $path,$temppath,$usercode,$ADMIN_PASS;
+	global $path,$temppath,$usercode;
 	
 	check_log_size_limit();//ログファイルのファイルサイズをチェック
 	//CSRFトークンをチェック
 	check_csrf_token();
+	//投稿間隔をチェック
+	check_submission_interval(3);//投稿間隔を3秒に設定
 
 	$admin = (string)filter_input_data('POST', 'admin');
 	$resto = (string)filter_input_data('POST', 'resto',FILTER_VALIDATE_INT);
@@ -1000,8 +1024,8 @@ function regist(): void {
 	if($pictmp2){
 			copy($upfile, $dest);
 		} else{//フォームからのアップロード
-			if(!USE_IMG_UPLOAD && (!$admin||$admin!==$ADMIN_PASS)){//アップロード禁止で管理画面からの投稿ではない時
-				error(MSG006,$upfile);
+			if(!USE_IMG_UPLOAD && !is_adminpass($admin)){//アップロード禁止で管理画面からの投稿ではない時
+				error(MSG049,$upfile);
 			}
 			if(!preg_match('/\A(jpe?g|jfif|gif|png|webp)\z/i', pathinfo($upfile_name, PATHINFO_EXTENSION))){//もとのファイル名の拡張子
 				error(MSG004,$upfile);
@@ -1033,7 +1057,7 @@ function regist(): void {
 	$date = str_replace(",", "&#44;", $date);
 	$ptime = str_replace(",", "&#44;", $ptime);
 
-	if(!$resto&&DENY_COMMENTS_ONLY&&!$is_file_dest&&(!$admin||$admin!==$ADMIN_PASS)) error(MSG039,$dest);
+	if(!$resto&&DENY_COMMENTS_ONLY&&!$is_file_dest&& !is_adminpass($admin)) error(MSG039,$dest);
 	if(strlen($resto) > 10) error(MSG015,$dest);
 
 	//フォーマット
@@ -1319,7 +1343,7 @@ function regist(): void {
 	defined('NOTICE_MAIL_NEWPOST') or define('NOTICE_MAIL_NEWPOST', '新規投稿がありました');
 
 	if(is_file(NOTICEMAIL_FILE)	//メール通知クラスがある場合
-	&& !(NOTICE_NOADMIN && $pwd && ($pwd === $ADMIN_PASS))){//管理者の投稿の場合メール出さない
+	&& !(NOTICE_NOADMIN && is_adminpass($pwd))){//管理者の投稿の場合メール出さない
 		require(__DIR__.'/'.NOTICEMAIL_FILE);
 		$name = h_decode($name);
 		$sub = h_decode($sub);
@@ -1644,7 +1668,7 @@ function check_dir ($path): void {
 
 // お絵かき画面
 function paintform(): void {
-	global $qualitys,$usercode,$ADMIN_PASS,$pallets_dat;
+	global $qualitys,$usercode,$pallets_dat;
 
 	check_log_size_limit();//ログファイルのファイルサイズをチェック
 	check_same_origin();
@@ -1696,7 +1720,7 @@ function paintform(): void {
 
 	$dat['parameter_day']=date("Ymd");//JavaScriptのキャッシュ制御
 	//pchファイルアップロードペイント
-	if($admin&&($admin===$ADMIN_PASS)){
+	if(is_adminpass($admin)){
 		
 		$pchtmp= $_FILES['pch_upload']['tmp_name'] ?? '';
 		if(isset($_FILES['pch_upload']['error']) && in_array($_FILES['pch_upload']['error'],[1,2])){//容量オーバー
@@ -1946,6 +1970,7 @@ function paintform(): void {
 // お絵かきコメント 
 function paintcom(): void {
 	global $usercode;
+	
 	$userip = get_uip();
 	$host = $userip ? gethostbyaddr($userip) : '';
 
@@ -2008,6 +2033,9 @@ function paintcom(): void {
 	}
 
 	$dat = array_merge($dat,form($resto,$tmp));
+
+	//フォームの表示時刻をセット
+	set_form_display_time();
 
 	htmloutput(OTHERFILE,$dat);
 }
@@ -2209,6 +2237,9 @@ function incontinue(): void {
 	}
 	$dat['addinfo'] = $addinfo;
 
+	//フォームの表示時刻をセット
+	set_form_display_time();
+
 	htmloutput(PAINTFILE,$dat);
 }
 
@@ -2216,6 +2247,8 @@ function incontinue(): void {
 function check_cont_pass(): void {
 
 	check_same_origin(true);
+	//投稿間隔をチェック
+	check_submission_interval();
 
 	$no = (string)filter_input_data('POST', 'no',FILTER_VALIDATE_INT);
 	$pwd = (string)newstring(filter_input_data('POST', 'pwd'));
@@ -2327,7 +2360,7 @@ function editform(): void {
 	if(!$flag) {
 		error(MSG028);
 	}
-	if((!$pwd || $pwd!==$ADMIN_PASS) && !check_elapsed_days($time,$logver)){//指定日数より古い記事の編集はエラーにする
+	if(!is_adminpass($pwd) && !check_elapsed_days($time,$logver)){//指定日数より古い記事の編集はエラーにする
 			error(MSG028);
 	}
 
@@ -2340,7 +2373,7 @@ function editform(): void {
 	
 	$dat['post_mode'] = true;
 	$dat['rewrite'] = $no;
-	$dat['admin'] =($pwd && ($pwd===$ADMIN_PASS)) ? h($ADMIN_PASS):'';
+	$dat['admin'] = is_adminpass($pwd) ? h($ADMIN_PASS):'';
 	$dat['maxbyte'] = 0;//編集画面
 	$dat['maxkb']   = 0;
 	$dat['addinfo'] = $addinfo;
@@ -2376,7 +2409,6 @@ function editform(): void {
 
 // 記事上書き
 function rewrite(): void {
-	global $ADMIN_PASS;
 
 	//CSRFトークンをチェック
 	check_csrf_token();
@@ -2455,7 +2487,7 @@ function rewrite(): void {
 		closeFile($fp);
 		error(MSG028);
 	}
-	if((!$admin || $admin!==$ADMIN_PASS) && !check_elapsed_days($time,$logver)){//指定日数より古い記事の編集はエラーにする
+	if(!is_adminpass($admin) && !check_elapsed_days($time,$logver)){//指定日数より古い記事の編集はエラーにする
 		closeFile($fp);
 		error(MSG028);
 	}
@@ -2789,9 +2821,9 @@ function charconvert($str): string {
 
 // NGワードがあれば拒絶
 function Reject_if_NGword_exists_in_the_post(): void {
-	global $badstring,$badname,$badurl,$badstr_A,$badstr_B,$pwd,$ADMIN_PASS,$admin;
+	global $badstring,$badname,$badurl,$badstr_A,$badstr_B;
 
-	if(($_SERVER["REQUEST_METHOD"]) !== "POST") error(MSG006);
+	if(($_SERVER["REQUEST_METHOD"]) !== "POST") error(MSG049);
 
 	$com = (string)filter_input_data('POST', 'com');
 	$name = (string)filter_input_data('POST', 'name');
@@ -2799,6 +2831,7 @@ function Reject_if_NGword_exists_in_the_post(): void {
 	$url = (string)filter_input_data('POST', 'url',FILTER_VALIDATE_URL);
 	$sub = (string)filter_input_data('POST', 'sub');
 	$pwd = (string)filter_input_data('POST', 'pwd');
+	$admin = (string)filter_input_data('POST', 'admin');
 
 	$com_len=strlen((string)$com);
 	$name_len=strlen((string)$name);
@@ -2828,7 +2861,7 @@ function Reject_if_NGword_exists_in_the_post(): void {
 		if ($com_len && !preg_match("/[ぁ-んァ-ヶｧ-ﾝー一-龠]+/u",$chk_com)) error(MSG035);
 	}
 	//本文へのURLの書き込みを禁止
-	if(!(($pwd&&$pwd===$ADMIN_PASS)||($admin&&($admin===$ADMIN_PASS)))){//どちらも一致しなければ
+	if(!(is_adminpass($pwd)||is_adminpass($admin))){//どちらも一致しなければ
 		if(DENY_COMMENTS_URL && preg_match('/:\/\/|\.co|\.ly|\.gl|\.net|\.org|\.cc|\.ru|\.su|\.ua|\.gd/i', $com)) error(MSG036);
 	}
 
@@ -3399,10 +3432,9 @@ function get_lineindex ($line): array {
 }
 
 function check_password ($pwd, $hash, $adminPass = false): bool {
-	global $ADMIN_PASS;
 	return
 		($pwd && (password_verify($pwd, $hash)))
-		|| ($adminPass && $ADMIN_PASS && ($adminPass === $ADMIN_PASS)); // 管理パスを許可する場合
+		|| is_adminpass($adminPass); // 管理パスを許可する場合
 }
 function is_neo($src):bool {//neoのPCHかどうか調べる
 	$fp = fopen("$src", "rb");
@@ -3566,7 +3598,6 @@ function check_log_size_limit(): void {
 
 //パスワードを5回連続して間違えた時は拒絶
 function check_password_input_error_count(): void {
-	global $ADMIN_PASS;
 	$file=__DIR__.'/templates/errorlog/error.log';
 	if(!CHECK_PASSWORD_INPUT_ERROR_COUNT){
 		return;
@@ -3577,7 +3608,7 @@ function check_password_input_error_count(): void {
 	if(count($arr_err)>=5){
 		error(MSG051);
 	}
-if(!$ADMIN_PASS || $ADMIN_PASS!==filter_input_data('POST','pass')){
+if(!is_adminpass(filter_input_data('POST','pass'))){
 	$errlog=$userip."\n";
 	file_put_contents($file,$errlog,FILE_APPEND);
 	chmod($file,0600);
@@ -3670,6 +3701,15 @@ function make_thumbnail($imgfile,$time,$max_w,$max_h): string {
 	return $thumbnail;
 }
 
+function is_adminpass($pwd):bool {
+	global $ADMIN_PASS;
+	if($ADMIN_PASS && $pwd && hash_equals($ADMIN_PASS,$pwd)){
+		return true;
+	}
+	return false;
+
+}
+
 //flockのラッパー関数
 function file_lock($fp, int $lock, array $options=[]): void {
 
@@ -3712,5 +3752,26 @@ function filter_input_data(string $input, string $key, int $filter=0) {
 			return filter_var($value, FILTER_VALIDATE_URL);
 		default:
 			return $value;  // 他のフィルタはそのまま返す
+	}
+}
+
+//フォームの表示時刻をセット
+function set_form_display_time(): void {
+	session_sta();
+	$_SESSION['form_display_time'] = time();
+}
+//投稿間隔をチェック
+function check_submission_interval($min_interval=2): void {
+	// デフォルトで最低2秒の間隔を設ける
+	session_sta();
+	if (!isset($_SESSION['form_display_time'])) {
+		error(MSG049);
+	}
+	$form_display_time = $_SESSION['form_display_time'];
+	$now = time();
+
+	if (($now - $form_display_time) < $min_interval) {
+		set_form_display_time();
+		error(MSG053);
 	}
 }
