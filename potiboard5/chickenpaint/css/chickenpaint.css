@@ -1147,8 +1147,9 @@
   margin-right: 6px;
 }
 /* ゴミ箱アイコンの右のマージンを0にする */
-
-.chickenpaint .chickenpaint-layer-buttons .chickenpaint-small-toolbar-button[data-action="CPRemoveLayer"] {
+.chickenpaint .chickenpaint-layer-buttons .chickenpaint-small-toolbar-button[data-action="CPRemoveLayer"],
+.chickenpaint .chickenpaint-layer-buttons .chickenpaint-small-toolbar-button[data-action="CPRemoveLayerMask"] 
+{
 	margin-right: 0;
 }
 
@@ -1460,6 +1461,7 @@
   margin: 0 0.5rem 0 0.5rem;
   font-size: 0.8rem;
   background-color: transparent;
+  color: black;
   border: 1px solid rgba(0, 0, 0, 0.2117647059);
   border-radius: 0.25rem;
 }
@@ -1477,6 +1479,7 @@
   height: 100vh;
   height: 100dvh;
   background-color: white;
+  color: black;
   z-index: 1000;
   -webkit-touch-callout: initial;
 }

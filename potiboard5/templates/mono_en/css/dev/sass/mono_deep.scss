@@ -496,6 +496,7 @@ div#chickenpaint-parent {
     bottom: 50px;
     background: val.$button;
     opacity: 0.5;
+    visibility: hidden;
     border-radius: 50%;
 }
 
@@ -579,8 +580,7 @@ div#chickenpaint-parent {
 #search {
     body {
         margin: 8px 10px;
-        font-family: "Hiragino Sans", meiryo, ヒラギノ角ゴシック, メイリオ,
-            sans-serif;
+        font-family: sans-serif;
         font-size: 16px;
         line-height: 150%;
         color: val.$moji;
