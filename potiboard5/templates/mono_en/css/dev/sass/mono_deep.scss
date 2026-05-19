@@ -108,6 +108,7 @@ select,
 textarea {
     width: 25em;
     height: 5em;
+    margin-top: 3px;
 }
 button,
 button.copy_button,
@@ -338,7 +339,7 @@ div#chickenpaint-parent {
 }
 #appstage {
     display: table;
-    margin: 0 auto;
+    margin: 16px auto;
 }
 #appstage > div {
     display: table-cell;

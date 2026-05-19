@@ -1,12 +1,25 @@
 <?php
-//save.inc.php 2024 (c)satopian MIT Licence
+//save.inc.php 2024-2026 (c)satopian MIT Licence
 //https://paintbbs.sakura.ne.jp/
 
-$save_inc_ver=20250308;
+$save_inc_ver=20260501;
 class image_save{
 
-	private $imgfile,$en,$count,$errtext,$session_usercode; // プロパティとして宣言
-	private $tool,$repcode,$stime,$resto,$timer,$error_type,$hide_animation,$pmax_w,$pmax_h;
+	private int $security_timer;
+	private string $imgfile;
+	private bool $en;
+	/** @var string|int  */
+	private $count;
+	private ?string $session_usercode; // プロパティとして宣言
+	private ?string $tool;
+	private ?string $repcode;
+	private ?string $stime;
+	private ?string $resto;
+	private int $timer;
+	private ?string $error_type;
+	private ?string $hide_animation;
+	private int $pmax_w;
+	private int $pmax_h;
 	
 	function __construct(){
 
@@ -17,7 +30,7 @@ class image_save{
 	//容量違反チェックをする する:1 しない:0
 	defined('SIZE_CHECK') or define('SIZE_CHECK', '1');
 	//PNG画像データ投稿容量制限KB(chiは含まない)
-	defined('PICTURE_MAX_KB') or define('PICTURE_MAX_KB', '10485760');//10MBまで
+	defined('PICTURE_MAX_KB') or define('PICTURE_MAX_KB', '40960');//40MBまで
 	defined('PSD_MAX_KB') or define('PSD_MAX_KB', '40960');//40MBまで。ただしサーバのPHPの設定によって2MB以下に制限される可能性があります。
 	defined('PERMISSION_FOR_LOG') or define('PERMISSION_FOR_LOG', 0600); //config.phpで未定義なら0600
 	defined('PERMISSION_FOR_DEST') or define('PERMISSION_FOR_DEST', 0606); //config.phpで未定義なら0606
@@ -27,7 +40,7 @@ class image_save{
 		header( "Location: ./ ");
 	}
 
-	$lang = ($http_langs = isset($_SERVER['HTTP_ACCEPT_LANGUAGE']) ? $_SERVER['HTTP_ACCEPT_LANGUAGE'] : '')
+	$lang = ($http_langs = $_SERVER['HTTP_ACCEPT_LANGUAGE'] ?? '')
 	? explode( ',', $http_langs )[0] : '';
 	$this->en= (stripos($lang,'ja')!==0);
 
@@ -120,15 +133,19 @@ class image_save{
 		$this->check_async_request();
 
 		session_sta();
-		$this->session_usercode = isset($_SESSION['usercode']) ? $_SESSION['usercode'] : "";
+		$this->session_usercode = $_SESSION['usercode'] ?? "";
 		$cookie_usercode = (string)filter_input_data('COOKIE', 'usercode');
 		if(!$this->session_usercode || !$cookie_usercode || ($this->session_usercode !== $cookie_usercode)){
 			$this->error_msg($this->en ? "User code has been reissued.\nPlease try again." : "ユーザーコードを再発行しました。\n再度投稿してみてください。");
 		}
+
+		$sec_fetch_site = $_SERVER['HTTP_SEC_FETCH_SITE'] ?? '';
+		$same_origin = ($sec_fetch_site === 'same-origin');
+
 		if(!isset($_SERVER['HTTP_ORIGIN']) || !isset($_SERVER['HTTP_HOST'])){
 			$this->error_msg($this->en ? "Your browser is not supported." : "お使いのブラウザはサポートされていません。");
 		}
-		if(parse_url($_SERVER['HTTP_ORIGIN'], PHP_URL_HOST) !== $_SERVER['HTTP_HOST']){
+		if(!$same_origin && (parse_url($_SERVER['HTTP_ORIGIN'], PHP_URL_HOST) !== $_SERVER['HTTP_HOST'])){
 			$this->error_msg($this->en ? "The post has been rejected." : "拒絶されました。");
 		}
 
@@ -160,7 +177,7 @@ class image_save{
 		$this->resto = trim($this->resto);
 		$this->tool = trim($this->tool);
 		$this->tool= is_paint_tool_name($this->tool);
-		$this->hide_animation = isset($this->hide_animation) ? $this->hide_animation : ''; 
+		$this->hide_animation = isset($this->hide_animation) ? trim($this->hide_animation) : ''; 
 		$this->hide_animation = trim($this->hide_animation);
 		/* ---------- 投稿者情報記録 ---------- */
 		$userdata = "$u_ip\t$u_host\t$u_agent\t$imgext";
@@ -197,7 +214,9 @@ class image_save{
 			if(!$im_in){
 				$this->error_msg($this->en ? "The image appears to be corrupted.\nPlease consider saving a screenshot to preserve your work." : "破損した画像が検出されました。\nスクリーンショットを撮り作品を保存する事を強くおすすめします。");
 			}else{
-				ImageDestroy($im_in);
+				if(PHP_VERSION_ID < 80000) {//PHP8.0未満の時は
+					ImageDestroy($im_in);
+				}
 			}
 		}
 
@@ -216,8 +235,18 @@ class image_save{
 					//chiファイルのアップロードができなかった場合はエラーメッセージはださず、画像のみ投稿する。 
 					move_uploaded_file($_FILES['chibifile']['tmp_name'], TEMP_DIR.$this->imgfile.'.chi');
 					if(is_file(TEMP_DIR.$this->imgfile.'.chi')){
-					chmod(TEMP_DIR.$this->imgfile.'.chi',PERMISSION_FOR_DEST);
+						chmod(TEMP_DIR.$this->imgfile.'.chi',PERMISSION_FOR_DEST);
 					}
+				}
+			}
+		}
+		if(isset($_FILES['swatches']) && ($_FILES['swatches']['error'] == UPLOAD_ERR_OK)){
+			$mimetype = mime_content_type($_FILES['swatches']['tmp_name']);
+			if($mimetype==="application/x-adobe-aco" || $mimetype==="application/octet-stream"){
+				//chiファイルのアップロードができなかった場合はエラーメッセージはださず、画像のみ投稿する。 
+				move_uploaded_file($_FILES['swatches']['tmp_name'], TEMP_DIR.$this->imgfile.'.aco');
+				if(is_file(TEMP_DIR.$this->imgfile.'.aco')){
+					chmod(TEMP_DIR.$this->imgfile.'.aco',PERMISSION_FOR_DEST);
 				}
 			}
 		}
@@ -260,7 +289,7 @@ class image_save{
 		}
 	}
 
-	private function error_msg($message): void {
+	private function error_msg(?string $message): void {
 		switch ($this->error_type){
 			case "neo":
 				$errtext="error\n";

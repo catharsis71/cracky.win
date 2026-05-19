@@ -1,7 +1,7 @@
 <?php
 // Mastodon、misskey等の分散型SNSへ記事を共有するクラス
 //(c)satopian 2023-2025 MIT License
-$sns_share_inc_ver = 20250328;
+$sns_share_inc_ver = 20251031;
 class sns_share{
 
 //シェアするserverの選択画面
@@ -48,35 +48,37 @@ class sns_share{
 		$sns_server_radio_for_cookie=($sns_server_radio_for_cookie === 'direct') ? 'direct' : $sns_server_radio;
 		$sns_server_direct_input=(string)filter_input_data('POST',"sns_server_direct_input",FILTER_VALIDATE_URL);
 		$encoded_t=(string)filter_input_data('POST',"encoded_t");
-		$encoded_t=urlencode($encoded_t);
+		$encoded_t=rawurlencode($encoded_t);
 		$encoded_u=(string)filter_input_data('POST',"encoded_u");
-		$encoded_u=urlencode($encoded_u);
+		$encoded_u=rawurlencode($encoded_u);
 		setcookie("sns_server_radio_cookie",$sns_server_radio_for_cookie, time()+(86400*30),"","",false,true);
 		setcookie("sns_server_direct_input_cookie",$sns_server_direct_input, time()+(86400*30),"","",false,true);
 		$share_url='';
+
 		if($sns_server_radio){
-			$share_url=$sns_server_radio."/share?text=";
-		}elseif($sns_server_direct_input){
-			$share_url=$sns_server_direct_input."/share?text=";
+			if(in_array($sns_server_radio,["https://x.com","https://twitter.com"])){
+				$share_url="https://x.com/intent/tweet?text=";
+			} elseif($sns_server_radio === "https://bsky.app"){
+				$share_url="https://bsky.app/intent/compose?text=";
+			}	elseif($sns_server_radio === "https://www.threads.net"){
+				$share_url="https://www.threads.net/intent/post?text=";
+			} else {
+				$share_url=$sns_server_radio."/share?text=";
+			}
+		} elseif ($sns_server_direct_input){//直接入力時
 			if($sns_server_direct_input==="https://bsky.app"){
 				$share_url="https://bsky.app/intent/compose?text=";
-			}
-			elseif($sns_server_direct_input==="https://www.threads.net"){
+			} elseif($sns_server_direct_input==="https://www.threads.net"){
 				$share_url="https://www.threads.net/intent/post?text=";
+			} else {
+				$share_url=$sns_server_direct_input."/share?text=";
 			}
 		}
-		if(in_array($sns_server_radio,["https://x.com","https://twitter.com"])){
-			// $share_url="https://x.com/intent/post?text=";
-			$share_url="https://twitter.com/intent/tweet?text=";
-		}
-		elseif($sns_server_radio === "https://bsky.app"){
-			$share_url="https://bsky.app/intent/compose?text=";
-		}
-		elseif($sns_server_radio === "https://www.threads.net"){
-			$share_url="https://www.threads.net/intent/post?text=";
-		}
+
 		$share_url.=$encoded_t.'%20'.$encoded_u;
 		$share_url = filter_var($share_url, FILTER_VALIDATE_URL) ? $share_url : ''; 
+		$share_url = (parse_url($share_url, PHP_URL_SCHEME) === "https") ? $share_url : '';
+		
 		if(!$share_url){
 			error($en ? "Please select an SNS sharing destination.":"SNSの共有先を選択してください。");
 		}

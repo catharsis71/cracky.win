@@ -1,3 +1,11 @@
+//ブラウザの優先言語が日本語以外の時は英語で表示
+const lang = (
+    navigator.languages?.[0] ||
+    navigator.language ||
+    ""
+).toLowerCase();
+const en = lang.startsWith("ja") ? false : true;
+
 const colorIdx = GetCookie("colorIdx");
 switch (Number(colorIdx)) {
     case 1:
@@ -62,19 +70,21 @@ function open_sns_server_window(event, width = 600, height = 600) {
         snsWindow = window.open(url, "_blank", windowFeatures); // 新しいウィンドウを開く
     }
     // ウィンドウがフォーカスを失った時の処理
-    snsWindow.addEventListener("blur", function () {
+    snsWindow.addEventListener("blur", () => {
         if (snsWindow.location.href === url) {
             snsWindow.close(); // URLが変更されていない場合はウィンドウを閉じる
         }
     });
 }
-window.addEventListener("pageshow", function () {
+window.addEventListener("pageshow", () => {
     // すべてのsubmitボタンを取得
     const submitButtons = document.querySelectorAll('[type="submit"]');
 
     submitButtons.forEach(function (btn) {
-        // ボタンを有効化
-        btn.disabled = false;
+        if (btn instanceof HTMLInputElement) {
+            // ボタンを有効化
+            btn.disabled = false;
+        }
     });
 });
 addEventListener("DOMContentLoaded", () => {
@@ -92,11 +102,6 @@ addEventListener("DOMContentLoaded", () => {
     const paintform = document.getElementById("paint_form");
     if (paintform instanceof HTMLFormElement) {
         paintform.onsubmit = function () {
-            // 二度押し防止
-            const submitButton = paintform.querySelector('[type="submit"]');
-            if (submitButton) {
-                submitButton.disabled = true;
-            }
             const picwInput = paintform.elements.namedItem("picw");
             const pichInput = paintform.elements.namedItem("pich");
             const shiInput = paintform.elements.namedItem("shi");
@@ -110,15 +115,24 @@ addEventListener("DOMContentLoaded", () => {
             if (shiInput instanceof HTMLSelectElement) {
                 SetCookie("appletc", shiInput.value);
             }
+            // 二度押し防止
+            const submitButton = paintform.querySelector('[type="submit"]');
+            if (submitButton instanceof HTMLInputElement) {
+                submitButton.disabled = true;
+            }
         };
     }
     const commentform = document.getElementById("comment_form");
     if (commentform instanceof HTMLFormElement) {
-        commentform.onsubmit = function () {
-            // 二度押し防止
-            const submitButton = commentform.querySelector('[type="submit"]');
-            if (submitButton) {
-                submitButton.disabled = true;
+        commentform.onsubmit = function (e) {
+            e.preventDefault(); // フォームのデフォルトの送信を防ぐ
+
+            //自動化ツールによる自動送信を拒否する
+            const languages_length0 = navigator.languages.length === 0;
+            const webdriver = navigator.webdriver;
+            if (webdriver || languages_length0) {
+                alert(en ? "The post has been rejected." : "拒絶されました。");
+                return;
             }
             const nameInput = commentform.elements.namedItem("name");
             const urlInput = commentform.elements.namedItem("url");
@@ -133,8 +147,150 @@ addEventListener("DOMContentLoaded", () => {
             if (pwdInput instanceof HTMLInputElement) {
                 SetCookie("pwdc", pwdInput.value);
             }
+            // JSからの送信であることを示す hidden フィールドを追加
+            const hidden = document.createElement("input");
+            hidden.type = "hidden";
+            hidden.name = "js_submit_flag";
+            hidden.value = "1";
+            commentform.appendChild(hidden);
+            const submitButton = commentform.querySelector('[type="submit"]');
+            if (submitButton instanceof HTMLInputElement) {
+                // 二度押し防止
+                submitButton.disabled = true;
+                // フォームを送信
+                submitButton.form?.submit();
+            }
         };
     }
+    const preview = document.getElementById("attach_preview");
+    const removeAttachmentBtn = document.getElementById(
+        "remove_attachment_btn"
+    );
+    if (removeAttachmentBtn) {
+        removeAttachmentBtn.style.cursor = "pointer";
+    }
+
+    const fileInput = document.querySelector(
+        '#comment_form input[type="file"]'
+    );
+
+    const clear_css_preview = () => {
+        if (preview instanceof HTMLImageElement) {
+            preview.src = ""; // メモリ上の画像を表示
+            preview.src = ""; // メモリ上の画像を表示
+            preview.style.marginTop = "";
+            preview.style.marginBottom = "";
+            preview.style.height = ""; //高さ自動調整
+            preview.style.display = "none"; //非表示
+        }
+        //選択解除リンクを非表示
+        if (removeAttachmentBtn) {
+            removeAttachmentBtn.style.display = "none";
+        }
+        if (fileInput instanceof HTMLInputElement) {
+            fileInput.value = "";
+            fileInput.style.width = "";
+        }
+    };
+    // ファイルサイズチェック
+    const setupFilePreviewAndSizeCheck = (formId) => {
+        const form = document.getElementById(formId);
+        if (!(form instanceof HTMLFormElement)) return;
+
+        const maxInput = form.querySelector('input[name="MAX_FILE_SIZE"]');
+        if (!(maxInput instanceof HTMLInputElement)) return;
+
+        const maxSize = parseInt(maxInput.value, 10);
+
+        form.addEventListener("change", (e) => {
+            const target = e.target;
+
+            if (
+                target instanceof HTMLInputElement &&
+                target.type === "file" &&
+                target.files &&
+                target.files.length > 0
+            ) {
+                const file = target.files?.[0];
+                if (file && file.size > maxSize) {
+                    alert(
+                        en
+                            ? "The file is too large."
+                            : "ファイルサイズが大きすぎます。"
+                    );
+                    clear_css_preview();
+                    target.value = ""; // 入力をクリア
+                    return;
+                }
+                // paint_formの時は画像プレビュー表示しない
+                if (formId === "paint_form") {
+                    return;
+                }
+                if (fileInput instanceof HTMLInputElement) {
+                    fileInput.style.width = "inherit";
+                }
+                //選択解除リンクを表示
+                if (removeAttachmentBtn) {
+                    removeAttachmentBtn.style.display = "inline-block";
+                }
+                //画像プレビュー表示
+                const reader = new FileReader();
+
+                reader.onload = function (e) {
+                    if (reader && preview instanceof HTMLImageElement) {
+                        const result = e.target && e.target.result;
+                        if (typeof result === "string") {
+                            const testImg = new Image();
+                            testImg.src = result;
+                            testImg.onload = () => {
+                                preview.style.height = "fit-content"; //高さ自動調整
+                                preview.src = result; // メモリ上の画像を表示
+                                preview.style.marginTop = "15px";
+                                preview.style.marginBottom = "8px";
+                                preview.style.display = "block"; //表示
+                            };
+                            testImg.onerror = () => {
+                                clear_css_preview();
+                                alert(
+                                    en
+                                        ? "This file is an unsupported format."
+                                        : "対応していないファイル形式です。"
+                                );
+                                return;
+                            };
+                        }
+                    }
+                };
+                if (file instanceof Blob) {
+                    reader.readAsDataURL(file);
+                }
+            } else {
+                //ファイル添付が解除された時
+                clear_css_preview();
+            }
+        });
+    };
+    setupFilePreviewAndSizeCheck("comment_form");
+    setupFilePreviewAndSizeCheck("paint_form");
+
+    removeAttachmentBtn?.addEventListener("click", (e) => {
+        e.preventDefault();
+        clear_css_preview();
+    });
+
+    window.addEventListener("pageshow", () => {
+        const formIds = ["comment_form", "paint_form"];
+        formIds.forEach((id) => {
+            const form = document.getElementById(id);
+            if (form instanceof HTMLFormElement) {
+                const fileInputs = form.querySelectorAll('input[type="file"]');
+                fileInputs.forEach((input) => {
+                    input.value = "";
+                });
+            }
+        });
+    });
+
     //スマホの時はPC用のメニューを非表示
     if (navigator.maxTouchPoints && screen.width < 600) {
         const for_mobile = document.getElementById("for_mobile");
@@ -152,11 +308,12 @@ addEventListener("DOMContentLoaded", () => {
     };
     const select_app = document.getElementById("select_app");
     // セレクトメニューの変更イベント
-    if (select_app) {
+    if (select_app instanceof HTMLSelectElement) {
         const usePlaybackApps = ["neo", "tegaki", "1", "2"];
 
         select_app.addEventListener("change", (e) => {
-            toggleHideAnimation(usePlaybackApps.includes(e.target?.value));
+            if (!(e.target instanceof HTMLSelectElement)) return;
+            toggleHideAnimation(usePlaybackApps.includes(e.target.value));
         });
 
         // 初期値の設定を反映
@@ -180,10 +337,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // フェードイン/フェードアウトを管理する関数
     const fade = (el, to, duration = 500) => {
-        const startOpacity = parseFloat(el.style.opacity);
+        const startOpacity = parseFloat(el.style.opacity || 0);
         let startTime = performance.now();
 
-        function fadeStep(now) {
+        const fadeStep = (now) => {
             const elapsed = now - startTime;
             const progress = Math.min(elapsed / duration, 1);
             let opacity = startOpacity + (to - startOpacity) * progress;
@@ -200,7 +357,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     el.style.visibility = "hidden"; // 完全にフェードアウトしたら非表示
                 }
             }
-        }
+        };
 
         if (to === 1) {
             el.style.visibility = "visible"; // フェードインで表示
@@ -226,12 +383,12 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // スムーススクロール
-    function smoothScrollToTop(duration = 500) {
+    const smoothScrollToTop = (duration = 500) => {
         // 0.5秒かけてスクロール
         const start = window.scrollY;
         const startTime = performance.now();
 
-        function scrollStep(now) {
+        const scrollStep = (now) => {
             const elapsed = now - startTime;
             const progress = Math.min(elapsed / duration, 1);
             const ease = 1 - Math.pow(1 - progress, 3); // ease-out効果
@@ -243,10 +400,10 @@ document.addEventListener("DOMContentLoaded", () => {
             } else {
                 fade(pagetop, 0, 500); // スクロール完了後にフェードアウト
             }
-        }
+        };
 
         requestAnimationFrame(scrollStep);
-    }
+    };
 
     // トップに戻るボタンがクリックされたとき
     pagetop?.addEventListener("click", (e) => {

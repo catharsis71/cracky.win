@@ -1,9 +1,7 @@
 <style>
-	@if(!$is_IE)
-			html {
+		html {
 			visibility: hidden;
 		}
-	@endif
 		html.ie {
 			visibility: visible;
 		}

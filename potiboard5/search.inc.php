@@ -1,8 +1,8 @@
 <?php
-$search_inc_ver = 20250308;
-//POTI-board plugin search(C)2020-2025 さとぴあ(@satopian)
+$search_inc_ver = 20260502;
+//POTI-board plugin search(C)2020-2026 さとぴあ(@satopian)
 //MIT License
-//v6.68.3 lot.20250308
+//v6.173.0 lot.20260502
 //POTI-board EVO v6.0 対応版
 //https://paintbbs.sakura.ne.jp/
 
@@ -12,7 +12,7 @@ $search_inc_ver = 20250308;
 //https://paintbbs.sakura.ne.jp/poti/
 
 //更新履歴
-
+//v6.173.0 2026.05.02 メソッドの引数の型指定。
 //V6.65.1 2025.02.09 検索可能行数を10000行に拡大。長過ぎる検索語句を無視するようにした。
 //v6.63.0 2025.01.25 ページ番号が負の値の時はトップページにリダイレクト。
 //v6.61.2 2024.12.27 戻り値の型宣言を追加。
@@ -47,7 +47,7 @@ $search_inc_ver = 20250308;
 //v0.1 2020.07.13 GitHubに公開
 
 class processsearch {
-	public static function search(): void {
+	public static function search() : void {
 	//設定
 // How many cases can you search?
 // Initial value 120 Do not make it too large.
@@ -56,14 +56,14 @@ class processsearch {
 
 	$imgsearch=(bool)filter_input_data('GET','imgsearch',FILTER_VALIDATE_BOOLEAN);
 	$page=(int)filter_input_data('GET','page',FILTER_VALIDATE_INT);
-	$page= $page ? $page : 1;
+	$page= $page ?: 1;
 
 	if($page<0){
 		redirect(h(PHP_SELF2));
 	}
 
 	$query=(string)filter_input_data('GET','query');
-	$query=urldecode($query);
+	$query=rawurldecode($query);
 	$q_len=strlen((string)$query);
 	$query=1000<$q_len ? "" :$query; 
 
@@ -91,6 +91,11 @@ class processsearch {
 	fclose($tp);
 
 	$fp = fopen(LOGFILE, "r");
+	
+	$s_com='';
+	$s_sub='';
+	$s_name='';
+	
 	while ($line = fgets($fp)) {
 		if(!trim($line)){
 			continue;
@@ -175,14 +180,15 @@ class processsearch {
 			$com=h(strip_tags($com));
 			$com=mb_strcut($com,0,180);
 			$name=h($name);
-			$encoded_name=urlencode($name);
+			$encoded_name=rawurlencode($name);
 			//変数格納
 			$dat['comments'][]= compact('no','name','encoded_name','sub','img','w','h','com','link','postedtime');
-
+			unset($no,$name,$sub,$com,$ext,$w,$h,$time,$link,$logver);
+			unset($articles[$i]);
 		}
 		$j=$page+$i;//表示件数
 	}
-	unset($sub,$name,$no,$boardname);
+	unset($boardname);
 	unset($i,$val);
 
 	$search_type='';
@@ -194,7 +200,7 @@ class processsearch {
 	else{
 		$img_or_com='comments';
 		$mai_or_ken=' ';
-		}
+	}
 	$dat['imgsearch']= $imgsearch ? true : false;
 
 	//クエリを検索窓に入ったままにする
@@ -203,7 +209,7 @@ class processsearch {
 	$dat['radio_chk1']=false;//作者名
 	$dat['radio_chk2']=false;//完全一致
 	$dat['radio_chk3']=false;//本文題名	
-	$query_l='&query='.urlencode(h($query));//クエリを次ページにgetで渡す
+	$query_l='&query='.rawurlencode(h($query));//クエリを次ページにgetで渡す
 	if($query!==''&&$radio===3){//本文題名
 		$query_l.='&radio=3';
 		$dat['radio_chk3']=true;
@@ -234,15 +240,15 @@ class processsearch {
 	if($check_query!==''&&$radio===3){
 		$dat['title']=$pageno.' '.$img_or_com.' of '.$query;//titleタグに入る
 		$dat['h1']=$pageno.' '.$img_or_com.' of '.$query;//h1タグに入る
-		}
+	}
 	elseif($check_query!==''){
 		$dat['title']=$pageno.' Posts by '.$query;
 		$dat['h1']=$pageno.' Posts by '.$query;
-		}
+	}
 	else{
 		$dat['title']='Recent '.$pageno.' Posts';
 		$dat['h1']='Recent '.$pageno.' Posts';
-		}
+	}
 	$dat['pageno']=$pageno;
 	//ページング
 
@@ -285,7 +291,7 @@ class processsearch {
 
 	}
 	//検索文字列をフォーマット
-	Private static function create_formatted_text_for_search($str): string {
+	Private static function create_formatted_text_for_search(?string $str): string {
 
 		$s_str=mb_convert_kana($str, 'rn', 'UTF-8');//全角英数を半角に
 		$s_str=str_replace([" ", "　"], "", $s_str);
