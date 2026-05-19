@@ -115,6 +115,7 @@ select,
 textarea {
   width: 25em;
   height: 5em;
+  margin-top: 3px;
 }
 
 button,
@@ -372,7 +373,7 @@ div#chickenpaint-parent {
 
 #appstage {
   display: table;
-  margin: 0 auto;
+  margin: 16px auto;
 }
 
 #appstage > div {

@@ -1,6 +1,6 @@
 <?php
 /*
-  * POTI-board EVO v5.30.0 lot.221022
+  * POTI-board EVO v6.77.1 lot.20250530
   * by POTI-board redevelopment team >> https://paintbbs.sakura.ne.jp/poti/
   *
   * configuration file of POTI-board EVO
@@ -11,12 +11,12 @@
 // 管理者パスワード
 // 必ず変更してください。
 // Administrator password, make sure to change it.
-$ADMIN_PASS = "(redacted)";
+$ADMIN_PASS = "adminpass";
 
 // 最大ログ数
 // 古いログから順番に消えます
 // Maximum number of posts. Disappears in chronological order.
-define("LOG_MAX", "99999999999999999999999999999999999999999999999999999999");
+define("LOG_MAX", "3000");
 
 // テーマ(テンプレート)のディレクトリ。"/"まで
 //テンプレートが入っているディレクトリを指定してください。
@@ -28,18 +28,18 @@ define("SKIN_DIR", "mono_en/");
 // メール通知のほか、シェアボタンなどで使用
 // Installation URL. In the directory where potiboard.php is located, and need last "/".
 // Be used notification by email, and share button, etc.
-define("ROOT_URL", "https://cracky.win/");
+define("ROOT_URL", "https://example.com/oekaki/");
 
 //掲示板のタイトル（<title>とTOP）
 //Board title (appears in <title> and site header)
-define("TITLE", "cracky.win oekaki board - please draw some Cracky-chans");
+define("TITLE", "Paint BBS");
 
 //「ホーム」へのリンク
 // 自分のサイトにお絵かき掲示板がある、という慣習からのものです。
 // 自分のサイトのURL（絶対パスも可）をどうぞ。
 // URL to link your own site. They had own sites ago.
 // Absolute path is OK.
-define("HOME", "https://cracky-chan.com/");
+define("HOME", "../");
 
 // 画像アップロード機能を 使う:1 使わない:0
 // 使わない:0 でも お絵かき機能は使えますし、
@@ -47,14 +47,14 @@ define("HOME", "https://cracky-chan.com/");
 // Whether to enable image uploads, "1" to enable.
 // Drawing is still enabled even with this disabled.
 // Administrators can still upload images in admin post mode.
-define("USE_IMG_UPLOAD","0");
+define("USE_IMG_UPLOAD","1");
 
 // 画像のないコメントのみの新規投稿を拒否する する:1 しない:0
 //する:1 でも管理者はコメントのみの投稿ができます。
 // If "1" is set, a new thread without an image cannot be created. To enable it, set it to "0".
 // Even if it is "1", the administrator can create a new thread without an image.
 
-define("DENY_COMMENTS_ONLY", "1");
+define("DENY_COMMENTS_ONLY", "0");
 
 // Use PaintBBS NEO 
 // (1: Enabled, 0: Disabled)
@@ -64,7 +64,7 @@ define("USE_PAINTBBS_NEO", "1");
 // (1: Enabled, 0: Disabled)
 define("USE_SHI_PAINTER", "1");
 
-// Use ChickenPaint
+// Use litaChix
 // (1: Enabled, 0: Disabled) 
 define("USE_CHICKENPAINT", "1");
 
@@ -118,7 +118,7 @@ define("SHARE_BUTTON", "1");
 // 拒絶する文字列
 // Reject string
 // String blacklists and regular expressions are supported.
-$badstring = array("\.onion");
+$badstring = array("irc.s16.xrea.com","Unsolicitedad");
 
 //拒絶するURL
 // URL blacklists
@@ -163,7 +163,7 @@ define("USE_JAPANESEFILTER", "0");
 // Reject if there is a url in the comment field.
 // Administrator writes are not rejected.
 // (Yes: 1, No: 0)
-define("DENY_COMMENTS_URL", "1");
+define("DENY_COMMENTS_URL", "0");
 
 //URL入力欄を使用する する:1 しない:0
 // Use URL input field (Yes: 1, No: 0)
@@ -174,7 +174,7 @@ define("USE_URL_INPUT_FIELD", "1");
 // Close threads after X days. 
 // Setting "365" days will close threads older than 1 year.
 // Set to 0 to disable.
-define("ELAPSED_DAYS","0");
+define("ELAPSED_DAYS","365");
 
 // 拒絶する画像のハッシュ値
 // Reject files with the following image hashes.
@@ -182,8 +182,23 @@ $badfile = array("dummyhash","dummyhash2");
 
 
 // 拒絶するホスト
-// Block following IPs
+// Blocked hosts
+// List of blocked hosts
 $badip = array("addr.dummy.com","addr2.dummy.com");
+
+// Reject posts from IP addresses that cannot be reverse-resolved to a hostname
+// (1: Enabled, 0: Disabled)
+define("REJECT_IF_NO_REVERSE_DNS", "0");
+
+// Note: Many users may have IP addresses that cannot be reverse-resolved.
+// Setting this to true may prevent some legitimate users from posting.
+
+// Store in SESSION when a banned host accesses the site  
+// (1: Enabled, 0: Disabled)
+define("USE_BADHOST_SESSION_CACHE", "0");
+
+// Note: Caches bad host detection result in the session.
+// Once flagged, it won't be cleared until the browser is restarted.
 
 /* ---------- メール通知設定(email notification settings) ---------- */
 // メール通知機能を使う使わないを設定する項目はここにはありません。
@@ -194,12 +209,12 @@ $badip = array("addr.dummy.com","addr2.dummy.com");
 // The email notification function will be turned on automatically.
 
 // 管理者が投稿したものもメールで通知 しない:1 する:0
-// Notify by email what the administrator posted (OFF:"1", ON"0").
+// Notify by email what the administrator posted (OFF:"1", ON:"0").
 define("NOTICE_NOADMIN", "0");
 
 // メール通知先
 // Mail address where the mail notifications will be sent.
-define("TO_MAIL", "root");
+define("TO_MAIL", "root@example.com");
 
 // メール通知に本文を付ける 付ける:1 付けない:0
 // Add a body to the mail notifications (Yes: 1, No: 0)
@@ -224,7 +239,7 @@ define("MAX_COM", "1000");
 
 // 1ページに表示する記事
 // Number of articles to display per page
-define("PAGE_DEF", "20");
+define("PAGE_DEF", "10");
 
 // カタログモードの時の1ページに表示する画像
 // Number of images displayed per page in catalog mode 
@@ -291,7 +306,7 @@ define("DEF_NAME", "anonymous");	//未入力時の名前(default name)
 // 本文を必須にする する:1 しない:0
 // Make the body of the post mandatory. (Yes: 1, No: 0)
 define("USE_COM", "0");
-define("DEF_COM", "no body");	//未入力時の本文(default letter body)
+define("DEF_COM", "Image only.");	//未入力時の本文(default message body)
 
 // 題名を必須にする する:1 しない:0
 // Make the title of the post mandatory. (Must have a title: 1, Must not have a title: 0)
@@ -382,7 +397,7 @@ define("DEF_ANIME", "1");
 // 動画再生スピード 超高速:-1 高速:0 中速:10 低速:100 超低速:1000
 // Speed of animation playback. Possible values are:
 // super fast:"-1", fast:"0", normal:"10", slow:"100", super slow:"1000"
-define("PCH_SPEED", "2");
+define("PCH_SPEED", "0");
 
 // コンティニューを使用する する:1 しない:0
 // Allow to continue drawings after leaving: (1: Enabled, 0: Disabled)
@@ -465,20 +480,20 @@ define("DIARY", "0");
 // 単位kb
 // Maximum size, in KB, for PNG files.
 // Files that exceed this value will be compressed as JPEG files.
-define("IMAGE_SIZE", "2048");	
+define("IMAGE_SIZE", "512");	
 
 //ログファイルのファイルサイズの制限値(単位MB)
 //大きな値を設定すると動作が不安定になる可能性があります。
 // Maximum file size limit for the log file (in MB)
 // Setting a large value may cause instability.
-define("MAX_LOG_FILESIZE", "50");
+define("MAX_LOG_FILESIZE", "15");
 
 // フォーム下の追加お知らせ
 // (例)"<li>お知らせデース</li>
 //     <li>サーバの規約でアダルト禁止</li>"
 // 要対応テーマ
 // Additional notice (needs a corresponding theme)
-$addinfo="<li>Tripcodes work now but not secure trips.</li><li>NOTE: Shi-Painter may be slow to load. If it's a problem use one of the other tools instead</li><li><a href='src/'>/src/</a></li>";
+$addinfo="";
 
 // 連続・二重投稿対象セキュリティレベル
 // ※連続・二重投稿チェック対象を決める条件
@@ -562,7 +577,7 @@ define("SNS_WINDOW_HEIGHT","600");
 
 // テンポラリ内のファイル有効期限(日数)
 // How many days until the files in the temporary folder expire.
-define("TEMP_LIMIT", "14");
+define("TEMP_LIMIT", "3");
 
 // 初期レイヤー数［しぃペインターのみ］
 // ※お絵かき中にレイヤー増やせるのであまり意味無い
@@ -604,7 +619,7 @@ define("SECURITY_TIMER", "");
 // ペイント画面のパスワードの暗号鍵
 // あまり頻繁に変えないように
 // Encryption key for paint mode. (don"t change it too often)
-define("CRYPT_PASS","(redacted)");
+define("CRYPT_PASS","fbgtK4pj9t8Auek");
 
 // ↑ 暗号化と解読のためのパスワード。
 // phpの内部で処理するので覚えておく必要はありません。
@@ -631,11 +646,11 @@ define("URL_PARAMETER", "0");
 // using the board.
 
 //Image and HTML file permissions.
-define("PERMISSION_FOR_DEST", 0644);//初期値 0606
+define("PERMISSION_FOR_DEST", 0606);//初期値 0606
 //Log file permissions (Those are used internally by the script)
-define("PERMISSION_FOR_LOG", 0644);//初期値 0600
+define("PERMISSION_FOR_LOG", 0600);//初期値 0600
 //Directory permissions to save image and other files
-define("PERMISSION_FOR_DIR", 0755);//初期値 0707
+define("PERMISSION_FOR_DIR", 0707);//初期値 0707
 
 // Skinny.php cache and directory permissions
 // Set in Skinny.php.
@@ -648,11 +663,11 @@ define("PERMISSION_FOR_DIR", 0755);//初期値 0707
 // But if it causes problems, set this to "0" (disabled) 
 define("RE_SAMPLED", "1");
 
+/*safety*/
+
 // Deny display in iframe:  (1: Deny, 0: Allow)
 // We strongly recommend "Deny" to avoid security risks.
 define("X_FRAME_OPTIONS_DENY", "1");
-
-/*safety*/
 
 //Reject if admin password is wrong for her 5 times in a row
 // (1: Enabled, 0: Disabled) 
@@ -663,3 +678,9 @@ define("CHECK_PASSWORD_INPUT_ERROR_COUNT", "0");
 // Access via ftp etc.
 // Remove the `templates/errorlog/error.log` and you should be able to login again.
 //This file contains the IP addresses of clients who entered an incorrect admin password.
+
+// Reject posts that are not submitted via JavaScript
+// (1: Enabled, 0: Disabled)
+// When set to 1, posts from clients with JavaScript disabled will be rejected.
+// Posts will also be rejected if common.js is not a compatible version.
+define("REJECT_WITHOUT_JAVASCRIPT", "1"); 

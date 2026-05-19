@@ -15,7 +15,7 @@
 			@if($use_tegaki)<option value="tegaki">Tegaki</option>@endif
 			@if($use_axnos)<option value="axnos">Axnos Paint</option>@endif
 			@if($use_shi_painter)<option value="1" class="for_pc">Shi-Painter</option>@endif
-			@if($use_chickenpaint)<option value="chicken">ChickenPaint</option>@endif
+			@if($use_chickenpaint)<option value="chicken">litaChix</option>@endif
 			@if($use_klecks)<option value="klecks">Klecks</option>@endif
 		</select>
 		@endif 
@@ -31,6 +31,7 @@
 		<input type="hidden" name="resto" value="{{$resno}}">
 		@endif
 		<input type="hidden" name="mode" value="paint">
+		<input type="hidden" name="MAX_FILE_SIZE" value="{{ isset($upload_max_filesize) ? $upload_max_filesize : '' }}">
 		<input class="button" type="submit" value="Paint">
 		@if($anime)<label id="save_playback"><input type="checkbox" value="true" name="anime" title="Save Playback" @if($animechk){{$animechk}}@endif>Save Playback</label>@endif
 	</p>
